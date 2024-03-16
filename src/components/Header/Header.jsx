@@ -1,5 +1,5 @@
-// const Header = () => {
+const Header = () => {
+  return <>Hello World</>;
+};
 
-// };
-
-// export default Header;
+export default Header;

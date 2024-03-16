@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Outlet } from "react-router-dom";
-import SpeedDialSocial from "../SpeedDial/SpeedDial";
+
 import Loader from "../Loader/Loader";
 
 const Layout = () => {
@@ -15,7 +15,6 @@ const Layout = () => {
           <Outlet />
         </Suspense>
       </main>
-      <SpeedDialSocial />
       <Footer />
     </Suspense>
   );
