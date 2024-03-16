@@ -4,14 +4,14 @@ import { signInThunk, signUpThunk } from "../thunk/authThunks";
 const initialState = {
   userData: {
     id_user: null,
-    name: "Dmytro",
-    lastName: "Prontenko",
-    email: "dprontenko@gmail.com",
-    phone: "+380505253148",
-    avatarURL: "U",
+    name: null,
+    lastName: null,
+    email: null,
+    phone: null,
+    avatarURL: null,
     isAdmin: false,
-    city: "Kyiv",
-    novaPost_point: "23",
+    city: null,
+    novaPost_point: null,
   },
   token: null,
 };

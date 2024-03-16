@@ -1,22 +1,22 @@
-import { useSelector } from "react-redux";
-import { selectModalContent } from "../../redux/selectors";
-import ModalMenu from "../ModalMenu/ModalMenu";
-import Cabinet from "../Cabinet/Cabinet";
+// import { useSelector } from "react-redux";
+// import { selectModalContent } from "../../redux/selectors";
+// import ModalMenu from "../ModalMenu/ModalMenu";
+// import Cabinet from "../Cabinet/Cabinet";
 
-const ModalContent = () => {
-  const modalContent = useSelector(selectModalContent);
+// const ModalContent = () => {
+//   const modalContent = useSelector(selectModalContent);
 
-  switch (modalContent) {
-    case "Modal Menu":
-      return <ModalMenu />;
-    case "Favorites":
-      return <div>Favorites</div>;
-    case "Cabinet":
-      return <Cabinet />;
+//   switch (modalContent) {
+//     case "1":
+//       return <ModalMenu />;
+//     case "2":
+//       return <div>Favorites</div>;
+//     case "3":
+//       return <Cabinet />;
 
-    default:
-      return null;
-  }
-};
+//     default:
+//       return null;
+//   }
+// };
 
-export default ModalContent;
+// export default ModalContent;
