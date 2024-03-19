@@ -1,9 +1,7 @@
-
-
 const WelcomePage = () => {
   return (
     <>
-      <div>Hello word</div>
+      <div>Hello word welkomPage</div>
     </>
   );
 };

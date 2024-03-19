@@ -1,6 +1,5 @@
 // import { A11y, Pagination } from "swiper/modules";
 
-
 // import "../../../node_modules/swiper/swiper-bundle.min.css";
 
 // import { StyledSlide, StyledSwiper } from "./NotFoundPage.styled";
@@ -11,6 +10,7 @@
 const NotFoundPage = () => {
   return (
     <>
+      <div>Not page</div>
       {/* <input name="radio" type="radio" checked/> */}
     </>
   );
