@@ -1,8 +1,4 @@
 @import url("normalize.css");
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -20,21 +16,28 @@ select:-webkit-autofill:focus {
 }
 
 :root {
-  --basic-white: #fafefd;
-  --blue-1: #76a8e3;
-  --blue-2: #9dc3d7;
-  --blue-3: #d8effb;
-  --hover-color: #011b35;
-  --buttons-color: #0e0adb;
-  --disable-color: #e5e5e5;
-  --active-color: #050383;
+  /** Colors **/
+  --basic-white: #fcfbfb;
+  --basic-grey: #606161;
+  --basic-black: #111010;
+  --accent-wight: #fefefe;
+  --accent-yellow-100: #fffaeb;
+  --accent-yellow-200: #fff1c6;
+  --accent-yellow-300: #ffe288;
+  --accent-green-300: #00544d;
 
-  --icons: #201f22;
-  --secondary-text: #696969;
-  --titles: #0c0202;
-  --main-text: #02101f;
-  --in-stock: #02c121;
-  --out-of-stock: #e69800;
+  --text-input: #8c9098;
+  --logo-yellow-400: #f3c80b;
+  --link-yellow-500: #e9a116;
+  --shadov-yellow-500: #c2a009;
+  --logo-blue: #27a6eb;
+  --delete-red: #f20a0a;
+  --edit-green: #24a750;
+  --green-100: #b0c0be;
+
+  /** Gradients **/
+  --liner-gradient-green: linear-gradient(to right, #00544d 100%, #00544d 0%);
+  --radial-gradient-green: radial-gradient(circle, #00544d 0%, #f9f9f9 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
