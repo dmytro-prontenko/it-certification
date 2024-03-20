@@ -5,7 +5,7 @@ import Footer from "../Footer/Footer";
 import { Outlet } from "react-router-dom";
 
 import Loader from "../Loader/Loader";
-import Hero from "../Hero/Hero";
+// import Hero from "../Hero/Hero";
 
 const Layout = () => {
   return (
@@ -13,7 +13,7 @@ const Layout = () => {
       <Header />
       <main>
         <Suspense fallback={<Loader />}>
-          <Hero />
+          {/* <Hero /> */}
           <Outlet />
         </Suspense>
       </main>

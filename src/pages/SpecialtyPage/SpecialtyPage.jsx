@@ -1,10 +1,14 @@
+import { useSelector } from "react-redux";
 import Table from "../../components/Table/Table";
-import { Subtitle, Title } from "./SpecialtyPage.styled";
+import { dataSpecialty } from "../../redux/selectors/mainInfoSelectors";
 
 const SpecialtyPage = () => {
+  const specialty = useSelector(dataSpecialty);
+  const columns = ["Номер", "Назва", "Посилання на стандарт", "Дія"];
+
   return (
     <>
-      <Table />
+      <Table view={"specialty"} data={specialty} columns={columns} />
     </>
   );
 };
