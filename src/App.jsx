@@ -45,15 +45,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<WelcomePage />} />
-          <Route path="institution" element={<InstitutionPage />} />
-          <Route path="specialty" element={<SpecialtyPage />} />
-          <Route path="educational" element={<EducationalPage />} />
-          <Route path="programs" element={<ProgramsPage />} />
-          <Route path="teachers" element={<TeachersPage />} />
-          <Route path="department" element={<DepartmentPage />} />
-          <Route path="blocdisciplines" element={<BlocDisciplinesPage />} />
-          <Route path="discipline" element={<DisciplinePage />} />
-          <Route path="groupdisciplines" element={<GroupDisPage />} />
+          <Route path="/institution" element={<InstitutionPage />} />
+          <Route path="/specialty" element={<SpecialtyPage />} />
+          <Route path="/educational" element={<EducationalPage />} />
+          <Route path="/programs" element={<ProgramsPage />} />
+          <Route path="/teachers" element={<TeachersPage />} />
+          <Route path="/department" element={<DepartmentPage />} />
+          <Route path="/blocdisciplines" element={<BlocDisciplinesPage />} />
+          <Route path="/discipline" element={<DisciplinePage />} />
+          <Route path="/groupdisciplines" element={<GroupDisPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

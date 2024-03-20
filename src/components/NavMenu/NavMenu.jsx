@@ -7,31 +7,31 @@ const NavMenu = () => {
     <Container>
       <ListPage>
         <li>
-          <PageLink to="institution">ВНЗ</PageLink>
+          <PageLink to="/institution">ВНЗ</PageLink>
         </li>
         <li>
-          <PageLink to="specialty">Спеціальність</PageLink>
+          <PageLink to="/specialty">Спеціальність</PageLink>
         </li>
         <li>
-          <PageLink to="educational">Рівень Освіти</PageLink>
+          <PageLink to="/educational">Рівень Освіти</PageLink>
         </li>
         <li>
-          <PageLink to="programs">Освітні програми</PageLink>
+          <PageLink to="/programs">Освітні програми</PageLink>
         </li>
         <li>
-          <PageLink to="teachers">Викладачі</PageLink>
+          <PageLink to="/teachers">Викладачі</PageLink>
         </li>
         <li>
-          <PageLink to="department">Кафедри</PageLink>
+          <PageLink to="/department">Кафедри</PageLink>
         </li>
         <li>
-          <PageLink to="blocdisciplines">Блок дисциплін</PageLink>
+          <PageLink to="/blocdisciplines">Блок дисциплін</PageLink>
         </li>
         <li>
-          <PageLink to="discipline">Дисципліна</PageLink>
+          <PageLink to="/discipline">Дисципліна</PageLink>
         </li>
         <li>
-          <PageLink to="groupdisciplines">Група дисциплін</PageLink>
+          <PageLink to="/groupdisciplines">Група дисциплін</PageLink>
         </li>
       </ListPage>
     </Container>

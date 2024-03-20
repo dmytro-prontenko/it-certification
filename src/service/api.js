@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://optic.fly.dev/";
+const BASE_URL = "https://itclusterjava.onrender.com";
 const $instance = axios.create({ baseURL: BASE_URL });
 
 export const setToken = (token) => {
@@ -27,3 +27,8 @@ export const signIn = async (userData) => {
 //   clearToken();
 //   return data;
 // };
+
+export const getData = async (endPoint) => {
+  const { data } = await $instance.get(endPoint);
+  return data;
+};

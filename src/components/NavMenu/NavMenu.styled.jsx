@@ -9,9 +9,9 @@ export const PageLink = styled(NavLink)`
   background-color: #fcfbfb;
   text-shadow: 2px 6px 2px rgba(0, 0, 0, 0.2);
 
-  :hover,
-  :focus,
-  :active {
+  &:hover,
+  &:focus,
+  &.active {
     transform: scale(0.95);
     background-color: #fff1c6;
   }
