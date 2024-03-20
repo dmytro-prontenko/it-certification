@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSpecialtyThunk, getTeacherThunk } from "../thunk/mainInfoThunks";
+import { getSpecialtyThunk, getTeachersThunk } from "../thunk/mainInfoThunks";
 
 const initialState = {
   teachers: [],
@@ -12,7 +12,7 @@ const mainInfoSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getTeacherThunk.fulfilled, (state, action) => {
+      .addCase(getTeachersThunk.fulfilled, (state, action) => {
         state.teachers = action.payload;
       })
       .addCase(getSpecialtyThunk.fulfilled, (state, action) => {
