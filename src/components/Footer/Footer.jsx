@@ -3,19 +3,22 @@ import {
   AddressContainer,
   AddressWrapper,
   FooterContainer,
+  FooterLink,
+  FooterlText,
   IconContainer,
   InfoContainer,
   LinksContainer,
   LinksWrapper,
+  SocialIcon,
   SocialItem,
-  SocialLink,
   SocialList,
   StyledFooter,
 } from "./Footer.styled";
+import sprite from "../../assets/it-sertification.svg";
 
 const Footer = () => {
   return (
-    <StyledFooter className="container">
+    <StyledFooter>
       <IconContainer>
         <Icon width={48} height={72} iconId={"emblem"} />
         <p>Ed UA</p>
@@ -23,58 +26,73 @@ const Footer = () => {
       <FooterContainer>
         <SocialList>
           <SocialItem>
-            <SocialLink href="#">
-              <Icon width={24} height={24} iconId={"instagram"} />
-            </SocialLink>
+            <FooterLink href="#">
+              <SocialIcon $meta={"instagram"} width={24} height={24}>
+                <use href={`${sprite}#${"instagram"}`}></use>
+              </SocialIcon>
+            </FooterLink>
           </SocialItem>
           <SocialItem>
-            <SocialLink href="#">
-              <Icon width={24} height={24} iconId={"facebook"} />
-            </SocialLink>
+            <FooterLink href="#">
+              <SocialIcon $meta={"facebook"} width={24} height={24}>
+                <use href={`${sprite}#${"facebook"}`}></use>
+              </SocialIcon>
+            </FooterLink>
           </SocialItem>
           <SocialItem>
-            <SocialLink href="#">
-              <Icon width={24} height={24} iconId={"phone"} />
-            </SocialLink>
+            <FooterLink href="#">
+              <SocialIcon $meta={"phone"} width={24} height={24}>
+                <use href={`${sprite}#${"phone"}`}></use>
+              </SocialIcon>
+            </FooterLink>
           </SocialItem>
           <SocialItem>
-            <SocialLink href="#">
-              <Icon width={24} height={24} iconId={"telegram"} />
-            </SocialLink>
+            <FooterLink href="#">
+              <SocialIcon $meta={"telegram"} width={24} height={24}>
+                <use href={`${sprite}#${"telegram"}`}></use>
+              </SocialIcon>
+            </FooterLink>
           </SocialItem>
         </SocialList>
         <InfoContainer>
           <LinksContainer>
             <LinksWrapper>
-              <p>Офіційний веб-сайт</p>
-              <a href="#">Education UA</a>
+              <FooterlText>Офіційний веб-сайт</FooterlText>
+              <FooterLink href="#">Education UA</FooterLink>
             </LinksWrapper>
             <LinksWrapper>
-              <p>Права на всі матеріали належать</p>
-              <a href="#">Education UA</a>
+              <FooterlText>Права на всі матеріали належать</FooterlText>
+              <FooterLink href="#">Education UA</FooterLink>
             </LinksWrapper>
             <LinksWrapper>
               <Icon width={20} height={20} iconId={"copyright"} />
-              <a href="">Education UA</a>
-              <p>2024 Всі права захищені</p>
+              <FooterLink href="">Education UA</FooterLink>
+              <FooterlText>2024</FooterlText>
+              <FooterlText> Всі права захищені</FooterlText>
             </LinksWrapper>
           </LinksContainer>
           <AddressContainer>
             <AddressWrapper>
-              <p>Гаряча лінія</p>
-              <a href="">0 (800) 000 000</a>
+              <FooterlText>Гаряча лінія</FooterlText>
+              <FooterLink href="tel:0 (800) 000 000">
+                0 (800) 000 000
+              </FooterLink>
             </AddressWrapper>
             <AddressWrapper>
-              <p>Email</p>
-              <a href="">example@gmail.com</a>
+              <FooterlText>Email</FooterlText>
+              <FooterLink href="malito:example@gmail.com">
+                example@gmail.com
+              </FooterLink>
             </AddressWrapper>
             <AddressWrapper>
-              <p>Телефон для дзвінків із-за кордону</p>
-              <a href="">044 000 00 00</a>
+              <FooterlText>Телефон для дзвінків із-за кордону</FooterlText>
+              <FooterLink href="tel:044 000 00 00">044 000 00 00</FooterLink>
             </AddressWrapper>
             <AddressWrapper>
-              <p>Співпраця</p>
-              <a href="">example@gmail.com</a>
+              <FooterlText>Співпраця</FooterlText>
+              <FooterLink href="malito:example@gmail.com">
+                example@gmail.com
+              </FooterLink>
             </AddressWrapper>
           </AddressContainer>
         </InfoContainer>
