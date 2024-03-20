@@ -57,7 +57,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: Montserrat, sans-serif;
+  font-family: "Roboto", sans-serif;
   background-image: url("../public/noiseAndTexture.png");
 }
 
@@ -73,8 +73,8 @@ p,
 ul,
 ol,
 li {
-  font-family: Montserrat, sans-serif;
-  color: var(--main-text);
+  font-family: "Roboto", sans-serif;
+  color: var(--basic-black);
   list-style: none;
   margin-top: 0;
   margin-bottom: 0;
@@ -87,9 +87,9 @@ button {
 }
 
 p {
-  color: var(--main-text);
-  font-family: "Montserrat", sans-serif;
-  font-size: 16px;
+  color: var(--basic-black);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
   font-weight: 400;
 }
 
@@ -151,5 +151,5 @@ button {
 .container {
   margin: 0 auto;
   max-width: 1440px;
-  padding: 80px 84px;
+  padding: 0px 84px 80px 84px;
 }
