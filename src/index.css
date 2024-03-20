@@ -58,6 +58,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: Montserrat, sans-serif;
+  background-image: url("../public/noiseAndTexture.png");
 }
 
 main {
@@ -145,4 +146,10 @@ button {
   white-space: nowrap;
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 80px 84px;
 }
