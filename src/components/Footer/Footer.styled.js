@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const getColor = (props) => {
   switch (props.$meta) {
@@ -21,7 +22,7 @@ export const FooterContainer = styled.div`
   border-top: 1px solid var(--accent-green-300);
 `;
 
-export const FooterLogoLink = styled.a`
+export const FooterLogoLink = styled(Link)`
   display: flex;
   flex-direction: column;
   gap: 4px;

@@ -23,7 +23,7 @@ const Footer = () => {
     <StyledFooter>
       <FooterContainer className="container">
         <IconContainer>
-          <FooterLogoLink href="#">
+          <FooterLogoLink to="/">
             <Icon width={48} height={72} iconId={"emblem"} />
             <Icon width={48} height={14} iconId={"headline"} />
           </FooterLogoLink>
