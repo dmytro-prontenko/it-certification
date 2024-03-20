@@ -1,17 +1,17 @@
-import { Container } from "@mui/material";
+import { Subtitle, Title } from "./ProgramsPage.styled";
 
 const ProgramsPage = () => {
   return (
     <>
-      <Container maxWidth="xs">
-        <div>
-          <h3>Перелік освітніх програм</h3>
-          <p>
-            Освітні програми в ВНЗ Харкова та Харківської області, які належать
-            до інформаційних технологій
-          </p>
-        </div>
-      </Container>
+      <div>
+        <Title>Перелік освітніх програм</Title>
+      </div>
+      <div>
+        <Subtitle>
+          Освітні програми в ВНЗ Харкова та Харківської області, які належать до
+          інформаційних технологій
+        </Subtitle>
+      </div>
     </>
   );
 };

@@ -1,14 +1,16 @@
-import { Container } from "@mui/material";
+import { Subtitle, Title } from "./TeachersPage.styled";
 
 const TeachersPage = () => {
   return (
     <>
-      <Container maxWidth="xs">
-        <div>
-          <h3>Перелік викладачів ВНЗ</h3>
-          <p>Перелік викладачів ВНЗ Харкова та Харківської області</p>
-        </div>
-      </Container>
+      <div>
+        <Title>Перелік викладачів ВНЗ</Title>
+      </div>
+      <div>
+        <Subtitle>
+          Перелік викладачів ВНЗ Харкова та Харківської області
+        </Subtitle>
+      </div>
     </>
   );
 };
