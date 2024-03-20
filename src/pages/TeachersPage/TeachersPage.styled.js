@@ -29,3 +29,8 @@ export const Subtitle = styled.p`
   margin-right: auto;
   text-align: center;
 `;
+
+export const StyledWrapper = styled.div`
+  width: 80%;
+  margin: 80px auto;
+`;
