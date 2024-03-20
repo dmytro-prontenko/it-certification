@@ -1,17 +1,17 @@
-import { Container } from "@mui/material";
+import { Subtitle, Title } from "./SpecialtyPage.styled";
 
 const SpecialtyPage = () => {
   return (
     <>
-      <Container maxWidth="xs">
-        <div>
-          <h3>Перелік спеціальностей</h3>
-          <p>
-            Спеціальності в ВНЗ Харкова та Харківської області, які належать до
-            інформаційних технологій
-          </p>
-        </div>
-      </Container>
+      <div>
+        <Title>Перелік спеціальностей</Title>
+      </div>
+      <div>
+        <Subtitle>
+          Спеціальності в ВНЗ Харкова та Харківської області, які належать до
+          інформаційних технологій
+        </Subtitle>
+      </div>
     </>
   );
 };

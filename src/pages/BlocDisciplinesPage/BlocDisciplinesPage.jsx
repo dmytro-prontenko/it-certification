@@ -1,11 +1,18 @@
 import { Container } from "@mui/material";
+import { Subtitle, Title } from "./BlocDisciplinesPage.styled";
 const BlocDisciplinesPage = () => {
   return (
     <>
+      <Container maxWidth="sm">
+        <div>
+          <Title>Перелік блоку дисциплін ВНЗ</Title>
+        </div>
+      </Container>
       <Container maxWidth="xs">
         <div>
-          <h3>Перелік блоку дисциплін ВНЗ</h3>
-          <p>Перелік блоку дисциплін ВНЗ Харкова та Харківської області</p>
+          <Subtitle>
+            Перелік блоку дисциплін ВНЗ Харкова та Харківської області
+          </Subtitle>
         </div>
       </Container>
     </>

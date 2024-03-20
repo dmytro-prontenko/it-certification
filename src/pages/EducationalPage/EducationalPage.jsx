@@ -1,16 +1,18 @@
 import { Container } from "@mui/material";
+import { Subtitle, Title } from "./EducationalPage.styled";
 const EducationalPage = () => {
   return (
     <>
-      <Container maxWidth="xs">
-        <div>
-          <h3>Перелік рівней освіти</h3>
-          <p>
-            Рівні освіти в ВНЗ Харкова та Харківської області, які належать до
-            інформаційних технологій
-          </p>
-        </div>
-      </Container>
+      <div>
+        <Title>Перелік рівней освіти</Title>
+      </div>
+
+      <div>
+        <Subtitle>
+          Рівні освіти в ВНЗ Харкова та Харківської області, які належать до
+          інформаційних технологій
+        </Subtitle>
+      </div>
     </>
   );
 };
