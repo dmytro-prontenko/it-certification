@@ -1,13 +1,16 @@
-import { Container } from "@mui/material";
+import { Subtitle, Title } from "./GroupDisPage.styled";
+
 const GroupDisPage = () => {
   return (
     <>
-      <Container maxWidth="xs">
-        <div>
-          <h3>Перелік груп дисциплін ВНЗ</h3>
-          <p>Перелік груп дисциплін ВНЗ Харкова та Харківської області</p>
-        </div>
-      </Container>
+      <div>
+        <Title>Перелік груп дисциплін ВНЗ</Title>
+      </div>
+      <div>
+        <Subtitle>
+          Перелік груп дисциплін ВНЗ Харкова та Харківської області
+        </Subtitle>
+      </div>
     </>
   );
 };

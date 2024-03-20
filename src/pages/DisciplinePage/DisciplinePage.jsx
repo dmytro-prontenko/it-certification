@@ -1,11 +1,18 @@
 import { Container } from "@mui/material";
+import { Subtitle, Title } from "./DisciplinePage.styled";
 const DisciplinePage = () => {
   return (
     <>
-      <Container maxWidth="xs">
+      {/* <Container maxWidth="sm"> */}
+      <div>
+        <Title>Перелік дисциплін ВНЗ</Title>
+      </div>
+      {/* </Container> */}
+      <Container maxWidth="sm">
         <div>
-          <h3>Перелік дисциплін ВНЗ</h3>
-          <p>Перелік дисциплін ВНЗ Харкова та Харківської області</p>
+          <Subtitle>
+            Перелік дисциплін ВНЗ Харкова та Харківської області
+          </Subtitle>
         </div>
       </Container>
     </>
