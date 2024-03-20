@@ -18,7 +18,11 @@ const Table = ({ view, data, columns }) => {
         label: column,
         options: {
           customBodyRender: (value) =>
-            value && <a href={"https" + value} target="_blank">{"Ознайомитись"}</a>,
+            value && (
+              <a href={"https" + value} target="_blank">
+                {"Ознайомитись"}
+              </a>
+            ),
         },
       };
     } else {
@@ -31,7 +35,6 @@ const Table = ({ view, data, columns }) => {
 
   let dataArray = [];
   data.map((el) => dataArray.push(Object.values(el)));
-
 
   const options = {
     // elevation:0,
