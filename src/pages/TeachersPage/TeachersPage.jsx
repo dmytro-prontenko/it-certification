@@ -1,5 +1,5 @@
 import { Table } from "@mui/material";
-import { StyledWrapper, Subtitle, Title } from "./TeachersPage.styled";
+import { StyledWrapper } from "./TeachersPage.styled";
 import { useSelector } from "react-redux";
 import { dataTeachers } from "../../redux/selectors/mainInfoSelectors";
 import Hero from "../../components/Hero/Hero";

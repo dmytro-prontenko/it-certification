@@ -1,4 +1,4 @@
-import Hero from "../../components/Hero/Hero";
+import HeroWelcom from "../../components/Hero/HeroWelcom";
 import {
   ImgPhoto,
   ImgText,
@@ -13,7 +13,7 @@ import {
 const WelcomePage = () => {
   return (
     <>
-      <Hero />
+      <HeroWelcom />
       <div className="container">
         <WrapperInfo>
           <InfoTop>
@@ -41,12 +41,7 @@ const WelcomePage = () => {
               </div>
             </InfoText>
             <div>
-              <ImgText
-                src="/WelcomPage/Text.png"
-                alt="text"
-                width="516px"
-                height="480px"
-              />
+              <ImgText src="/WelcomPage/Text.png" alt="text" />
             </div>
           </InfoTop>
         </WrapperInfo>
@@ -83,12 +78,7 @@ const WelcomePage = () => {
               </div>
             </InfoText>
             <div>
-              <ImgPhoto
-                src="/WelcomPage/Photo.png"
-                alt="photo"
-                width="516px"
-                height="670px"
-              />
+              <ImgPhoto src="/WelcomPage/Photo.png" alt="photo" />
             </div>
           </InfoTop>
         </div>
