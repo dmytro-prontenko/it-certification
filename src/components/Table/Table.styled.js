@@ -35,6 +35,7 @@ export const PaginationWrapper = styled.div`
 export const StyledPagination = styled(Pagination)`
   display: flex;
   justify-content: center;
+  width:var(--pagination-width);
 `;
 
 

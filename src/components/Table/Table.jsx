@@ -6,7 +6,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getSpecialtyThunk } from "../../redux/thunk/mainInfoThunks";
+import { getSpecialtyThunk, getTeachersThunk } from "../../redux/thunk/mainInfoThunks";
 import { tableTheme } from "../../services/MUI_themes/table_theme";
 import {
   LinkWrapper,
@@ -198,10 +198,10 @@ const Table = ({ view, data, columns }) => {
         dispatch(getSpecialtyThunk());
         break;
       }
-      // case "teachers": {
-      //   dispatch(getTeachersThunk());
-      //   break;
-      // }
+      case "teachers": {
+        dispatch(getTeachersThunk());
+        break;
+      }
     }
   }, [page]);
 
