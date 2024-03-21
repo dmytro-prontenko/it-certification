@@ -4,7 +4,10 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import MUIDataTable from "mui-datatables";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getSpecialtyThunk } from "../../redux/thunk/mainInfoThunks";
+import {
+  getSpecialtyThunk,
+  getTeachersThunk,
+} from "../../redux/thunk/mainInfoThunks";
 import { StyledWrapper } from "./Table.styled";
 
 const Table = ({ view, data, columns }) => {
@@ -105,10 +108,10 @@ const Table = ({ view, data, columns }) => {
         dispatch(getSpecialtyThunk());
         break;
       }
-      // case "teachers": {
-      //   dispatch(getTeachersThunk());
-      //   break;
-      // }
+      case "teachers": {
+        dispatch(getTeachersThunk());
+        break;
+      }
     }
   }, [page]);
 
