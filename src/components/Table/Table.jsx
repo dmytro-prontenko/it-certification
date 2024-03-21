@@ -1,15 +1,21 @@
-import AddIcon from "@mui/icons-material/Add";
-import { IconButton } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import MUIDataTable from "mui-datatables";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getSpecialtyThunk } from "../../redux/thunk/mainInfoThunks";
-import { StyledWrapper } from "./Table.styled";
+import MUIDataTable from "mui-datatables";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { LinkWrapper, StyledWrapper, TableLink } from "./Table.styled";
 
 const Table = ({ view, data, columns }) => {
+  const [selectedRows, setSelectedRows] = useState([]);
   const [page] = useState(1);
   const dispatch = useDispatch();
+  let dataArray = [];
+
+  data.map((el) => dataArray.push(Object.values(el)));
 
   const columnsToRender = columns.map((column) => {
     if (column.includes("Посилання")) {
@@ -17,35 +23,101 @@ const Table = ({ view, data, columns }) => {
         name: column,
         label: column,
         options: {
+          setCellHeaderProps: () => {
+            return { align: "center" };
+          },
+          setCellProps: () => {
+            return { align: "center" };
+          },
           customBodyRender: (value) =>
             value && (
-              <a href={"https" + value} target="_blank">
-                {"Ознайомитись"}
-              </a>
+              <LinkWrapper>
+                <TableLink href={"https" + value} target="_blank">
+                  {"Ознайомитись"}
+                </TableLink>
+              </LinkWrapper>
             ),
         },
       };
-    } else {
+    }
+
+    if (column.includes("Номер")) {
       return {
         name: column,
         label: column,
+        options: {
+          setCellProps: () => {
+            return { align: "center" };
+          },
+        },
       };
     }
+
+    if (column.includes("Дія")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          onRowSelectionChange: (currentSelect, allSelected) => {
+            setSelectedRows(allSelected);
+          },
+          setCellHeaderProps: () => {
+            return { align: "center" };
+          },
+          setCellProps: () => {
+            return { align: "center" };
+          },
+          customBodyRenderLite: (dataIndex, rowIndex) => (
+            <>
+              <IconButton
+                style={{ color: "var(--edit-green)" }}
+                onClick={() => console.log(`Edit on ${dataArray[dataIndex][0]}`)}
+              >
+                <EditIcon />
+              </IconButton>
+              <IconButton
+                style={{ color: "var(--delete-red)" }}
+                onClick={() => console.log(`Delete on ${rowIndex} `)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </>
+          ),
+        },
+      };
+    }
+
+    return {
+      name: column,
+      label: column,
+      options: {
+        setCellHeaderProps: () => {
+          return { align: "center" };
+        },
+        setCellProps: () => {
+          return { align: "left" };
+        },
+      },
+    };
   });
 
-  let dataArray = [];
-  data.map((el) => dataArray.push(Object.values(el)));
-
   const options = {
-    // elevation:0,
     filterType: "dropdown",
+    selectableRowsHeader: false,
+    selectToolbarPlacement: "none",
+    selectableRowsHideCheckboxes: true,
     rowsPerPage: 20,
     rowsPerPageOptions: [5, 6, 7, 8, 9, 10, 15, 20],
     customToolbar: () => {
       return (
-        <IconButton style={{ order: -1 }}>
-          <AddIcon />
-        </IconButton>
+        <>
+          <IconButton
+            style={{ order: 2 }}
+            onClick={(e) => console.log(`Add on ${e.target}`)}
+          >
+            <AddIcon />
+          </IconButton>
+        </>
       );
     },
   };
@@ -58,9 +130,7 @@ const Table = ({ view, data, columns }) => {
       },
       palette: {
         background: {
-          // paper: "transparent", // background тіла таблиці
           borderRadius: "24px 24px 0px 0px",
-          // default: "green", //background фільтра
         },
         mode: "light",
       },
@@ -73,16 +143,24 @@ const Table = ({ view, data, columns }) => {
             },
           },
         },
+        MUIDataTableHeadCell: {
+          styleOverrides: {
+            contentWrapper: {
+              justifyContent: "center",
+            },
+            toolButton: {
+              margin: 0,
+            },
+          },
+        },
         MuiTableCell: {
           styleOverrides: {
             head: {
               padding: "10px 20px",
               borderRadius: "24px 24px 0px 0px",
-              // borderBottom: "1px solid var(--Gray-200, #7F7F7F)",
             },
             body: {
               padding: "10px 20px",
-              // borderBottom: "1px solid var(--Gray-200, #7F7F7F)",
             },
             footer: {},
           },
@@ -114,6 +192,7 @@ const Table = ({ view, data, columns }) => {
 
   return (
     <StyledWrapper>
+      <>{selectedRows}</>
       <ThemeProvider theme={theme()}>
         <MUIDataTable
           title={"Спеціальності"}
