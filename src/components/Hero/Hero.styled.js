@@ -2,37 +2,37 @@ import styled from "styled-components";
 import Vector from "/Vectors/Vector.png";
 import Building from "/Vectors/Building.png";
 
-export const Title = styled.h1`
-  font-optical-sizing: auto;
-  font-weight: 500;
+export const TitleHero = styled.h1`
+  font-weight: 400;
   font-size: 48px;
   line-height: 1.5;
   color: var(--accent-green-300);
-
-  width: 635px;
+  margin-top: 80px;
+  flex-direction: column;
+  max-width: 750px;
   text-align: center;
   display: flex;
-  flex-direction: column;
+
+  justify-content: center;
 `;
 
 export const HeroContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-
+  flex-direction: column;
   position: relative;
 `;
 
 export const LeftImage = styled.p`
   background-image: url(${Building});
-  width: 305px;
+  width: 296px;
   height: 185px;
   background-repeat: no-repeat;
 
   position: absolute;
-  top: 70%;
-  left: 15%;
-  transform: translate(-60%, -50%);
+  top: 44%;
+  left: 20%;
+  transform: translate(-65%, -50%);
 `;
 
 export const RightImage = styled.p`
@@ -42,7 +42,27 @@ export const RightImage = styled.p`
   background-repeat: no-repeat;
 
   position: absolute;
-  top: 47%;
-  left: 79%;
-  transform: translate(-21%, -50%);
+  top: 35%;
+  left: 77%;
+  transform: translate(-20%, -50%);
+`;
+
+/////////////////////////////////////////////////page
+export const Title = styled.h3`
+  font-weight: 400;
+  line-height: 1.2;
+  font-size: 32px;
+
+  color: var(--edit-green);
+  margin-top: 20px;
+`;
+
+export const Subtitle = styled.p`
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--basic-black);
+  margin-top: 40px;
+  max-width: 740px;
+  line-height: 1.2;
+  text-align: center;
 `;

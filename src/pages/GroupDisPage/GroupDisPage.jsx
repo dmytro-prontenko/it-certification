@@ -1,16 +1,11 @@
-import { Subtitle, Title } from "./GroupDisPage.styled";
+import Hero from "../../components/Hero/Hero";
 
 const GroupDisPage = () => {
+  const subtitle = "Перелік груп дисциплін ЗВО";
+  const subtext = "Перелік груп дисциплін ЗВО Харкова та Харківської області";
   return (
     <>
-      <div>
-        <Title>Перелік груп дисциплін ВНЗ</Title>
-      </div>
-      <div>
-        <Subtitle>
-          Перелік груп дисциплін ВНЗ Харкова та Харківської області
-        </Subtitle>
-      </div>
+      <Hero subtitle={subtitle} subtext={subtext} />
     </>
   );
 };
