@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const getColor = (props) => {
   switch (props.$meta) {
@@ -15,19 +16,26 @@ const getColor = (props) => {
   }
 };
 
-export const StyledFooter = styled.footer`
-  position: relative;
-  padding: 130px 84px 84px 84px;
+export const StyledFooter = styled.footer``;
+
+export const FooterContainer = styled.div`
+  border-top: 1px solid var(--accent-green-300);
+`;
+
+export const FooterLogoLink = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  width: 48px;
 `;
 
 export const IconContainer = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 84px;
-  /* display: none; */
+  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
-export const FooterContainer = styled.div`
+export const FooterinfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 72px;
@@ -55,7 +63,7 @@ export const SocialIcon = styled.svg`
 `;
 
 export const FooterlText = styled.p`
-  /* font-size: 18px; */
+  font-size: 18px;
   line-height: 27px;
 `;
 
