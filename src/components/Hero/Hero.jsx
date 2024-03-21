@@ -1,11 +1,27 @@
-import { HeroContainer, LeftImage, RightImage, Title } from "./Hero.styled";
+import {
+  HeroContainer,
+  LeftImage,
+  RightImage,
+  Subtitle,
+  Title,
+  TitleHero,
+} from "./Hero.styled";
 
-const Hero = () => {
+const Hero = ({ subtitle, subtext }) => {
   return (
-    <HeroContainer>
+    <HeroContainer className="container">
       <LeftImage />
-      <Title>12 галузь</Title>
-      <Title>Інформаційні технології</Title>
+      <div>
+        <TitleHero>
+          12 галузь<span> &#8220;Інформаційні технології &#8222;</span>
+        </TitleHero>
+      </div>
+      <div>
+        <Title>{subtitle}</Title>
+      </div>
+      <div>
+        <Subtitle>{subtext}</Subtitle>
+      </div>
       <RightImage />
     </HeroContainer>
   );
