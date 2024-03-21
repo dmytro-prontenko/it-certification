@@ -45,3 +45,4 @@ export const RightImage = styled.p`
   left: 80%;
   transform: translate(-22%, -50%);
 `;
+
