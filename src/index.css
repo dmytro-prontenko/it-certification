@@ -39,6 +39,8 @@ select:-webkit-autofill:focus {
   --liner-gradient-green: linear-gradient(to right, #00544d 100%, #00544d 0%);
   --radial-gradient-green: radial-gradient(circle, #00544d 0%, #f9f9f9 100%);
 
+  --pagination-width:414px;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
