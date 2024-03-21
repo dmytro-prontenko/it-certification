@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 import { lazy } from "react";
-import ModalContent from "./components/ModalContent/ModalContent";
-import { setModalContent, setModalStatus } from "./redux/slice/serviceSlice";
-import { selectModalContent, selectOpenModal } from "./redux/selectors/serviceSelectors";
 import Modal from "./components/Modal/Modal";
+import ModalContent from "./components/ModalContent/ModalContent";
+import { selectOpenModal } from "./redux/selectors/serviceSelectors";
+import { setModalContent, setModalStatus } from "./redux/slice/serviceSlice";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const InstitutionPage = lazy(() =>

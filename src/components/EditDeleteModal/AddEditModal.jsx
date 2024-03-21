@@ -1,17 +1,15 @@
 import { useSelector } from "react-redux";
-import { selectModalContent } from "../../redux/selectors/serviceSelectors";
 import { ModalWrapper } from "../../commonStyles/commonStyles";
+import { selectModalContent } from "../../redux/selectors/serviceSelectors";
 
-
-const EditDeleteModal = () => {
+const AddEditModal = () => {
   const data = useSelector(selectModalContent);
-console.log(data)
 
   return (
     <ModalWrapper>
-      EditDelete {data.recordData.id}
+      {data.action}
     </ModalWrapper>
-  )
-}
+  );
+};
 
-export default EditDeleteModal
+export default AddEditModal;

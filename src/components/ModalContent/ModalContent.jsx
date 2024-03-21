@@ -1,18 +1,19 @@
 import { useSelector } from "react-redux";
 
 import { selectModalContent } from "../../redux/selectors/serviceSelectors";
-import EditDeleteModal from "../EditDeleteModal/EditDeleteModal";
+import AddEditModal from "../EditDeleteModal/AddEditModal";
 
 const ModalContent = () => {
   const modalContent = useSelector(selectModalContent);
+  console.log(modalContent.action);
 
   switch (modalContent.action) {
     case "Add":
-      return <div>Edit</div>;
+      return <AddEditModal />;
     case "Edit":
-      return <EditDeleteModal />;
+      return <AddEditModal />;
     case "Delete":
-      return <EditDeleteModal />;
+      return <>Delete</>;
 
     default:
       return null;
