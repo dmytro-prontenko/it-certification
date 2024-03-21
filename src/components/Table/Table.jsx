@@ -2,11 +2,12 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Chip, IconButton, MenuItem, Select } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getSpecialtyThunk } from "../../redux/thunk/mainInfoThunks";
+import { tableTheme } from "../../services/MUI_themes/table_theme";
 import {
   LinkWrapper,
   PageSelectWrapper,
@@ -17,16 +18,18 @@ import {
 } from "./Table.styled";
 
 const Table = ({ view, data, columns }) => {
+  let dataArray = [];
+
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
-  let dataArray = [];
 
   data.map((el) => dataArray.push(Object.values(el)));
 
   const handleEditClick = (recordId) => {
     console.log(recordId);
   };
+
   const handleDeleteClick = (recordId) => {
     console.log(recordId);
   };
@@ -89,8 +92,6 @@ const Table = ({ view, data, columns }) => {
                 return "Ознайомитись";
             },
           },
-
-          // filterList: [1,2]
         },
       };
     }
@@ -113,9 +114,6 @@ const Table = ({ view, data, columns }) => {
         name: column,
         label: column,
         options: {
-          // onRowSelectionChange: (currentSelect, allSelected) => {
-          //   setSelectedRows(allSelected);
-          // },
           filter: false,
           setCellHeaderProps: () => {
             return { align: "center" };
@@ -194,61 +192,6 @@ const Table = ({ view, data, columns }) => {
     },
   };
 
-  const theme = () =>
-    createTheme({
-      typography: {
-        fontFamily: "Montserrat, sans-serif",
-        fontSize: 14,
-      },
-      palette: {
-        background: {
-          borderRadius: "24px 24px 0px 0px",
-        },
-        mode: "light",
-      },
-      components: {
-        MuiPaper: {
-          styleOverrides: {
-            root: {
-              borderRadius: "24px",
-              padding: 20,
-            },
-          },
-        },
-        MUIDataTableHeadCell: {
-          styleOverrides: {
-            contentWrapper: {
-              justifyContent: "center",
-            },
-            toolButton: {
-              margin: 0,
-            },
-          },
-        },
-        MuiTableCell: {
-          styleOverrides: {
-            head: {
-              padding: "10px 20px",
-              borderRadius: "24px 24px 0px 0px",
-            },
-            body: {
-              padding: "10px 20px",
-            },
-            footer: {},
-          },
-        },
-      },
-      styleOverrides: {
-        MUIDataTableToolbar: {
-          actions: {
-            display: "flex",
-            flexDirection: "row",
-            flex: "initial",
-          },
-        },
-      },
-    });
-
   useEffect(() => {
     switch (view) {
       case "specialty": {
@@ -264,7 +207,7 @@ const Table = ({ view, data, columns }) => {
 
   return (
     <StyledWrapper>
-      <ThemeProvider theme={theme()}>
+      <ThemeProvider theme={tableTheme()}>
         <MUIDataTable
           title={"Спеціальності"}
           data={dataArray}
@@ -281,8 +224,8 @@ const Table = ({ view, data, columns }) => {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={page}
-              label="Страница"
               onChange={handleChange}
+              size="small"
             >
               {[...Array(10)].map((_, index) => (
                 <MenuItem key={index} value={index + 1}>
