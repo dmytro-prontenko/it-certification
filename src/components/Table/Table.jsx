@@ -5,7 +5,7 @@ import { Chip, IconButton, MenuItem, Select } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getSpecialtyThunk, getTeachersThunk } from "../../redux/thunk/mainInfoThunks";
 import { tableTheme } from "../../services/MUI_themes/table_theme";
 import {
@@ -16,23 +16,30 @@ import {
   StyledWrapper,
   TableLink,
 } from "./Table.styled";
+import { setModalContent, setModalStatus } from "../../redux/slice/serviceSlice";
+import { selectOpenModal } from "../../redux/selectors/serviceSelectors";
 
 const Table = ({ view, data, columns }) => {
+  const dispatch = useDispatch();
+  const modalStatus = useSelector(selectOpenModal);
+
   let dataArray = [];
 
   const [page, setPage] = useState(1);
-  const dispatch = useDispatch();
+
+
+    
 
 
   data.map((el) => dataArray.push(Object.values(el)));
 
-  const handleEditClick = (recordId) => {
-    console.log(recordId);
-  };
+  // const handleEditClick = (recordId) => {
+  //   console.log(recordId);
+  // };
 
-  const handleDeleteClick = (recordId) => {
-    console.log(recordId);
-  };
+  // const handleDeleteClick = (recordId) => {
+  //   console.log(recordId);
+  // };
 
   const handleChange = (e) => {
     setPage(Number(e.target.value));
@@ -41,6 +48,12 @@ const Table = ({ view, data, columns }) => {
   const handleChangePage = (e) => {
     setPage(Number(e.target.textContent));
   };
+
+  const handleModal = (action, recordData) => {
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent({ action, recordData }));
+  };
+
 
   const CustomChip = ({ label, onDelete }) => {
     let customLabel = label;
@@ -125,13 +138,15 @@ const Table = ({ view, data, columns }) => {
             <>
               <IconButton
                 style={{ color: "var(--edit-green)" }}
-                onClick={() => handleEditClick(data[dataIndex])}
+                onClick={() => handleModal("Edit", data[dataIndex])}
+                // onClick={() => handleEditClick(data[dataIndex])}
               >
                 <EditIcon />
               </IconButton>
               <IconButton
                 style={{ color: "var(--delete-red)" }}
-                onClick={() => handleDeleteClick(data[dataIndex])}
+                onClick={() => handleModal("Delete", data[dataIndex])}
+                // onClick={() => handleDeleteClick(data[dataIndex])}
               >
                 <DeleteIcon />
               </IconButton>
@@ -183,7 +198,7 @@ const Table = ({ view, data, columns }) => {
         <>
           <IconButton
             style={{ order: 2 }}
-            onClick={(e) => console.log(`Add on ${e.target}`)}
+            onClick={()=>handleModal("Add")}
           >
             <AddIcon />
           </IconButton>

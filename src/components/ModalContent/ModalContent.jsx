@@ -1,22 +1,22 @@
-// import { useSelector } from "react-redux";
-// import { selectModalContent } from "../../redux/selectors";
-// import ModalMenu from "../ModalMenu/ModalMenu";
-// import Cabinet from "../Cabinet/Cabinet";
+import { useSelector } from "react-redux";
 
-// const ModalContent = () => {
-//   const modalContent = useSelector(selectModalContent);
+import { selectModalContent } from "../../redux/selectors/serviceSelectors";
+import EditDeleteModal from "../EditDeleteModal/EditDeleteModal";
 
-//   switch (modalContent) {
-//     case "1":
-//       return <ModalMenu />;
-//     case "2":
-//       return <div>Favorites</div>;
-//     case "3":
-//       return <Cabinet />;
+const ModalContent = () => {
+  const modalContent = useSelector(selectModalContent);
 
-//     default:
-//       return null;
-//   }
-// };
+  switch (modalContent.action) {
+    case "Add":
+      return <div>Edit</div>;
+    case "Edit":
+      return <EditDeleteModal />;
+    case "Delete":
+      return <EditDeleteModal />;
 
-// export default ModalContent;
+    default:
+      return null;
+  }
+};
+
+export default ModalContent;

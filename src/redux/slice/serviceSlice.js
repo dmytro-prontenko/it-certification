@@ -6,7 +6,10 @@ const initialState = {
   isSignedIn: false,
   isLoading: false,
   openModal: false,
-  modalContent: null,
+  modalContent: {
+    action: null,
+    recordData:null
+  },
 };
 
 const serviceSlice = createSlice({
@@ -17,7 +20,7 @@ const serviceSlice = createSlice({
       state.openModal = action.payload;
     },
     setModalContent: (state, action) => {
-      state.modalContent = action.payload;
+      state.modalContent = {...action.payload};
     },
   },
   extraReducers: (builder) => {
