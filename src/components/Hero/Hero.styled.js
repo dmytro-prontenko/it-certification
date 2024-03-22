@@ -22,7 +22,7 @@ export const HeroContainer = styled.div`
   flex-direction: column;
   position: relative;
 `;
-
+////////////// leftImg
 export const LeftImage = styled.p`
   background-image: url(${Building});
   width: 296px;
@@ -34,7 +34,7 @@ export const LeftImage = styled.p`
   left: 20%;
   transform: translate(-65%, -50%);
 `;
-
+///////////////////rightImg
 export const RightImage = styled.p`
   background-image: url(${Vector});
   width: 345px;

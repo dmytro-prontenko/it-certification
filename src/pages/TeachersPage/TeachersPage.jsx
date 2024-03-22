@@ -1,4 +1,3 @@
-
 import { useSelector } from "react-redux";
 import Hero from "../../components/Hero/Hero";
 import Table from "../../components/Table/Table";
