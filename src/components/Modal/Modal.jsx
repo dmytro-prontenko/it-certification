@@ -1,12 +1,25 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { StyledBackdrop, StyledModalContent } from "./Modal.styled";
+import Icon from "../Icon/Icon";
+import { useDispatch } from "react-redux";
+import {
+  setModalContent,
+  setModalStatus,
+} from "../../redux/slice/serviceSlice";
+import { CloseModalButton } from "../../commonStyles/commonStyles";
 
 const modalRootElement = document.querySelector("#modal");
 
 const Modal = ({ open, onClose, children }) => {
   const element = useMemo(() => document.createElement("div"), []);
   element.setAttribute("id", "modal-content");
+  const dispatch = useDispatch();
+
+  const handleCloseUserModal = () => {
+    dispatch(setModalContent({ action: null, recordData: null }));
+    dispatch(setModalStatus(false));
+  };
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -47,7 +60,12 @@ const Modal = ({ open, onClose, children }) => {
     <>
       {open && (
         <StyledBackdrop onClick={handleBackdropClick}>
-          <StyledModalContent>{children}</StyledModalContent>
+          <StyledModalContent>
+            <CloseModalButton onClick={handleCloseUserModal}>
+              <Icon width={24} height={24} iconId={"close"} />
+            </CloseModalButton>
+            {children}
+          </StyledModalContent>
         </StyledBackdrop>
       )}
     </>,
