@@ -1,13 +1,20 @@
 import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import { Chip, IconButton, MenuItem, Select } from "@mui/material";
+import { Chip, IconButton, MenuItem, Select, Tooltip } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getSpecialtyThunk, getTeachersThunk } from "../../redux/thunk/mainInfoThunks";
+import { useDispatch, useSelector } from "react-redux";
+import { selectOpenModal } from "../../redux/selectors/serviceSelectors";
+import {
+  setModalContent,
+  setModalStatus,
+} from "../../redux/slice/serviceSlice";
+import {
+  getSpecialtyThunk,
+  getTeachersThunk,
+} from "../../redux/thunk/mainInfoThunks";
 import { tableTheme } from "../../services/MUI_themes/table_theme";
+import Icon from "../Icon/Icon";
 import {
   LinkWrapper,
   PageSelectWrapper,
@@ -18,21 +25,14 @@ import {
 } from "./Table.styled";
 
 const Table = ({ view, data, columns }) => {
+  const dispatch = useDispatch();
+  const modalStatus = useSelector(selectOpenModal);
+
   let dataArray = [];
 
   const [page, setPage] = useState(1);
-  const dispatch = useDispatch();
-
 
   data.map((el) => dataArray.push(Object.values(el)));
-
-  const handleEditClick = (recordId) => {
-    console.log(recordId);
-  };
-
-  const handleDeleteClick = (recordId) => {
-    console.log(recordId);
-  };
 
   const handleChange = (e) => {
     setPage(Number(e.target.value));
@@ -40,6 +40,11 @@ const Table = ({ view, data, columns }) => {
 
   const handleChangePage = (e) => {
     setPage(Number(e.target.textContent));
+  };
+
+  const handleModal = (action, recordData) => {
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent({ action, recordData }));
   };
 
   const CustomChip = ({ label, onDelete }) => {
@@ -123,18 +128,32 @@ const Table = ({ view, data, columns }) => {
           },
           customBodyRenderLite: (dataIndex) => (
             <>
-              <IconButton
-                style={{ color: "var(--edit-green)" }}
-                onClick={() => handleEditClick(data[dataIndex])}
-              >
-                <EditIcon />
-              </IconButton>
-              <IconButton
-                style={{ color: "var(--delete-red)" }}
-                onClick={() => handleDeleteClick(data[dataIndex])}
-              >
-                <DeleteIcon />
-              </IconButton>
+              <Tooltip title="Редагувати">
+                <IconButton
+                  onClick={() => handleModal("Edit", data[dataIndex])}
+                  // onClick={() => handleEditClick(data[dataIndex])}
+                >
+                  <Icon
+                    styles={{ fill: "var(--edit-green)" }}
+                    width={24}
+                    height={24}
+                    iconId={"pencil"}
+                  />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Видалити">
+                <IconButton
+                  onClick={() => handleModal("Delete", data[dataIndex])}
+                  // onClick={() => handleDeleteClick(data[dataIndex])}
+                >
+                  <Icon
+                    styles={{ fill: "var( --delete-red)" }}
+                    width={24}
+                    height={24}
+                    iconId={"trash"}
+                  />
+                </IconButton>
+              </Tooltip>
             </>
           ),
         },
@@ -181,12 +200,14 @@ const Table = ({ view, data, columns }) => {
     customToolbar: () => {
       return (
         <>
-          <IconButton
-            style={{ order: 2 }}
-            onClick={(e) => console.log(`Add on ${e.target}`)}
-          >
-            <AddIcon />
-          </IconButton>
+          <Tooltip title="Додати запис">
+            <IconButton
+              style={{ order: 2 }}
+              onClick={() => handleModal("Add", null)}
+            >
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
         </>
       );
     },
@@ -194,11 +215,11 @@ const Table = ({ view, data, columns }) => {
 
   useEffect(() => {
     switch (view) {
-      case "specialty": {
+      case "Перелік спеціальностей": {
         dispatch(getSpecialtyThunk());
         break;
       }
-      case "teachers": {
+      case "Перелік викладачів": {
         dispatch(getTeachersThunk());
         break;
       }
@@ -209,7 +230,7 @@ const Table = ({ view, data, columns }) => {
     <StyledWrapper>
       <ThemeProvider theme={tableTheme()}>
         <MUIDataTable
-          title={"Спеціальності"}
+          title={view}
           data={dataArray}
           columns={columnsToRender}
           options={options}

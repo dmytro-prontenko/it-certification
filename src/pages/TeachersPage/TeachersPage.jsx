@@ -2,7 +2,8 @@ import { useSelector } from "react-redux";
 import Hero from "../../components/Hero/Hero";
 import Table from "../../components/Table/Table";
 import { dataTeachers } from "../../redux/selectors/mainInfoSelectors";
-import { StyledWrapper } from "./TeachersPage.styled";
+import { StyledWrapper } from "../../components/Table/Table.styled";
+
 
 const TeachersPage = () => {
   // const dispatch = useDispatch();
@@ -27,8 +28,8 @@ const TeachersPage = () => {
     <>
       <Hero subtitle={subtitle} subtext={subtext} />
 
-      <StyledWrapper>
-        <Table view={"teachers"} data={teachers} columns={columns} />
+      <StyledWrapper className="container">
+        <Table view={"Перелік викладачів"} data={teachers} columns={columns} />
       </StyledWrapper>
     </>
   );
