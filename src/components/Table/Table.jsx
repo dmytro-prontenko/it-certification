@@ -1,15 +1,20 @@
 import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import { Chip, IconButton, MenuItem, Select, Tooltip } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectOpenModal } from "../../redux/selectors/serviceSelectors";
-import { setModalContent, setModalStatus } from "../../redux/slice/serviceSlice";
-import { getSpecialtyThunk, getTeachersThunk } from "../../redux/thunk/mainInfoThunks";
+import {
+  setModalContent,
+  setModalStatus,
+} from "../../redux/slice/serviceSlice";
+import {
+  getSpecialtyThunk,
+  getTeachersThunk,
+} from "../../redux/thunk/mainInfoThunks";
 import { tableTheme } from "../../services/MUI_themes/table_theme";
+import Icon from "../Icon/Icon";
 import {
   LinkWrapper,
   PageSelectWrapper,
@@ -27,9 +32,7 @@ const Table = ({ view, data, columns }) => {
 
   const [page, setPage] = useState(1);
 
-
   data.map((el) => dataArray.push(Object.values(el)));
-
 
   const handleChange = (e) => {
     setPage(Number(e.target.value));
@@ -43,7 +46,6 @@ const Table = ({ view, data, columns }) => {
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent({ action, recordData }));
   };
-
 
   const CustomChip = ({ label, onDelete }) => {
     let customLabel = label;
@@ -126,20 +128,32 @@ const Table = ({ view, data, columns }) => {
           },
           customBodyRenderLite: (dataIndex) => (
             <>
-              <IconButton
-                style={{ color: "var(--edit-green)" }}
-                onClick={() => handleModal("Edit", data[dataIndex])}
-                // onClick={() => handleEditClick(data[dataIndex])}
-              >
-                <EditIcon />
-              </IconButton>
-              <IconButton
-                style={{ color: "var(--delete-red)" }}
-                onClick={() => handleModal("Delete", data[dataIndex])}
-                // onClick={() => handleDeleteClick(data[dataIndex])}
-              >
-                <DeleteIcon />
-              </IconButton>
+              <Tooltip title="Редагувати">
+                <IconButton
+                  onClick={() => handleModal("Edit", data[dataIndex])}
+                  // onClick={() => handleEditClick(data[dataIndex])}
+                >
+                  <Icon
+                    styles={{ fill: "var(--edit-green)" }}
+                    width={24}
+                    height={24}
+                    iconId={"pencil"}
+                  />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Видалити">
+                <IconButton
+                  onClick={() => handleModal("Delete", data[dataIndex])}
+                  // onClick={() => handleDeleteClick(data[dataIndex])}
+                >
+                  <Icon
+                    styles={{ fill: "var( --delete-red)" }}
+                    width={24}
+                    height={24}
+                    iconId={"trash"}
+                  />
+                </IconButton>
+              </Tooltip>
             </>
           ),
         },
@@ -187,7 +201,10 @@ const Table = ({ view, data, columns }) => {
       return (
         <>
           <Tooltip title="Додати запис">
-            <IconButton style={{ order: 2 }} onClick={() => handleModal("Add", null)}>
+            <IconButton
+              style={{ order: 2 }}
+              onClick={() => handleModal("Add", null)}
+            >
               <AddIcon />
             </IconButton>
           </Tooltip>
@@ -198,11 +215,11 @@ const Table = ({ view, data, columns }) => {
 
   useEffect(() => {
     switch (view) {
-      case "specialty": {
+      case "Перелік спеціальностей": {
         dispatch(getSpecialtyThunk());
         break;
       }
-      case "teachers": {
+      case "Перелік викладачів": {
         dispatch(getTeachersThunk());
         break;
       }
@@ -212,41 +229,39 @@ const Table = ({ view, data, columns }) => {
   return (
     <StyledWrapper>
       <ThemeProvider theme={tableTheme()}>
-        {/* <Suspense fallback={<Loader />}> */}
-          <MUIDataTable
-            title={"Спеціальності"}
-            data={dataArray}
-            columns={columnsToRender}
-            options={options}
-            components={{
-              TableFilterList: CustomFilterList,
-            }}
+        <MUIDataTable
+          title={view}
+          data={dataArray}
+          columns={columnsToRender}
+          options={options}
+          components={{
+            TableFilterList: CustomFilterList,
+          }}
+        />
+        <PaginationWrapper>
+          <PageSelectWrapper>
+            <div>Показати сторінку</div>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={page}
+              onChange={handleChange}
+              size="small"
+            >
+              {[...Array(10)].map((_, index) => (
+                <MenuItem key={index} value={index + 1}>
+                  {index + 1}
+                </MenuItem>
+              ))}
+            </Select>
+          </PageSelectWrapper>
+          <StyledPagination
+            count={10}
+            page={page}
+            onChange={handleChangePage}
+            size="large"
           />
-          <PaginationWrapper>
-            <PageSelectWrapper>
-              <div>Показати сторінку</div>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={page}
-                onChange={handleChange}
-                size="small"
-              >
-                {[...Array(10)].map((_, index) => (
-                  <MenuItem key={index} value={index + 1}>
-                    {index + 1}
-                  </MenuItem>
-                ))}
-              </Select>
-            </PageSelectWrapper>
-            <StyledPagination
-              count={10}
-              page={page}
-              onChange={handleChangePage}
-              size="large"
-            />
-          </PaginationWrapper>
-        {/* </Suspense> */}
+        </PaginationWrapper>
       </ThemeProvider>
     </StyledWrapper>
   );

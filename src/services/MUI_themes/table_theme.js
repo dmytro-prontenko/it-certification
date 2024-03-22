@@ -23,6 +23,12 @@ export const tableTheme = () =>
       },
       MUIDataTableHeadCell: {
         styleOverrides: {
+          root: {
+            // "&:last-child": {
+            //   width: "fit-content",
+            //   padding: 0,
+            // },
+          },
           contentWrapper: {
             justifyContent: "center",
           },
@@ -34,11 +40,26 @@ export const tableTheme = () =>
       MuiTableCell: {
         styleOverrides: {
           head: {
-            padding: "10px 20px",
+            padding: "10px 0",
             borderRadius: "24px 24px 0px 0px",
           },
           body: {
-            padding: "10px 20px",
+            padding: "15px 20px",
+            // "&:nth-child(1)": {
+            //   width: "70px",
+            //   outline: "1px solid tomato",
+            //   // padding: 0,
+            // },
+            // "&:nth-child(2)": {
+            //   maxWidth: "max-content",
+            //   outline: "1px solid tomato",
+            //   // padding: 0,
+            // },
+            // "&:last-child": {
+            //   width: "100px",
+            //   padding: 0,
+            //   outline: "1px solid tomato",
+            // },
           },
           footer: {},
         },

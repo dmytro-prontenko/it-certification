@@ -13,7 +13,7 @@ const Hero = ({ subtitle, subtext }) => {
       <LeftImage />
       <div>
         <TitleHero>
-          12 галузь<span> &#8220;Інформаційні технології &#8222;</span>
+          12 галузь<span> “Інформаційні технології”</span>
         </TitleHero>
       </div>
       <div>
