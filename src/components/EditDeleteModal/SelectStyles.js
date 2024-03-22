@@ -59,9 +59,10 @@ const selectStyles = {
   dropdownIndicator: (customStyles) => ({
     ...customStyles,
     "&:focus": { color: "green" },
-    "&:hover": { color: "green" },
+    "&:hover": { color: "green", cursor:"pointer" },
     "&:active": { color: "green" },
     color: "var(--accent-green-300)",
+
   }),
   menu: (customStyles) => ({
     ...customStyles,
