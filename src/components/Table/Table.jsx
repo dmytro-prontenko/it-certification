@@ -1,11 +1,13 @@
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { Chip, IconButton, MenuItem, Select } from "@mui/material";
+import { Chip, IconButton, MenuItem, Select, Tooltip } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { selectOpenModal } from "../../redux/selectors/serviceSelectors";
+import { setModalContent, setModalStatus } from "../../redux/slice/serviceSlice";
 import { getSpecialtyThunk, getTeachersThunk } from "../../redux/thunk/mainInfoThunks";
 import { tableTheme } from "../../services/MUI_themes/table_theme";
 import {
@@ -16,8 +18,6 @@ import {
   StyledWrapper,
   TableLink,
 } from "./Table.styled";
-import { setModalContent, setModalStatus } from "../../redux/slice/serviceSlice";
-import { selectOpenModal } from "../../redux/selectors/serviceSelectors";
 
 const Table = ({ view, data, columns }) => {
   const dispatch = useDispatch();
@@ -28,18 +28,8 @@ const Table = ({ view, data, columns }) => {
   const [page, setPage] = useState(1);
 
 
-    
-
-
   data.map((el) => dataArray.push(Object.values(el)));
 
-  // const handleEditClick = (recordId) => {
-  //   console.log(recordId);
-  // };
-
-  // const handleDeleteClick = (recordId) => {
-  //   console.log(recordId);
-  // };
 
   const handleChange = (e) => {
     setPage(Number(e.target.value));
@@ -196,12 +186,11 @@ const Table = ({ view, data, columns }) => {
     customToolbar: () => {
       return (
         <>
-          <IconButton
-            style={{ order: 2 }}
-            onClick={()=>handleModal("Add")}
-          >
-            <AddIcon />
-          </IconButton>
+          <Tooltip title="Додати запис">
+            <IconButton style={{ order: 2 }} onClick={() => handleModal("Add", null)}>
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
         </>
       );
     },
@@ -223,39 +212,41 @@ const Table = ({ view, data, columns }) => {
   return (
     <StyledWrapper>
       <ThemeProvider theme={tableTheme()}>
-        <MUIDataTable
-          title={"Спеціальності"}
-          data={dataArray}
-          columns={columnsToRender}
-          options={options}
-          components={{
-            TableFilterList: CustomFilterList,
-          }}
-        />
-        <PaginationWrapper>
-          <PageSelectWrapper>
-            <div>Показати сторінку</div>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={page}
-              onChange={handleChange}
-              size="small"
-            >
-              {[...Array(10)].map((_, index) => (
-                <MenuItem key={index} value={index + 1}>
-                  {index + 1}
-                </MenuItem>
-              ))}
-            </Select>
-          </PageSelectWrapper>
-          <StyledPagination
-            count={10}
-            page={page}
-            onChange={handleChangePage}
-            size="large"
+        {/* <Suspense fallback={<Loader />}> */}
+          <MUIDataTable
+            title={"Спеціальності"}
+            data={dataArray}
+            columns={columnsToRender}
+            options={options}
+            components={{
+              TableFilterList: CustomFilterList,
+            }}
           />
-        </PaginationWrapper>
+          <PaginationWrapper>
+            <PageSelectWrapper>
+              <div>Показати сторінку</div>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={page}
+                onChange={handleChange}
+                size="small"
+              >
+                {[...Array(10)].map((_, index) => (
+                  <MenuItem key={index} value={index + 1}>
+                    {index + 1}
+                  </MenuItem>
+                ))}
+              </Select>
+            </PageSelectWrapper>
+            <StyledPagination
+              count={10}
+              page={page}
+              onChange={handleChangePage}
+              size="large"
+            />
+          </PaginationWrapper>
+        {/* </Suspense> */}
       </ThemeProvider>
     </StyledWrapper>
   );

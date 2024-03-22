@@ -34,3 +34,12 @@ export const StyledModalContent = styled.div`
 
   border-radius: 10px;
 `;
+
+export const CloseModalButton = styled.button`
+  position: absolute;
+  right: 3%;
+  top: 4%;
+
+  border: none;
+  background: transparent;
+`;

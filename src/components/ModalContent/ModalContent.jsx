@@ -5,7 +5,7 @@ import AddEditModal from "../EditDeleteModal/AddEditModal";
 
 const ModalContent = () => {
   const modalContent = useSelector(selectModalContent);
-  console.log(modalContent.action);
+  // console.log(modalContent.action);
 
   switch (modalContent.action) {
     case "Add":
