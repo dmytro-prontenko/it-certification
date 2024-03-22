@@ -6,6 +6,7 @@ import {
   InfoTitle,
   InfoTop,
   LIstItem,
+  List,
   Text,
   WrapperInfo,
 } from "./WelcomePage.styled";
@@ -65,7 +66,7 @@ const WelcomePage = () => {
                 </Text>
               </div>
               <div>
-                <ul>
+                <List>
                   <LIstItem>Викладачів</LIstItem>
                   <LIstItem>ЗВО</LIstItem>
                   <LIstItem>Рівень освіти</LIstItem>
@@ -74,7 +75,7 @@ const WelcomePage = () => {
                   <LIstItem>Дисципліни</LIstItem>
                   <LIstItem>Блоки дисциплін</LIstItem>
                   <LIstItem>Групи дисциплін</LIstItem>
-                </ul>
+                </List>
               </div>
             </InfoText>
             <div>
