@@ -47,7 +47,6 @@ const AddEditModal = () => {
 
   return (
     <ModalWrapper>
-
       <ModalTitle>{modalTitle}</ModalTitle>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <StyledInputsWrapper>

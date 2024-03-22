@@ -28,7 +28,9 @@ export const Text = styled.p`
   line-height: 1.5;
 `;
 
-export const List = styled.ul``;
+export const List = styled.ul`
+  margin-left: 25px;
+`;
 
 export const LIstItem = styled.li`
   line-height: 1.2;
@@ -42,7 +44,7 @@ export const LIstItem = styled.li`
   &::before {
     content: "";
     position: absolute;
-    left: 0;
+    left: -4%;
     top: 50%;
     transform: translateY(-50%);
     width: 10px;
