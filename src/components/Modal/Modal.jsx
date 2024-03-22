@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
-import { CloseModalButton, StyledBackdrop, StyledModalContent } from "./Modal.styled";
+import {
+  CloseModalButton,
+  StyledBackdrop,
+  StyledModalContent,
+} from "./Modal.styled";
 import Icon from "../Icon/Icon";
 import { useDispatch } from "react-redux";
 import {
   setModalContent,
   setModalStatus,
 } from "../../redux/slice/serviceSlice";
-
 
 const modalRootElement = document.querySelector("#modal");
 
@@ -16,6 +19,16 @@ const Modal = ({ open, onClose, children }) => {
   element.setAttribute("id", "modal-content");
   const dispatch = useDispatch();
 
+  if (open) {
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth; // Вычисляем ширину вертикального скролла
+    document.body.style.paddingRight = `${scrollbarWidth}px`; // Добавляем padding-right для компенсации ширины скролла
+    document.body.style.overflowY = "hidden";
+  } else {
+    document.body.style.paddingRight = "0"; // Сбрасываем padding-right при закрытии модального окна
+    document.body.style.overflowY = "auto";
+  }
+  
   const handleCloseUserModal = () => {
     dispatch(setModalContent({ action: null, recordData: null }));
     dispatch(setModalStatus(false));
