@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectModalContent } from "../../redux/selectors/serviceSelectors";
 
-import { setModalContent } from "../../redux/slice/serviceSlice";
+import {
+  setModalContent,
+  setModalStatus,
+} from "../../redux/slice/serviceSlice";
 import CancelButton from "../Buttons/CancelButton/CancelButton";
 import ProceedButton from "../Buttons/ProceedButton/ProccedButton";
 import {
@@ -13,6 +16,25 @@ import {
 const ConfirmationModal = () => {
   const action = useSelector(selectModalContent);
   const dispatch = useDispatch();
+
+  const handleCancel = () => {
+    dispatch(
+      setModalContent({
+        action: actionToDispatch,
+        recordData: action.recordData,
+      })
+    );
+  };
+
+  const handleProceed = () => {
+    dispatch(
+      setModalContent({
+        action: null,
+        recordData: null,
+      })
+    );
+    dispatch(setModalStatus(false));
+  };
 
   let title;
   let actionToDispatch;
@@ -30,17 +52,12 @@ const ConfirmationModal = () => {
     }
   }
 
-
   return (
     <ConfirmationWrapper>
       <ConfirmationTitle>{title}</ConfirmationTitle>
       <ButtonsWrapper>
-        <CancelButton
-          onClick={() =>
-            dispatch(setModalContent({ action:actionToDispatch, recordData:action.recordData }))
-          }
-        />
-        <ProceedButton onClick={() => console.log("proceed")} />
+        <CancelButton onClick={handleCancel} />
+        <ProceedButton onClick={handleProceed} />
       </ButtonsWrapper>
     </ConfirmationWrapper>
   );
