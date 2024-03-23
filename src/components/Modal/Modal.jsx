@@ -1,83 +1,89 @@
-// import { AnimatePresence, motion } from "framer-motion";
-// import { useCallback, useEffect, useMemo } from "react";
-// import { createPortal } from "react-dom";
-// import { StyledBackdrop, StyledModalContent } from "./Modal.styled";
+import { useCallback, useEffect, useMemo } from "react";
+import { createPortal } from "react-dom";
+import {
+  CloseModalButton,
+  StyledBackdrop,
+  StyledModalContent,
+} from "./Modal.styled";
+import Icon from "../Icon/Icon";
+import { useDispatch } from "react-redux";
+import {
+  setModalContent,
+  setModalStatus,
+} from "../../redux/slice/serviceSlice";
 
-// const modalRootElement = document.querySelector("#modal");
+const modalRootElement = document.querySelector("#modal");
 
-// const containerVariants = {
-//   hidden: {
-//     opacity: 0,
-//   },
-//   visible: {
-//     opacity: 1,
-//     transition: {
-//       delay: 0,
-//       duration: 0.5,
-//     },
-//   },
-//   exit: {
-//     opacity: 0,
-//     transition: { delay: 0, duration: 0.5 },
-//   },
-// };
+const Modal = ({ open, onClose, children }) => {
+  const element = useMemo(() => document.createElement("div"), []);
+  element.setAttribute("id", "modal-content");
+  const dispatch = useDispatch();
 
-// const Modal = ({ open, onClose, children }) => {
-//   const element = useMemo(() => document.createElement("div"), []);
-//   element.setAttribute("id", "modal-content");
+  if (open) {
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth; // Вычисляем ширину вертикального скролла
+    document.body.style.paddingRight = `${scrollbarWidth}px`; // Добавляем padding-right для компенсации ширины скролла
+    document.body.style.overflowY = "hidden";
+  } else {
+    document.body.style.paddingRight = "0"; // Сбрасываем padding-right при закрытии модального окна
+    document.body.style.overflowY = "auto";
+  }
+  
+  const handleCloseUserModal = () => {
+    dispatch(setModalContent({ action: null, recordData: null }));
+    dispatch(setModalStatus(false));
+  };
 
-//   const handleKeyDown = useCallback(
-//     (event) => {
-//       if (event.key === "Escape" && open) {
-//         onClose();
-//       }
-//     },
-//     [open, onClose]
-//   );
+  const handleKeyDown = useCallback(
+    (event) => {
+      if (event.key === "Escape" && open) {
+        onClose();
+      }
+    },
+    [open, onClose]
+  );
 
-//   const handleBackdropClick = useCallback(
-//     (event) => {
-//       if (event.target === event.currentTarget) {
-//         onClose();
-//       }
-//     },
-//     [onClose]
-//   );
+  const handleBackdropClick = useCallback(
+    (event) => {
+      if (event.target === event.currentTarget) {
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
-//   useEffect(() => {
-//     if (open) {
-//       document.body.style.overflow = "hidden";
-//     } else {
-//       document.body.style.overflow = "auto";
-//     }
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
 
-//     modalRootElement.appendChild(element);
+    modalRootElement.appendChild(element);
 
-//     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
 
-//     return () => {
-//       modalRootElement.removeChild(element);
-//       document.removeEventListener("keydown", handleKeyDown);
-//     };
-//   }, [element, handleKeyDown, open]);
+    return () => {
+      modalRootElement.removeChild(element);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [element, handleKeyDown, open]);
 
-//   return createPortal(
-//     <AnimatePresence>
-//       {open && (
-//         <motion.div
-//           variants={containerVariants}
-//           initial="hidden"
-//           animate="visible"
-//           exit="exit"
-//         >
-//           <StyledBackdrop onClick={handleBackdropClick}>
-//             <StyledModalContent>{children}</StyledModalContent>
-//           </StyledBackdrop>
-//         </motion.div>
-//       )}
-//     </AnimatePresence>,
-//     element
-//   );
-// };
+  return createPortal(
+    <>
+      {open && (
+        <StyledBackdrop onClick={handleBackdropClick}>
+          <StyledModalContent>
+            <CloseModalButton onClick={handleCloseUserModal}>
+              <Icon width={24} height={24} iconId={"close"} />
+            </CloseModalButton>
+            {children}
+          </StyledModalContent>
+        </StyledBackdrop>
+      )}
+    </>,
+    element
+  );
+};
 
-// export default Modal;
+export default Modal;

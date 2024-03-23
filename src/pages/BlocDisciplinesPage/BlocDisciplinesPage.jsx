@@ -1,20 +1,11 @@
-import { Container } from "@mui/material";
-import { Subtitle, Title } from "./BlocDisciplinesPage.styled";
+import Hero from "../../components/Hero/Hero";
+
 const BlocDisciplinesPage = () => {
+  const subtitle = "Перелік блоку дисциплін ЗВО";
+  const subtext = "Перелік блоку дисциплін ЗВО Харкова та Харківської області";
   return (
     <>
-      <Container maxWidth="sm">
-        <div>
-          <Title>Перелік блоку дисциплін ВНЗ</Title>
-        </div>
-      </Container>
-      <Container maxWidth="xs">
-        <div>
-          <Subtitle>
-            Перелік блоку дисциплін ВНЗ Харкова та Харківської області
-          </Subtitle>
-        </div>
-      </Container>
+      <Hero subtitle={subtitle} subtext={subtext} />
     </>
   );
 };

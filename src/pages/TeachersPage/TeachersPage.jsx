@@ -1,10 +1,15 @@
-import { Table } from "@mui/material";
-import { StyledWrapper, Subtitle, Title } from "./TeachersPage.styled";
 import { useSelector } from "react-redux";
+import Hero from "../../components/Hero/Hero";
+import Table from "../../components/Table/Table";
 import { dataTeachers } from "../../redux/selectors/mainInfoSelectors";
+import { StyledWrapper } from "../../components/Table/Table.styled";
+
 
 const TeachersPage = () => {
+  // const dispatch = useDispatch();
   const teachers = useSelector(dataTeachers);
+  const subtitle = "Перелік викладачів ЗВО";
+  const subtext = "Перелік викладачів ЗВО Харкова та Харківської області";
   const columns = [
     "Номер",
     "Ім’я викладача Email",
@@ -14,18 +19,17 @@ const TeachersPage = () => {
     "Коментарі",
     "Дія",
   ];
+
+  // useEffect(() => {
+  //   dispatch(getTeachersThunk());
+  // }, []);
+
   return (
     <>
-      <div>
-        <Title>Перелік викладачів ВНЗ</Title>
-      </div>
-      <div>
-        <Subtitle>
-          Перелік викладачів ВНЗ Харкова та Харківської області
-        </Subtitle>
-      </div>
-      <StyledWrapper>
-        <Table view={"teachers"} data={teachers} columns={columns} />
+      <Hero subtitle={subtitle} subtext={subtext} />
+
+      <StyledWrapper className="container">
+        <Table view={"Перелік викладачів"} data={teachers} columns={columns} />
       </StyledWrapper>
     </>
   );

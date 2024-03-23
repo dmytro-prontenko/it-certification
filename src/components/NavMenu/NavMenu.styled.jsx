@@ -8,7 +8,6 @@ export const PageLink = styled(NavLink)`
   border-radius: 5px;
   // padding: 10px 20px;
   background-color: #fcfbfb;
-  text-shadow: 2px 6px 2px rgba(0, 0, 0, 0.2);
 
   &:hover,
   &:focus,
@@ -21,10 +20,10 @@ export const PageLink = styled(NavLink)`
 export const ListPage = styled.ul`
   margin-top: 12px;
   display: flex;
-  justify-content: space-evenly;
-  max-width: 815px;
+  justify-content: center;
   flex-wrap: wrap;
-  row-gap: 20px;
+  row-gap: 40px;
+  column-gap: 20px;
 `;
 
 

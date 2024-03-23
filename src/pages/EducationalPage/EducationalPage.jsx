@@ -1,18 +1,11 @@
-import { Container } from "@mui/material";
-import { Subtitle, Title } from "./EducationalPage.styled";
+import Hero from "../../components/Hero/Hero";
 const EducationalPage = () => {
+  const subtitle = "Перелік рівней освіти";
+  const subtext =
+    " Рівні освіти в ЗВО Харкова та Харківської області, які належать до інформаційних технологій";
   return (
     <>
-      <div>
-        <Title>Перелік рівней освіти</Title>
-      </div>
-
-      <div>
-        <Subtitle>
-          Рівні освіти в ВНЗ Харкова та Харківської області, які належать до
-          інформаційних технологій
-        </Subtitle>
-      </div>
+      <Hero subtitle={subtitle} subtext={subtext} />
     </>
   );
 };

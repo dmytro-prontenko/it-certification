@@ -6,7 +6,10 @@ const initialState = {
   isSignedIn: false,
   isLoading: false,
   openModal: false,
-  modalContent: null,
+  modalContent: {
+    action: null,
+    recordData:null
+  },
 };
 
 const serviceSlice = createSlice({

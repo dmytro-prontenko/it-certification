@@ -2,12 +2,15 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/Layout/Layout";
 
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-// import ModalContent from "./components/ModalContent/ModalContent";
-// import { selectOpenModal } from "./redux/selectors";
-// import { setModalContent, setModalStatus } from "./redux/slice/serviceSlice";
+
+
 import { lazy } from "react";
+import Modal from "./components/Modal/Modal";
+import ModalContent from "./components/ModalContent/ModalContent";
+import { selectOpenModal } from "./redux/selectors/serviceSelectors";
+import { setModalContent, setModalStatus } from "./redux/slice/serviceSlice";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const InstitutionPage = lazy(() =>
@@ -32,13 +35,13 @@ const GroupDisPage = lazy(() => import("./pages/GroupDisPage/GroupDisPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 function App() {
-  // const modalStatus = useSelector(selectOpenModal);
-  // const dispatch = useDispatch();
+  const modalStatus = useSelector(selectOpenModal);
+  const dispatch = useDispatch();
 
-  // const handleCloseModal = () => {
-  //   dispatch(setModalStatus(false));
-  //   dispatch(setModalContent(null));
-  // };
+  const handleCloseModal = () => {
+    dispatch(setModalStatus(false));
+    dispatch(setModalContent({action: null, recordData:null}));
+  };
 
   return (
     <>
@@ -58,9 +61,9 @@ function App() {
         </Route>
       </Routes>
 
-      {/* <Modal open={modalStatus} onClose={handleCloseModal}>
+      <Modal open={modalStatus} onClose={handleCloseModal}>
         {<ModalContent />}
-      </Modal> */}
+      </Modal>
     </>
   );
 }
