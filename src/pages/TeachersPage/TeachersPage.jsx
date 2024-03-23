@@ -5,7 +5,6 @@ import Table from "../../components/Table/Table";
 import { StyledWrapper } from "../../components/Table/Table.styled";
 import { tableData } from "../../redux/selectors/mainInfoSelectors";
 
-
 const TeachersPage = () => {
   // const dispatch = useDispatch();
   const teachers = useSelector(tableData);
@@ -21,16 +20,15 @@ const TeachersPage = () => {
     "Дія",
   ];
 
-
   return (
-    <>
+    <div>
       <Table view={"teachers"} data={teachers} columns={columns} />
       <Hero subtitle={subtitle} subtext={subtext} />
 
       <StyledWrapper className="container">
         <Table view={"Перелік викладачів"} data={teachers} columns={columns} />
       </StyledWrapper>
-    </>
+    </div>
   );
 };
 
