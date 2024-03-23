@@ -47,10 +47,19 @@ export const addData = async ({ endPoint, postData, postParams }) => {
   return data;
 };
 
-export const editData = async ({ endPoint, editData, editParams }) => {
-  const { data } = await $instance.put(endPoint, editData, {
+export const editData = async ({ endPoint, putData, editParams }) => {
+  const { data } = await $instance.put(endPoint, putData, {
     params: {
       ...editParams,
+    },
+  });
+  return data;
+};
+
+export const deleteData = async ({ endPoint, deleteParams }) => {
+  const { data } = await $instance.delete(endPoint, {
+    params: {
+      ...deleteParams,
     },
   });
   return data;

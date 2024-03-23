@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addTableDataThunk,
+  deleteTableDataThunk,
   editTableDataThunk,
   getTableDataThunk,
 } from "../thunk/mainInfoThunks";
@@ -22,6 +23,9 @@ const mainInfoSlice = createSlice({
         state.tableData = action.payload;
       })
       .addCase(editTableDataThunk.fulfilled, (state, action) => {
+        state.tableData = action.payload;
+      })
+      .addCase(deleteTableDataThunk.fulfilled, (state, action) => {
         state.tableData = action.payload;
       });
   },

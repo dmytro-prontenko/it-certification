@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { addData, editData, getData } from "../../service/api";
+import { addData, deleteData, editData, getData } from "../../service/api";
 
 //================= getThunk =================//
 export const getTableDataThunk = createAsyncThunk(
@@ -37,13 +37,27 @@ export const addTableDataThunk = createAsyncThunk(
 
 export const editTableDataThunk = createAsyncThunk(
   "data/editData",
-  async ({ endPoint, postData, postParams }, thunkAPI) => {
+  async ({ endPoint, putData, editParams }, thunkAPI) => {
     try {
-      const response = await editData({ endPoint, postData, postParams });
+      const response = await editData({ endPoint, putData, editParams });
       return response;
     } catch (error) {
       console.log(error);
       toast.error(`Error edit ${endPoint} : `, error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteTableDataThunk = createAsyncThunk(
+  "data/deleteData",
+  async ({ endPoint, deleteParams }, thunkAPI) => {
+    try {
+      const response = await deleteData({ endPoint, deleteParams });
+      return response;
+    } catch (error) {
+      console.log(error);
+      toast.error(`Error delete ${endPoint} : `, error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
