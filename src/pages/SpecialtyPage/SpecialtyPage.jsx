@@ -1,12 +1,13 @@
 import { useSelector } from "react-redux";
 import Hero from "../../components/Hero/Hero";
 import Table from "../../components/Table/Table";
-import { dataSpecialty } from "../../redux/selectors/mainInfoSelectors";
+
 import { StyledTableWrapper } from "../../commonStyles/commonStyles";
+import { tableData } from "../../redux/selectors/mainInfoSelectors";
 
 const SpecialtyPage = () => {
   // const dispatch = useDispatch();
-  const specialty = useSelector(dataSpecialty);
+  const specialty = useSelector(tableData);
   const columns = ["Номер", "Назва", "Посилання на стандарт", "Дія"];
   const subtitle = "Перелік спеціальностей";
   const subtext =
@@ -21,7 +22,11 @@ const SpecialtyPage = () => {
       <Hero subtitle={subtitle} subtext={subtext} />
 
       <StyledTableWrapper className="container">
-        <Table view={"Перелік спеціальностей"} data={specialty} columns={columns} />
+        <Table
+          view={"Перелік спеціальностей"}
+          data={specialty}
+          columns={columns}
+        />
       </StyledTableWrapper>
     </>
   );

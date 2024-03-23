@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { addData, getData } from "../../service/api";
 
 //================= getThunk =================//
-export const getTeachersThunk = createAsyncThunk(
+export const getTableDataThunk = createAsyncThunk(
   "data/getData",
   async ({ endPoint, getParams }, thunkAPI) => {
     try {
@@ -17,23 +17,9 @@ export const getTeachersThunk = createAsyncThunk(
   }
 );
 
-// export const getSpecialtyThunk = createAsyncThunk(
-//   "data/getSpecialty",
-//   async (getParams, thunkAPI) => {
-//     try {
-//       const response = await getData({ endPoint: "/specialty/", getParams });
-//       return response;
-//     } catch (error) {
-//       console.log(error);
-//       toast.error("Error get specialty:", error);
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 //================= postThunk =================//
 
-export const postTeachersThunk = createAsyncThunk(
+export const addTableDataThunk = createAsyncThunk(
   "data/postData",
   async ({ endPoint, postData, postParams }, thunkAPI) => {
     try {

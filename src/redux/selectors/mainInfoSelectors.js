@@ -1,2 +1,1 @@
-export const dataTeachers = (state) => state.mainInfo.teachers;
-export const dataSpecialty = (state) => state.mainInfo.specialty;
+export const tableData = (state) => state.mainInfo.tableData;

@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSpecialtyThunk, getTeachersThunk } from "../thunk/mainInfoThunks";
+import { getTableDataThunk } from "../thunk/mainInfoThunks";
 
 const initialState = {
-  teachers: [],
-  specialty: [],
+  tableData: [],
 };
 
 const mainInfoSlice = createSlice({
@@ -11,13 +10,9 @@ const mainInfoSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(getTeachersThunk.fulfilled, (state, action) => {
-        state.teachers = action.payload;
-      })
-      .addCase(getSpecialtyThunk.fulfilled, (state, action) => {
-        state.specialty = action.payload;
-      });
+    builder.addCase(getTableDataThunk.fulfilled, (state, action) => {
+      state.tableData = action.payload;
+    });
   },
 });
 
