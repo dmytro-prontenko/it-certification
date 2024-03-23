@@ -6,7 +6,7 @@ export const ConfirmationWrapper = styled.div`
   gap: 40px;
   justify-content: center;
   align-items: center;
-  padding: 80px;
+  padding: 60px;
 `;
 
 export const ButtonsWrapper = styled.div`

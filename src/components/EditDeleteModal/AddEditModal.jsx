@@ -83,6 +83,10 @@ const AddEditModal = () => {
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
+                  defaultValue={{
+                    value: dataContent.id,
+                    label: dataContent.id,
+                  }}
                   required
                 />
               )}

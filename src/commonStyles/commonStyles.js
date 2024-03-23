@@ -13,7 +13,7 @@ export const StyledTableWrapper = styled.div`
 
 export const StyledModalButton = styled.button`
   display: flex;
-  padding: 16px 24px;
+  /* padding: 16px 24px; */
   justify-content: center;
   align-items: center;
   gap: 20px;
