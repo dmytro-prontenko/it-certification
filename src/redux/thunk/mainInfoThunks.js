@@ -4,31 +4,45 @@ import { getData } from "../../service/api";
 
 //================= getThunk =================//
 export const getTeachersThunk = createAsyncThunk(
-  "data/getTeachers",
-  async (getParams, thunkAPI) => {
+  "data/getData",
+  async ({ endPoint, getParams }, thunkAPI) => {
     try {
-      const response = await getData({ endPoint: "/teachers", getParams });
+      const response = await getData({ endPoint, getParams });
       return response;
     } catch (error) {
       console.log(error);
-      toast.error("Error get teachers:", error);
+      toast.error(`Error get ${endPoint} : `, error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-export const getSpecialtyThunk = createAsyncThunk(
-  "data/getSpecialty",
-  async (getParams, thunkAPI) => {
-    try {
-      const response = await getData({ endPoint: "/specialty/", getParams });
-      return response;
-    } catch (error) {
-      console.log(error);
-      toast.error("Error get specialty:", error);
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const getSpecialtyThunk = createAsyncThunk(
+//   "data/getSpecialty",
+//   async (getParams, thunkAPI) => {
+//     try {
+//       const response = await getData({ endPoint: "/specialty/", getParams });
+//       return response;
+//     } catch (error) {
+//       console.log(error);
+//       toast.error("Error get specialty:", error);
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 //================= postThunk =================//
+
+export const postTeachersThunk = createAsyncThunk(
+  "data/postData",
+  async ({ endPoint, postData, postParams }, thunkAPI) => {
+    try {
+      const response = await getData({ endPoint, postData, postParams });
+      return response;
+    } catch (error) {
+      console.log(error);
+      toast.error(`Error post ${endPoint} : `, error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
