@@ -1,13 +1,12 @@
-import { Button, Divider } from "@mui/material";
+import { Divider } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import { ModalWrapper } from "../../commonStyles/commonStyles";
-import {
-  selectModalContent
-} from "../../redux/selectors/serviceSelectors";
+import { selectModalContent } from "../../redux/selectors/serviceSelectors";
 import { setModalContent } from "../../redux/slice/serviceSlice";
+import CommonButton from "../Buttons/CommonButton/CommonButton";
 import {
   ModalTitle,
   StyledErrorSelectMobile,
@@ -148,9 +147,7 @@ const AddEditModal = () => {
           </StyledInputWrapper>
         </StyledInputsWrapper>
 
-        <Button variant="contained" type="submit">
-          {actionTitle}
-        </Button>
+        <CommonButton buttonType={"submit"}>{actionTitle}</CommonButton>
       </StyledForm>
     </ModalWrapper>
   );
