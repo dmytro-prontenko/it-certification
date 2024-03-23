@@ -2,8 +2,7 @@ import { Pagination } from "@mui/material";
 import styled from "styled-components";
 
 export const StyledWrapper = styled.div`
-  width: 80%;
-  margin: 80px auto;
+  width: 100%;
 `;
 
 export const LinkWrapper = styled.div`
@@ -22,17 +21,22 @@ export const TableLink = styled.a`
   line-height: 150%;
 `;
 
+export const PaginationWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  padding-right: calc((100% - var(--pagination-width) - 40px) / 2);
+
+  width: 100%;
+`;
+
 export const StyledPagination = styled(Pagination)`
   display: flex;
   justify-content: center;
-  margin: 20px auto;
+  width:var(--pagination-width);
 `;
 
-export const PaginationWrapper = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-`;
 
 export const PageSelectWrapper = styled.div`
   display: flex;

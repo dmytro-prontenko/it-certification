@@ -7,7 +7,7 @@ export const TitleHero = styled.h1`
   font-size: 48px;
   line-height: 1.5;
   color: var(--accent-green-300);
-  margin-top: 80px;
+
   flex-direction: column;
   max-width: 750px;
   text-align: center;
@@ -21,8 +21,10 @@ export const HeroContainer = styled.div`
   align-items: center;
   flex-direction: column;
   position: relative;
+  height: 324px;
+  margin-bottom: 80px;
 `;
-
+////////////// leftImg
 export const LeftImage = styled.p`
   background-image: url(${Building});
   width: 296px;
@@ -33,8 +35,9 @@ export const LeftImage = styled.p`
   top: 44%;
   left: 20%;
   transform: translate(-65%, -50%);
+  max-width: 100%;
 `;
-
+///////////////////rightImg
 export const RightImage = styled.p`
   background-image: url(${Vector});
   width: 345px;
@@ -45,6 +48,7 @@ export const RightImage = styled.p`
   top: 35%;
   left: 77%;
   transform: translate(-20%, -50%);
+  max-width: 100%;
 `;
 
 /////////////////////////////////////////////////page

@@ -1,4 +1,4 @@
-import Hero from "../../components/Hero/Hero";
+import HeroWelcom from "../../components/Hero/HeroWelcom";
 import {
   ImgPhoto,
   ImgText,
@@ -6,6 +6,7 @@ import {
   InfoTitle,
   InfoTop,
   LIstItem,
+  List,
   Text,
   WrapperInfo,
 } from "./WelcomePage.styled";
@@ -13,7 +14,7 @@ import {
 const WelcomePage = () => {
   return (
     <>
-      <Hero />
+      <HeroWelcom />
       <div className="container">
         <WrapperInfo>
           <InfoTop>
@@ -41,12 +42,7 @@ const WelcomePage = () => {
               </div>
             </InfoText>
             <div>
-              <ImgText
-                src="/WelcomPage/Text.png"
-                alt="text"
-                width="516px"
-                height="480px"
-              />
+              <ImgText src="/WelcomPage/Text.png" alt="text" />
             </div>
           </InfoTop>
         </WrapperInfo>
@@ -70,7 +66,7 @@ const WelcomePage = () => {
                 </Text>
               </div>
               <div>
-                <ul>
+                <List>
                   <LIstItem>Викладачів</LIstItem>
                   <LIstItem>ЗВО</LIstItem>
                   <LIstItem>Рівень освіти</LIstItem>
@@ -79,16 +75,11 @@ const WelcomePage = () => {
                   <LIstItem>Дисципліни</LIstItem>
                   <LIstItem>Блоки дисциплін</LIstItem>
                   <LIstItem>Групи дисциплін</LIstItem>
-                </ul>
+                </List>
               </div>
             </InfoText>
             <div>
-              <ImgPhoto
-                src="/WelcomPage/Photo.png"
-                alt="photo"
-                width="516px"
-                height="670px"
-              />
+              <ImgPhoto src="/WelcomPage/Photo.png" alt="photo" />
             </div>
           </InfoTop>
         </div>

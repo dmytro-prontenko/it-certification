@@ -1,2 +1,4 @@
-// export const selectOpenModal = (state) => state.service.openModal;
-// export const selectModalContent = (state) => state.service.modalContent;
+export const selectOpenModal = (state) => state.service.openModal;
+export const selectModalContent = (state) => state.service.modalContent;
+export const selectModalContentAction = (state) => state.service.modalContent.action;
+export const selectModalContentData = (state) => state.service.modalContent.recordData;
