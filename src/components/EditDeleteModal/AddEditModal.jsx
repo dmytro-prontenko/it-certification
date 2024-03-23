@@ -83,7 +83,7 @@ const AddEditModal = () => {
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  // required
+                  required
                 />
               )}
             />
@@ -118,7 +118,7 @@ const AddEditModal = () => {
                   sSearchable={true}
                   isClearable={true}
                   maxMenuHeight={145}
-                  // required
+                  required
                 />
               )}
             />
@@ -141,7 +141,7 @@ const AddEditModal = () => {
             <StyledTextInput
               type="text"
               placeholder="link"
-              // required
+              required
               {...register("link", { required: true, maxLength: 100 })}
             />
           </StyledInputWrapper>

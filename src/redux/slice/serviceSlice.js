@@ -20,6 +20,8 @@ const serviceSlice = createSlice({
       state.openModal = action.payload;
     },
     setModalContent: (state, action) => {
+      console.log(state)
+      console.log(action)
       state.modalContent = { ...state.modalContent, ...action.payload };
     },
   },

@@ -1,25 +1,48 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectModalContent } from "../../redux/selectors/serviceSelectors";
+
+import { setModalContent } from "../../redux/slice/serviceSlice";
+import CancelButton from "../Buttons/CancelButton/CancelButton";
+import ProceedButton from "../Buttons/ProceedButton/ProccedButton";
+import {
+  ButtonsWrapper,
+  ConfirmationTitle,
+  ConfirmationWrapper,
+} from "./ConfirmationModal.styled";
 
 const ConfirmationModal = () => {
   const action = useSelector(selectModalContent);
+  const dispatch = useDispatch();
 
   let title;
+  let actionToDispatch;
+
   switch (action.action) {
     case "EditConfirm": {
       title = "Зберегти редагування?";
+      actionToDispatch = "Edit";
       break;
     }
     case "DeleteConfirm": {
-      title = "Зберегти редагування?";
+      title = "Видалити інформацію?";
       break;
+      // actionToDispatch = "Delete";
     }
   }
 
+
   return (
-    <div>
-      <div>{title}</div>
-    </div>
+    <ConfirmationWrapper>
+      <ConfirmationTitle>{title}</ConfirmationTitle>
+      <ButtonsWrapper>
+        <CancelButton
+          onClick={() =>
+            dispatch(setModalContent({ action:actionToDispatch, recodrData:action.recordData }))
+          }
+        />
+        <ProceedButton onClick={() => console.log("proceed")} />
+      </ButtonsWrapper>
+    </ConfirmationWrapper>
   );
 };
 
