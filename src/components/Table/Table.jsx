@@ -20,6 +20,7 @@ import {
   TableLink,
 } from "./Table.styled";
 import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
+import { SIZE } from "../../service/constant";
 
 const Table = ({ view, data, columns }) => {
   const dispatch = useDispatch();
@@ -216,7 +217,7 @@ const Table = ({ view, data, columns }) => {
         dispatch(
           getTableDataThunk({
             endPoint: "specialty/",
-            getParams: { page: 1, size: 20 },
+            getParams: { page: 1, size: SIZE },
           })
         );
         break;
@@ -225,7 +226,7 @@ const Table = ({ view, data, columns }) => {
         dispatch(
           getTableDataThunk({
             endPoint: "teachers/",
-            getParams: { page: 1, size: 20 },
+            getParams: { page: 1, size: SIZE },
           })
         );
         break;

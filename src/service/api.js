@@ -46,3 +46,12 @@ export const addData = async ({ endPoint, postData, postParams }) => {
   });
   return data;
 };
+
+export const editData = async ({ endPoint, editData, editParams }) => {
+  const { data } = await $instance.put(endPoint, editData, {
+    params: {
+      ...editParams,
+    },
+  });
+  return data;
+};
