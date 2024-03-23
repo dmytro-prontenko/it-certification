@@ -2,11 +2,14 @@ import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 
 export const PageLink = styled(NavLink)`
-  display: block;
+
+  display: box;
   border: 1px solid black;
   border-radius: 5px;
-  padding: 10px 20px;
-  background-color: #fcfbfb;
+  padding: 10px 20px; 
+
+  text-decoration: none; 
+  transition: transform 0.3s, background-color 0.3s; 
 
   &:hover,
   &:focus,
@@ -17,16 +20,18 @@ export const PageLink = styled(NavLink)`
 `;
 
 export const ListPage = styled.ul`
-  margin-top: 12px;
+ 
+ padding-bottom: 20px;
+ padding-top: 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  row-gap: 28px;
-  column-gap: 28px;
-  border-bottom: 1px solid black;
-  padding-bottom: 20px;
+  gap: 40px;  
+  list-style-type: none;
 `;
 
-export const Wrraper = styled.div`
-  margin-bottom: 80px;
+export const Wrapper = styled.div`
+  padding-right:84px;
+  padding-left:84px;
 `;

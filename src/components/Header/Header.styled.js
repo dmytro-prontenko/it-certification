@@ -22,25 +22,44 @@ export const HeaderLogo = styled.div`
   align-items: center;
 `;
 
+export const NavWrapperMenu = styled.nav`
+display: flex;
+align-items: center;
+`;
+
 export const HeaderMenu = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid black;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border: 1px solid black;
+gap: 9.5px;
 `;
 export const IconContainer = styled.div`
   display: flex;
-  top: 28px;
-  left: 84px;
+  flex-direction: column;
+  position: relative; 
+  left: 84px;  
+  margin-right: 20px;
+  & > a {
+    margin: 0; 
+  }
+
 `;
 
 export const UserPanel = styled.div`
-  height: 21px;
-  width: 101px;
+
   display: flex;
   justify-content: space-between;
+  align-items: flex-end; 
+  padding-right: 84px;
+ 
 `;
 
 export const Button = styled.button`
+border: none;  
+background: none;  
+padding: 0; 
+cursor: pointer; 
+outline: none;
 `;
 
