@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 import { selectModalContent } from "../../redux/selectors/serviceSelectors";
 import AddEditModal from "../EditDeleteModal/AddEditModal";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
 const ModalContent = () => {
   const modalContent = useSelector(selectModalContent);
@@ -12,6 +13,8 @@ const ModalContent = () => {
       return <AddEditModal />;
     case "Edit":
       return <AddEditModal />;
+    case "EditConfirm":
+      return <ConfirmationModal />;
     case "Delete":
       return <>Delete</>;
 

@@ -1,10 +1,13 @@
-import { Divider } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import { ModalWrapper } from "../../commonStyles/commonStyles";
-import { selectModalContent } from "../../redux/selectors/serviceSelectors";
+import {
+  selectModalContent
+} from "../../redux/selectors/serviceSelectors";
+import { setModalContent } from "../../redux/slice/serviceSlice";
 import {
   ModalTitle,
   StyledErrorSelectMobile,
@@ -17,11 +20,13 @@ import {
 import selectStyles from "./SelectStyles";
 
 const AddEditModal = () => {
-  const data = useSelector(selectModalContent);
+  const dataContent = useSelector(selectModalContent);
   const location = useLocation();
+  const dispatch = useDispatch();
+
   let actionTitle;
   let modalTitle;
-  data.action === "Add"
+  dataContent.action === "Add"
     ? (actionTitle = "Додати")
     : (actionTitle = "Редагувати");
 
@@ -42,7 +47,12 @@ const AddEditModal = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    console.log(dataContent.action);
+
+    dispatch(setModalContent({ action: "EditConfirm" }));
+  };
   // console.log(errors);
 
   return (
@@ -74,7 +84,7 @@ const AddEditModal = () => {
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  required
+                  // required
                 />
               )}
             />
@@ -109,7 +119,7 @@ const AddEditModal = () => {
                   sSearchable={true}
                   isClearable={true}
                   maxMenuHeight={145}
-                  required
+                  // required
                 />
               )}
             />
@@ -132,13 +142,15 @@ const AddEditModal = () => {
             <StyledTextInput
               type="text"
               placeholder="link"
-              required
+              // required
               {...register("link", { required: true, maxLength: 100 })}
             />
           </StyledInputWrapper>
         </StyledInputsWrapper>
 
-        <button type="submit">{actionTitle}</button>
+        <Button variant="contained" type="submit">
+          {actionTitle}
+        </Button>
       </StyledForm>
     </ModalWrapper>
   );
