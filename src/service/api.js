@@ -29,7 +29,20 @@ export const signIn = async (userData) => {
 //   return data;
 // };
 
-export const getData = async (endPoint) => {
-  const { data } = await $instance.get(endPoint);
+export const getData = async ({ endPoint, getParams }) => {
+  const { data } = await $instance.get(endPoint, {
+    params: {
+      ...getParams,
+    },
+  });
+  return data;
+};
+
+export const postData = async ({ endPoint, postData, postParams }) => {
+  const { data } = await $instance.post(endPoint, postData, {
+    params: {
+      ...postParams,
+    },
+  });
   return data;
 };

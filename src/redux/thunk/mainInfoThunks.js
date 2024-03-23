@@ -2,11 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { getData } from "../../service/api";
 
+//================= getThunk =================//
 export const getTeachersThunk = createAsyncThunk(
   "data/getTeachers",
-  async (_, thunkAPI) => {
+  async (getParams, thunkAPI) => {
     try {
-      const response = await getData("/teachers");
+      const response = await getData({ endPoint: "/teachers", getParams });
       return response;
     } catch (error) {
       console.log(error);
@@ -18,9 +19,9 @@ export const getTeachersThunk = createAsyncThunk(
 
 export const getSpecialtyThunk = createAsyncThunk(
   "data/getSpecialty",
-  async (_, thunkAPI) => {
+  async (getParams, thunkAPI) => {
     try {
-      const response = await getData("/specialty/");
+      const response = await getData({ endPoint: "/specialty/", getParams });
       return response;
     } catch (error) {
       console.log(error);
@@ -29,3 +30,5 @@ export const getSpecialtyThunk = createAsyncThunk(
     }
   }
 );
+
+//================= postThunk =================//
