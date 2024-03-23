@@ -9,10 +9,6 @@ import {
   setModalContent,
   setModalStatus,
 } from "../../redux/slice/serviceSlice";
-import {
-  getSpecialtyThunk,
-  getTeachersThunk,
-} from "../../redux/thunk/mainInfoThunks";
 import { tableTheme } from "../../services/MUI_themes/table_theme";
 import Icon from "../Icon/Icon";
 import {
@@ -23,6 +19,8 @@ import {
   StyledWrapper,
   TableLink,
 } from "./Table.styled";
+import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
+import { SIZE } from "../../service/constant";
 
 const Table = ({ view, data, columns }) => {
   const dispatch = useDispatch();
@@ -216,11 +214,21 @@ const Table = ({ view, data, columns }) => {
   useEffect(() => {
     switch (view) {
       case "Перелік спеціальностей": {
-        dispatch(getSpecialtyThunk());
+        dispatch(
+          getTableDataThunk({
+            endPoint: "specialty/",
+            getParams: { page: 1, size: SIZE },
+          })
+        );
         break;
       }
       case "Перелік викладачів": {
-        dispatch(getTeachersThunk());
+        dispatch(
+          getTableDataThunk({
+            endPoint: "teachers/",
+            getParams: { page: 1, size: SIZE },
+          })
+        );
         break;
       }
     }
