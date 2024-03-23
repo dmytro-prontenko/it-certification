@@ -37,7 +37,7 @@ const ConfirmationModal = () => {
       <ButtonsWrapper>
         <CancelButton
           onClick={() =>
-            dispatch(setModalContent({ action:actionToDispatch, recodrData:action.recordData }))
+            dispatch(setModalContent({ action:actionToDispatch, recordData:action.recordData }))
           }
         />
         <ProceedButton onClick={() => console.log("proceed")} />
