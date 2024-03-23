@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { getData } from "../../service/api";
+import { addData, getData } from "../../service/api";
 
 //================= getThunk =================//
 export const getTeachersThunk = createAsyncThunk(
@@ -37,7 +37,7 @@ export const postTeachersThunk = createAsyncThunk(
   "data/postData",
   async ({ endPoint, postData, postParams }, thunkAPI) => {
     try {
-      const response = await getData({ endPoint, postData, postParams });
+      const response = await addData({ endPoint, postData, postParams });
       return response;
     } catch (error) {
       console.log(error);

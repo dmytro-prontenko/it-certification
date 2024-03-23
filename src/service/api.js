@@ -38,7 +38,7 @@ export const getData = async ({ endPoint, getParams }) => {
   return data;
 };
 
-export const postData = async ({ endPoint, postData, postParams }) => {
+export const addData = async ({ endPoint, postData, postParams }) => {
   const { data } = await $instance.post(endPoint, postData, {
     params: {
       ...postParams,
