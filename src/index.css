@@ -34,6 +34,7 @@ select:-webkit-autofill:focus {
   --delete-red: #f20a0a;
   --edit-green: #24a750;
   --green-100: #b0c0be;
+  
 
   /** Gradients **/
   --liner-gradient-green: linear-gradient(to right, #00544d 100%, #00544d 0%);
