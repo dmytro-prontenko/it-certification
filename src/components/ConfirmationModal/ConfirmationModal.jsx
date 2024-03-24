@@ -56,8 +56,8 @@ const ConfirmationModal = () => {
     <ConfirmationWrapper>
       <ConfirmationTitle>{title}</ConfirmationTitle>
       <ButtonsWrapper>
-        <CancelButton onClick={handleCancel} />
         <ProceedButton onClick={handleProceed} />
+        <CancelButton onClick={handleCancel} />
       </ButtonsWrapper>
     </ConfirmationWrapper>
   );

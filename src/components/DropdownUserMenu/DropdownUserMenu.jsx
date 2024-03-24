@@ -1,13 +1,14 @@
-import Button from "@mui/material/Button";
+import { Button } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { alpha, styled } from "@mui/material/styles";
-import * as React from "react";
+import { useState } from "react";
 import Icon from "../Icon/Icon";
 import {
   DropdownButtonWrapper,
   DropdownCaption,
+  RotatableWrapper
 } from "./DropdownUserMenu.styled";
 
 const StyledMenu = styled((props) => (
@@ -30,12 +31,12 @@ const StyledMenu = styled((props) => (
     minWidth: 180,
     color:
       theme.palette.mode === "light"
-        ? "var(--accent-yellow-100"
+        ? "var(--accent-yellow-100)"
         : theme.palette.grey[300],
     boxShadow:
       "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
     "& .MuiMenu-list": {
-      padding: "4px 0",
+      padding: "20px",
     },
     "& .MuiMenuItem-root": {
       "& .MuiSvgIcon-root": {
@@ -54,13 +55,14 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function CustomizedMenus() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (action) => {
     setAnchorEl(null);
+    console.log(action);
   };
 
   return (
@@ -72,16 +74,22 @@ export default function CustomizedMenus() {
         aria-expanded={open ? "true" : undefined}
         variant="text"
         disableElevation
+        disableRipple
         onClick={handleClick}
         sx={{
           borderRadius: "50%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           padding: 0,
           minWidth: 24,
           height: 24,
-          placeSelf:"center",
+          placeSelf: "center",
         }}
       >
-        <Icon width={24} height={24} iconId={"arrow-down"} />
+        <RotatableWrapper rotate={open ? 1 : 0}>
+          <Icon width={24} height={24} iconId={"arrow-down"} />
+        </RotatableWrapper>
       </Button>
       <StyledMenu
         id="demo-customized-menu"
@@ -93,9 +101,9 @@ export default function CustomizedMenus() {
         onClose={handleClose}
       >
         <MenuItem
-          onClick={handleClose}
+          onClick={() => handleClose("settings")}
           disableRipple
-          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }} // Цвет фона при наведении
+          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }}
         >
           <DropdownButtonWrapper>
             <Icon
@@ -108,9 +116,9 @@ export default function CustomizedMenus() {
           </DropdownButtonWrapper>
         </MenuItem>
         <MenuItem
-          onClick={handleClose}
+          onClick={() => handleClose("profile")}
           disableRipple
-          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }} // Цвет фона при наведении
+          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }}
         >
           <DropdownButtonWrapper>
             <Icon
@@ -126,7 +134,7 @@ export default function CustomizedMenus() {
         <MenuItem
           onClick={handleClose}
           disableRipple
-          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }} // Цвет фона при наведении
+          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }}
         >
           <DropdownButtonWrapper>
             <Icon
