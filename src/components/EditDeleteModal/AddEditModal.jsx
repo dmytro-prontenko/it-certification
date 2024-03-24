@@ -35,8 +35,8 @@ const AddEditModal = () => {
   } else {
     actionTitle = "Редагувати";
     defaultData = {
-      value: dataContent.recordData?.name,
-      label: dataContent.recordData?.name,
+      value: dataContent.recordData?.id,
+      label: dataContent.recordData?.id,
     };
   }
 
@@ -67,8 +67,8 @@ const AddEditModal = () => {
       return;
     }
 
-    console.log(data);
-    console.log(dataContent.action);
+    // console.log(data);
+    // console.log(dataContent.action);
     dispatch(setModalContent({ action: "EditConfirm" }));
   };
   // console.log(errors);

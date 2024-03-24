@@ -73,5 +73,11 @@ export const tableTheme = () =>
           flex: "initial",
         },
       },
+      MuiPaper: {
+        root: {
+          borderRadius: "24px",
+          padding: 20,
+        },
+      },
     },
   });

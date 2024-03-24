@@ -8,7 +8,7 @@ import Icon from "../Icon/Icon";
 import {
   DropdownButtonWrapper,
   DropdownCaption,
-  RotatableWrapper
+  RotatableWrapper,
 } from "./DropdownUserMenu.styled";
 
 const StyledMenu = styled((props) => (
