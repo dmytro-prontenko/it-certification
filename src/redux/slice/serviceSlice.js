@@ -20,7 +20,9 @@ const serviceSlice = createSlice({
       state.openModal = action.payload;
     },
     setModalContent: (state, action) => {
-      state.modalContent = action.payload;
+      console.log(state)
+      console.log(action)
+      state.modalContent = { ...state.modalContent, ...action.payload };
     },
   },
   extraReducers: (builder) => {

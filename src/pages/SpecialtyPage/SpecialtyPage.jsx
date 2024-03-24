@@ -15,7 +15,6 @@ const SpecialtyPage = () => {
   return (
     <>
       <Hero subtitle={subtitle} subtext={subtext} />
-
       <StyledTableWrapper className="container">
         <Table
           view={"Перелік спеціальностей"}

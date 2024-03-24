@@ -41,6 +41,7 @@ const Table = ({ view, data, columns }) => {
   };
 
   const handleModal = (action, recordData) => {
+    console.log(recordData)
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent({ action, recordData }));
   };
@@ -128,8 +129,7 @@ const Table = ({ view, data, columns }) => {
             <>
               <Tooltip title="Редагувати">
                 <IconButton
-                  onClick={() => handleModal("Edit", data[dataIndex])}
-                  // onClick={() => handleEditClick(data[dataIndex])}
+                  onClick={() => handleModal("Edit", data.data[dataIndex])}
                 >
                   <Icon
                     styles={{ fill: "var(--edit-green)" }}
@@ -141,8 +141,7 @@ const Table = ({ view, data, columns }) => {
               </Tooltip>
               <Tooltip title="Видалити">
                 <IconButton
-                  onClick={() => handleModal("Delete", data[dataIndex])}
-                  // onClick={() => handleDeleteClick(data[dataIndex])}
+                  onClick={() => handleModal("Delete", data.data[dataIndex])}
                 >
                   <Icon
                     styles={{ fill: "var( --delete-red)" }}
