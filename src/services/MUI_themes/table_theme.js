@@ -23,12 +23,7 @@ export const tableTheme = () =>
       },
       MUIDataTableHeadCell: {
         styleOverrides: {
-          root: {
-            // "&:last-child": {
-            //   width: "fit-content",
-            //   padding: 0,
-            // },
-          },
+          root: {},
           contentWrapper: {
             justifyContent: "center",
           },
@@ -45,23 +40,20 @@ export const tableTheme = () =>
           },
           body: {
             padding: "15px 20px",
-            // "&:nth-child(1)": {
-            //   width: "70px",
-            //   outline: "1px solid tomato",
-            //   // padding: 0,
-            // },
-            // "&:nth-child(2)": {
-            //   maxWidth: "max-content",
-            //   outline: "1px solid tomato",
-            //   // padding: 0,
-            // },
-            // "&:last-child": {
-            //   width: "100px",
-            //   padding: 0,
-            //   outline: "1px solid tomato",
-            // },
           },
           footer: {},
+        },
+      },
+      MuiIconButton: {
+        styleOverrides: {
+          root: {
+            "&:hover": {
+              backgroundColor: "var(--accent-yellow-100)",
+            },
+            "&:hover .MuiSvgIcon-root": {
+              fill: "green",
+            },
+          },
         },
       },
     },
