@@ -1,4 +1,3 @@
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Menu from "@mui/material/Menu";
@@ -6,7 +5,10 @@ import MenuItem from "@mui/material/MenuItem";
 import { alpha, styled } from "@mui/material/styles";
 import * as React from "react";
 import Icon from "../Icon/Icon";
-import { DropdownButtonWrapper, DropdownCaption } from "./DropdownUserMenu.styled";
+import {
+  DropdownButtonWrapper,
+  DropdownCaption,
+} from "./DropdownUserMenu.styled";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -28,7 +30,7 @@ const StyledMenu = styled((props) => (
     minWidth: 180,
     color:
       theme.palette.mode === "light"
-        ? "rgb(55, 65, 81)"
+        ? "var(--accent-yellow-100"
         : theme.palette.grey[300],
     boxShadow:
       "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
@@ -71,8 +73,16 @@ export default function CustomizedMenus() {
         variant="text"
         disableElevation
         onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
-      ></Button>
+        sx={{
+          borderRadius: "50%",
+          padding: 0,
+          minWidth: 24,
+          height: 24,
+          placeSelf:"center",
+        }}
+      >
+        <Icon width={24} height={24} iconId={"arrow-down"} />
+      </Button>
       <StyledMenu
         id="demo-customized-menu"
         MenuListProps={{
@@ -82,7 +92,11 @@ export default function CustomizedMenus() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={handleClose}
+          disableRipple
+          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }} // Цвет фона при наведении
+        >
           <DropdownButtonWrapper>
             <Icon
               width={24}
@@ -93,7 +107,11 @@ export default function CustomizedMenus() {
             <DropdownCaption>Налаштування</DropdownCaption>
           </DropdownButtonWrapper>
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={handleClose}
+          disableRipple
+          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }} // Цвет фона при наведении
+        >
           <DropdownButtonWrapper>
             <Icon
               width={24}
@@ -105,7 +123,11 @@ export default function CustomizedMenus() {
           </DropdownButtonWrapper>
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={handleClose}
+          disableRipple
+          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }} // Цвет фона при наведении
+        >
           <DropdownButtonWrapper>
             <Icon
               width={24}
