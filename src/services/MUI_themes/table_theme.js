@@ -1,3 +1,5 @@
+// table_theme.js
+
 import { createTheme } from "@mui/material";
 
 export const tableTheme = () =>
@@ -56,19 +58,24 @@ export const tableTheme = () =>
           },
         },
       },
-    },
-    styleOverrides: {
-      MUIDataTableToolbar: {
-        actions: {
-          display: "flex",
-          flexDirection: "row",
-          flex: "initial",
-        },
-      },
-      MuiPaper: {
-        root: {
-          borderRadius: "24px",
-          padding: 20,
+      MuiPaginationItem: {
+        styleOverrides: {
+          page: {
+            "&:not(.Mui-selected):hover": {
+              backgroundColor: "var(--accent-yellow-200)",
+            },
+            "&:(.Mui-selected):hover": {
+              backgroundColor: "red",
+            },
+            "&.Mui-selected": {
+              backgroundColor: "var(--accent-yellow-100)",
+              color: "var(--accent-green-300)",
+              cursor:"not-allowed"
+            },
+            "&.Mui-disabled": {
+              pointerEvents: "none",
+            },
+          },
         },
       },
     },
