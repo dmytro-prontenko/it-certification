@@ -56,11 +56,7 @@ export const editData = async ({ endPoint, putData, editParams }) => {
   return data;
 };
 
-export const deleteData = async ({ endPoint, deleteParams }) => {
-  const { data } = await $instance.delete(endPoint, {
-    params: {
-      ...deleteParams,
-    },
-  });
+export const deleteData = async ({ endPoint, dataToDelete }) => {
+  const { data } = await $instance.delete(endPoint, dataToDelete);
   return data;
 };

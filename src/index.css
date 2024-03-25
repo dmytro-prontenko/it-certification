@@ -1,4 +1,5 @@
 @import url("normalize.css");
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -40,7 +41,7 @@ select:-webkit-autofill:focus {
   --liner-gradient-green: linear-gradient(to right, #00544d 100%, #00544d 0%);
   --radial-gradient-green: radial-gradient(circle, #00544d 0%, #f9f9f9 100%);
 
-  --pagination-width:414px;
+  --pagination-width: 414px;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -61,7 +62,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "Roboto", sans-serif;
-  background-image: url("../public/noiseAndTexture.png");
+  background-image: url("/noiseAndTexture.png");
   color: var(--basic-black);
 }
 
@@ -143,5 +144,5 @@ button {
 .container {
   margin: 0 auto;
   max-width: 1440px;
-  padding: 0px 84px 80px 84px;
+  padding: 0px 84px 120px 84px;
 }

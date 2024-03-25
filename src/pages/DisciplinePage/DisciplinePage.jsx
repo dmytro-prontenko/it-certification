@@ -1,11 +1,34 @@
-import Hero from "../../components/Hero/Hero";
+import { useSelector } from "react-redux";
+import { StyledTableWrapper } from "../../commonStyles/commonStyles";
+import Table from "../../components/Table/Table";
+import { tableData } from "../../redux/selectors/mainInfoSelectors";
+import { ImageBottom, ImageTop } from "../../commonStyles/commonStyles";
 
 const DisciplinePage = () => {
-  const subtitle = "Перелік дисциплін ЗВО";
-  const subtext = "Перелік дисциплін ЗВО Харкова та Харківської області";
+  const discipline= useSelector(tableData);
+  const columns = [
+    "№",
+    "Дисципліна",
+    "Викладач",
+    "Блок",
+    "Група",
+    "Програма",
+    "Сілабус",
+    "РП",
+    "Дія",
+  ];
+
   return (
     <>
-      <Hero subtitle={subtitle} subtext={subtext} />
+      <ImageTop></ImageTop>
+          <StyledTableWrapper className="container">
+      <Table
+        view={"Перелік дисциплін"}
+        data={discipline}
+        columns={columns}
+      />
+    </StyledTableWrapper>
+      <ImageBottom></ImageBottom>
     </>
   );
 };

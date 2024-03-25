@@ -1,11 +1,24 @@
-import Hero from "../../components/Hero/Hero";
+import { useSelector } from "react-redux";
+import { StyledTableWrapper } from "../../commonStyles/commonStyles";
+import Table from "../../components/Table/Table";
+import { tableData } from "../../redux/selectors/mainInfoSelectors";
+import { ImageBottom, ImageTop } from "../../commonStyles/commonStyles";
 
 const GroupDisPage = () => {
-  const subtitle = "Перелік груп дисциплін ЗВО";
-  const subtext = "Перелік груп дисциплін ЗВО Харкова та Харківської області";
+const disciplineGroup = useSelector(tableData);
+const columns = ["№", "Група дисциплін", "Опис","Блок", "Дисципліни", "Дія"];
+
   return (
     <>
-      <Hero subtitle={subtitle} subtext={subtext} />
+      <ImageTop></ImageTop>
+        <StyledTableWrapper className="container">
+    <Table
+      view={"Перелік груп дисциплін"}
+      data={disciplineGroup}
+      columns={columns}
+    />
+  </StyledTableWrapper>
+      <ImageBottom></ImageBottom>
     </>
   );
 };

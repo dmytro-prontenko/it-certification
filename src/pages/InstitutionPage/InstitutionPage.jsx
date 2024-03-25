@@ -1,13 +1,28 @@
-import Hero from "../../components/Hero/Hero";
+import { useSelector } from "react-redux";
+import { StyledTableWrapper } from "../../commonStyles/commonStyles";
+import Table from "../../components/Table/Table";
+import { tableData } from "../../redux/selectors/mainInfoSelectors";
+import { ImageBottom, ImageTop } from "../../commonStyles/commonStyles";
 
 const InstitutionPage = () => {
-  const subtitle = "Перелік Вищих навчальних закладів ЗВО";
-  const subtext =
-    "Вузи Харкова та Харківської області - університети, інститути, академії та інші вищі навчальні заклади ВНЗ 3-4 рівня академії ";
+  const institution = useSelector(tableData);
+  const columns = [
+    "№",
+    "ЗВО",
+    "Абревіатура",
+    "Перелік прогам",
+    "Сайт",
+    "Дія",
+  ];
+
 
   return (
     <>
-      <Hero subtitle={subtitle} subtext={subtext} />
+      <ImageTop></ImageTop>
+      <StyledTableWrapper className="container">
+        <Table view={"Перелік ЗВО"} data={institution} columns={columns} />
+      </StyledTableWrapper>
+      <ImageBottom></ImageBottom>
     </>
   );
 };

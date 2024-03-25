@@ -21,10 +21,12 @@ import {
 } from "./Table.styled";
 import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
+import { useLocation } from "react-router-dom";
 
 const Table = ({ view, data, columns }) => {
   const dispatch = useDispatch();
   const modalStatus = useSelector(selectOpenModal);
+  const location = useLocation();
 
   let dataArray = [];
 
@@ -211,26 +213,12 @@ const Table = ({ view, data, columns }) => {
   };
 
   useEffect(() => {
-    switch (view) {
-      case "Перелік спеціальностей": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "specialty/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
-      case "Перелік викладачів": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "teachers/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
-    }
+    dispatch(
+      getTableDataThunk({
+        endPoint: `${location.pathname}`,
+        getParams: { page: 1, size: SIZE },
+      })
+    );
   }, [page]);
 
   return (
