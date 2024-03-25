@@ -1,11 +1,10 @@
-import Hero from "../../components/Hero/Hero";
+import { ImageBottom, ImageTop } from "../../commonStyles/commonStyles";
+
 const EducationalPage = () => {
-  const subtitle = "Перелік рівней освіти";
-  const subtext =
-    " Рівні освіти в ЗВО Харкова та Харківської області, які належать до інформаційних технологій";
   return (
     <>
-      <Hero subtitle={subtitle} subtext={subtext} />
+      <ImageTop></ImageTop>
+      <ImageBottom></ImageBottom>
     </>
   );
 };

@@ -1,29 +1,15 @@
-import {
-  HeroContainer,
-  LeftImage,
-  RightImage,
-  Subtitle,
-  Title,
-  TitleHero,
-} from "./Hero.styled";
+import { ContainerWelcom, Imgwrraper, TitleWelcom } from "./Hero.styled";
 
-const Hero = ({ subtitle, subtext }) => {
+const Hero = () => {
   return (
-    <HeroContainer className="container">
-      <LeftImage />
-      <div>
-        <TitleHero>
-          12 галузь<span> “Інформаційні технології”</span>
-        </TitleHero>
-      </div>
-      <div>
-        <Title>{subtitle}</Title>
-      </div>
-      <div>
-        <Subtitle>{subtext}</Subtitle>
-      </div>
-      <RightImage />
-    </HeroContainer>
+    <ContainerWelcom className="container">
+      <Imgwrraper></Imgwrraper>
+      <TitleWelcom>
+        12 галузь
+        <br />
+        Інформаційні технології
+      </TitleWelcom>
+    </ContainerWelcom>
   );
 };
 

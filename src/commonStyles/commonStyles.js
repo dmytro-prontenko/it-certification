@@ -48,3 +48,30 @@ export const StyledModalButton = styled.button`
     font-size: 20px;
   }
 `;
+
+/////////////////////PageImage
+import picture from "/public/Vectors/Picture.png";
+
+export const ImageTop = styled.div`
+  background-image: url(${picture});
+  background-repeat: no-repeat;
+  min-width: 360px;
+  min-height: 120px;
+  margin-bottom: 40px;
+`;
+
+export const ImageBottom = styled.div`
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 67%;
+    bottom: 1px;
+    width: 360px;
+    height: 160px;
+    background-color: transparent;
+    background-image: url(${picture});
+    z-index: -1;
+  }
+`;
