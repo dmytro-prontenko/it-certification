@@ -51,9 +51,9 @@ export const editTableDataThunk = createAsyncThunk(
 
 export const deleteTableDataThunk = createAsyncThunk(
   "data/deleteData",
-  async ({ endPoint, deleteParams }, thunkAPI) => {
+  async ({ endPoint, dataToDelete }, thunkAPI) => {
     try {
-      const response = await deleteData({ endPoint, deleteParams });
+      const response = await deleteData({ endPoint, dataToDelete });
       return response;
     } catch (error) {
       console.log(error);

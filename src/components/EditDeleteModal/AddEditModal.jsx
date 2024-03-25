@@ -31,7 +31,7 @@ const AddEditModal = () => {
 
   if (dataContent.action === "Add") {
     actionTitle = "Додати";
-    defaultData =  null;
+    defaultData = null;
   } else {
     actionTitle = "Редагувати";
     defaultData = {
@@ -57,19 +57,15 @@ const AddEditModal = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
+
   const onSubmit = (data) => {
-    const { id, name, link } = data;
-    const filledFields = [id, name, link].filter(Boolean);
-
-    if (filledFields.length === 0) {
-      console.log("Пожалуйста, отредактируйте минимум одно поле.");
-      return;
-    }
-
-    // console.log(data);
-    // console.log(dataContent.action);
-    dispatch(setModalContent({ action: "EditConfirm" }));
+    console.log(data);
+    dispatch(
+      setModalContent({
+        action: "EditConfirm",
+        recordData: { ...dataContent.recordData, ...data },
+      })
+    );
   };
   // console.log(errors);
 

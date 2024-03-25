@@ -16,7 +16,7 @@ const ModalContent = () => {
     case "EditConfirm":
       return <ConfirmationModal />;
     case "Delete":
-      return <>Delete</>;
+      return <ConfirmationModal />;
 
     default:
       return null;

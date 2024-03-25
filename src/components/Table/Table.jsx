@@ -21,10 +21,12 @@ import {
 } from "./Table.styled";
 import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
+import { useLocation } from "react-router-dom";
 
 const Table = ({ view, data, columns }) => {
   const dispatch = useDispatch();
   const modalStatus = useSelector(selectOpenModal);
+  const location = useLocation();
 
   let dataArray = [];
 
@@ -211,98 +213,12 @@ const Table = ({ view, data, columns }) => {
   };
 
   useEffect(() => {
-    switch (view) {
-      case "Перелік викладачів": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "teachers/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
-      // =================
-      case "Перелік ЗВО": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "universities/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
-      // =================
-      case "Перелік спеціальностей": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "specialty/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
-      // =================
-      case "Перелік рівнів освіти": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "programs_levels/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
-      // =================
-      case "Перелік освітніх програм": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "programs/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
-      // =================
-      case "Перелік кафедр": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "school/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
-      // =================
-      case "Перелік блоків дисциплін": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "course_blocks/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
-      // =================
-      case "Перелік дисциплін": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "course/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
-      // =================
-      case "Перелік груп дисциплін": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "course_groupes/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
-      // =================
-    }
+    dispatch(
+      getTableDataThunk({
+        endPoint: `${location.pathname}`,
+        getParams: { page: 1, size: SIZE },
+      })
+    );
   }, [page]);
 
   return (
