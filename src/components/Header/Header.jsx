@@ -6,7 +6,6 @@ import {
   HeaderLogo,
   HeaderMenu,
   HeaderWrapper,
-  IconContainer,
   NavWrapperMenu,
   WrapperMenu,
   UserPanel,
@@ -26,12 +25,10 @@ const Header = () => {
       <HeaderMenu>
         <WrapperMenu className="container">
           <NavWrapperMenu>
-            <IconContainer>
               <Link to="/">
                 <Icon iconId="emblem" height={72} width={48} gap={4} />
                 <Icon iconId="headline" height={14} width={48} />
               </Link>
-            </IconContainer>
             <NavMenu />
           </NavWrapperMenu>
           <UserPanel>

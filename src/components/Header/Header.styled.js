@@ -33,24 +33,16 @@ export const NavWrapperMenu = styled.nav`
   gap: 160px;
 `;
 
-export const IconContainer = styled.div`
-  // display: flex;
-  // flex-direction: column;
-`;
-
 export const UserPanel = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: flex-end;
-  // padding-top:28.5px;
-  // padding-bottom:28.5px;
   gap:12px;
+ 
 `;
 
 export const UserInfo = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: center;
 align-items: center;
 gap: 8px;`;
 
@@ -59,7 +51,7 @@ export const UserAvatar = styled.div`
   height: 40px;
   border-radius: 50%;
   background-color: var(--accent-green-300);
-  // padding: 0px 28.5px 0px 28.5px;
+ 
 `;
 
 export const UserName = styled.p`
@@ -67,7 +59,5 @@ font-weight:500px;
 font-size:12px;
 line-height:1.5em;
 color: var(--basic-black);
-text-align: center;
-display: inline-block;
 white-space: nowrap;
 `;
