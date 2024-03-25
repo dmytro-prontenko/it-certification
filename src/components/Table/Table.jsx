@@ -43,7 +43,6 @@ const Table = ({ view, data, columns }) => {
   };
 
   const handleModal = (action, recordData) => {
-    // console.log(recordData)
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent({ action, recordData }));
   };

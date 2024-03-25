@@ -20,7 +20,7 @@ const ConfirmationModal = () => {
   const location = useLocation();
   const action = useSelector(selectModalContent);
   const dispatch = useDispatch();
-  console.log(location);
+  // console.log(location);
 
   const handleCancel = () => {
     dispatch(
