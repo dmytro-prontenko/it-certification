@@ -12,7 +12,7 @@ import {
   UserPanel,
   UserInfo, 
   UserAvatar, 
-  UserName
+  UserName,
 } from "./Header.styled";
 
 const Header = () => {
