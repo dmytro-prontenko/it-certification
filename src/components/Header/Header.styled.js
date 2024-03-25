@@ -68,4 +68,6 @@ font-size:12px;
 line-height:1.5em;
 color: var(--basic-black);
 text-align: center;
+display: inline-block;
+white-space: nowrap;
 `;

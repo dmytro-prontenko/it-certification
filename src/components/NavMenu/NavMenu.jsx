@@ -1,7 +1,7 @@
-import { ListPage, PageLink, Wrapper } from "./NavMenu.styled";
+import { ListPage, PageLink } from "./NavMenu.styled";
 const NavMenu = () => {
   return (
-    <Wrapper>
+    
       <ListPage>
         <li>
           <PageLink to="/">Головна</PageLink>
@@ -35,7 +35,7 @@ const NavMenu = () => {
           <PageLink to="/disciplines-group">Група дисциплін</PageLink>
         </li>
       </ListPage>
-    </Wrapper>
+   
   );
 };
 

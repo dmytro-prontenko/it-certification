@@ -34,7 +34,4 @@ export const ListPage = styled.ul`
   list-style-type: none;
 `;
 
-export const Wrapper = styled.div`
-  // padding-right: 84px;
-  // padding-left: 84px;
-`;
+
