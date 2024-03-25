@@ -24,17 +24,17 @@ export const PageLink = styled(NavLink)`
 `;
 
 export const ListPage = styled.ul`
-  padding-bottom: 20px;
-  padding-top: 20px;
+  // padding-bottom: 23px;
+  // padding-top: 23px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 20px;
   list-style-type: none;
 `;
 
 export const Wrapper = styled.div`
-  padding-right: 84px;
-  padding-left: 84px;
+  // padding-right: 84px;
+  // padding-left: 84px;
 `;

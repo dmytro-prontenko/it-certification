@@ -11,8 +11,8 @@ export const HeaderLogo = styled.div`
   align-items: center;
 
   padding-top: 40px;
-  padding-bottom: 48px;
-  gap: 40px;
+  padding-bottom: 40px;
+  gap: 32px;
 `;
 
 export const HeaderMenu = styled.header`
@@ -24,13 +24,13 @@ export const WrapperMenu = styled.div`
   display: flex;
   padding-bottom: 23px;
   padding-top: 23px;
-  gap: 9.5px;
+  gap: 160px;
 `;
 
 export const NavWrapperMenu = styled.nav`
   display: flex;
   align-items: center;
-  gap: auto;
+  gap: 160px;
 `;
 
 export const IconContainer = styled.div`
@@ -42,8 +42,8 @@ export const UserPanel = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding-top:28.5px;
-  padding-bottom:28.5px;
+  // padding-top:28.5px;
+  // padding-bottom:28.5px;
   gap:12px;
 `;
 
