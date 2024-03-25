@@ -22,20 +22,20 @@ export const HeaderMenu = styled.header`
 
 export const WrapperMenu = styled.div`
   display: flex;
-  padding-bottom: 20px;
-  padding-top: 20px;
+  padding-bottom: 23px;
+  padding-top: 23px;
   gap: 9.5px;
 `;
 
 export const NavWrapperMenu = styled.nav`
   display: flex;
   align-items: center;
-  gap: 9.5px;
+  gap: auto;
 `;
 
 export const IconContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
 `;
 
 export const UserPanel = styled.div`
@@ -55,16 +55,16 @@ align-items: center;
 gap: 8px;`;
 
 export const UserAvatar = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: var(--accent-green-300);
-  padding: 0px 20.5px 8px 20.5px;
+  // padding: 0px 28.5px 0px 28.5px;
 `;
 
 export const UserName = styled.p`
-font-weight:400px;
-font-size:14px;
+font-weight:500px;
+font-size:12px;
 line-height:1.5em;
 color: var(--basic-black);
 text-align: center;

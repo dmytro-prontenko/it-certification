@@ -5,13 +5,13 @@ export const PageLink = styled(NavLink)`
   display: box;
   border: 1px solid black;
   border-radius: 5px;
-  padding: 8px 12px;
+  padding: 4px 16px;
 
   text-decoration: none;
   transition: transform 0.3s, background-color 0.3s;
 
-  font-weight: 500px;
-  font-size: 18px;
+  font-weight: 400px;
+  font-size: 16px;
   line-height: 1.5em;
   color: var(--basic-black);
 
