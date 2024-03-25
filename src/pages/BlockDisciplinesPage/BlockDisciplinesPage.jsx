@@ -3,29 +3,19 @@ import { StyledTableWrapper } from "../../commonStyles/commonStyles";
 import Table from "../../components/Table/Table";
 import { tableData } from "../../redux/selectors/mainInfoSelectors";
 
-const DisciplinePage = () => {
-  const discipline= useSelector(tableData);
-  const columns = [
-    "№",
-    "Дисципліна",
-    "Викладач",
-    "Блок",
-    "Група",
-    "Програма",
-    "Сілабус",
-    "РП",
-    "Дія",
-  ];
+const BlockDisciplinesPage = () => {
+  const disciplineBlock = useSelector(tableData);
+  const columns = ["№", "Назва блоку дисципліни", "Опис", "Дія"];
 
   return (
     <StyledTableWrapper className="container">
       <Table
         view={"Перелік дисциплін"}
-        data={discipline}
+        data={disciplineBlock}
         columns={columns}
       />
     </StyledTableWrapper>
   );
 };
 
-export default DisciplinePage;
+export default BlockDisciplinesPage;

@@ -1,12 +1,24 @@
-import Hero from "../../components/Hero/Hero";
+import { useSelector } from "react-redux";
+import { StyledTableWrapper } from "../../commonStyles/commonStyles";
+import Table from "../../components/Table/Table";
+import { tableData } from "../../redux/selectors/mainInfoSelectors";
 
 const DepartmentPage = () => {
-  const subtitle = "Перелік кафедер ЗВО";
-  const subtext = "Перелік кафедр ЗВО Харкова та Харківської області";
+  const department = useSelector(tableData);
+  const columns = [
+    "№",
+    "Назва кафедри",
+    "ЗВО",
+    "Опис",
+    "Контакт",
+    "Кафедра",
+    "Дія",
+  ];
+
   return (
-    <>
-      <Hero subtitle={subtitle} subtext={subtext} />
-    </>
+    <StyledTableWrapper className="container">
+      <Table view={"Перелік кафедр"} data={department} columns={columns} />
+    </StyledTableWrapper>
   );
 };
 

@@ -1,4 +1,4 @@
-import { ListPage, PageLink, Wrapper} from "./NavMenu.styled";
+import { ListPage, PageLink, Wrapper } from "./NavMenu.styled";
 const NavMenu = () => {
   return (
     <Wrapper>
@@ -16,7 +16,7 @@ const NavMenu = () => {
           <PageLink to="/specialty">Спеціальність</PageLink>
         </li>
         <li>
-          <PageLink to="/educational">Рівень Освіти</PageLink>
+          <PageLink to="/education-level">Рівень Освіти</PageLink>
         </li>
         <li>
           <PageLink to="/programs">Освітні програми</PageLink>
@@ -26,16 +26,16 @@ const NavMenu = () => {
           <PageLink to="/department">Кафедри</PageLink>
         </li>
         <li>
-          <PageLink to="/blocdisciplines">Блок дисциплін</PageLink>
+          <PageLink to="/disciplines-block">Блок дисциплін</PageLink>
         </li>
         <li>
           <PageLink to="/discipline">Дисципліна</PageLink>
         </li>
         <li>
-          <PageLink to="/groupdisciplines">Група дисциплін</PageLink>
+          <PageLink to="/disciplines-group">Група дисциплін</PageLink>
         </li>
       </ListPage>
-      </Wrapper>
+    </Wrapper>
   );
 };
 

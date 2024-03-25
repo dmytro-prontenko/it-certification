@@ -4,8 +4,6 @@ import Layout from "./components/Layout/Layout";
 
 import { useDispatch, useSelector } from "react-redux";
 
-
-
 import { lazy } from "react";
 import Modal from "./components/Modal/Modal";
 import ModalContent from "./components/ModalContent/ModalContent";
@@ -17,16 +15,16 @@ const InstitutionPage = lazy(() =>
   import("./pages/InstitutionPage/InstitutionPage")
 );
 const SpecialtyPage = lazy(() => import("./pages/SpecialtyPage/SpecialtyPage"));
-const EducationalPage = lazy(() =>
-  import("./pages/EducationalPage/EducationalPage")
+const EducationLevelPage = lazy(() =>
+  import("./pages/EducationLevelPage/EducationLevelPage")
 );
 const ProgramsPage = lazy(() => import("./pages/ProgramsPage/ProgramsPage"));
 const TeachersPage = lazy(() => import("./pages/TeachersPage/TeachersPage"));
 const DepartmentPage = lazy(() =>
   import("./pages/DepartmentPage/DepartmentPage")
 );
-const BlocDisciplinesPage = lazy(() =>
-  import("./pages/BlocDisciplinesPage/BlocDisciplinesPage")
+const BlockDisciplinesPage = lazy(() =>
+  import("./pages/BlockDisciplinesPage/BlockDisciplinesPage")
 );
 const DisciplinePage = lazy(() =>
   import("./pages/DisciplinePage/DisciplinePage")
@@ -40,7 +38,7 @@ function App() {
 
   const handleCloseModal = () => {
     dispatch(setModalStatus(false));
-    dispatch(setModalContent({action: null, recordData:null}));
+    dispatch(setModalContent({ action: null, recordData: null }));
   };
 
   return (
@@ -50,13 +48,13 @@ function App() {
           <Route index element={<WelcomePage />} />
           <Route path="/institution" element={<InstitutionPage />} />
           <Route path="/specialty" element={<SpecialtyPage />} />
-          <Route path="/educational" element={<EducationalPage />} />
+          <Route path="/education-level" element={<EducationLevelPage />} />
           <Route path="/programs" element={<ProgramsPage />} />
           <Route path="/teachers" element={<TeachersPage />} />
           <Route path="/department" element={<DepartmentPage />} />
-          <Route path="/blocdisciplines" element={<BlocDisciplinesPage />} />
           <Route path="/discipline" element={<DisciplinePage />} />
-          <Route path="/groupdisciplines" element={<GroupDisPage />} />
+          <Route path="/disciplines-block" element={<BlockDisciplinesPage />} />
+          <Route path="/disciplines-group" element={<GroupDisPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
