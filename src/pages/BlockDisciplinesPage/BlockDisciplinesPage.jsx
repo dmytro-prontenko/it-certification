@@ -10,7 +10,7 @@ const BlockDisciplinesPage = () => {
   return (
     <StyledTableWrapper className="container">
       <Table
-        view={"Перелік дисциплін"}
+        view={"Перелік блоків дисциплін"}
         data={disciplineBlock}
         columns={columns}
       />

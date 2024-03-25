@@ -212,15 +212,6 @@ const Table = ({ view, data, columns }) => {
 
   useEffect(() => {
     switch (view) {
-      case "Перелік спеціальностей": {
-        dispatch(
-          getTableDataThunk({
-            endPoint: "specialty/",
-            getParams: { page: 1, size: SIZE },
-          })
-        );
-        break;
-      }
       case "Перелік викладачів": {
         dispatch(
           getTableDataThunk({
@@ -230,6 +221,87 @@ const Table = ({ view, data, columns }) => {
         );
         break;
       }
+      // =================
+      case "Перелік ЗВО": {
+        dispatch(
+          getTableDataThunk({
+            endPoint: "teachers/",
+            getParams: { page: 1, size: SIZE },
+          })
+        );
+        break;
+      }
+      // =================
+      case "Перелік спеціальностей": {
+        dispatch(
+          getTableDataThunk({
+            endPoint: "specialty/",
+            getParams: { page: 1, size: SIZE },
+          })
+        );
+        break;
+      }
+      // // =================
+      // case "Перелік рівнів освіти": {
+      //   dispatch(
+      //     getTableDataThunk({
+      //       endPoint: "teachers/",
+      //       getParams: { page: 1, size: SIZE },
+      //     })
+      //   );
+      //   break;
+      // }
+      // // =================
+      // case "Перелік освітніх програм": {
+      //   dispatch(
+      //     getTableDataThunk({
+      //       endPoint: "teachers/",
+      //       getParams: { page: 1, size: SIZE },
+      //     })
+      //   );
+      //   break;
+      // }
+      // // =================
+      // case "Перелік кафедр": {
+      //   dispatch(
+      //     getTableDataThunk({
+      //       endPoint: "teachers/",
+      //       getParams: { page: 1, size: SIZE },
+      //     })
+      //   );
+      //   break;
+      // }
+      // // =================
+      // case "Перелік блоків дисциплін": {
+      //   dispatch(
+      //     getTableDataThunk({
+      //       endPoint: "teachers/",
+      //       getParams: { page: 1, size: SIZE },
+      //     })
+      //   );
+      //   break;
+      // }
+      // // =================
+      // case "Перелік дисциплін": {
+      //   dispatch(
+      //     getTableDataThunk({
+      //       endPoint: "teachers/",
+      //       getParams: { page: 1, size: SIZE },
+      //     })
+      //   );
+      //   break;
+      // }
+      // // =================
+      // case "Перелік груп дисциплін": {
+      //   dispatch(
+      //     getTableDataThunk({
+      //       endPoint: "teachers/",
+      //       getParams: { page: 1, size: SIZE },
+      //     })
+      //   );
+      //   break;
+      // }
+      // // =================
     }
   }, [page]);
 
