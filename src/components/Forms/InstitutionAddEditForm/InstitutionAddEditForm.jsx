@@ -53,7 +53,7 @@ const InstitutionAddEditForm = () => {
 
   return (
     <>
-      <ModalAddEditTitle>{`${actionTitle} інформацію про викладача`}</ModalAddEditTitle>
+      <ModalAddEditTitle>{`${actionTitle} інформацію про ЗВО`}</ModalAddEditTitle>
       <StyledAddEditForm onSubmit={handleSubmit(onSubmit)}>
         <StyledAddEditInputsWrapper>
           <StyledAddEditInputWrapper>

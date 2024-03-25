@@ -53,7 +53,7 @@ const EducationLevelAddEditForm = () => {
 
   return (
     <>
-      <ModalAddEditTitle>{`${actionTitle} інформацію про спеціальність`}</ModalAddEditTitle>
+      <ModalAddEditTitle>{`${actionTitle} інформацію про рівень освіти`}</ModalAddEditTitle>
       <StyledAddEditForm onSubmit={handleSubmit(onSubmit)}>
         <StyledAddEditInputsWrapper>
           <StyledAddEditInputWrapper>
