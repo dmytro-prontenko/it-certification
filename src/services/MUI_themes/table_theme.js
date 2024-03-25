@@ -1,3 +1,5 @@
+// table_theme.js
+
 import { createTheme } from "@mui/material";
 
 export const tableTheme = () =>
@@ -23,12 +25,7 @@ export const tableTheme = () =>
       },
       MUIDataTableHeadCell: {
         styleOverrides: {
-          root: {
-            // "&:last-child": {
-            //   width: "fit-content",
-            //   padding: 0,
-            // },
-          },
+          root: {},
           contentWrapper: {
             justifyContent: "center",
           },
@@ -45,32 +42,40 @@ export const tableTheme = () =>
           },
           body: {
             padding: "15px 20px",
-            // "&:nth-child(1)": {
-            //   width: "70px",
-            //   outline: "1px solid tomato",
-            //   // padding: 0,
-            // },
-            // "&:nth-child(2)": {
-            //   maxWidth: "max-content",
-            //   outline: "1px solid tomato",
-            //   // padding: 0,
-            // },
-            // "&:last-child": {
-            //   width: "100px",
-            //   padding: 0,
-            //   outline: "1px solid tomato",
-            // },
           },
           footer: {},
         },
       },
-    },
-    styleOverrides: {
-      MUIDataTableToolbar: {
-        actions: {
-          display: "flex",
-          flexDirection: "row",
-          flex: "initial",
+      MuiIconButton: {
+        styleOverrides: {
+          root: {
+            "&:hover": {
+              backgroundColor: "var(--accent-yellow-100)",
+            },
+            "&:hover .MuiSvgIcon-root": {
+              fill: "green",
+            },
+          },
+        },
+      },
+      MuiPaginationItem: {
+        styleOverrides: {
+          page: {
+            "&:not(.Mui-selected):hover": {
+              backgroundColor: "var(--accent-yellow-200)",
+            },
+            "&:(.Mui-selected):hover": {
+              backgroundColor: "red",
+            },
+            "&.Mui-selected": {
+              backgroundColor: "var(--accent-yellow-100)",
+              color: "var(--accent-green-300)",
+              cursor:"not-allowed"
+            },
+            "&.Mui-disabled": {
+              pointerEvents: "none",
+            },
+          },
         },
       },
     },

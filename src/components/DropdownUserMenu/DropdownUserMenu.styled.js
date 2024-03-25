@@ -12,3 +12,9 @@ export const DropdownCaption = styled.span`
   font-weight: 400;
   line-height: 150%;
 `;
+
+export const RotatableWrapper = styled.div`
+  transition: transform 0.3s ease;
+  transform: ${({ rotate }) => (rotate ? "rotate(180deg)" : "rotate(0deg)")};
+`;
+
