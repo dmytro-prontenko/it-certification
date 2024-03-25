@@ -16,8 +16,8 @@ const NavMenu = () => {
           <PageLink to="/specialty">Спеціальність</PageLink>
         </li>
         <li>
-          <PageLink to="/education-level">Рівень Освіти</PageLink>
-          <PageLink to="/educational">Рівень oсвіти</PageLink>
+          <PageLink to="/education-level">Рівень освіти</PageLink>
+          {/* <PageLink to="/educational">Рівень oсвіти</PageLink> */}
         </li>
         <li>
           <PageLink to="/programs">Освітні програми</PageLink>
