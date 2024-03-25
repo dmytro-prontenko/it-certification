@@ -23,43 +23,39 @@ export const HeaderLogo = styled.div`
 `;
 
 export const NavWrapperMenu = styled.nav`
-display: flex;
-align-items: center;
+  display: flex;
+  align-items: center;
 `;
 
 export const HeaderMenu = styled.div`
-display: flex;
-align-items: center;
-justify-content: space-between;
-border: 1px solid black;
-gap: 9.5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid black;
+  gap: 9.5px;
 `;
 export const IconContainer = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative; 
-  left: 84px;  
+  position: relative;
+  left: 84px;
   margin-right: 20px;
   & > a {
-    margin: 0; 
+    margin: 0;
   }
-
 `;
 
 export const UserPanel = styled.div`
-
   display: flex;
   justify-content: space-between;
-  align-items: flex-end; 
+  align-items: center;
   padding-right: 84px;
- 
 `;
 
 export const Button = styled.button`
-border: none;  
-background: none;  
-padding: 0; 
-cursor: pointer; 
-outline: none;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
 `;
-

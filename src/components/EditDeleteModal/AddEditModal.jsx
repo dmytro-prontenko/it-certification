@@ -22,12 +22,23 @@ const AddEditModal = () => {
   const dataContent = useSelector(selectModalContent);
   const location = useLocation();
   const dispatch = useDispatch();
+  console.log(dataContent.action);
+  console.log(dataContent.recordData);
 
   let actionTitle;
   let modalTitle;
-  dataContent.action === "Add"
-    ? (actionTitle = "Додати")
-    : (actionTitle = "Редагувати");
+  let defaultData;
+
+  if (dataContent.action === "Add") {
+    actionTitle = "Додати";
+    defaultData =  null;
+  } else {
+    actionTitle = "Редагувати";
+    defaultData = {
+      value: dataContent.recordData?.id,
+      label: dataContent.recordData?.id,
+    };
+  }
 
   switch (location.pathname) {
     case "/specialty": {
@@ -46,10 +57,18 @@ const AddEditModal = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(dataContent.action);
+    const { id, name, link } = data;
+    const filledFields = [id, name, link].filter(Boolean);
 
+    if (filledFields.length === 0) {
+      console.log("Пожалуйста, отредактируйте минимум одно поле.");
+      return;
+    }
+
+    // console.log(data);
+    // console.log(dataContent.action);
     dispatch(setModalContent({ action: "EditConfirm" }));
   };
   // console.log(errors);
@@ -74,20 +93,17 @@ const AddEditModal = () => {
               render={({ field }) => (
                 <Select
                   {...field}
-                  options={[...Array(20)].map((el, index) => ({
-                    value: index,
-                    label: index,
-                  }))}
+                  // options={[...Array(20)].map((el, index) => ({
+                  //   value: index,
+                  //   label: index,
+                  // }))}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  defaultValue={{
-                    value: dataContent.id,
-                    label: dataContent.id,
-                  }}
-                  required
+                  defaultValue={defaultData}
+                  // required
                 />
               )}
             />
@@ -113,16 +129,17 @@ const AddEditModal = () => {
               render={({ field }) => (
                 <Select
                   {...field}
-                  options={[...Array(20)].map((el, index) => ({
-                    value: index,
-                    label: index,
-                  }))}
+                  // options={[...Array(20)].map((el, index) => ({
+                  //   value: index,
+                  //   label: index,
+                  // }))}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
                   sSearchable={true}
                   isClearable={true}
                   maxMenuHeight={145}
-                  required
+                  defaultValue={defaultData}
+                  // required
                 />
               )}
             />
@@ -145,7 +162,7 @@ const AddEditModal = () => {
             <StyledTextInput
               type="text"
               placeholder="link"
-              required
+              // required
               {...register("link", { required: true, maxLength: 100 })}
             />
           </StyledInputWrapper>

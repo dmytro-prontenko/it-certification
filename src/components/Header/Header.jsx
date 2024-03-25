@@ -1,15 +1,15 @@
-import NavMenu from "../NavMenu/NavMenu";
 import { Link } from "react-router-dom";
+import DropdownUserMenu from "../DropdownUserMenu/DropdownUserMenu";
 import Icon from "../Icon/Icon";
+import NavMenu from "../NavMenu/NavMenu";
 import {
-  HeaderWrapper,
   BrandSection,
-  NavWrapperMenu,
   HeaderLogo,
   HeaderMenu,
+  HeaderWrapper,
   IconContainer,
-  UserPanel,
-  Button,
+  NavWrapperMenu,
+  UserPanel
 } from "./Header.styled";
 
 const Header = () => {
@@ -34,9 +34,7 @@ const Header = () => {
         </NavWrapperMenu>
         <UserPanel>
           <div>Ім&lsquo;я / Прізвище:</div>
-          <Button>
-            <Icon iconId="arrow-down" height={24} width={24} />
-          </Button>
+          <DropdownUserMenu />
         </UserPanel>
       </HeaderMenu>
     </HeaderWrapper>
