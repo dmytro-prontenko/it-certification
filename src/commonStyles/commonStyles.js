@@ -50,7 +50,7 @@ export const StyledModalButton = styled.button`
 `;
 
 /////////////////////PageImage
-import picture from "/public/Vectors/Picture.png";
+import picture from "/Vectors/Picture.png";
 
 export const ImageTop = styled.div`
   background-image: url(${picture});

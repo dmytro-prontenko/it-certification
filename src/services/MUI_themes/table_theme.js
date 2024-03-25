@@ -70,10 +70,26 @@ export const tableTheme = () =>
             "&.Mui-selected": {
               backgroundColor: "var(--accent-yellow-100)",
               color: "var(--accent-green-300)",
-              cursor:"not-allowed"
             },
             "&.Mui-disabled": {
               pointerEvents: "none",
+            },
+          },
+        },
+      },
+      MuiMenuItem: {
+        styleOverrides: {
+          root: {
+            justifyContent: "center",
+            borderRadius: "50%",
+            "&.Mui-selected": {
+              backgroundColor: "var(--accent-yellow-200)",
+              color: "var(--accent-green-300)",
+
+              // padding:0,
+            },
+            "&:hover": {
+              backgroundColor: "var(--accent-yellow-100)",
             },
           },
         },

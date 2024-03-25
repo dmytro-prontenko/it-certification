@@ -10,15 +10,16 @@ import {
 import { tableData } from "../../redux/selectors/mainInfoSelectors";
 
 const TeachersPage = () => {
-  // const dispatch = useDispatch();
   const teachers = useSelector(tableData);
 
   const columns = [
-    "Номер",
-    "Ім’я викладача Email",
+    "№",
+    "Ім’я викладача",
     "Посада",
     "Наукова ступінь",
+    "ЗВО",
     "Кафедра",
+    "Email",
     "Коментарі",
     "Дія",
   ];
