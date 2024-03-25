@@ -35,7 +35,11 @@ select:-webkit-autofill:focus {
   --delete-red: #f20a0a;
   --edit-green: #24a750;
   --green-100: #b0c0be;
-  
+
+  --viber-color: rgba(119, 50, 169, 1);
+  --telegram-color: rgba(37, 163, 226, 1);
+  --facebook-color: rgba(24, 119, 242, 1);
+  --instagram-color: rgba(216, 51, 121, 1);
 
   /** Gradients **/
   --liner-gradient-green: linear-gradient(to right, #00544d 100%, #00544d 0%);
