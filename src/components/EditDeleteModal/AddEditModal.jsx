@@ -3,6 +3,7 @@ import { ModalWrapper } from "../../commonStyles/commonStyles";
 import SpecialtyAddEditForm from "../Forms/SpecialtyAddEditForm/SpecialtyAddEditForm";
 import TeachersAddEditForm from "../Forms/TeachersAddEditForm/TeachersAddEditForm";
 import InstitutionAddEditForm from "../Forms/InstitutionAddEditForm/InstitutionAddEditForm";
+import EducationLevelAddEditForm from "../Forms/EducationLevelAddEditForm/EducationLevelAddEditForm";
 
 const AddEditModal = () => {
   const location = useLocation();
@@ -10,16 +11,20 @@ const AddEditModal = () => {
   let formToRender;
 
   switch (location.pathname) {
-    case "/specialty": {
-      formToRender = <SpecialtyAddEditForm />;
-      break;
-    }
     case "/teachers": {
       formToRender = <TeachersAddEditForm />;
       break;
     }
     case "/institution": {
       formToRender = <InstitutionAddEditForm />;
+      break;
+    }
+    case "/specialty": {
+      formToRender = <SpecialtyAddEditForm />;
+      break;
+    }
+    case "/education-level": {
+      formToRender = <EducationLevelAddEditForm />;
       break;
     }
   }
