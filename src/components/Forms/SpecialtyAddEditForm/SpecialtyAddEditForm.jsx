@@ -57,7 +57,7 @@ const SpecialtyAddEditForm = () => {
       <StyledAddEditForm onSubmit={handleSubmit(onSubmit)}>
         <StyledAddEditInputsWrapper>
           <StyledAddEditInputWrapper>
-            <StyledAddEditLabel>Номер</StyledAddEditLabel>
+            <StyledAddEditLabel>Номер cпеціальності</StyledAddEditLabel>
             <Divider
               orientation="vertical"
               flexItem
@@ -75,7 +75,7 @@ const SpecialtyAddEditForm = () => {
                   //   value: index,
                   //   label: index,
                   // }))}
-                  placeholder="Оберіть зі списку"
+                  placeholder="Оберіть номер спеціальності"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
@@ -100,7 +100,7 @@ const SpecialtyAddEditForm = () => {
           </StyledAddEditInputWrapper>
           {/* ================================= */}
           <StyledAddEditInputWrapper>
-            <StyledAddEditLabel>Назва</StyledAddEditLabel>
+            <StyledAddEditLabel>Назва cпеціальності</StyledAddEditLabel>
             <Divider
               orientation="vertical"
               flexItem
@@ -118,7 +118,7 @@ const SpecialtyAddEditForm = () => {
                   //   value: index,
                   //   label: index,
                   // }))}
-                  placeholder="Оберіть зі списку"
+                  placeholder="Оберіть назву спеціальності"
                   styles={selectStyles}
                   sSearchable={true}
                   isClearable={true}
@@ -136,7 +136,7 @@ const SpecialtyAddEditForm = () => {
           </StyledAddEditInputWrapper>
           {/* ================================= */}
           <StyledAddEditInputWrapper>
-            <StyledAddEditLabel>Посилання</StyledAddEditLabel>
+            <StyledAddEditLabel>Посилання на стандарт</StyledAddEditLabel>
             <Divider
               orientation="vertical"
               flexItem
@@ -146,7 +146,7 @@ const SpecialtyAddEditForm = () => {
             />
             <StyledAddEditTextInput
               type="text"
-              placeholder="link"
+              placeholder="Додайте посилання на стандарт"
               defaultValue={dataContent.recordData?.link || null}
               // required
               {...register("link", { required: true, maxLength: 100 })}

@@ -276,7 +276,7 @@ const TeachersAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Введіть коментар"
-              defaultValue={dataContent.recordData?.email || null}
+              defaultValue={null}
               // required
               {...register("comment", { required: true, maxLength: 100 })}
             />
