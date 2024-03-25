@@ -225,7 +225,7 @@ const Table = ({ view, data, columns }) => {
       case "Перелік ЗВО": {
         dispatch(
           getTableDataThunk({
-            endPoint: "teachers/",
+            endPoint: "universities/",
             getParams: { page: 1, size: SIZE },
           })
         );
@@ -241,67 +241,67 @@ const Table = ({ view, data, columns }) => {
         );
         break;
       }
-      // // =================
-      // case "Перелік рівнів освіти": {
-      //   dispatch(
-      //     getTableDataThunk({
-      //       endPoint: "teachers/",
-      //       getParams: { page: 1, size: SIZE },
-      //     })
-      //   );
-      //   break;
-      // }
-      // // =================
-      // case "Перелік освітніх програм": {
-      //   dispatch(
-      //     getTableDataThunk({
-      //       endPoint: "teachers/",
-      //       getParams: { page: 1, size: SIZE },
-      //     })
-      //   );
-      //   break;
-      // }
-      // // =================
-      // case "Перелік кафедр": {
-      //   dispatch(
-      //     getTableDataThunk({
-      //       endPoint: "teachers/",
-      //       getParams: { page: 1, size: SIZE },
-      //     })
-      //   );
-      //   break;
-      // }
-      // // =================
-      // case "Перелік блоків дисциплін": {
-      //   dispatch(
-      //     getTableDataThunk({
-      //       endPoint: "teachers/",
-      //       getParams: { page: 1, size: SIZE },
-      //     })
-      //   );
-      //   break;
-      // }
-      // // =================
-      // case "Перелік дисциплін": {
-      //   dispatch(
-      //     getTableDataThunk({
-      //       endPoint: "teachers/",
-      //       getParams: { page: 1, size: SIZE },
-      //     })
-      //   );
-      //   break;
-      // }
-      // // =================
-      // case "Перелік груп дисциплін": {
-      //   dispatch(
-      //     getTableDataThunk({
-      //       endPoint: "teachers/",
-      //       getParams: { page: 1, size: SIZE },
-      //     })
-      //   );
-      //   break;
-      // }
-      // // =================
+      // =================
+      case "Перелік рівнів освіти": {
+        dispatch(
+          getTableDataThunk({
+            endPoint: "programs_levels/",
+            getParams: { page: 1, size: SIZE },
+          })
+        );
+        break;
+      }
+      // =================
+      case "Перелік освітніх програм": {
+        dispatch(
+          getTableDataThunk({
+            endPoint: "programs/",
+            getParams: { page: 1, size: SIZE },
+          })
+        );
+        break;
+      }
+      // =================
+      case "Перелік кафедр": {
+        dispatch(
+          getTableDataThunk({
+            endPoint: "school/",
+            getParams: { page: 1, size: SIZE },
+          })
+        );
+        break;
+      }
+      // =================
+      case "Перелік блоків дисциплін": {
+        dispatch(
+          getTableDataThunk({
+            endPoint: "course_blocks/",
+            getParams: { page: 1, size: SIZE },
+          })
+        );
+        break;
+      }
+      // =================
+      case "Перелік дисциплін": {
+        dispatch(
+          getTableDataThunk({
+            endPoint: "course/",
+            getParams: { page: 1, size: SIZE },
+          })
+        );
+        break;
+      }
+      // =================
+      case "Перелік груп дисциплін": {
+        dispatch(
+          getTableDataThunk({
+            endPoint: "course_groupes/",
+            getParams: { page: 1, size: SIZE },
+          })
+        );
+        break;
+      }
+      // =================
     }
   }, [page]);
 
