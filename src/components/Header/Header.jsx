@@ -14,7 +14,7 @@ import {
 
 const Header = () => {
   return (
-    <HeaderWrapper>
+    <HeaderWrapper className="container">
       <BrandSection>
         <HeaderLogo>
           <Icon iconId="header-left" height={40} width={254} gap={40} />

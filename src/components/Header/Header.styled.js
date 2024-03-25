@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const HeaderWrapper = styled.header`
   display: flex;
@@ -38,7 +38,7 @@ export const IconContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  left: 84px;
+  // left: 84px;
   margin-right: 20px;
   & > a {
     margin: 0;
@@ -49,7 +49,7 @@ export const UserPanel = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-right: 84px;
+  // padding-right: 84px;
 `;
 
 export const Button = styled.button`
