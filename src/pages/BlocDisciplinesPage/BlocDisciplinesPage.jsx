@@ -1,9 +1,11 @@
-import Hero from "../../components/Hero/Hero";
+import { ImageBottom, ImageTop } from "../../commonStyles/commonStyles";
+
 
 const BlocDisciplinesPage = () => {
   return (
     <>
-      <Hero />
+      <ImageTop></ImageTop>
+      <ImageBottom></ImageBottom>
     </>
   );
 };

@@ -1,5 +1,12 @@
+import { ImageBottom, ImageTop } from "../../commonStyles/commonStyles";
+
 const EducationalPage = () => {
-  return <></>;
+  return (
+    <>
+      <ImageTop></ImageTop>
+      <ImageBottom></ImageBottom>
+    </>
+  );
 };
 
 export default EducationalPage;
