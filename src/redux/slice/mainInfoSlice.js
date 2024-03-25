@@ -8,6 +8,21 @@ import {
 
 const initialState = {
   tableData: [],
+  serviceInfo: [
+    {
+      position: [],
+      degree: [],
+      university:[],
+      universityAbbr:[],
+      cathedra:[],
+      specNum:[],
+      specName:[],
+      educationLevel:[],
+      disciplineName:[],
+      disciplineBlockName:[],
+      disciplineGroupName:[],
+    },
+  ],
 };
 
 const mainInfoSlice = createSlice({
