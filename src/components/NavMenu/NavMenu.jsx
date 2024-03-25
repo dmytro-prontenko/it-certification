@@ -17,7 +17,6 @@ const NavMenu = () => {
         </li>
         <li>
           <PageLink to="/education-level">Рівень освіти</PageLink>
-          {/* <PageLink to="/educational">Рівень oсвіти</PageLink> */}
         </li>
         <li>
           <PageLink to="/programs">Освітні програми</PageLink>
