@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 const getColor = (props) => {
   switch (props.$meta) {
     case "instagram":
-      return "rgba(216, 51, 121, 1)";
+      return "--instagram-color";
     case "facebook":
-      return "rgba(24, 119, 242, 1)";
-    case "phone":
-      return "rgba(119, 50, 169, 1)";
+      return "--facebook-color";
+    case "viber":
+      return "--viber-color";
     case "telegram":
-      return "rgba(37, 163, 226, 1)";
+      return "--telegram-color";
+    case "twitter":
+      return "--basic-black";
     default:
-      return "red";
+      return "--basic-black";
   }
 };
 
@@ -38,7 +40,7 @@ export const IconContainer = styled.div`
 export const FooterinfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 72px;
+  gap: 84px;
 `;
 
 export const SocialList = styled.ul`
@@ -56,9 +58,12 @@ export const FooterLink = styled.a`
 `;
 
 export const SocialIcon = styled.svg`
+  transition: transform 0.3s ease;
+  fill: var(${getColor});
+
   &:hover {
-    fill: ${getColor};
-    color: red;
+    /* fill: var(${getColor}) */
+    transform: scale(1.4);
   }
 `;
 
