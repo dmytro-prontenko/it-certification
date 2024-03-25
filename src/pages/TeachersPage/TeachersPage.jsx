@@ -1,11 +1,17 @@
 import { useSelector } from "react-redux";
+
 import Table from "../../components/Table/Table";
 
-import { StyledTableWrapper } from "../../commonStyles/commonStyles";
+import {
+  ImageBottom,
+  ImageTop,
+  StyledTableWrapper,
+} from "../../commonStyles/commonStyles";
 import { tableData } from "../../redux/selectors/mainInfoSelectors";
 
 const TeachersPage = () => {
   const teachers = useSelector(tableData);
+
   const columns = [
     "№",
     "Ім’я викладача",
@@ -19,9 +25,13 @@ const TeachersPage = () => {
   ];
 
   return (
-    <StyledTableWrapper className="container">
-      <Table view={"Перелік викладачів"} data={teachers} columns={columns} />
-    </StyledTableWrapper>
+    <>
+      <StyledTableWrapper className="container">
+        <ImageTop></ImageTop>
+        <Table view={"Перелік викладачів"} data={teachers} columns={columns} />
+      </StyledTableWrapper>
+      <ImageBottom></ImageBottom>
+    </>
   );
 };
 

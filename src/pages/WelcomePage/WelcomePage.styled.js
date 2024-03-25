@@ -1,27 +1,30 @@
 import styled from "styled-components";
 
-export const WrapperInfo = styled.div`
+export const WrapperTextTop = styled.div`
   margin-bottom: 80px;
 `;
 
-export const InfoTop = styled.div`
+export const WrapperBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-export const InfoText = styled.div`
+export const InfoBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 `;
 export const InfoTitle = styled.p`
   color: var(--accent-green-300);
-  font-size: 24px;
+  font-size: 28px;
   margin-bottom: 20px;
+  font-weight: 400;
+  line-height: 1.5;
 `;
 
 export const Text = styled.p`
   font-size: 20px;
+  font-weight: 400;
   color: var(--basic-black);
   max-width: 624px;
   margin-bottom: 40px;
@@ -33,9 +36,10 @@ export const List = styled.ul`
 `;
 
 export const LIstItem = styled.li`
-  line-height: 1.2;
+  line-height: 1.5;
   letter-spacing: 1px;
   font-size: 20px;
+  font-weight: 400;
   margin-bottom: 12px;
 
   position: relative;
@@ -53,16 +57,21 @@ export const LIstItem = styled.li`
     background-color: var(--accent-green-300);
   }
 `;
+///////////////////////////////////////IMG
+export const BoxImg = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
 
+export const ImgBottom = styled.img`
+  max-width: 360px;
+  /* display: flex; */
+`;
 export const ImgText = styled.img`
-  /* max-width: 516px;
-  max-height: 670px; */
   max-width: 100%;
-  height: auto;
 `;
 export const ImgPhoto = styled.img`
-  /* max-width: 516px;
-  max-height: 670px; */
   max-width: 100%;
-  height: auto;
 `;

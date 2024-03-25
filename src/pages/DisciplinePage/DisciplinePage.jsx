@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { StyledTableWrapper } from "../../commonStyles/commonStyles";
 import Table from "../../components/Table/Table";
 import { tableData } from "../../redux/selectors/mainInfoSelectors";
+import { ImageBottom, ImageTop } from "../../commonStyles/commonStyles";
 
 const DisciplinePage = () => {
   const discipline= useSelector(tableData);
@@ -18,13 +19,17 @@ const DisciplinePage = () => {
   ];
 
   return (
-    <StyledTableWrapper className="container">
+    <>
+      <ImageTop></ImageTop>
+          <StyledTableWrapper className="container">
       <Table
         view={"Перелік дисциплін"}
         data={discipline}
         columns={columns}
       />
     </StyledTableWrapper>
+      <ImageBottom></ImageBottom>
+    </>
   );
 };
 
