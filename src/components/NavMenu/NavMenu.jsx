@@ -16,11 +16,8 @@ const NavMenu = () => {
           <PageLink to="/specialty">Спеціальність</PageLink>
         </li>
         <li>
-<<<<<<< Updated upstream
           <PageLink to="/education-level">Рівень Освіти</PageLink>
-=======
           <PageLink to="/educational">Рівень oсвіти</PageLink>
->>>>>>> Stashed changes
         </li>
         <li>
           <PageLink to="/programs">Освітні програми</PageLink>
