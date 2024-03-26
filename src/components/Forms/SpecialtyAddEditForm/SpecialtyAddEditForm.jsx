@@ -25,7 +25,6 @@ const SpecialtyAddEditForm = () => {
 
   let actionTitle;
 
-  // let defaultData;
 
   if (dataContent.action === "Add") {
     actionTitle = "Додати";
@@ -42,10 +41,15 @@ const SpecialtyAddEditForm = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    const filteredData = Object.fromEntries(
+      Object.entries(data).filter(([, value]) => value !== undefined)
+    );
+    console.log(filteredData)
+
     dispatch(
       setModalContent({
         action: "EditConfirm",
-        recordData: { ...dataContent.recordData, ...data },
+        editedData: { id: dataContent.recordData.id, ...filteredData },
       })
     );
   };
@@ -147,9 +151,9 @@ const SpecialtyAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте посилання на стандарт"
-              defaultValue={dataContent.recordData?.link || null}
+              defaultValue={dataContent.recordData?.link_standart || null}
               // required
-              {...register("link", { required: true, maxLength: 100 })}
+              {...register("link_standart", { required: true, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
         </StyledAddEditInputsWrapper>

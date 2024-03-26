@@ -32,6 +32,10 @@ const AddEditModal = () => {
       formToRender = <ProgramsAddEditForm />;
       break;
     }
+    case "/department": {
+      formToRender = <ProgramsAddEditForm />;
+      break;
+    }
   }
 
   return <ModalWrapper>{formToRender}</ModalWrapper>;
