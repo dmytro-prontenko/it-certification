@@ -7,9 +7,6 @@ export const PageLink = styled(NavLink)`
   border-radius: 5px;
   padding: 4px 16px;
 
-  text-decoration: none;
-  transition: transform 0.3s, background-color 0.3s;
-
   font-weight: 400px;
   font-size: 16px;
   line-height: 1.5em;
@@ -31,7 +28,7 @@ export const ListPage = styled.ul`
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
-  list-style-type: none;
+ 
 `;
 
 

@@ -35,10 +35,16 @@ export const NavWrapperMenu = styled.nav`
 
 export const UserPanel = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+ 
   gap:12px;
  
 `;
+
+export const UserSettingsButton = styled.div`
+padding-top:42px
+
+`
 
 export const UserInfo = styled.div`
 display: flex;

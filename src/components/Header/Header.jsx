@@ -12,22 +12,23 @@ import {
   UserInfo, 
   UserAvatar, 
   UserName,
+  UserSettingsButton
 } from "./Header.styled";
 
 const Header = () => {
   return (
     <HeaderWrapper>
         <HeaderLogo className="container">
-          <Icon iconId="header-left" height={40} width={254} gap={40} />
-          <Icon iconId="emblem" height={92} width={72} gap={40} />
-          <Icon iconId="header-right" height={40} width={254} gap={40} />
+          <Icon iconId="header-left" height={32} width={200}  />
+          <Icon iconId="emblem" height={80} width={64} />
+          <Icon iconId="header-right" height={32} width={200} />
         </HeaderLogo>
       <HeaderMenu>
         <WrapperMenu className="container">
           <NavWrapperMenu>
               <Link to="/">
-                <Icon iconId="emblem" height={72} width={48} gap={4} />
-                <Icon iconId="headline" height={14} width={48} />
+                <Icon iconId="emblem" height={72} width={49} gap={4} />
+                <Icon iconId="headline" height={14} width={49} />
               </Link>
             <NavMenu />
           </NavWrapperMenu>
@@ -36,8 +37,11 @@ const Header = () => {
             <UserAvatar/>
             <UserName>Ім&lsquo;я/Прізвище</UserName>
             </UserInfo>
+            
+            <UserSettingsButton>
             <DropdownUserMenu />
-          </UserPanel>
+            </UserSettingsButton>
+            </UserPanel>
         </WrapperMenu>
       </HeaderMenu>
     </HeaderWrapper>
