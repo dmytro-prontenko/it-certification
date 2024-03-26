@@ -57,7 +57,6 @@ export const ImageTop = styled.div`
   background-repeat: no-repeat;
   min-width: 360px;
   min-height: 120px;
-  margin-bottom: 40px;
 `;
 
 export const ImageBottom = styled.div`
