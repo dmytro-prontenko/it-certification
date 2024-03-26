@@ -52,114 +52,155 @@ const DepartmentAddEditForm = () => {
   // console.log(errors);
 
   return (
-    <>test</>
-    // <>
-    //   <ModalAddEditTitle>{`${actionTitle} інформацію про кафедру`}</ModalAddEditTitle>
-    //   <StyledAddEditForm onSubmit={handleSubmit(onSubmit)}>
-    //     <StyledAddEditInputsWrapper>
-    //       <StyledAddEditInputWrapper>
-    //         <StyledAddEditLabel>Назва кафедри</StyledAddEditLabel>
-    //         <Divider
-    //           orientation="vertical"
-    //           flexItem
-    //           sx={{
-    //             color: "var(--basic-grey)",
-    //           }}
-    //         />
-    //         <Controller
-    //           name="id"
-    //           control={control}
-    //           render={({ field }) => (
-    //             <Select
-    //               {...field}
-    //               // options={[...Array(20)].map((el, index) => ({
-    //               //   value: index,
-    //               //   label: index,
-    //               // }))}
-    //               placeholder="Оберіть номер спеціальності"
-    //               styles={selectStyles}
-    //               isSearchable={true}
-    //               isClearable={true}
-    //               maxMenuHeight={150}
-    //               defaultValue={
-    //                 dataContent.recordData
-    //                   ? {
-    //                       value: dataContent.recordData.id,
-    //                       label: dataContent.recordData.id,
-    //                     }
-    //                   : null
-    //               }
-    //               // required
-    //             />
-    //           )}
-    //         />
-    //         {/* {errors.category && (
-    //           <StyledErrorSelectMobile>
-    //             {errors.category.message}
-    //           </StyledErrorSelectMobile>
-    //         )} */}
-    //       </StyledAddEditInputWrapper>
+    <>
+      <ModalAddEditTitle>{`${actionTitle} інформацію про кафедру`}</ModalAddEditTitle>
+      <StyledAddEditForm onSubmit={handleSubmit(onSubmit)}>
+        <StyledAddEditInputsWrapper>
+          <StyledAddEditInputWrapper>
+            <StyledAddEditLabel>Назва кафедри</StyledAddEditLabel>
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{
+                color: "var(--basic-grey)",
+              }}
+            />
+            <Controller
+              name="id"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  // options={[...Array(20)].map((el, index) => ({
+                  //   value: index,
+                  //   label: index,
+                  // }))}
+                  placeholder="Оберіть назву кафедри"
+                  styles={selectStyles}
+                  isSearchable={true}
+                  isClearable={true}
+                  maxMenuHeight={150}
+                  defaultValue={
+                    dataContent.recordData
+                      ? {
+                          value: dataContent.recordData.id,
+                          label: dataContent.recordData.id,
+                        }
+                      : null
+                  }
+                  // required
+                />
+              )}
+            />
+            {/* {errors.category && (
+              <StyledErrorSelectMobile>
+                {errors.category.message}
+              </StyledErrorSelectMobile>
+            )} */}
+          </StyledAddEditInputWrapper>
 
-    //       {/* ================================= */}
+          {/* ================================= */}
 
-    //       <StyledAddEditInputWrapper>
-    //         <StyledAddEditLabel>Назва cпеціальності</StyledAddEditLabel>
-    //         <Divider
-    //           orientation="vertical"
-    //           flexItem
-    //           sx={{
-    //             color: "var(--basic-grey)",
-    //           }}
-    //         />
-    //         <Controller
-    //           name="name"
-    //           control={control}
-    //           render={({ field }) => (
-    //             <Select
-    //               {...field}
-    //               // options={[...Array(20)].map((el, index) => ({
-    //               //   value: index,
-    //               //   label: index,
-    //               // }))}
-    //               placeholder="Оберіть назву спеціальності"
-    //               styles={selectStyles}
-    //               sSearchable={true}
-    //               isClearable={true}
-    //               maxMenuHeight={145}
-    //               defaultValue={dataContent.recordData?.name || null}
-    //               // required
-    //             />
-    //           )}
-    //         />
-    //         {/* {errors.category && (
-    //           <StyledErrorSelectMobile>
-    //             {errors.category.message}
-    //           </StyledErrorSelectMobile>
-    //         )} */}
-    //       </StyledAddEditInputWrapper>
-    //       {/* ================================= */}
-    //       <StyledAddEditInputWrapper>
-    //         <StyledAddEditLabel>Посилання на стандарт</StyledAddEditLabel>
-    //         <Divider
-    //           orientation="vertical"
-    //           flexItem
-    //           sx={{
-    //             color: "var(--basic-grey)",
-    //           }}
-    //         />
-    //         <StyledAddEditTextInput
-    //           type="text"
-    //           placeholder="Додайте посилання на стандарт"
-    //           defaultValue={dataContent.recordData?.link || null}
-    //           // required
-    //           {...register("link", { required: true, maxLength: 100 })}
-    //         />
-    //       </StyledAddEditInputWrapper>
-    //     </StyledAddEditInputsWrapper>
+          <StyledAddEditInputWrapper>
+            <StyledAddEditLabel>Сайт кафедри</StyledAddEditLabel>
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{
+                color: "var(--basic-grey)",
+              }}
+            />
+            <StyledAddEditTextInput
+              type="text"
+              placeholder="Додайте сайт кафедри"
+              defaultValue={dataContent.recordData?.link || null}
+              // required
+              {...register("link", { required: true, maxLength: 100 })}
+            />
+          </StyledAddEditInputWrapper>
 
-    //     <CommonButton buttonType={"submit"}>{actionTitle}</CommonButton>
-    //   </StyledAddEditForm>
-    // </>
+          {/* ================================= */}
+
+          <StyledAddEditInputWrapper>
+            <StyledAddEditLabel>Опис</StyledAddEditLabel>
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{
+                color: "var(--basic-grey)",
+              }}
+            />
+            <StyledAddEditTextInput
+              type="text"
+              placeholder="Додайте опис про кафедру"
+              defaultValue={dataContent.recordData?.link || null}
+              // required
+              {...register("link", { required: true, maxLength: 100 })}
+            />
+          </StyledAddEditInputWrapper>
+
+          {/* ================================= */}
+
+          <StyledAddEditInputWrapper>
+            <StyledAddEditLabel>ЗВО</StyledAddEditLabel>
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{
+                color: "var(--basic-grey)",
+              }}
+            />
+            <Controller
+              name="name"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  // options={[...Array(20)].map((el, index) => ({
+                  //   value: index,
+                  //   label: index,
+                  // }))}
+                  placeholder="Оберіть назву ЗВО"
+                  styles={selectStyles}
+                  sSearchable={true}
+                  isClearable={true}
+                  maxMenuHeight={145}
+                  defaultValue={dataContent.recordData?.name || null}
+                  // required
+                />
+              )}
+            />
+            {/* {errors.category && (
+              <StyledErrorSelectMobile>
+                {errors.category.message}
+              </StyledErrorSelectMobile>
+            )} */}
+          </StyledAddEditInputWrapper>
+
+          {/* ================================= */}
+
+          <StyledAddEditInputWrapper>
+            <StyledAddEditLabel>Контакти </StyledAddEditLabel>
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{
+                color: "var(--basic-grey)",
+              }}
+            />
+            <StyledAddEditTextInput
+              type="text"
+              placeholder="Додайте контакти"
+              defaultValue={dataContent.recordData?.link || null}
+              // required
+              {...register("link", { required: true, maxLength: 100 })}
+            />
+          </StyledAddEditInputWrapper>
+        </StyledAddEditInputsWrapper>
+
+        <CommonButton buttonType={"submit"}>{actionTitle}</CommonButton>
+      </StyledAddEditForm>
+    </>
   );
 };
 
