@@ -5,21 +5,20 @@ import { tableData } from "../../redux/selectors/mainInfoSelectors";
 import { ImageBottom, ImageTop } from "../../commonStyles/commonStyles";
 
 const GroupDisPage = () => {
-const disciplineGroup = useSelector(tableData);
-const columns = ["№", "Група дисциплін", "Опис","Блок", "Дисципліни", "Дія"];
+  const disciplineGroup = useSelector(tableData);
+  const columns = ["№", "Група дисциплін", "Опис", "Блок", "Дисципліни", "Дія"];
 
   return (
-    <>
+    <StyledTableWrapper className="container">
       <ImageTop></ImageTop>
-        <StyledTableWrapper className="container">
-    <Table
-      view={"Перелік груп дисциплін"}
-      data={disciplineGroup}
-      columns={columns}
-    />
-  </StyledTableWrapper>
+      <Table
+        view={"Перелік груп дисциплін"}
+        data={disciplineGroup}
+        columns={columns}
+      />
+
       <ImageBottom></ImageBottom>
-    </>
+    </StyledTableWrapper>
   );
 };
 
