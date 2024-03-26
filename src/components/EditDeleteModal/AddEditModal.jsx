@@ -7,6 +7,8 @@ import EducationLevelAddEditForm from "../Forms/EducationLevelAddEditForm/Educat
 import ProgramsAddEditForm from "../Forms/ProgramsAddEditForm/ProgramsAddEditForm";
 import DepartmentAddEditForm from "../Forms/DepartmentAddEditForm/DepartmentAddEditForm";
 import DisciplineBlockAddEditForm from "../Forms/DisciplineBlockAddEditForm/DisciplineBlockAddEditForm";
+import DisciplineAddEditForm from "../Forms/DisciplineAddEditForm/DisciplineAddEditForm";
+import DisciplineGroupAddEditForm from "../Forms/DisciplineGroupAddEditForm/DisciplineGroupAddEditForm";
 
 const AddEditModal = () => {
   const location = useLocation();
@@ -40,6 +42,14 @@ const AddEditModal = () => {
     }
     case "/disciplines-block": {
       formToRender = <DisciplineBlockAddEditForm />;
+      break;
+    }
+    case "/discipline": {
+      formToRender = <DisciplineAddEditForm />;
+      break;
+    }
+    case "/disciplines-group": {
+      formToRender = <DisciplineGroupAddEditForm />;
       break;
     }
   }
