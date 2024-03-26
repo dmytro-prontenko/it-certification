@@ -29,6 +29,8 @@ export const signIn = async (userData) => {
 //   return data;
 // };
 
+// ====================== info_query
+
 export const getData = async ({ endPoint, getParams }) => {
   const { data } = await $instance.get(endPoint, {
     params: {
@@ -56,7 +58,11 @@ export const editData = async ({ endPoint, putData, editParams }) => {
   return data;
 };
 
-export const deleteData = async ({ endPoint, dataToDelete }) => {
-  const { data } = await $instance.delete(endPoint, dataToDelete);
+export const deleteData = async ({ endPoint, deleteParams }) => {
+  const { data } = await $instance.delete(endPoint, {
+    params: {
+      ...deleteParams,
+    },
+  });
   return data;
 };
