@@ -2,60 +2,68 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled.header`
   display: flex;
-  align-items: center;
   flex-direction: column;
-  height: 326px;
-`;
-
-export const BrandSection = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const HeaderLogo = styled.div`
-  padding-top: 40px;
-  padding-bottom: 40px;
-  height: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  padding-top: 40px;
+  padding-bottom: 40px;
+  gap: 32px;
+`;
+
+export const HeaderMenu = styled.div`
+  border-top: 1px solid var(--accent-green-300);
+  border-bottom: 1px solid var(--accent-green-300);
+`;
+
+export const WrapperMenu = styled.div`
+  display: flex;
+  padding-bottom: 23px;
+  padding-top: 23px;
+  gap: 160px;
 `;
 
 export const NavWrapperMenu = styled.nav`
   display: flex;
   align-items: center;
-`;
-
-export const HeaderMenu = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid black;
-  gap: 9.5px;
-`;
-export const IconContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  left: 84px;
-  margin-right: 20px;
-  & > a {
-    margin: 0;
-  }
+  gap: 160px;
 `;
 
 export const UserPanel = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding-right: 84px;
+ 
+  gap:12px;
+ 
 `;
 
-export const Button = styled.button`
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  outline: none;
+export const UserSettingsButton = styled.div`
+padding-top:42px
+
+`
+
+export const UserInfo = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 8px;`;
+
+export const UserAvatar = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--accent-green-300);
+ 
+`;
+
+export const UserName = styled.p`
+font-weight:500px;
+font-size:12px;
+line-height:1.5em;
+color: var(--basic-black);
+white-space: nowrap;
 `;
