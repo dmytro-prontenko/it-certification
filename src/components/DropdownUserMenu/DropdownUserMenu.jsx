@@ -124,7 +124,7 @@ export default function CustomizedMenus() {
             <Icon
               width={24}
               height={24}
-              iconId={"icon-Icon-Person"}
+              iconId={"person"}
               styles={{ fill: "var(--accent-green-300)" }}
             />
             <DropdownCaption>Мій профіль</DropdownCaption>

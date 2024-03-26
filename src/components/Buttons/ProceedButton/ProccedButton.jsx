@@ -9,7 +9,7 @@ const ProceedButton = ({onClick}) => {
         styles={{ fill: "var( --accent-green-300)" }}
         width={24}
         height={24}
-        iconId={"check-min"}
+        iconId={"Icon-check"}
       />
     </StyledProceedButton>
   );

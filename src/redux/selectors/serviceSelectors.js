@@ -1,3 +1,4 @@
+export const selectCurrentPage = (state) => state.service.currentPage;
 export const selectOpenModal = (state) => state.service.openModal;
 export const selectModalContent = (state) => state.service.modalContent;
 export const selectModalContentAction = (state) => state.service.modalContent.action;

@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectOpenModal } from "../../redux/selectors/serviceSelectors";
+import { selectCurrentPage, selectOpenModal } from "../../redux/selectors/serviceSelectors";
 import {
   setModalContent,
   setModalStatus,
@@ -27,6 +27,7 @@ const Table = ({ view, data, columns }) => {
   const dispatch = useDispatch();
   const modalStatus = useSelector(selectOpenModal);
   const location = useLocation();
+  const currentPage = useSelector(selectCurrentPage);
 
   let dataArray = [];
 
@@ -43,7 +44,6 @@ const Table = ({ view, data, columns }) => {
   };
 
   const handleModal = (action, recordData) => {
-    // console.log(recordData)
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent({ action, recordData }));
   };
@@ -216,7 +216,7 @@ const Table = ({ view, data, columns }) => {
     dispatch(
       getTableDataThunk({
         endPoint: `${location.pathname}`,
-        getParams: { page: 1, size: SIZE },
+        getParams: { page: currentPage, size: SIZE },
       })
     );
   }, [page]);

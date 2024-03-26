@@ -6,6 +6,7 @@ const initialState = {
   isSignedIn: false,
   isLoading: false,
   openModal: false,
+  currentPage:1,
   modalContent: {
     action: null,
     recordData: null,

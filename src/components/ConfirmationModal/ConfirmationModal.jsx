@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectModalContent } from "../../redux/selectors/serviceSelectors";
+import { selectCurrentPage, selectModalContent } from "../../redux/selectors/serviceSelectors";
 
 import { useLocation } from "react-router-dom";
 import {
@@ -7,6 +7,7 @@ import {
   setModalStatus,
 } from "../../redux/slice/serviceSlice";
 import {
+  addTableDataThunk,
   deleteTableDataThunk,
   editTableDataThunk,
 } from "../../redux/thunk/mainInfoThunks";
@@ -23,13 +24,13 @@ const ConfirmationModal = () => {
   const location = useLocation();
   const action = useSelector(selectModalContent);
   const dispatch = useDispatch();
-  console.log(location);
+  const currentPage = useSelector(selectCurrentPage)
 
   const handleCancel = () => {
     dispatch(
       setModalContent({
         action: actionToDispatch,
-        recordData: action.recordData,
+        recordData: { ...action.recordData, ...action.editedData },
       })
     );
   };
@@ -42,12 +43,22 @@ const ConfirmationModal = () => {
       })
     );
     switch (actionToDispatch) {
+      case "Add": {
+        dispatch(
+          addTableDataThunk({
+            endPoint: `${location.pathname}/${action.recordData.id}`,
+            putData: action.editedData,
+            editParams: { page: currentPage, size: SIZE },
+          })
+        );
+        break;
+      }
       case "Edit": {
         dispatch(
           editTableDataThunk({
             endPoint: `${location.pathname}/${action.recordData.id}`,
             putData: action.editedData,
-            editParams: { page: 1, size: SIZE },
+            editParams: { page: currentPage, size: SIZE },
           })
         );
         break;
@@ -57,7 +68,7 @@ const ConfirmationModal = () => {
         dispatch(
           deleteTableDataThunk({
             endPoint: `${location.pathname}/${action.recordData.id}`,
-            deleteParams: { page: 1, size: SIZE },
+            deleteParams: { page: currentPage, size: SIZE },
           })
         );
         break;

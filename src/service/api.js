@@ -50,7 +50,7 @@ export const addData = async ({ endPoint, postData, postParams }) => {
 };
 
 export const editData = async ({ endPoint, putData, editParams }) => {
-  const { data } = await $instance.put(endPoint, putData, {
+  const { data } = await $instance.patch(endPoint, putData, {
     params: {
       ...editParams,
     },
