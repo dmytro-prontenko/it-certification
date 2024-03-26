@@ -58,6 +58,7 @@ const ConfirmationModal = () => {
         dispatch(
           editTableDataThunk({
             endPoint: `${location.pathname}/${action.recordData.id}`,
+            // endPoint: "teachers/1",
             putData: action.editedData,
             editParams: { page: currentPage, size: SIZE },
           })
@@ -65,10 +66,10 @@ const ConfirmationModal = () => {
         break;
       }
       case "Delete": {
-        console.log(action.recordData.id);
         dispatch(
           deleteTableDataThunk({
             endPoint: `${location.pathname}/${action.recordData.id}`,
+            // endPoint: "teachers/2",
             deleteParams: { page: currentPage, size: SIZE },
           })
         );
@@ -82,6 +83,11 @@ const ConfirmationModal = () => {
   let actionToDispatch;
 
   switch (action.action) {
+    case "AddConfirm": {
+      title = "Додати новий запис?";
+      actionToDispatch = "Add";
+      break;
+    }
     case "EditConfirm": {
       title = "Зберегти редагування?";
       actionToDispatch = "Edit";
