@@ -19,17 +19,17 @@ const DisciplinePage = () => {
   ];
 
   return (
-    <>
-      <ImageTop></ImageTop>
+
           <StyledTableWrapper className="container">
+      <ImageTop></ImageTop>
       <Table
         view={"Перелік дисциплін"}
         data={discipline}
         columns={columns}
       />
-    </StyledTableWrapper>
       <ImageBottom></ImageBottom>
-    </>
+    </StyledTableWrapper>
+
   );
 };
 

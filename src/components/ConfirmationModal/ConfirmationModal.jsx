@@ -29,10 +29,11 @@ const ConfirmationModal = () => {
   const handleCancel = () => {
     dispatch(
       setModalContent({
-        action: actionToDispatch,
-        recordData: { ...action.recordData, ...action.editedData },
+        action: null,
+        recordData: null,
       })
     );
+    dispatch(setModalStatus(false));
   };
 
   const handleProceed = (actionToDispatch) => {
@@ -46,7 +47,7 @@ const ConfirmationModal = () => {
       case "Add": {
         dispatch(
           addTableDataThunk({
-            endPoint: `${location.pathname}/${action.recordData.id}`,
+            endPoint: `${location.pathname}`,
             putData: action.editedData,
             editParams: { page: currentPage, size: SIZE },
           })

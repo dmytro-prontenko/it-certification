@@ -19,7 +19,7 @@ const ProgramsPage = () => {
   ];
 
   return (
-    <>
+    <StyledTableWrapper className="container">
       <ImageTop></ImageTop>
       <StyledTableWrapper className="container">
         <Table
@@ -29,7 +29,7 @@ const ProgramsPage = () => {
         />
       </StyledTableWrapper>
       <ImageBottom></ImageBottom>
-    </>
+    </StyledTableWrapper>
   );
 };
 

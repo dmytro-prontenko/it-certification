@@ -17,13 +17,13 @@ const DepartmentPage = () => {
   ];
 
   return (
-    <>
-      <ImageTop></ImageTop>
+
       <StyledTableWrapper className="container">
-      <Table view={"Перелік кафедр"} data={department} columns={columns} />
-    </StyledTableWrapper>
-      <ImageBottom></ImageBottom>
-    </>
+        <ImageTop></ImageTop>
+        <Table view={"Перелік кафедр"} data={department} columns={columns} />
+        <ImageBottom></ImageBottom>
+      </StyledTableWrapper>
+
   );
 };
 
