@@ -29,10 +29,11 @@ const ConfirmationModal = () => {
   const handleCancel = () => {
     dispatch(
       setModalContent({
-        action: actionToDispatch,
-        recordData: { ...action.recordData, ...action.editedData },
+        action: null,
+        recordData: null,
       })
     );
+    dispatch(setModalStatus(false));
   };
 
   const handleProceed = (actionToDispatch) => {
