@@ -47,7 +47,7 @@ const ConfirmationModal = () => {
       case "Add": {
         dispatch(
           addTableDataThunk({
-            endPoint: `${location.pathname}/${action.recordData.id}`,
+            endPoint: `${location.pathname}`,
             putData: action.editedData,
             editParams: { page: currentPage, size: SIZE },
           })
