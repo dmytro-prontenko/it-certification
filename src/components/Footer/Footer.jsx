@@ -32,29 +32,36 @@ const Footer = () => {
           <SocialList>
             <SocialItem>
               <FooterLink href="#">
-                <SocialIcon $meta={"instagram"} width={24} height={24}>
+                <SocialIcon $meta={"instagram"} width={32} height={32}>
                   <use href={`${sprite}#${"instagram"}`}></use>
                 </SocialIcon>
               </FooterLink>
             </SocialItem>
             <SocialItem>
               <FooterLink href="#">
-                <SocialIcon $meta={"facebook"} width={24} height={24}>
+                <SocialIcon $meta={"facebook"} width={32} height={32}>
                   <use href={`${sprite}#${"facebook"}`}></use>
                 </SocialIcon>
               </FooterLink>
             </SocialItem>
             <SocialItem>
               <FooterLink href="#">
-                <SocialIcon $meta={"phone"} width={24} height={24}>
-                  <use href={`${sprite}#${"phone"}`}></use>
+                <SocialIcon $meta={"viber"} width={32} height={32}>
+                  <use href={`${sprite}#${"viber"}`}></use>
                 </SocialIcon>
               </FooterLink>
             </SocialItem>
             <SocialItem>
               <FooterLink href="#">
-                <SocialIcon $meta={"telegram"} width={24} height={24}>
+                <SocialIcon $meta={"telegram"} width={32} height={32}>
                   <use href={`${sprite}#${"telegram"}`}></use>
+                </SocialIcon>
+              </FooterLink>
+            </SocialItem>
+            <SocialItem>
+              <FooterLink href="#">
+                <SocialIcon $meta={"twitter"} width={30} height={30}>
+                  <use href={`${sprite}#${"twitter"}`}></use>
                 </SocialIcon>
               </FooterLink>
             </SocialItem>

@@ -8,7 +8,8 @@ const initialState = {
   openModal: false,
   modalContent: {
     action: null,
-    recordData:null
+    recordData: null,
+    editedData: null,
   },
 };
 

@@ -6,7 +6,10 @@ import {
   setModalContent,
   setModalStatus,
 } from "../../redux/slice/serviceSlice";
-import { deleteTableDataThunk, editTableDataThunk } from "../../redux/thunk/mainInfoThunks";
+import {
+  deleteTableDataThunk,
+  editTableDataThunk,
+} from "../../redux/thunk/mainInfoThunks";
 import CancelButton from "../Buttons/CancelButton/CancelButton";
 import ProceedButton from "../Buttons/ProceedButton/ProccedButton";
 import {
@@ -43,16 +46,18 @@ const ConfirmationModal = () => {
         dispatch(
           editTableDataThunk({
             endPoint: `${location.pathname}/${action.recordData.id}`,
-            dataToDelete: { page: 1, size: SIZE },
+            putData: action.editedData,
+            editParams: { page: 1, size: SIZE },
           })
         );
         break;
       }
       case "Delete": {
+        console.log(action.recordData.id);
         dispatch(
           deleteTableDataThunk({
             endPoint: `${location.pathname}/${action.recordData.id}`,
-            dataToDelete: { page: 1, size: SIZE },
+            deleteParams: { page: 1, size: SIZE },
           })
         );
         break;
