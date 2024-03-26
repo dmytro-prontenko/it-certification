@@ -100,7 +100,7 @@ export const StyledAddEditInputWrapper = styled.div`
   display: flex;
   align-items: center;
 
-  overflow: hidden;
+  /* overflow: hidden; */
 
   height: 100%;
 

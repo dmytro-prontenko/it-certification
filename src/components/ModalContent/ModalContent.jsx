@@ -15,6 +15,8 @@ const ModalContent = () => {
       return <AddEditModal />;
     case "EditConfirm":
       return <ConfirmationModal />;
+    case "AddConfirm":
+      return <ConfirmationModal />;
     case "Delete":
       return <ConfirmationModal />;
 

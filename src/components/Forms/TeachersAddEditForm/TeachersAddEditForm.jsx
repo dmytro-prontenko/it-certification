@@ -42,12 +42,22 @@ const TeachersAddEditForm = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    dispatch(
-      setModalContent({
-        action: "EditConfirm",
-        recordData: { ...dataContent.recordData, ...data },
-      })
-    );
+      const transformedData = {
+        status: data.status.value,
+        position: data.position.value,
+        institution: data.institution.value
+      };
+
+    dataContent.action === "Edit"
+      ? dispatch(
+          setModalContent({
+            action: "EditConfirm",
+            recordData: { ...dataContent.recordData, ...data, ...transformedData },
+          })
+        )
+      : dispatch(
+          setModalContent({ action: "AddConfirm", editedData: { ...data, ...transformedData } })
+        );
   };
   // console.log(errors);
 
@@ -70,7 +80,7 @@ const TeachersAddEditForm = () => {
               placeholder="Введіть ПІБ викладача"
               defaultValue={dataContent.recordData?.name || null}
               // required
-              {...register("name", { required: true, maxLength: 100 })}
+              {...register("name", { required: false, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
           {/* ================================= */}
@@ -89,23 +99,15 @@ const TeachersAddEditForm = () => {
               render={({ field }) => (
                 <Select
                   {...field}
-                  // options={[...Array(20)].map((el, index) => ({
-                  //   value: index,
-                  //   label: index,
-                  // }))}
+                  options={[...Array(20)].map((el, index) => ({
+                    value: index,
+                    label: index,
+                  }))}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  defaultValue={
-                    dataContent.recordData
-                      ? {
-                          value: dataContent.recordData.role,
-                          label: dataContent.recordData.role,
-                        }
-                      : null
-                  }
                   // required
                 />
               )}
@@ -132,23 +134,23 @@ const TeachersAddEditForm = () => {
               render={({ field }) => (
                 <Select
                   {...field}
-                  // options={[...Array(20)].map((el, index) => ({
-                  //   value: index,
-                  //   label: index,
-                  // }))}
+                  options={[...Array(5)].map((el, index) => ({
+                    value: index,
+                    label: index,
+                  }))}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  defaultValue={
-                    dataContent.recordData
-                      ? {
-                          value: dataContent.recordData.status,
-                          label: dataContent.recordData.status,
-                        }
-                      : null
-                  }
+                  // defaultValue={
+                  //   dataContent.recordData
+                  //     ? {
+                  //         value: dataContent.recordData.status,
+                  //         label: dataContent.recordData.status,
+                  //       }
+                  //     : null
+                  // }
                   // required
                 />
               )}
@@ -172,9 +174,9 @@ const TeachersAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Введіть Email викладача"
-              defaultValue={dataContent.recordData?.email || null}
+              // defaultValue={dataContent.recordData?.email || null}
               // required
-              {...register("email", { required: true, maxLength: 100 })}
+              {...register("email", { required: false, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
           {/* ================================= */}
@@ -193,23 +195,23 @@ const TeachersAddEditForm = () => {
               render={({ field }) => (
                 <Select
                   {...field}
-                  // options={[...Array(20)].map((el, index) => ({
-                  //   value: index,
-                  //   label: index,
-                  // }))}
+                  options={[...Array(5)].map((el, index) => ({
+                    value: index,
+                    label: index,
+                  }))}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  defaultValue={
-                    dataContent.recordData
-                      ? {
-                          value: dataContent.recordData.institution,
-                          label: dataContent.recordData.institution,
-                        }
-                      : null
-                  }
+                  // defaultValue={
+                  //   dataContent.recordData
+                  //     ? {
+                  //         value: dataContent.recordData.institution,
+                  //         label: dataContent.recordData.institution,
+                  //       }
+                  //     : null
+                  // }
                   // required
                 />
               )}
@@ -236,23 +238,23 @@ const TeachersAddEditForm = () => {
               render={({ field }) => (
                 <Select
                   {...field}
-                  // options={[...Array(20)].map((el, index) => ({
-                  //   value: index,
-                  //   label: index,
-                  // }))}
+                  options={[...Array(5)].map((el, index) => ({
+                    value: index,
+                    label: index,
+                  }))}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  defaultValue={
-                    dataContent.recordData
-                      ? {
-                          value: dataContent.recordData.status,
-                          label: dataContent.recordData.status,
-                        }
-                      : null
-                  }
+                  // defaultValue={
+                  //   dataContent.recordData
+                  //     ? {
+                  //         value: dataContent.recordData.status,
+                  //         label: dataContent.recordData.status,
+                  //       }
+                  //     : null
+                  // }
                   // required
                 />
               )}
@@ -278,7 +280,7 @@ const TeachersAddEditForm = () => {
               placeholder="Введіть коментар"
               defaultValue={null}
               // required
-              {...register("comment", { required: true, maxLength: 100 })}
+              {...register("comment", { required: false, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
         </StyledAddEditInputsWrapper>
