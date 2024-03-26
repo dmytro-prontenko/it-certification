@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled.header`
   display: flex;
   flex-direction: column;
 `;
@@ -15,7 +15,7 @@ export const HeaderLogo = styled.div`
   gap: 32px;
 `;
 
-export const HeaderMenu = styled.header`
+export const HeaderMenu = styled.div`
   border-top: 1px solid var(--accent-green-300);
   border-bottom: 1px solid var(--accent-green-300);
 `;
