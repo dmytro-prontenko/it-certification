@@ -17,16 +17,42 @@ import {
   StyledAddEditLabel,
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
+import { selectDictionary } from "../../../redux/selectors/mainInfoSelectors";
+import { useState } from "react";
 
 const TeachersAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordData);
-
+  const dictionary = useSelector(selectDictionary);
   const dispatch = useDispatch();
+
+  const [cathedraOptions, setCathedraOptions] = useState([]);
+  const [selectedUniversity, setSelectedUniversity] = useState(null);
+  const [selectedCathedra, setSelectedCathedra] = useState(null);
 
   let actionTitle;
 
-  // let defaultData;
+  const handleUniversityChange = (selectedOption) => {
+    setSelectedUniversity(selectedOption);
+    if (selectedOption) {
+      const cathedraData =
+        dictionary.university
+          .find((el) => el.id === selectedOption.id)
+          ?.cathedra.map((cath) => ({
+            value: cath.value,
+            label: cath.value,
+          })) || [];
+      setCathedraOptions(cathedraData);
+    } else {
+      setCathedraOptions([]);
+      setSelectedCathedra(null);
+    }
+  };
+
+  const handleUniversityClear = () => {
+    setSelectedUniversity(null);
+    setCathedraOptions([]);
+    setSelectedCathedra(null);
+  };
 
   if (dataContent.action === "Add") {
     actionTitle = "Додати";
@@ -42,12 +68,15 @@ const TeachersAddEditForm = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    // const transformedData = {
-    //   status: data.status.value,
-    //   position: data.role.value,
-    //   institution: data.university.value,
-    // };
+    const transformedData = {
+      cathedra: data.cathedra.value,
+      university: data.university.value,
+      institution: data.university.value,
+      role: data.role.value,
+      status: data.status.value,
+      comment: data.comment || "",
+    };
+    console.log({ ...data, ...transformedData });
 
     dataContent.action === "Edit"
       ? dispatch(
@@ -55,16 +84,15 @@ const TeachersAddEditForm = () => {
             action: "EditConfirm",
             recordData: {
               ...dataContent.recordData,
-              ...data,
-              // ...transformedData,
+              // ...data,
+              ...transformedData,
             },
           })
         )
       : dispatch(
           setModalContent({
             action: "AddConfirm",
-            // editedData: { ...data, ...transformedData },
-            editedData: { ...data},
+            editedData: { ...data, ...transformedData },
           })
         );
   };
@@ -89,23 +117,33 @@ const TeachersAddEditForm = () => {
               placeholder="Введіть ПІБ викладача"
               defaultValue={dataContent.recordData?.name || null}
               // required
-              {...register("name", dataContent.action !== "Edit" ? {
-                required: { value: true, message: "Введіть імʼя викладача" },
-                minLength: {
-                  value: 2,
-                  message: "Мінімальна довжина для імені 2 символи",
-                },
-                maxLength: {
-                  value: 100,
-                  message: "Максимальна довжина для імені 100 символів",
-                },
-              }: null)}
+              {...register(
+                "name",
+                dataContent.action !== "Edit"
+                  ? {
+                      required: {
+                        value: true,
+                        message: "Введіть імʼя викладача",
+                      },
+                      minLength: {
+                        value: 2,
+                        message: "Мінімальна довжина для імені 2 символи",
+                      },
+                      maxLength: {
+                        value: 100,
+                        message: "Максимальна довжина для імені 100 символів",
+                      },
+                    }
+                  : { required: false }
+              )}
             />
             {errors.name && (
               <ErrorsContainer>{errors.name.message}</ErrorsContainer>
             )}
           </StyledAddEditInputWrapper>
+
           {/* ================================= */}
+
           <StyledAddEditInputWrapper>
             <StyledAddEditLabel>Посада викладача</StyledAddEditLabel>
             <Divider
@@ -121,31 +159,34 @@ const TeachersAddEditForm = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  {...field}
                   {...register("role", {
                     required: {
                       value: true,
                       message: "Оберіть посаду викладача",
                     },
+                    minLength: {
+                      value: 3,
+                      message: "Мінімальна довжина 6 символів",
+                    },
                   })}
-                  // options={[...Array(20)].map((el, index) => ({
-                  //   value: index,
-                  //   label: index,
-                  // }))}
-                  defaultValue={
-                    dataContent.recordData
-                      ? {
-                          value: dataContent.recordData.role,
-                          label: dataContent.recordData.role,
-                        }
-                      : null
-                  }
-                  placeholder="Оберіть посаду викладача"
+                  {...field}
+                  options={dictionary.position.map((el) => ({
+                    value: el.value,
+                    label: el.value,
+                  }))}
+                  placeholder="Оберіть зі списку"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  // required
+                  defaultValue={
+                    dataContent.recordData
+                      ? {
+                          value: dataContent.recordData.university,
+                          label: dataContent.recordData.university,
+                        }
+                      : null
+                  }
                 />
               )}
             />
@@ -153,7 +194,9 @@ const TeachersAddEditForm = () => {
               <ErrorsContainer>{errors.role.message}</ErrorsContainer>
             )}
           </StyledAddEditInputWrapper>
+
           {/* ================================= */}
+
           <StyledAddEditInputWrapper>
             <StyledAddEditLabel>Науковий ступінь</StyledAddEditLabel>
             <Divider
@@ -163,22 +206,27 @@ const TeachersAddEditForm = () => {
                 color: "var(--accent-green-300)",
               }}
             />
+
             <Controller
               name="status"
               control={control}
               render={({ field }) => (
                 <Select
-                  {...field}
                   {...register("status", {
                     required: {
                       value: true,
                       message: "Оберіть науковий ступінь викладача",
                     },
+                    minLength: {
+                      value: 3,
+                      message: "Мінімальна довжина 6 символів",
+                    },
                   })}
-                  // options={[...Array(5)].map((el, index) => ({
-                  //   value: index,
-                  //   label: index,
-                  // }))}
+                  {...field}
+                  options={dictionary.degree.map((el) => ({
+                    value: el.value,
+                    label: el.value,
+                  }))}
                   placeholder="Оберіть науковий ступінь викладача"
                   styles={selectStyles}
                   isSearchable={true}
@@ -187,12 +235,11 @@ const TeachersAddEditForm = () => {
                   defaultValue={
                     dataContent.recordData
                       ? {
-                          value: dataContent.recordData.status,
-                          label: dataContent.recordData.status,
+                          value: dataContent.recordData.university,
+                          label: dataContent.recordData.university,
                         }
                       : null
                   }
-                  // required
                 />
               )}
             />
@@ -200,7 +247,9 @@ const TeachersAddEditForm = () => {
               <ErrorsContainer>{errors.status.message}</ErrorsContainer>
             )}
           </StyledAddEditInputWrapper>
+
           {/* ================================= */}
+
           <StyledAddEditInputWrapper>
             <StyledAddEditLabel>Email</StyledAddEditLabel>
             <Divider
@@ -228,7 +277,9 @@ const TeachersAddEditForm = () => {
               <ErrorsContainer>{errors.email.message}</ErrorsContainer>
             )}
           </StyledAddEditInputWrapper>
+
           {/* ================================= */}
+
           <StyledAddEditInputWrapper>
             <StyledAddEditLabel>ЗВО</StyledAddEditLabel>
             <Divider
@@ -254,9 +305,10 @@ const TeachersAddEditForm = () => {
                     },
                   })}
                   {...field}
-                  options={[...Array(5)].map((el, index) => ({
-                    value: index,
-                    label: index,
+                  options={dictionary.university.map((el) => ({
+                    value: el.name,
+                    label: el.name,
+                    id: el.id,
                   }))}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
@@ -271,6 +323,16 @@ const TeachersAddEditForm = () => {
                         }
                       : null
                   }
+                  onChange={(selectedOption) => {
+                    field.onChange(selectedOption);
+                    handleUniversityChange(selectedOption);
+                    setSelectedCathedra(null);
+                  }}
+                  onMenuClose={() => {
+                    if (!selectedUniversity) {
+                      handleUniversityClear();
+                    }
+                  }}
                 />
               )}
             />
@@ -278,7 +340,9 @@ const TeachersAddEditForm = () => {
               <ErrorsContainer>{errors.university.message}</ErrorsContainer>
             )}
           </StyledAddEditInputWrapper>
+
           {/* ================================= */}
+
           <StyledAddEditInputWrapper>
             <StyledAddEditLabel>Кафедра</StyledAddEditLabel>
             <Divider
@@ -288,43 +352,45 @@ const TeachersAddEditForm = () => {
                 color: "var(--accent-green-300)",
               }}
             />
+
             <Controller
-              name="department"
+              name="cathedra"
               control={control}
               render={({ field }) => (
                 <Select
-                  {...field}
-                  {...register("department", {
+                  {...register("cathedra", {
                     required: {
                       value: true,
-                      message: "Оберіть кафедру викладача",
+                      message: "Введіть ЗВО викладача",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "Мінімальна довжина 6 символів",
                     },
                   })}
-                  options={[...Array(5)].map((el, index) => ({
-                    value: index,
-                    label: index,
-                  }))}
+                  {...field}
+                  key={JSON.stringify(cathedraOptions)}
+                  options={cathedraOptions}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  defaultValue={
-                    dataContent.recordData
-                      ? {
-                          value: dataContent.recordData.department,
-                          label: dataContent.recordData.department,
-                        }
-                      : null
-                  }
+                  value={selectedCathedra}
+                  onChange={(selectedOption) => {
+                    setSelectedCathedra(selectedOption);
+                    field.onChange(selectedOption);
+                  }}
                 />
               )}
             />
-            {errors.department && (
-              <ErrorsContainer>{errors.department.message}</ErrorsContainer>
+            {errors.cathedra && (
+              <ErrorsContainer>{errors.cathedra.message}</ErrorsContainer>
             )}
           </StyledAddEditInputWrapper>
+
           {/* ================================= */}
+
           <StyledAddEditInputWrapper>
             <StyledAddEditLabel>Коментарі</StyledAddEditLabel>
             <Divider
@@ -339,7 +405,7 @@ const TeachersAddEditForm = () => {
               placeholder="Введіть коментар"
               defaultValue={dataContent.recordData?.details || null}
               // required
-              {...register("details", { required: false, maxLength: 100 })}
+              {...register("comment", { required: false, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
         </StyledAddEditInputsWrapper>

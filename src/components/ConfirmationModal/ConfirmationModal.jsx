@@ -48,8 +48,8 @@ const ConfirmationModal = () => {
         dispatch(
           addTableDataThunk({
             endPoint: `${location.pathname}`,
-            putData: action.editedData,
-            editParams: { page: currentPage, size: SIZE },
+            postData: action.editedData,
+            postParams: { page: currentPage, size: SIZE },
           })
         );
         break;
