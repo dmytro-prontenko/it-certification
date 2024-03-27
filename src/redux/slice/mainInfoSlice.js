@@ -11,25 +11,36 @@ const initialState = {
   serviceInfo: {
     position: [
       {
-        id: "",
-        value: "",
+        id: "1",
+        value: "доцент",
       },
     ],
     degree: [
       {
-        id: "",
-        value: "",
+        id: "1",
+        value: "phd",
       },
     ],
     university: [
       {
-        id: "",
-        name: "",
-        universityAbbr: "",
+        id: "1",
+        name: "Харківський національний університет ім.Каразіна",
+        universityAbbr: "ХНУ",
         cathedra: [
           {
-            id: "",
-            value: "",
+            id: "1",
+            value: "Інформаційні технології",
+          },
+        ],
+      },
+      {
+        id: "2",
+        name: "Харківський національний університет ім.Каразіна2",
+        universityAbbr: "ХНУ2",
+        cathedra: [
+          {
+            id: "1",
+            value: "Інформаційні технології2",
           },
         ],
       },

@@ -93,6 +93,7 @@ export const ModalAddEditTitle = styled.h1`
 export const StyledAddEditInputsWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 24px;
 `;
 
 export const StyledAddEditInputWrapper = styled.div`
@@ -100,22 +101,10 @@ export const StyledAddEditInputWrapper = styled.div`
   display: flex;
   align-items: center;
 
-  /* overflow: hidden; */
-
   height: 100%;
 
-  border-top: 1px solid var(--Gray-200, #7f7f7f);
-  border-left: 1px solid var(--Gray-200, #7f7f7f);
-  border-right: 1px solid var(--Gray-200, #7f7f7f);
-
-  &:first-of-type {
-    border-radius: 12px 12px 0px 0px;
-  }
-
-  &:last-of-type {
-    border-radius: 0px 0px 12px 12px;
-    border-bottom: 1px solid var(--Gray-200, #7f7f7f);
-  }
+  border: 1px solid var(--accent-green-300);
+  border-radius: 8px;
 `;
 
 export const StyledAddEditLabel = styled.label`
@@ -125,15 +114,43 @@ export const StyledAddEditLabel = styled.label`
   font-family: Roboto;
   font-size: 14px;
   font-weight: 400;
-  line-height: 150%; /* 21px */
-  padding: 40px 20px;
+  line-height: 150%;
+  padding: 12px;
+
+  color: var(--basic-black);
 `;
 
 export const StyledAddEditTextInput = styled.input`
+position: relative;
   width: calc(100% - 288px);
-  padding: 40px 20px;
+  padding: 12px;
   border: none;
+  border-radius:8px;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+  padding: 12px;
+
+  color: var(--basic-black);
   &:focus {
     outline: none;
   }
+`;
+
+export const ControllerWrapper = styled.div`
+  position: relative;
+  outline: 1px solid tomato;
+`;
+
+export const ErrorsContainer = styled.p`
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+
+  color:var(--delete-red);
+
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 150%;
 `;

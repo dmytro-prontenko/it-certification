@@ -42,12 +42,30 @@ const InstitutionAddEditForm = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    dispatch(
-      setModalContent({
-        action: "EditConfirm",
-        recordData: { ...dataContent.recordData, ...data },
-      })
-    );
+    // const transformedData = {
+    //   status: data.status.value,
+    //   position: data.role.value,
+    //   institution: data.university.value,
+    // };
+
+    dataContent.action === "Edit"
+      ? dispatch(
+          setModalContent({
+            action: "EditConfirm",
+            recordData: {
+              ...dataContent.recordData,
+              ...data,
+              // ...transformedData,
+            },
+          })
+        )
+      : dispatch(
+          setModalContent({
+            action: "AddConfirm",
+            // editedData: { ...data, ...transformedData },
+            editedData: { ...data },
+          })
+        );
   };
   // console.log(errors);
 
