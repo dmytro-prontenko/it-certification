@@ -12,15 +12,17 @@ const BlockDisciplinesPage = () => {
   const columns = ["№", "Назва блоку дисципліни", "Опис", "Дія"];
 
   return (
-    <StyledTableWrapper className="container">
-      <ImageTop />
-      <Table
-        view={"Перелік блоків дисциплін"}
-        data={disciplineBlock}
-        columns={columns}
-      />
-      <ImageBottom />
-    </StyledTableWrapper>
+    <>
+      <StyledTableWrapper className="container">
+        <ImageTop />
+        <Table
+          view={"Перелік блоків дисциплін"}
+          data={disciplineBlock}
+          columns={columns}
+        />
+        <ImageBottom></ImageBottom>
+      </StyledTableWrapper>
+    </>
   );
 };
 

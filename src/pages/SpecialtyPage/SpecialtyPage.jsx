@@ -22,8 +22,8 @@ const SpecialtyPage = () => {
           data={specialty}
           columns={columns}
         />
+        <ImageBottom></ImageBottom>
       </StyledTableWrapper>
-      <ImageBottom></ImageBottom>
     </>
   );
 };
