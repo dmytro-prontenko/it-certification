@@ -9,16 +9,17 @@ const GroupDisPage = () => {
   const columns = ["№", "Група дисциплін", "Опис", "Блок", "Дисципліни", "Дія"];
 
   return (
-    <StyledTableWrapper className="container">
-      <ImageTop></ImageTop>
-      <Table
-        view={"Перелік груп дисциплін"}
-        data={disciplineGroup}
-        columns={columns}
-      />
-
-      <ImageBottom></ImageBottom>
-    </StyledTableWrapper>
+    <>
+      <StyledTableWrapper className="container">
+        <ImageTop></ImageTop>
+        <Table
+          view={"Перелік груп дисциплін"}
+          data={disciplineGroup}
+          columns={columns}
+        />
+        <ImageBottom></ImageBottom>
+      </StyledTableWrapper>
+    </>
   );
 };
 

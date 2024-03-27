@@ -12,17 +12,17 @@ const EducationLevelPage = () => {
   const columns = ["№", "Назва", "Дія"];
 
   return (
-
+    <>
       <StyledTableWrapper className="container">
-      <ImageTop />
+        <ImageTop />
         <Table
           view={"Перелік рівнів освіти"}
           data={educationLevel}
           columns={columns}
         />
-      <ImageBottom />
+        <ImageBottom></ImageBottom>
       </StyledTableWrapper>
-
+    </>
   );
 };
 

@@ -29,8 +29,8 @@ const TeachersPage = () => {
       <StyledTableWrapper className="container">
         <ImageTop></ImageTop>
         <Table view={"Перелік викладачів"} data={teachers} columns={columns} />
+        <ImageBottom></ImageBottom>
       </StyledTableWrapper>
-      <ImageBottom></ImageBottom>
     </>
   );
 };

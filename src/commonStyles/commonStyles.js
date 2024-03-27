@@ -66,12 +66,12 @@ export const ImageBottom = styled.div`
     content: "";
     position: absolute;
     left: 67%;
-    bottom: 1px;
+    bottom: -110px;
     width: 360px;
     height: 160px;
     background-color: transparent;
     background-image: url(${picture});
-    z-index: -1;
+    z-index: -10;
   }
 `;
 
