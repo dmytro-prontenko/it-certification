@@ -116,9 +116,9 @@ const DisciplineBlockAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте опис про блок дисциплін"
-              defaultValue={dataContent.recordData?.link_standart || null}
+              defaultValue={dataContent.recordData?.link_standard || null}
               // required
-              {...register("link_standart", { required: true, maxLength: 100 })}
+              {...register("link_standard", { required: true, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
         </StyledAddEditInputsWrapper>

@@ -192,9 +192,9 @@ const DisciplineAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте посилання на сілабус"
-              defaultValue={dataContent.recordData?.link_standart || null}
+              defaultValue={dataContent.recordData?.link_standard || null}
               // required
-              {...register("link_standart", { required: true, maxLength: 100 })}
+              {...register("link_standard", { required: true, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
 
@@ -214,9 +214,9 @@ const DisciplineAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте посилання на робочу програму"
-              defaultValue={dataContent.recordData?.link_standart || null}
+              defaultValue={dataContent.recordData?.link_standard || null}
               // required
-              {...register("link_standart", { required: true, maxLength: 100 })}
+              {...register("link_standard", { required: true, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
         </StyledAddEditInputsWrapper>

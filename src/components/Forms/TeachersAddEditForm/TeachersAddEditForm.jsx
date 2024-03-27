@@ -25,33 +25,33 @@ const TeachersAddEditForm = () => {
   const dictionary = useSelector(selectDictionary);
   const dispatch = useDispatch();
 
-  const [cathedraOptions, setCathedraOptions] = useState([]);
+  const [departmentOptions, setDepartmentOptions] = useState([]);
   const [selectedUniversity, setSelectedUniversity] = useState(null);
-  const [selectedCathedra, setSelectedCathedra] = useState(null);
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
 
   let actionTitle;
 
   const handleUniversityChange = (selectedOption) => {
     setSelectedUniversity(selectedOption);
     if (selectedOption) {
-      const cathedraData =
+      const departmentData =
         dictionary.university
           .find((el) => el.id === selectedOption.id)
-          ?.cathedra.map((cath) => ({
+          ?.department.map((cath) => ({
             value: cath.value,
             label: cath.value,
           })) || [];
-      setCathedraOptions(cathedraData);
+      setDepartmentOptions(departmentData);
     } else {
-      setCathedraOptions([]);
-      setSelectedCathedra(null);
+      setDepartmentOptions([]);
+      setSelectedDepartment(null);
     }
   };
 
   const handleUniversityClear = () => {
     setSelectedUniversity(null);
-    setCathedraOptions([]);
-    setSelectedCathedra(null);
+    setDepartmentOptions([]);
+    setSelectedDepartment(null);
   };
 
   if (dataContent.action === "Add") {
@@ -69,7 +69,7 @@ const TeachersAddEditForm = () => {
 
   const onSubmit = (data) => {
     const transformedData = {
-      cathedra: data.cathedra.value,
+      department: data.department.value,
       university: data.university.value,
       institution: data.university.value,
       role: data.role.value,
@@ -326,7 +326,7 @@ const TeachersAddEditForm = () => {
                   onChange={(selectedOption) => {
                     field.onChange(selectedOption);
                     handleUniversityChange(selectedOption);
-                    setSelectedCathedra(null);
+                    setSelectedDepartment(null);
                   }}
                   onMenuClose={() => {
                     if (!selectedUniversity) {
@@ -354,11 +354,11 @@ const TeachersAddEditForm = () => {
             />
 
             <Controller
-              name="cathedra"
+              name="department"
               control={control}
               render={({ field }) => (
                 <Select
-                  {...register("cathedra", {
+                  {...register("department", {
                     required: {
                       value: true,
                       message: "Введіть ЗВО викладача",
@@ -369,23 +369,23 @@ const TeachersAddEditForm = () => {
                     },
                   })}
                   {...field}
-                  key={JSON.stringify(cathedraOptions)}
-                  options={cathedraOptions}
+                  key={JSON.stringify(departmentOptions)}
+                  options={departmentOptions}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  value={selectedCathedra}
+                  value={selectedDepartment}
                   onChange={(selectedOption) => {
-                    setSelectedCathedra(selectedOption);
+                    setSelectedDepartment(selectedOption);
                     field.onChange(selectedOption);
                   }}
                 />
               )}
             />
-            {errors.cathedra && (
-              <ErrorsContainer>{errors.cathedra.message}</ErrorsContainer>
+            {errors.department && (
+              <ErrorsContainer>{errors.department.message}</ErrorsContainer>
             )}
           </StyledAddEditInputWrapper>
 

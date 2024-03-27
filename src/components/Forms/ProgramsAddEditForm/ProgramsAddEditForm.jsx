@@ -245,7 +245,10 @@ const ProgramsAddEditForm = () => {
               placeholder="Додайте прізвище ім'я та по батькові гаранта"
               defaultValue={dataContent.recordData?.email || null}
               // required
-              {...register("guarant_name", { required: true, maxLength: 100 })}
+              {...register("guarantor_name", {
+                required: true,
+                maxLength: 100,
+              })}
             />
           </StyledAddEditInputWrapper>
 
@@ -261,7 +264,7 @@ const ProgramsAddEditForm = () => {
               }}
             />
             <Controller
-              name="cathedra_name"
+              name="department_name"
               control={control}
               render={({ field }) => (
                 <Select
@@ -310,7 +313,10 @@ const ProgramsAddEditForm = () => {
               placeholder="Додайте посилання на сайт кафедри"
               defaultValue={null}
               // required
-              {...register("cathedra_link", { required: true, maxLength: 100 })}
+              {...register("department_link", {
+                required: true,
+                maxLength: 100,
+              })}
             />
           </StyledAddEditInputWrapper>
 

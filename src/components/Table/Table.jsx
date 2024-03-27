@@ -36,7 +36,7 @@ const Table = ({ view, data, columns }) => {
 
   const [page, setPage] = useState(1);
 
-  data.data?.map((el) => dataArray.push(Object.values(el)));
+  data.content?.map((el) => dataArray.push(Object.values(el)));
 
   const handleChange = (e) => {
     setPage(Number(e.target.value));

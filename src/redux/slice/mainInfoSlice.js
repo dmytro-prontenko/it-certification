@@ -12,35 +12,35 @@ const initialState = {
     position: [
       {
         id: "1",
-        value: "доцент",
+        name: "доцент",
       },
     ],
     degree: [
       {
         id: "1",
-        value: "phd",
+        name: "phd",
       },
     ],
     university: [
       {
         id: "1",
         name: "Харківський національний університет ім.Каразіна",
-        universityAbbr: "ХНУ",
-        cathedra: [
+        abbr: "ХНУ",
+        department: [
           {
             id: "1",
-            value: "Інформаційні технології",
+            name: "Інформаційні технології",
           },
         ],
       },
       {
         id: "2",
         name: "Харківський національний університет ім.Каразіна2",
-        universityAbbr: "ХНУ2",
-        cathedra: [
+        abbr: "ХНУ2",
+        department: [
           {
             id: "1",
-            value: "Інформаційні технології2",
+            name: "Інформаційні технології2",
           },
         ],
       },
@@ -48,32 +48,32 @@ const initialState = {
     specialty: [
       {
         id: "",
-        specialtyNum: "",
-        specialtyName: "",
+        code: "",
+        name: "",
       },
     ],
-    educationLevel: [
+    educationLevels: [
       {
         id: "",
-        value: "",
+        name: "",
       },
     ],
-    disciplineName: [
+    discipline: [
       {
         id: "",
-        value: "",
+        name: "",
       },
     ],
-    disciplineBlockName: [
+    disciplineGroups: [
       {
         id: "",
-        value: "",
+        name: "",
       },
     ],
-    disciplineGroupName: [
+    disciplineBlocks: [
       {
         id: "",
-        value: "",
+        name: "",
       },
     ],
   },
