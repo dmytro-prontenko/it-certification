@@ -43,11 +43,11 @@ const TeachersAddEditForm = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    const transformedData = {
-      status: data.status.value,
-      position: data.role.value,
-      institution: data.university.value,
-    };
+    // const transformedData = {
+    //   status: data.status.value,
+    //   position: data.role.value,
+    //   institution: data.university.value,
+    // };
 
     dataContent.action === "Edit"
       ? dispatch(
@@ -56,14 +56,15 @@ const TeachersAddEditForm = () => {
             recordData: {
               ...dataContent.recordData,
               ...data,
-              ...transformedData,
+              // ...transformedData,
             },
           })
         )
       : dispatch(
           setModalContent({
             action: "AddConfirm",
-            editedData: { ...data, ...transformedData },
+            // editedData: { ...data, ...transformedData },
+            editedData: { ...data},
           })
         );
   };
@@ -88,7 +89,7 @@ const TeachersAddEditForm = () => {
               placeholder="Введіть ПІБ викладача"
               defaultValue={dataContent.recordData?.name || null}
               // required
-              {...register("name", {
+              {...register("name", dataContent.action !== "Edit" ? {
                 required: { value: true, message: "Введіть імʼя викладача" },
                 minLength: {
                   value: 2,
@@ -98,7 +99,7 @@ const TeachersAddEditForm = () => {
                   value: 100,
                   message: "Максимальна довжина для імені 100 символів",
                 },
-              })}
+              }: null)}
             />
             {errors.name && (
               <ErrorsContainer>{errors.name.message}</ErrorsContainer>
