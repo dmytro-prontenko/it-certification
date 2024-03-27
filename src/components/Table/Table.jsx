@@ -4,7 +4,10 @@ import { ThemeProvider } from "@mui/material/styles";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentPage, selectOpenModal } from "../../redux/selectors/serviceSelectors";
+import {
+  selectCurrentPage,
+  selectOpenModal,
+} from "../../redux/selectors/serviceSelectors";
 import {
   setModalContent,
   setModalStatus,

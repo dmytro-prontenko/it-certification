@@ -11,6 +11,7 @@ export const Imgwrraper = styled.div`
 export const ContainerWelcom = styled.div`
   display: flex;
   justify-content: start;
+  margin-top: 80px;
 `;
 
 export const TitleWelcom = styled.h1`
