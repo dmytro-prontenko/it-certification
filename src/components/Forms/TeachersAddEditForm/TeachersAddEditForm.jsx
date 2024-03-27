@@ -9,6 +9,7 @@ import { setModalContent } from "../../../redux/slice/serviceSlice";
 import { selectModalContent } from "../../../redux/selectors/serviceSelectors";
 
 import {
+  ErrorsContainer,
   ModalAddEditTitle,
   StyledAddEditForm,
   StyledAddEditInputWrapper,
@@ -37,26 +38,33 @@ const TeachersAddEditForm = () => {
     register,
     control,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
-      const transformedData = {
-        status: data.status.value,
-        position: data.position.value,
-        institution: data.institution.value
-      };
+    const transformedData = {
+      status: data.status.value,
+      position: data.role.value,
+      institution: data.university.value,
+    };
 
     dataContent.action === "Edit"
       ? dispatch(
           setModalContent({
             action: "EditConfirm",
-            recordData: { ...dataContent.recordData, ...data, ...transformedData },
+            recordData: {
+              ...dataContent.recordData,
+              ...data,
+              ...transformedData,
+            },
           })
         )
       : dispatch(
-          setModalContent({ action: "AddConfirm", editedData: { ...data, ...transformedData } })
+          setModalContent({
+            action: "AddConfirm",
+            editedData: { ...data, ...transformedData },
+          })
         );
   };
   // console.log(errors);
@@ -72,7 +80,7 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                color: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
@@ -80,8 +88,21 @@ const TeachersAddEditForm = () => {
               placeholder="Введіть ПІБ викладача"
               defaultValue={dataContent.recordData?.name || null}
               // required
-              {...register("name", { required: false, maxLength: 100 })}
+              {...register("name", {
+                required: { value: true, message: "Введіть імʼя викладача" },
+                minLength: {
+                  value: 2,
+                  message: "Мінімальна довжина для імені 2 символи",
+                },
+                maxLength: {
+                  value: 30,
+                  message: "Максимальна довжина для імені 30 символів",
+                },
+              })}
             />
+            {errors.name && (
+              <ErrorsContainer>{errors.name.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
           {/* ================================= */}
           <StyledAddEditInputWrapper>
@@ -90,20 +111,35 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                color: "var(--accent-green-300)",
               }}
             />
+
             <Controller
-              name="position"
+              name="role"
               control={control}
               render={({ field }) => (
                 <Select
                   {...field}
-                  options={[...Array(20)].map((el, index) => ({
-                    value: index,
-                    label: index,
-                  }))}
-                  placeholder="Оберіть зі списку"
+                  {...register("role", {
+                    required: {
+                      value: true,
+                      message: "Оберіть посаду викладача",
+                    },
+                  })}
+                  // options={[...Array(20)].map((el, index) => ({
+                  //   value: index,
+                  //   label: index,
+                  // }))}
+                  defaultValue={
+                    dataContent.recordData
+                      ? {
+                          value: dataContent.recordData.role,
+                          label: dataContent.recordData.role,
+                        }
+                      : null
+                  }
+                  placeholder="Оберіть посаду викладача"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
@@ -112,20 +148,18 @@ const TeachersAddEditForm = () => {
                 />
               )}
             />
-            {/* {errors.category && (
-              <StyledErrorSelectMobile>
-                {errors.category.message}
-              </StyledErrorSelectMobile>
-            )} */}
+            {errors.role && (
+              <ErrorsContainer>{errors.role.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
           {/* ================================= */}
           <StyledAddEditInputWrapper>
-            <StyledAddEditLabel>Науковий ступень</StyledAddEditLabel>
+            <StyledAddEditLabel>Науковий ступінь</StyledAddEditLabel>
             <Divider
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                color: "var(--accent-green-300)",
               }}
             />
             <Controller
@@ -134,32 +168,36 @@ const TeachersAddEditForm = () => {
               render={({ field }) => (
                 <Select
                   {...field}
-                  options={[...Array(5)].map((el, index) => ({
-                    value: index,
-                    label: index,
-                  }))}
-                  placeholder="Оберіть зі списку"
+                  {...register("status", {
+                    required: {
+                      value: true,
+                      message: "Оберіть науковий ступінь викладача",
+                    },
+                  })}
+                  // options={[...Array(5)].map((el, index) => ({
+                  //   value: index,
+                  //   label: index,
+                  // }))}
+                  placeholder="Оберіть науковий ступінь викладача"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  // defaultValue={
-                  //   dataContent.recordData
-                  //     ? {
-                  //         value: dataContent.recordData.status,
-                  //         label: dataContent.recordData.status,
-                  //       }
-                  //     : null
-                  // }
+                  defaultValue={
+                    dataContent.recordData
+                      ? {
+                          value: dataContent.recordData.status,
+                          label: dataContent.recordData.status,
+                        }
+                      : null
+                  }
                   // required
                 />
               )}
             />
-            {/* {errors.category && (
-              <StyledErrorSelectMobile>
-                {errors.category.message}
-              </StyledErrorSelectMobile>
-            )} */}
+            {errors.status && (
+              <ErrorsContainer>{errors.status.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
           {/* ================================= */}
           <StyledAddEditInputWrapper>
@@ -168,16 +206,26 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                color: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
               type="text"
               placeholder="Введіть Email викладача"
-              // defaultValue={dataContent.recordData?.email || null}
+              defaultValue={dataContent.recordData?.email || null}
               // required
-              {...register("email", { required: false, maxLength: 100 })}
+              {...register("email", {
+                required: { value: true, message: "Введіть email викладача" },
+                minLength: {
+                  value: 3,
+                  message: "Мінімальна довжина 6 символів",
+                },
+                pattern: /^\S+@\S+$/i,
+              })}
             />
+            {errors.email && (
+              <ErrorsContainer>{errors.email.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
           {/* ================================= */}
           <StyledAddEditInputWrapper>
@@ -186,14 +234,24 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                color: "var(--accent-green-300)",
               }}
             />
             <Controller
-              name="institution"
+              name="university"
               control={control}
               render={({ field }) => (
                 <Select
+                  {...register("university", {
+                    required: {
+                      value: true,
+                      message: "Введіть ЗВО викладача",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "Мінімальна довжина 6 символів",
+                    },
+                  })}
                   {...field}
                   options={[...Array(5)].map((el, index) => ({
                     value: index,
@@ -204,23 +262,20 @@ const TeachersAddEditForm = () => {
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  // defaultValue={
-                  //   dataContent.recordData
-                  //     ? {
-                  //         value: dataContent.recordData.institution,
-                  //         label: dataContent.recordData.institution,
-                  //       }
-                  //     : null
-                  // }
-                  // required
+                  defaultValue={
+                    dataContent.recordData
+                      ? {
+                          value: dataContent.recordData.university,
+                          label: dataContent.recordData.university,
+                        }
+                      : null
+                  }
                 />
               )}
             />
-            {/* {errors.category && (
-              <StyledErrorSelectMobile>
-                {errors.category.message}
-              </StyledErrorSelectMobile>
-            )} */}
+            {errors.university && (
+              <ErrorsContainer>{errors.university.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
           {/* ================================= */}
           <StyledAddEditInputWrapper>
@@ -229,15 +284,21 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                color: "var(--accent-green-300)",
               }}
             />
             <Controller
-              name="status"
+              name="department"
               control={control}
               render={({ field }) => (
                 <Select
                   {...field}
+                  {...register("department", {
+                    required: {
+                      value: true,
+                      message: "Оберіть кафедру викладача",
+                    },
+                  })}
                   options={[...Array(5)].map((el, index) => ({
                     value: index,
                     label: index,
@@ -247,23 +308,20 @@ const TeachersAddEditForm = () => {
                   isSearchable={true}
                   isClearable={true}
                   maxMenuHeight={150}
-                  // defaultValue={
-                  //   dataContent.recordData
-                  //     ? {
-                  //         value: dataContent.recordData.status,
-                  //         label: dataContent.recordData.status,
-                  //       }
-                  //     : null
-                  // }
-                  // required
+                  defaultValue={
+                    dataContent.recordData
+                      ? {
+                          value: dataContent.recordData.department,
+                          label: dataContent.recordData.department,
+                        }
+                      : null
+                  }
                 />
               )}
             />
-            {/* {errors.category && (
-              <StyledErrorSelectMobile>
-                {errors.category.message}
-              </StyledErrorSelectMobile>
-            )} */}
+            {errors.department && (
+              <ErrorsContainer>{errors.department.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
           {/* ================================= */}
           <StyledAddEditInputWrapper>
@@ -272,15 +330,15 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                color: "var(--accent-green-300)!importany",
               }}
             />
             <StyledAddEditTextInput
               type="text"
               placeholder="Введіть коментар"
-              defaultValue={null}
+              defaultValue={dataContent.recordData?.details || null}
               // required
-              {...register("comment", { required: false, maxLength: 100 })}
+              {...register("details", { required: false, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
         </StyledAddEditInputsWrapper>

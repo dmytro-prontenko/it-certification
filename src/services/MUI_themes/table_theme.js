@@ -23,6 +23,13 @@ export const tableTheme = () =>
           },
         },
       },
+      MuiDivider: {
+        styleOverrides: {
+          root: {
+            color:"var(--accent-green-300)"
+          }
+        }
+      },
       MUIDataTableHeadCell: {
         styleOverrides: {
           root: {},

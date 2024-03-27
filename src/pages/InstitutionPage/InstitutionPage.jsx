@@ -19,9 +19,9 @@ const InstitutionPage = () => {
   return (
     <StyledTableWrapper className="container">
       <ImageTop></ImageTop>
-      <StyledTableWrapper className="container">
+      
         <Table view={"Перелік ЗВО"} data={institution} columns={columns} />
-      </StyledTableWrapper>
+      
       <ImageBottom></ImageBottom>
     </StyledTableWrapper>
   );
