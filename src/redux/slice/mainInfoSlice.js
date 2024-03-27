@@ -8,21 +8,64 @@ import {
 
 const initialState = {
   tableData: [],
-  serviceInfo: [
-    {
-      position: [],
-      degree: [],
-      university:[],
-      universityAbbr:[],
-      cathedra:[],
-      specNum:[],
-      specName:[],
-      educationLevel:[],
-      disciplineName:[],
-      disciplineBlockName:[],
-      disciplineGroupName:[],
-    },
-  ],
+  serviceInfo: {
+    position: [
+      {
+        id: "",
+        value: "",
+      },
+    ],
+    degree: [
+      {
+        id: "",
+        value: "",
+      },
+    ],
+    university: [
+      {
+        id: "",
+        name: "",
+        universityAbbr: "",
+        cathedra: [
+          {
+            id: "",
+            value: "",
+          },
+        ],
+      },
+    ],
+    specialty: [
+      {
+        id: "",
+        specialtyNum: "",
+        specialtyName: "",
+      },
+    ],
+    educationLevel: [
+      {
+        id: "",
+        value: "",
+      },
+    ],
+    disciplineName: [
+      {
+        id: "",
+        value: "",
+      },
+    ],
+    disciplineBlockName: [
+      {
+        id: "",
+        value: "",
+      },
+    ],
+    disciplineGroupName: [
+      {
+        id: "",
+        value: "",
+      },
+    ],
+  },
 };
 
 const mainInfoSlice = createSlice({
