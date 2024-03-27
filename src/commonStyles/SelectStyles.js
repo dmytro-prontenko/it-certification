@@ -1,6 +1,7 @@
 const selectStyles = {
   select: (customStyles) => ({
     ...customStyles,
+    position: "relative",
     "&:focus": { outline: "none" },
     "&:hover": { outline: "none" },
     border: "none",
@@ -24,6 +25,7 @@ const selectStyles = {
   }),
   control: (customStyles) => ({
     ...customStyles,
+    position: "relative",
     boxShadow: "none",
 
     "&:focus": {},
@@ -64,7 +66,7 @@ const selectStyles = {
   }),
   menu: (customStyles) => ({
     ...customStyles,
-    
+
     background: "white",
     cursor: "pointer",
     color: "var(--basic-grey)",

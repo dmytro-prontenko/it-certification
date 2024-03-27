@@ -75,7 +75,7 @@ const TeachersAddEditForm = () => {
       <StyledAddEditForm onSubmit={handleSubmit(onSubmit)}>
         <StyledAddEditInputsWrapper>
           <StyledAddEditInputWrapper>
-            <StyledAddEditLabel>Ім’я викладача</StyledAddEditLabel>
+            <StyledAddEditLabel>Імʼя викладача</StyledAddEditLabel>
             <Divider
               orientation="vertical"
               flexItem
@@ -95,8 +95,8 @@ const TeachersAddEditForm = () => {
                   message: "Мінімальна довжина для імені 2 символи",
                 },
                 maxLength: {
-                  value: 30,
-                  message: "Максимальна довжина для імені 30 символів",
+                  value: 100,
+                  message: "Максимальна довжина для імені 100 символів",
                 },
               })}
             />
