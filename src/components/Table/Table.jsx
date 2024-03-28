@@ -22,15 +22,20 @@ import {
   StyledWrapper,
   TableLink,
 } from "./Table.styled";
-import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
+import {
+  getTableDataThunk,
+  serviceInfoThunk,
+} from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
 import { useLocation } from "react-router-dom";
+import { selectDictionary } from "../../redux/selectors/mainInfoSelectors";
 
 const Table = ({ view, data, columns }) => {
   const dispatch = useDispatch();
   const modalStatus = useSelector(selectOpenModal);
   const location = useLocation();
   const currentPage = useSelector(selectCurrentPage);
+  const serviceInfo = useSelector(selectDictionary);
 
   let dataArray = [];
 
@@ -47,8 +52,12 @@ const Table = ({ view, data, columns }) => {
   };
 
   const handleModal = (action, recordData) => {
-    dispatch(setModalStatus(!modalStatus));
-    dispatch(setModalContent({ action, recordData }));
+    if (serviceInfo) {
+      dispatch(setModalStatus(!modalStatus));
+      dispatch(setModalContent({ action, recordData }));
+    } else {
+      console.log("Сервіс не відповідає. Спробуйте пізніше");
+    }
   };
 
   const CustomChip = ({ label, onDelete }) => {
@@ -111,30 +120,88 @@ const Table = ({ view, data, columns }) => {
         label: column,
         options: {
           setCellProps: () => {
-            return { align: "center" };
+            return { align: "center", padding:"0" };
+          },
+          filterType: "multiselect",
+        },
+      };
+    }
+    if (column.includes("Посада")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "center", minWidth: "100px", maxWidth: "100px" };
+          },
+          setCellProps: () => {
+            return { align: "center", minWidth: "100px", maxWidth: "100px" };
+          },
+          filterType: "multiselect",
+        },
+      };
+    }
+    if (column.includes("Ім’я викладача")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "center", width: "230px" };
+          },
+          setCellProps: () => {
+            return { align: "left", width: "230px" };
+          },
+          filterType: "multiselect",
+        },
+      };
+    }
+    if (column.includes("Наукова ступінь")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "center", width: "170px" };
+          },
+          setCellProps: () => {
+            return { align: "center", width: "170px" };
           },
           filterType: "multiselect",
         },
       };
     }
 
+
+
     if (column.includes("Дія")) {
+      const actionStyles = {
+        existingStyles: {
+          align: "center",
+          width: "130px",
+        },
+      };
+
+      actionStyles.noWrapCell = {
+        ...actionStyles.existingStyles,
+        whiteSpace: "nowrap",
+      };
       return {
         name: column,
         label: column,
         options: {
           filter: false,
           setCellHeaderProps: () => {
-            return { align: "center" };
+            return { style: actionStyles.noWrapCell };
           },
           setCellProps: () => {
-            return { align: "center" };
+            return { style: actionStyles.noWrapCell };
           },
           customBodyRenderLite: (dataIndex) => (
             <>
               <Tooltip title="Редагувати">
                 <IconButton
-                  onClick={() => handleModal("Edit", data.data[dataIndex])}
+                  onClick={() => handleModal("Edit", data.content[dataIndex])}
                 >
                   <Icon
                     styles={{ fill: "var(--edit-green)" }}
@@ -146,7 +213,7 @@ const Table = ({ view, data, columns }) => {
               </Tooltip>
               <Tooltip title="Видалити">
                 <IconButton
-                  onClick={() => handleModal("Delete", data.data[dataIndex])}
+                  onClick={() => handleModal("Delete", data.content[dataIndex])}
                 >
                   <Icon
                     styles={{ fill: "var( --delete-red)" }}
@@ -222,6 +289,7 @@ const Table = ({ view, data, columns }) => {
         getParams: { page: currentPage, size: SIZE },
       })
     );
+    if (!serviceInfo) dispatch(serviceInfoThunk());
   }, [page]);
 
   return (
