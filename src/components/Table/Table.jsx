@@ -22,15 +22,20 @@ import {
   StyledWrapper,
   TableLink,
 } from "./Table.styled";
-import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
+import {
+  getTableDataThunk,
+  serviceInfoThunk,
+} from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
 import { useLocation } from "react-router-dom";
+import { selectDictionary } from "../../redux/selectors/mainInfoSelectors";
 
 const Table = ({ view, data, columns }) => {
   const dispatch = useDispatch();
   const modalStatus = useSelector(selectOpenModal);
   const location = useLocation();
   const currentPage = useSelector(selectCurrentPage);
+  const serviceInfo = useSelector(selectDictionary);
 
   let dataArray = [];
 
@@ -47,8 +52,12 @@ const Table = ({ view, data, columns }) => {
   };
 
   const handleModal = (action, recordData) => {
-    dispatch(setModalStatus(!modalStatus));
-    dispatch(setModalContent({ action, recordData }));
+    if (serviceInfo) {
+      dispatch(setModalStatus(!modalStatus));
+      dispatch(setModalContent({ action, recordData }));
+    } else {
+      console.log("Сервіс не відповідає. Спробуйте пізніше");
+    }
   };
 
   const CustomChip = ({ label, onDelete }) => {
@@ -222,6 +231,7 @@ const Table = ({ view, data, columns }) => {
         getParams: { page: currentPage, size: SIZE },
       })
     );
+    if (!serviceInfo) dispatch(serviceInfoThunk());
   }, [page]);
 
   return (

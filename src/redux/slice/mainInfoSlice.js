@@ -4,79 +4,12 @@ import {
   deleteTableDataThunk,
   editTableDataThunk,
   getTableDataThunk,
+  serviceInfoThunk,
 } from "../thunk/mainInfoThunks";
 
 const initialState = {
   tableData: [],
-  serviceInfo: {
-    position: [
-      {
-        id: "1",
-        name: "доцент",
-      },
-    ],
-    degree: [
-      {
-        id: "1",
-        name: "phd",
-      },
-    ],
-    university: [
-      {
-        id: "1",
-        name: "Харківський національний університет ім.Каразіна",
-        abbr: "ХНУ",
-        department: [
-          {
-            id: "1",
-            name: "Інформаційні технології",
-          },
-        ],
-      },
-      {
-        id: "2",
-        name: "Харківський національний університет ім.Каразіна2",
-        abbr: "ХНУ2",
-        department: [
-          {
-            id: "1",
-            name: "Інформаційні технології2",
-          },
-        ],
-      },
-    ],
-    specialty: [
-      {
-        id: "",
-        code: "",
-        name: "",
-      },
-    ],
-    educationLevels: [
-      {
-        id: "",
-        name: "",
-      },
-    ],
-    discipline: [
-      {
-        id: "",
-        name: "",
-      },
-    ],
-    disciplineGroups: [
-      {
-        id: "",
-        name: "",
-      },
-    ],
-    disciplineBlocks: [
-      {
-        id: "",
-        name: "",
-      },
-    ],
-  },
+  serviceInfo: null,
 };
 
 const mainInfoSlice = createSlice({
@@ -96,6 +29,9 @@ const mainInfoSlice = createSlice({
       })
       .addCase(deleteTableDataThunk.fulfilled, (state, action) => {
         state.tableData = action.payload;
+      })
+      .addCase(serviceInfoThunk.fulfilled, (state, action) => {
+        state.serviceInfo = {...action.payload.serviceInfo};
       });
   },
 });

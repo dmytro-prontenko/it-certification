@@ -37,7 +37,7 @@ const TeachersAddEditForm = () => {
       const departmentData =
         dictionary.university
           .find((el) => el.id === selectedOption.id)
-          ?.department.map((cath) => ({
+          ?.cathedra.map((cath) => ({
             value: cath.value,
             label: cath.value,
           })) || [];
@@ -223,7 +223,7 @@ const TeachersAddEditForm = () => {
                     },
                   })}
                   {...field}
-                  options={dictionary.degree.map((el) => ({
+                  options={dictionary.degree?.map((el) => ({
                     value: el.value,
                     label: el.value,
                   }))}
@@ -305,7 +305,7 @@ const TeachersAddEditForm = () => {
                     },
                   })}
                   {...field}
-                  options={dictionary.university.map((el) => ({
+                  options={dictionary.university?.map((el) => ({
                     value: el.name,
                     label: el.name,
                     id: el.id,

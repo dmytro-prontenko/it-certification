@@ -62,3 +62,18 @@ export const deleteTableDataThunk = createAsyncThunk(
     }
   }
 );
+
+//================= serviceInfoThunk =================//
+export const serviceInfoThunk = createAsyncThunk(
+  "data/serviceInfo",
+  async (_, thunkAPI) => {
+    try {
+      const response = await getData({ endPoint: "/service_info" });
+      return response;
+    } catch (error) {
+      console.log(error);
+      toast.error(`Error get service data : `, error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
