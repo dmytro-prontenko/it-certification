@@ -64,10 +64,13 @@ const TeachersAddEditForm = () => {
     register,
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields, isDirty },
   } = useForm();
 
+  console.log(dirtyFields, isDirty)
+
   const onSubmit = (data) => {
+    console.log(data)
     const transformedData = {
       department: data.department.value,
       university: data.university.value,
@@ -159,7 +162,8 @@ const TeachersAddEditForm = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  {...register("role", {
+                  {...register("role", dataContent.action !== "Edit"
+                  ? {
                     required: {
                       value: true,
                       message: "Оберіть посаду викладача",
@@ -168,7 +172,7 @@ const TeachersAddEditForm = () => {
                       value: 3,
                       message: "Мінімальна довжина 6 символів",
                     },
-                  })}
+                  }: {required:false})}
                   {...field}
                   options={dictionary.position.map((el) => ({
                     value: el.value,
@@ -212,7 +216,8 @@ const TeachersAddEditForm = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  {...register("status", {
+                  {...register("status",dataContent.action !== "Edit"
+                  ? {
                     required: {
                       value: true,
                       message: "Оберіть науковий ступінь викладача",
@@ -221,7 +226,7 @@ const TeachersAddEditForm = () => {
                       value: 3,
                       message: "Мінімальна довжина 6 символів",
                     },
-                  })}
+                  }:{required:false})}
                   {...field}
                   options={dictionary.degree?.map((el) => ({
                     value: el.value,
@@ -264,14 +269,15 @@ const TeachersAddEditForm = () => {
               placeholder="Введіть Email викладача"
               defaultValue={dataContent.recordData?.email || null}
               // required
-              {...register("email", {
+              {...register("email", dataContent.action !== "Edit"
+                  ?{
                 required: { value: true, message: "Введіть email викладача" },
                 minLength: {
                   value: 3,
                   message: "Мінімальна довжина 6 символів",
                 },
                 pattern: /^\S+@\S+$/i,
-              })}
+              }:{required:false})}
             />
             {errors.email && (
               <ErrorsContainer>{errors.email.message}</ErrorsContainer>
@@ -294,7 +300,8 @@ const TeachersAddEditForm = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  {...register("university", {
+                  {...register("university",dataContent.action !== "Edit"
+                  ? {
                     required: {
                       value: true,
                       message: "Введіть ЗВО викладача",
@@ -303,7 +310,7 @@ const TeachersAddEditForm = () => {
                       value: 3,
                       message: "Мінімальна довжина 6 символів",
                     },
-                  })}
+                  }:{required:false})}
                   {...field}
                   options={dictionary.university?.map((el) => ({
                     value: el.name,
@@ -358,7 +365,8 @@ const TeachersAddEditForm = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  {...register("department", {
+                  {...register("department",dataContent.action !== "Edit"
+                  ?{
                     required: {
                       value: true,
                       message: "Введіть ЗВО викладача",
@@ -367,7 +375,7 @@ const TeachersAddEditForm = () => {
                       value: 3,
                       message: "Мінімальна довжина 6 символів",
                     },
-                  })}
+                  }:{required:false})}
                   {...field}
                   key={JSON.stringify(departmentOptions)}
                   options={departmentOptions}

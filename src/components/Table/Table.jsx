@@ -143,7 +143,7 @@ const Table = ({ view, data, columns }) => {
             <>
               <Tooltip title="Редагувати">
                 <IconButton
-                  onClick={() => handleModal("Edit", data.data[dataIndex])}
+                  onClick={() => handleModal("Edit", data.content[dataIndex])}
                 >
                   <Icon
                     styles={{ fill: "var(--edit-green)" }}
@@ -155,7 +155,7 @@ const Table = ({ view, data, columns }) => {
               </Tooltip>
               <Tooltip title="Видалити">
                 <IconButton
-                  onClick={() => handleModal("Delete", data.data[dataIndex])}
+                  onClick={() => handleModal("Delete", data.content[dataIndex])}
                 >
                   <Icon
                     styles={{ fill: "var( --delete-red)" }}
