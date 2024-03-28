@@ -37,7 +37,7 @@ const TeachersAddEditForm = () => {
       const departmentData =
         dictionary.university
           .find((el) => el.id === selectedOption.id)
-          ?.cathedra.map((cath) => ({
+          ?.department.map((cath) => ({
             value: cath.value,
             label: cath.value,
           })) || [];
@@ -64,30 +64,38 @@ const TeachersAddEditForm = () => {
     register,
     control,
     handleSubmit,
-    formState: { errors, dirtyFields, isDirty },
+    getValues,
+    formState: { errors, dirtyFields },
   } = useForm();
 
-  console.log(dirtyFields, isDirty)
+  const getDirtyFieldsValues = () => {
+    const dirtyValues = {};
+    Object.keys(dirtyFields).forEach((field) => {
+      dirtyValues[field] = getValues(field);
+    });
+    return dirtyValues;
+  };
 
   const onSubmit = (data) => {
-    console.log(data)
-    const transformedData = {
-      department: data.department.value,
-      university: data.university.value,
-      institution: data.university.value,
-      role: data.role.value,
-      status: data.status.value,
-      comment: data.comment || "",
-    };
-    console.log({ ...data, ...transformedData });
+    console.log(data);
+    const dirtyValues = getDirtyFieldsValues();
+    let transformedData;
+    dataContent.action !== "Edit"
+      ? (transformedData = {
+          department: data.department.value,
+          university: data.university.value,
+          position: data.position.value,
+          degree: data.degree.value,
+          comments: data.comments || "",
+        })
+      : (transformedData = dirtyValues);
+
 
     dataContent.action === "Edit"
       ? dispatch(
           setModalContent({
             action: "EditConfirm",
-            recordData: {
-              ...dataContent.recordData,
-              // ...data,
+            editedData: {
               ...transformedData,
             },
           })
@@ -158,21 +166,25 @@ const TeachersAddEditForm = () => {
             />
 
             <Controller
-              name="role"
+              name="position"
               control={control}
               render={({ field }) => (
                 <Select
-                  {...register("role", dataContent.action !== "Edit"
-                  ? {
-                    required: {
-                      value: true,
-                      message: "Оберіть посаду викладача",
-                    },
-                    minLength: {
-                      value: 3,
-                      message: "Мінімальна довжина 6 символів",
-                    },
-                  }: {required:false})}
+                  {...register(
+                    "position",
+                    dataContent.action !== "Edit"
+                      ? {
+                          required: {
+                            value: true,
+                            message: "Оберіть посаду викладача",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Мінімальна довжина 6 символів",
+                          },
+                        }
+                      : { required: false }
+                  )}
                   {...field}
                   options={dictionary.position.map((el) => ({
                     value: el.value,
@@ -186,16 +198,16 @@ const TeachersAddEditForm = () => {
                   defaultValue={
                     dataContent.recordData
                       ? {
-                          value: dataContent.recordData.university,
-                          label: dataContent.recordData.university,
+                          value: dataContent.recordData.position,
+                          label: dataContent.recordData.position,
                         }
                       : null
                   }
                 />
               )}
             />
-            {errors.role && (
-              <ErrorsContainer>{errors.role.message}</ErrorsContainer>
+            {errors.position && (
+              <ErrorsContainer>{errors.position.message}</ErrorsContainer>
             )}
           </StyledAddEditInputWrapper>
 
@@ -212,21 +224,25 @@ const TeachersAddEditForm = () => {
             />
 
             <Controller
-              name="status"
+              name="degree"
               control={control}
               render={({ field }) => (
                 <Select
-                  {...register("status",dataContent.action !== "Edit"
-                  ? {
-                    required: {
-                      value: true,
-                      message: "Оберіть науковий ступінь викладача",
-                    },
-                    minLength: {
-                      value: 3,
-                      message: "Мінімальна довжина 6 символів",
-                    },
-                  }:{required:false})}
+                  {...register(
+                    "degree",
+                    dataContent.action !== "Edit"
+                      ? {
+                          required: {
+                            value: true,
+                            message: "Оберіть науковий ступінь викладача",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Мінімальна довжина 6 символів",
+                          },
+                        }
+                      : { required: false }
+                  )}
                   {...field}
                   options={dictionary.degree?.map((el) => ({
                     value: el.value,
@@ -240,16 +256,16 @@ const TeachersAddEditForm = () => {
                   defaultValue={
                     dataContent.recordData
                       ? {
-                          value: dataContent.recordData.university,
-                          label: dataContent.recordData.university,
+                          value: dataContent.recordData.degree,
+                          label: dataContent.recordData.degree,
                         }
                       : null
                   }
                 />
               )}
             />
-            {errors.status && (
-              <ErrorsContainer>{errors.status.message}</ErrorsContainer>
+            {errors.degree && (
+              <ErrorsContainer>{errors.degree.message}</ErrorsContainer>
             )}
           </StyledAddEditInputWrapper>
 
@@ -269,15 +285,22 @@ const TeachersAddEditForm = () => {
               placeholder="Введіть Email викладача"
               defaultValue={dataContent.recordData?.email || null}
               // required
-              {...register("email", dataContent.action !== "Edit"
-                  ?{
-                required: { value: true, message: "Введіть email викладача" },
-                minLength: {
-                  value: 3,
-                  message: "Мінімальна довжина 6 символів",
-                },
-                pattern: /^\S+@\S+$/i,
-              }:{required:false})}
+              {...register(
+                "email",
+                dataContent.action !== "Edit"
+                  ? {
+                      required: {
+                        value: true,
+                        message: "Введіть email викладача",
+                      },
+                      minLength: {
+                        value: 3,
+                        message: "Мінімальна довжина 6 символів",
+                      },
+                      pattern: /^\S+@\S+$/i,
+                    }
+                  : { required: false }
+              )}
             />
             {errors.email && (
               <ErrorsContainer>{errors.email.message}</ErrorsContainer>
@@ -300,17 +323,21 @@ const TeachersAddEditForm = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  {...register("university",dataContent.action !== "Edit"
-                  ? {
-                    required: {
-                      value: true,
-                      message: "Введіть ЗВО викладача",
-                    },
-                    minLength: {
-                      value: 3,
-                      message: "Мінімальна довжина 6 символів",
-                    },
-                  }:{required:false})}
+                  {...register(
+                    "university",
+                    dataContent.action !== "Edit"
+                      ? {
+                          required: {
+                            value: true,
+                            message: "Введіть ЗВО викладача",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Мінімальна довжина 6 символів",
+                          },
+                        }
+                      : { required: false }
+                  )}
                   {...field}
                   options={dictionary.university?.map((el) => ({
                     value: el.name,
@@ -365,17 +392,21 @@ const TeachersAddEditForm = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  {...register("department",dataContent.action !== "Edit"
-                  ?{
-                    required: {
-                      value: true,
-                      message: "Введіть ЗВО викладача",
-                    },
-                    minLength: {
-                      value: 3,
-                      message: "Мінімальна довжина 6 символів",
-                    },
-                  }:{required:false})}
+                  {...register(
+                    "department",
+                    dataContent.action !== "Edit"
+                      ? {
+                          required: {
+                            value: true,
+                            message: "Введіть ЗВО викладача",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Мінімальна довжина 6 символів",
+                          },
+                        }
+                      : { required: false }
+                  )}
                   {...field}
                   key={JSON.stringify(departmentOptions)}
                   options={departmentOptions}
@@ -385,6 +416,14 @@ const TeachersAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   value={selectedDepartment}
+                  defaultValue={
+                    dataContent.recordData
+                      ? {
+                          value: dataContent.recordData.department,
+                          label: dataContent.recordData.department,
+                        }
+                      : null
+                  }
                   onChange={(selectedOption) => {
                     setSelectedDepartment(selectedOption);
                     field.onChange(selectedOption);
@@ -413,7 +452,7 @@ const TeachersAddEditForm = () => {
               placeholder="Введіть коментар"
               defaultValue={dataContent.recordData?.details || null}
               // required
-              {...register("comment", { required: false, maxLength: 100 })}
+              {...register("comments", { required: false, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
         </StyledAddEditInputsWrapper>
