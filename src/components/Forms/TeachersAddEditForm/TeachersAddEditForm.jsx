@@ -33,12 +33,15 @@ const TeachersAddEditForm = () => {
 
   const handleUniversityChange = (selectedOption) => {
     setSelectedUniversity(selectedOption);
+    console.log("selected option - ", selectedOption)
+    console.log(dictionary.university.map(el=>console.log(el.value)))
+
     if (selectedOption) {
       const departmentData =
         dictionary.university
-          .find((el) => el.id === selectedOption.id)
-          ?.department.map((cath) => ({
-            value: cath.value,
+          .find((el) => el.id === selectedOption.value)
+          ?.cathedra.map((cath) => ({
+            value: cath.id,
             label: cath.value,
           })) || [];
       setDepartmentOptions(departmentData);
@@ -83,12 +86,13 @@ const TeachersAddEditForm = () => {
     dataContent.action !== "Edit"
       ? (transformedData = {
           department: data.department.value,
-          university: data.university.value,
+          university: data.university.value.value,
           position: data.position.value,
           degree: data.degree.value,
           comments: data.comments || "",
         })
       : (transformedData = dirtyValues);
+
 
 
     dataContent.action === "Edit"
@@ -187,7 +191,7 @@ const TeachersAddEditForm = () => {
                   )}
                   {...field}
                   options={dictionary.position.map((el) => ({
-                    value: el.value,
+                    value: el.id,
                     label: el.value,
                   }))}
                   placeholder="Оберіть зі списку"
@@ -245,7 +249,7 @@ const TeachersAddEditForm = () => {
                   )}
                   {...field}
                   options={dictionary.degree?.map((el) => ({
-                    value: el.value,
+                    value: el.id,
                     label: el.value,
                   }))}
                   placeholder="Оберіть науковий ступінь викладача"
@@ -340,9 +344,9 @@ const TeachersAddEditForm = () => {
                   )}
                   {...field}
                   options={dictionary.university?.map((el) => ({
-                    value: el.name,
+                    value: el.id,
                     label: el.name,
-                    id: el.id,
+                    // id: el.id,
                   }))}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
