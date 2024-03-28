@@ -103,7 +103,18 @@ export default function CustomizedMenus() {
         <MenuItem
           onClick={() => handleClose("settings")}
           disableRipple
-          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }}
+          sx={{
+            "&:hover": {
+              backgroundColor: "var(--accent-yellow-200)",
+              "& svg": {
+                transform: "rotate(180deg)",
+              },
+            },
+            "& svg": {
+              transform: "rotate(0deg)",
+              transition: "transform 0.5s ease-in-out",
+            },
+          }}
         >
           <DropdownButtonWrapper>
             <Icon
@@ -118,7 +129,18 @@ export default function CustomizedMenus() {
         <MenuItem
           onClick={() => handleClose("profile")}
           disableRipple
-          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }}
+          sx={{
+            "&:hover": {
+              backgroundColor: "var(--accent-yellow-200)",
+              "& svg": {
+                scale: "1.15",
+              },
+            },
+            "& svg": {
+              transform: "scale(1)",
+              transition: "transform 0.5s ease-in-out",
+            },
+          }}
         >
           <DropdownButtonWrapper>
             <Icon
@@ -134,7 +156,18 @@ export default function CustomizedMenus() {
         <MenuItem
           onClick={handleClose}
           disableRipple
-          sx={{ "&:hover": { backgroundColor: "var(--accent-yellow-200)" } }}
+          sx={{
+            "&:hover": {
+              backgroundColor: "var(--accent-yellow-200)",
+              "& svg": {
+                scale: "1.1",
+              },
+            },
+            "& svg": {
+              transform: "scale(1)",
+              transition: "transform 0.5s ease-in-out",
+            },
+          }}
         >
           <DropdownButtonWrapper>
             <Icon
