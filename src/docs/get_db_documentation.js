@@ -1,23 +1,39 @@
 // Перелік викладачів
 // /teachers
 
+get
 const teachers = {
-  id: "100",
+  id: 100,
   name: "Петренко Петро Петрович",
-  position: "професор",
-  degree: "PhD",
-  university: "Харківський національний університет",
-  department: "Інформаційні технології",
+  position:{
+    id: 1,
+    name:  "професор",
+  },
+  degree: {
+    id: 1,
+    name: "PhD",
+  },
+ university: {
+    id: 100,
+    name: "Харківський національний університет",
+  },
+  department: {
+    id: 1,
+    name: "Кафедра",
+  },
   email: "test@test.ua",
   comments: "Хороший чувак",
 };
+
+
+
 
 // Перелік ЗВО
 // /universities
 
 const universities = {
-  id: "100",
-  university: "Харківський національний університет",
+  id: 100,
+  name: "Харківський національний університет",
   abbr: "ХНУ",
   programs_list_url: "http://google.com",
   url: "http://google.com",
@@ -27,7 +43,7 @@ const universities = {
 // /specialties
 
 const specialty = {
-  id: "100",
+  id: 100,
   code: "121",
   name: "Кібербезпека",
   standard_url: "http://google.com",
@@ -37,7 +53,7 @@ const specialty = {
 // /education-levels
 
 const education_levels = {
-  id: "100",
+  id: 100,
   name: "Бакалавр",
 };
 
@@ -45,19 +61,19 @@ const education_levels = {
 // /education-programs
 
 const education_programs = {
-  id: "1",
+  id: 1,
   name: "Назва",
   university: {
-    id: "100",
+    id: 100,
     name: "Харківський національний університет",
   },
   education_level: {
-    id: "100",
+    id: 100,
     name: "Бакалавр",
   },
   guarantor: "Гарант",
   department: {
-    id: "1",
+    id: 1,
     url: "http://google.com",
     name: "Кафедра",
   },
@@ -69,10 +85,10 @@ const education_programs = {
 // /department
 
 const departments = {
-  id: "1",
+  id: 1,
   name: "Кафедра",
   university: {
-    id: "100",
+    id: 100,
     name: "Харківський національний університет",
   },
   description: "Опис кафедри",
@@ -88,7 +104,7 @@ const departments = {
 // /discipline-blocks
 
 const discipline_blocks = {
-  id: "1",
+  id: 1,
   name: "Назва",
   description: "Опис",
 };
@@ -97,22 +113,22 @@ const discipline_blocks = {
 // /disciplines
 
 const disciplines = {
-  id: "1",
+  id: 1,
   name: "Назва",
   teacher: {
-    id: "1",
+    id: 1,
     name: "Петренко Петро Петрович",
   },
   discipline_block: {
-    id: "1",
+    id: 1,
     name: "Назва",
   },
   discipline_group: {
-    id: "1",
+    id: 1,
     name: "Назва",
   },
   education_program: {
-    id: "1",
+    id: 1,
     name: "Назва",
   },
   syllabus_url: "http://google.com",
@@ -124,51 +140,51 @@ const disciplines = {
 // /discipline-groups
 
 const discipline_groups = {
-  id: "1",
+  id: 1,
   name: "Назва",
   description: "Опис",
   block: {
-    id: "1",
+    id: 1,
     name: "Назва",
   },
   discipline_url:"http://google.com",
 };
 
 //Сервісна інформація
-/service_info
+// /service_info
 
 serviceInfo: {
     position: [
       {
-        id: "1",
+        id: 1,
         name: "доцент",
       },
     ],
     degree: [
       {
-        id: "1",
+        id: 1,
         name: "phd",
       },
     ],
     university: [
       {
-        id: "1",
+        id: 1,
         name: "Харківський національний університет ім.Каразіна",
         abbr: "ХНУ",
         department: [
           {
-            id: "1",
+            id: 1,
             name: "Інформаційні технології",
           },
         ],
       },
       {
-        id: "2",
+        id: 2,
         name: "Харківський національний університет ім.Каразіна2",
         abbr: "ХНУ2",
         department: [
           {
-            id: "1",
+            id: 1,
             name: "Інформаційні технології2",
           },
         ],
@@ -176,32 +192,32 @@ serviceInfo: {
     ],
     specialty: [
       {
-        id: "",
+        id: ,
         code: "",
         name: "",
       },
     ],
     educationLevels: [
       {
-        id: "",
+        id: ,
         name: "",
       },
     ],
     discipline: [
       {
-        id: "",
+        id: ,
         name: "",
       },
     ],
     disciplineGroups: [
       {
-        id: "",
+        id: ,
         name: "",
       },
     ],
     disciplineBlocks: [
       {
-        id: "",
+        id: ,
         name: "",
       },
     ],

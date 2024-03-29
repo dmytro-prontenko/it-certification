@@ -41,7 +41,21 @@ const Table = ({ view, data, columns }) => {
 
   const [page, setPage] = useState(1);
 
-  data.content?.map((el) => dataArray.push(Object.values(el)));
+  data.content?.forEach((obj) => {
+    let objValues = [];
+    for (let key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        if (typeof obj[key] === "object" && "name" in obj[key]) {
+          objValues.push(obj[key].name);
+        } else {
+          objValues.push(obj[key]);
+        }
+      }
+    }
+    dataArray.push(objValues);
+  });
+
+  console.log(dataArray);
 
   const handleChange = (e) => {
     setPage(Number(e.target.value));
@@ -120,7 +134,7 @@ const Table = ({ view, data, columns }) => {
         label: column,
         options: {
           setCellProps: () => {
-            return { align: "center", padding:"0" };
+            return { align: "center", padding: "0" };
           },
           filterType: "multiselect",
         },
@@ -171,8 +185,6 @@ const Table = ({ view, data, columns }) => {
         },
       };
     }
-
-
 
     if (column.includes("Дія")) {
       const actionStyles = {
