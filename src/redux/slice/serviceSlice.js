@@ -1,12 +1,19 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { signInThunk, signUpThunk } from "../thunk/authThunks";
+import {
+  addTableDataThunk,
+  deleteTableDataThunk,
+  editTableDataThunk,
+  getTableDataThunk,
+  serviceInfoThunk,
+} from "../thunk/mainInfoThunks";
 
 const initialState = {
   error: null,
   isSignedIn: false,
   isLoading: false,
   openModal: false,
-  currentPage:0,
+  currentPage: 0,
   modalContent: {
     action: null,
     recordData: null,
@@ -28,21 +35,45 @@ const serviceSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        isAnyOf(signUpThunk.pending, signInThunk.pending),
+        isAnyOf(
+          signUpThunk.pending,
+          signInThunk.pending,
+          getTableDataThunk.pending,
+          addTableDataThunk.pending,
+          editTableDataThunk.pending,
+          deleteTableDataThunk.pending,
+          serviceInfoThunk.pending
+        ),
         (state) => {
           state.error = null;
           state.isLoading = true;
         }
       )
       .addMatcher(
-        isAnyOf(signUpThunk.fulfilled, signInThunk.fulfilled),
+        isAnyOf(
+          signUpThunk.fulfilled,
+          signInThunk.fulfilled,
+          getTableDataThunk.fulfilled,
+          addTableDataThunk.fulfilled,
+          editTableDataThunk.fulfilled,
+          deleteTableDataThunk.fulfilled,
+          serviceInfoThunk.fulfilled
+        ),
         (state) => {
           state.error = null;
           state.isLoading = false;
         }
       )
       .addMatcher(
-        isAnyOf(signUpThunk.rejected, signInThunk.rejected),
+        isAnyOf(
+          signUpThunk.rejected,
+          signInThunk.rejected,
+          getTableDataThunk.rejected,
+          addTableDataThunk.rejected,
+          editTableDataThunk.rejected,
+          deleteTableDataThunk.rejected,
+          serviceInfoThunk.rejected
+        ),
         (state, action) => {
           state.isLoading = false;
           state.error = action.payload;
