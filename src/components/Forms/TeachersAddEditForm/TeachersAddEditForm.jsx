@@ -33,8 +33,8 @@ const TeachersAddEditForm = () => {
 
   const handleUniversityChange = (selectedOption) => {
     setSelectedUniversity(selectedOption);
-    console.log("selected option - ", selectedOption)
-    console.log(dictionary.university.map(el=>console.log(el.value)))
+    console.log("selected option - ", selectedOption);
+    console.log(dictionary.university.map((el) => console.log(el.value)));
 
     if (selectedOption) {
       const departmentData =
@@ -71,29 +71,50 @@ const TeachersAddEditForm = () => {
     formState: { errors, dirtyFields },
   } = useForm();
 
-  const getDirtyFieldsValues = () => {
-    const dirtyValues = {};
-    Object.keys(dirtyFields).forEach((field) => {
-      dirtyValues[field] = getValues(field);
-    });
-    return dirtyValues;
-  };
+const getDirtyFieldsValues = () => {
+  const dirtyFieldsArray = [];
+  Object.keys(dirtyFields).forEach((field) => {
+    if (dirtyFields[field]) {
+      const value = getValues(field);
+      dirtyFieldsArray.push({ field, value });
+    }
+  });
+  return dirtyFieldsArray;
+};
 
   const onSubmit = (data) => {
     console.log(data);
-    const dirtyValues = getDirtyFieldsValues();
-    let transformedData;
-    dataContent.action !== "Edit"
-      ? (transformedData = {
-          department: data.department.value,
-          university: data.university.value.value,
-          position: data.position.value,
-          degree: data.degree.value,
-          comments: data.comments || "",
-        })
-      : (transformedData = dirtyValues);
-
-
+    const dirtyFieldsArray = getDirtyFieldsValues();
+    let transformedData={};
+    if (dataContent.action !== "Edit") {
+      transformedData = {
+        name: data.name,
+        department: {
+          id: data.department.value,
+        },
+        // university: {
+        //   id: data.university.value.value,
+        // },
+        position: {
+          id: data.position.value,
+        },
+        degree: {
+          id: data.degree.value,
+        },
+        email: data.email,
+        comments: data.comments || "",
+      };
+    } else {
+      dirtyFieldsArray.forEach((item) => {
+        switch (item.field) {
+          case "name":
+            transformedData.name = item.value;
+            break;
+          
+    }
+});
+      }
+    }
 
     dataContent.action === "Edit"
       ? dispatch(
@@ -107,7 +128,7 @@ const TeachersAddEditForm = () => {
       : dispatch(
           setModalContent({
             action: "AddConfirm",
-            editedData: { ...data, ...transformedData },
+            editedData: { ...transformedData },
           })
         );
   };
