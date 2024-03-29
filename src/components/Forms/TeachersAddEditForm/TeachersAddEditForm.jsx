@@ -40,7 +40,7 @@ const TeachersAddEditForm = () => {
       const departmentData =
         dictionary.university
           .find((el) => el.id === selectedOption.value)
-          ?.cathedra.map((cath) => ({
+          ?.department.map((cath) => ({
             value: cath.id,
             label: cath.value,
           })) || [];
@@ -71,21 +71,23 @@ const TeachersAddEditForm = () => {
     formState: { errors, dirtyFields },
   } = useForm();
 
-const getDirtyFieldsValues = () => {
-  const dirtyFieldsArray = [];
-  Object.keys(dirtyFields).forEach((field) => {
-    if (dirtyFields[field]) {
-      const value = getValues(field);
-      dirtyFieldsArray.push({ field, value });
-    }
-  });
-  return dirtyFieldsArray;
-};
+  const getDirtyFieldsValues = () => {
+    const dirtyFieldsArray = [];
+    Object.keys(dirtyFields).forEach((field) => {
+      if (dirtyFields[field]) {
+        const value = getValues(field);
+        dirtyFieldsArray.push({ field, value });
+      }
+    });
+    return dirtyFieldsArray;
+  };
+
+  let transformedData = {};
 
   const onSubmit = (data) => {
     console.log(data);
     const dirtyFieldsArray = getDirtyFieldsValues();
-    let transformedData={};
+
     if (dataContent.action !== "Edit") {
       transformedData = {
         name: data.name,
@@ -110,12 +112,28 @@ const getDirtyFieldsValues = () => {
           case "name":
             transformedData.name = item.value;
             break;
-          
-    }
-});
-      }
+          case ("department", "university"):
+            transformedData.department = { id: item.value.value };
+            break;
+          case "position":
+            transformedData.position = { id: item.value.value };
+            break;
+          case "degree":
+            transformedData.degree = { id: item.value.value };
+            break;
+          case "email":
+            transformedData.email = item.value;
+            break;
+          case "comments":
+            transformedData.comments = item.value;
+            break;
+          default:
+            transformedData = {};
+        }
+      });
     }
 
+    console.log(transformedData);
     dataContent.action === "Edit"
       ? dispatch(
           setModalContent({
@@ -132,6 +150,8 @@ const getDirtyFieldsValues = () => {
           })
         );
   };
+  console.log(transformedData);
+
   // console.log(errors);
 
   return (
@@ -213,7 +233,7 @@ const getDirtyFieldsValues = () => {
                   {...field}
                   options={dictionary.position.map((el) => ({
                     value: el.id,
-                    label: el.value,
+                    label: el.name,
                   }))}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
@@ -223,8 +243,8 @@ const getDirtyFieldsValues = () => {
                   defaultValue={
                     dataContent.recordData
                       ? {
-                          value: dataContent.recordData.position,
-                          label: dataContent.recordData.position,
+                          value: dataContent.recordData.position.id,
+                          label: dataContent.recordData.position.name,
                         }
                       : null
                   }
@@ -271,7 +291,7 @@ const getDirtyFieldsValues = () => {
                   {...field}
                   options={dictionary.degree?.map((el) => ({
                     value: el.id,
-                    label: el.value,
+                    label: el.name,
                   }))}
                   placeholder="Оберіть науковий ступінь викладача"
                   styles={selectStyles}
@@ -281,8 +301,8 @@ const getDirtyFieldsValues = () => {
                   defaultValue={
                     dataContent.recordData
                       ? {
-                          value: dataContent.recordData.degree,
-                          label: dataContent.recordData.degree,
+                          value: dataContent.recordData.degree.id,
+                          label: dataContent.recordData.degree.name,
                         }
                       : null
                   }
@@ -367,7 +387,6 @@ const getDirtyFieldsValues = () => {
                   options={dictionary.university?.map((el) => ({
                     value: el.id,
                     label: el.name,
-                    // id: el.id,
                   }))}
                   placeholder="Оберіть зі списку"
                   styles={selectStyles}
@@ -377,8 +396,8 @@ const getDirtyFieldsValues = () => {
                   defaultValue={
                     dataContent.recordData
                       ? {
-                          value: dataContent.recordData.university,
-                          label: dataContent.recordData.university,
+                          value: dataContent.recordData.university.id,
+                          label: dataContent.recordData.university.name,
                         }
                       : null
                   }
@@ -417,21 +436,16 @@ const getDirtyFieldsValues = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  {...register(
-                    "department",
-                    dataContent.action !== "Edit"
-                      ? {
-                          required: {
-                            value: true,
-                            message: "Введіть ЗВО викладача",
-                          },
-                          minLength: {
-                            value: 3,
-                            message: "Мінімальна довжина 6 символів",
-                          },
-                        }
-                      : { required: false }
-                  )}
+                  {...register("department", {
+                    required: {
+                      value: true,
+                      message: "Введіть ЗВО викладача",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "Мінімальна довжина 6 символів",
+                    },
+                  })}
                   {...field}
                   key={JSON.stringify(departmentOptions)}
                   options={departmentOptions}
@@ -444,8 +458,8 @@ const getDirtyFieldsValues = () => {
                   defaultValue={
                     dataContent.recordData
                       ? {
-                          value: dataContent.recordData.department,
-                          label: dataContent.recordData.department,
+                          value: dataContent.recordData.department.id,
+                          label: dataContent.recordData.department.name,
                         }
                       : null
                   }
@@ -475,7 +489,7 @@ const getDirtyFieldsValues = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Введіть коментар"
-              defaultValue={dataContent.recordData?.details || null}
+              defaultValue={dataContent.recordData?.comments || null}
               // required
               {...register("comments", { required: false, maxLength: 100 })}
             />

@@ -55,8 +55,6 @@ const Table = ({ view, data, columns }) => {
     dataArray.push(objValues);
   });
 
-  console.log(dataArray);
-
   const handleChange = (e) => {
     setPage(Number(e.target.value));
   };
@@ -146,10 +144,10 @@ const Table = ({ view, data, columns }) => {
         label: column,
         options: {
           setCellHeaderProps: () => {
-            return { align: "center", minWidth: "100px", maxWidth: "100px" };
+            return { align: "center" };
           },
           setCellProps: () => {
-            return { align: "center", minWidth: "100px", maxWidth: "100px" };
+            return { align: "center" };
           },
           filterType: "multiselect",
         },
