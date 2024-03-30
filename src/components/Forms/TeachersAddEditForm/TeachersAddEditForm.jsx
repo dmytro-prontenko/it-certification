@@ -3,11 +3,12 @@ import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 
-import CommonButton from "../../Buttons/CommonButton/CommonButton";
 import selectStyles from "../../../commonStyles/SelectStyles";
-import { setModalContent } from "../../../redux/slice/serviceSlice";
 import { selectModalContent } from "../../../redux/selectors/serviceSelectors";
+import { setModalContent } from "../../../redux/slice/serviceSlice";
+import CommonButton from "../../Buttons/CommonButton/CommonButton";
 
+import { useState } from "react";
 import {
   ErrorsContainer,
   ModalAddEditTitle,
@@ -18,7 +19,6 @@ import {
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
 import { selectDictionary } from "../../../redux/selectors/mainInfoSelectors";
-import { useState } from "react";
 
 const TeachersAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
@@ -30,21 +30,20 @@ const TeachersAddEditForm = () => {
   const [selectedDepartment, setSelectedDepartment] = useState(null);
 
   let actionTitle;
+  console.log(dataContent)
 
   const handleUniversityChange = (selectedOption) => {
     setSelectedUniversity(selectedOption);
-    console.log("selected option - ", selectedOption);
-    console.log(dictionary.university.map((el) => console.log(el.value)));
-
     if (selectedOption) {
       const departmentData =
         dictionary.university
           .find((el) => el.id === selectedOption.value)
           ?.department.map((cath) => ({
             value: cath.id,
-            label: cath.value,
+            label: cath.name,
           })) || [];
       setDepartmentOptions(departmentData);
+      console.log(`Department data - ${departmentData}`)
     } else {
       setDepartmentOptions([]);
       setSelectedDepartment(null);
@@ -438,7 +437,7 @@ const TeachersAddEditForm = () => {
                 <Select
                   {...register("department", {
                     required: {
-                      value: true,
+                      value: false,
                       message: "Введіть ЗВО викладача",
                     },
                     minLength: {
