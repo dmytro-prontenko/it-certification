@@ -3,11 +3,12 @@ import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 
-import CommonButton from "../../Buttons/CommonButton/CommonButton";
 import selectStyles from "../../../commonStyles/SelectStyles";
-import { setModalContent } from "../../../redux/slice/serviceSlice";
 import { selectModalContent } from "../../../redux/selectors/serviceSelectors";
+import { setModalContent } from "../../../redux/slice/serviceSlice";
+import CommonButton from "../../Buttons/CommonButton/CommonButton";
 
+import { useState } from "react";
 import {
   ErrorsContainer,
   ModalAddEditTitle,
@@ -18,50 +19,11 @@ import {
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
 import { selectDictionary } from "../../../redux/selectors/mainInfoSelectors";
-import { useState } from "react";
 
 const TeachersAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
   const dictionary = useSelector(selectDictionary);
   const dispatch = useDispatch();
-
-  const [departmentOptions, setDepartmentOptions] = useState([]);
-  const [selectedUniversity, setSelectedUniversity] = useState(null);
-  const [selectedDepartment, setSelectedDepartment] = useState(null);
-
-  let actionTitle;
-
-  const handleUniversityChange = (selectedOption) => {
-    setSelectedUniversity(selectedOption);
-    console.log("selected option - ", selectedOption);
-    console.log(dictionary.university.map((el) => console.log(el.value)));
-
-    if (selectedOption) {
-      const departmentData =
-        dictionary.university
-          .find((el) => el.id === selectedOption.value)
-          ?.department.map((cath) => ({
-            value: cath.id,
-            label: cath.value,
-          })) || [];
-      setDepartmentOptions(departmentData);
-    } else {
-      setDepartmentOptions([]);
-      setSelectedDepartment(null);
-    }
-  };
-
-  const handleUniversityClear = () => {
-    setSelectedUniversity(null);
-    setDepartmentOptions([]);
-    setSelectedDepartment(null);
-  };
-
-  if (dataContent.action === "Add") {
-    actionTitle = "Додати";
-  } else {
-    actionTitle = "Редагувати";
-  }
 
   const {
     register,
@@ -70,6 +32,58 @@ const TeachersAddEditForm = () => {
     getValues,
     formState: { errors, dirtyFields },
   } = useForm();
+
+  const [departmentOptions, setDepartmentOptions] = useState([]);
+  const [selectedUniversity, setSelectedUniversity] = useState(null);
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
+
+  let actionTitle;
+  let transformedData = {};
+
+  // Наповнення select для кафедр
+  // ======================================================
+  // #region department
+
+  const handleUniversityChange = (selectedOption) => {
+    setSelectedUniversity(selectedOption);
+    if (selectedOption) {
+      const departmentData =
+        dictionary.university
+          .find((el) => el.id === selectedOption.value)
+          ?.department.map((cath) => ({
+            value: cath.id,
+            label: cath.name,
+          })) || [];
+      setDepartmentOptions(departmentData);
+    } else {
+      setDepartmentOptions([]);
+      setSelectedDepartment(null);
+    }
+  };
+  // #endregion
+  // ======================================================
+
+  // Очистка select для кафедр
+  // ======================================================
+  // #region department clean
+
+  const handleUniversityClear = () => {
+    setSelectedUniversity(null);
+    setDepartmentOptions([]);
+    setSelectedDepartment(null);
+  };
+  // #endregion
+  // ======================================================
+
+  if (dataContent.action === "Add") {
+    actionTitle = "Додати";
+  } else {
+    actionTitle = "Редагувати";
+  }
+
+  // Збір обʼєкту зі зміненими полями форми при Edit
+  // ======================================================
+  // #region
 
   const getDirtyFieldsValues = () => {
     const dirtyFieldsArray = [];
@@ -82,21 +96,22 @@ const TeachersAddEditForm = () => {
     return dirtyFieldsArray;
   };
 
-  let transformedData = {};
+  // #endregion
+  // ======================================================
 
+  // Submit форми Add/Edit
+  // ======================================================
+  // #region onSubmit
   const onSubmit = (data) => {
-    console.log(data);
     const dirtyFieldsArray = getDirtyFieldsValues();
 
+    //* Формування request body для Add
     if (dataContent.action !== "Edit") {
       transformedData = {
         name: data.name,
         department: {
           id: data.department.value,
         },
-        // university: {
-        //   id: data.university.value.value,
-        // },
         position: {
           id: data.position.value,
         },
@@ -107,6 +122,7 @@ const TeachersAddEditForm = () => {
         comments: data.comments || "",
       };
     } else {
+      //* Формування request body для Edit
       dirtyFieldsArray.forEach((item) => {
         switch (item.field) {
           case "name":
@@ -133,7 +149,7 @@ const TeachersAddEditForm = () => {
       });
     }
 
-    console.log(transformedData);
+    // Відкриття модального вікна Confirmation modal
     dataContent.action === "Edit"
       ? dispatch(
           setModalContent({
@@ -150,9 +166,9 @@ const TeachersAddEditForm = () => {
           })
         );
   };
-  console.log(transformedData);
 
-  // console.log(errors);
+  // #endregion
+  // ======================================================
 
   return (
     <>
@@ -438,7 +454,7 @@ const TeachersAddEditForm = () => {
                 <Select
                   {...register("department", {
                     required: {
-                      value: true,
+                      value: false,
                       message: "Введіть ЗВО викладача",
                     },
                     minLength: {
