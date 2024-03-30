@@ -25,12 +25,24 @@ const TeachersAddEditForm = () => {
   const dictionary = useSelector(selectDictionary);
   const dispatch = useDispatch();
 
+  const {
+    register,
+    control,
+    handleSubmit,
+    getValues,
+    formState: { errors, dirtyFields },
+  } = useForm();
+
   const [departmentOptions, setDepartmentOptions] = useState([]);
   const [selectedUniversity, setSelectedUniversity] = useState(null);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
 
   let actionTitle;
-  console.log(dataContent)
+  let transformedData = {};
+
+  // Наповнення select для кафедр
+  // ======================================================
+  // #region department
 
   const handleUniversityChange = (selectedOption) => {
     setSelectedUniversity(selectedOption);
@@ -43,18 +55,25 @@ const TeachersAddEditForm = () => {
             label: cath.name,
           })) || [];
       setDepartmentOptions(departmentData);
-      console.log(`Department data - ${departmentData}`)
     } else {
       setDepartmentOptions([]);
       setSelectedDepartment(null);
     }
   };
+  // #endregion
+  // ======================================================
+
+  // Очистка select для кафедр
+  // ======================================================
+  // #region department clean
 
   const handleUniversityClear = () => {
     setSelectedUniversity(null);
     setDepartmentOptions([]);
     setSelectedDepartment(null);
   };
+  // #endregion
+  // ======================================================
 
   if (dataContent.action === "Add") {
     actionTitle = "Додати";
@@ -62,13 +81,9 @@ const TeachersAddEditForm = () => {
     actionTitle = "Редагувати";
   }
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    getValues,
-    formState: { errors, dirtyFields },
-  } = useForm();
+  // Збір обʼєкту зі зміненими полями форми при Edit
+  // ======================================================
+  // #region
 
   const getDirtyFieldsValues = () => {
     const dirtyFieldsArray = [];
@@ -81,21 +96,22 @@ const TeachersAddEditForm = () => {
     return dirtyFieldsArray;
   };
 
-  let transformedData = {};
+  // #endregion
+  // ======================================================
 
+  // Submit форми Add/Edit
+  // ======================================================
+  // #region onSubmit
   const onSubmit = (data) => {
-    console.log(data);
     const dirtyFieldsArray = getDirtyFieldsValues();
 
+    //* Формування request body для Add
     if (dataContent.action !== "Edit") {
       transformedData = {
         name: data.name,
         department: {
           id: data.department.value,
         },
-        // university: {
-        //   id: data.university.value.value,
-        // },
         position: {
           id: data.position.value,
         },
@@ -106,6 +122,7 @@ const TeachersAddEditForm = () => {
         comments: data.comments || "",
       };
     } else {
+      //* Формування request body для Edit
       dirtyFieldsArray.forEach((item) => {
         switch (item.field) {
           case "name":
@@ -132,7 +149,7 @@ const TeachersAddEditForm = () => {
       });
     }
 
-    console.log(transformedData);
+    // Відкриття модального вікна Confirmation modal
     dataContent.action === "Edit"
       ? dispatch(
           setModalContent({
@@ -149,9 +166,9 @@ const TeachersAddEditForm = () => {
           })
         );
   };
-  console.log(transformedData);
 
-  // console.log(errors);
+  // #endregion
+  // ======================================================
 
   return (
     <>

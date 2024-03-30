@@ -13,7 +13,7 @@ const initialState = {
   isSignedIn: false,
   isLoading: false,
   openModal: false,
-  currentPage: 0,
+  currentPage: 1,
   modalContent: {
     action: null,
     recordData: null,
@@ -30,6 +30,9 @@ const serviceSlice = createSlice({
     },
     setModalContent: (state, action) => {
       state.modalContent = { ...state.modalContent, ...action.payload };
+    },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -87,6 +90,7 @@ export const {
   setModalContent,
   setIdForEditDelete,
   setChooseDate,
+  setCurrentPage,
 } = serviceSlice.actions;
 
 export const serviceReducer = serviceSlice.reducer;

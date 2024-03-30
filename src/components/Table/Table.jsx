@@ -2,16 +2,24 @@ import AddIcon from "@mui/icons-material/Add";
 import { Chip, IconButton, MenuItem, Select, Tooltip } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { selectDictionary } from "../../redux/selectors/mainInfoSelectors";
 import {
   selectCurrentPage,
   selectOpenModal,
 } from "../../redux/selectors/serviceSelectors";
 import {
+  setCurrentPage,
   setModalContent,
   setModalStatus,
 } from "../../redux/slice/serviceSlice";
+import {
+  getTableDataThunk,
+  serviceInfoThunk,
+} from "../../redux/thunk/mainInfoThunks";
+import { SIZE } from "../../service/constant";
 import { tableTheme } from "../../services/MUI_themes/table_theme";
 import Icon from "../Icon/Icon";
 import {
@@ -22,25 +30,29 @@ import {
   StyledWrapper,
   TableLink,
 } from "./Table.styled";
-import {
-  getTableDataThunk,
-  serviceInfoThunk,
-} from "../../redux/thunk/mainInfoThunks";
-import { SIZE } from "../../service/constant";
-import { useLocation } from "react-router-dom";
-import { selectDictionary } from "../../redux/selectors/mainInfoSelectors";
 
 const Table = ({ view, data, columns }) => {
   const dispatch = useDispatch();
-  const modalStatus = useSelector(selectOpenModal);
   const location = useLocation();
+  const modalStatus = useSelector(selectOpenModal);
   const currentPage = useSelector(selectCurrentPage);
   const serviceInfo = useSelector(selectDictionary);
 
   let dataArray = [];
 
-  const [page, setPage] = useState(1);
+  useEffect(() => {
+    dispatch(
+      getTableDataThunk({
+        endPoint: `${location.pathname}`,
+        getParams: { page: currentPage, size: SIZE },
+      })
+    );
+    if (!serviceInfo) dispatch(serviceInfoThunk());
+  }, [currentPage]);
 
+  // Функція, що перетворює вхідні дані для рендеру таблиці в масив масивів
+  // ======================================================================
+  // #region
   data.content?.forEach((obj) => {
     let objValues = [];
     for (let key in obj) {
@@ -54,14 +66,21 @@ const Table = ({ view, data, columns }) => {
     }
     dataArray.push(objValues);
   });
+  // #endregion
+  // ======================================================
 
+  // Пагінація
+  // ======================================================
+  // #region pagination
   const handleChange = (e) => {
-    setPage(Number(e.target.value));
+    dispatch(setCurrentPage(e.target.value));
   };
 
   const handleChangePage = (e) => {
-    setPage(Number(e.target.textContent));
+    dispatch(setCurrentPage(e.target.textContent));
   };
+  // #endregion
+  // ======================================================
 
   const handleModal = (action, recordData) => {
     if (serviceInfo) {
@@ -72,12 +91,16 @@ const Table = ({ view, data, columns }) => {
     }
   };
 
+  // Підміна посилань на лінк "Ознайомитись"
+  // ======================================================
+  // #region replace
+
   const CustomChip = ({ label, onDelete }) => {
     let customLabel = label;
     console.log(label);
     if (label === "" || label === null || label === undefined) {
       customLabel = "(пусто)";
-    } else if (label.toString().toLocaleLowerCase().startsWith("hell"))
+    } else if (label.toString().toLocaleLowerCase().startsWith("http"))
       customLabel = "Ознайомитись";
 
     return (
@@ -94,6 +117,12 @@ const Table = ({ view, data, columns }) => {
     return <TableFilterList {...props} ItemComponent={CustomChip} />;
   };
 
+  // #endregion
+  // ======================================================
+
+  // Налаштування колонок таблиці
+  // ======================================================
+  // #region columns
   const columnsToRender = columns.map((column) => {
     if (column.includes("Посилання")) {
       return {
@@ -153,7 +182,7 @@ const Table = ({ view, data, columns }) => {
         },
       };
     }
-    if (column.includes("Ім’я викладача")) {
+    if (column.includes("Імʼя викладача")) {
       return {
         name: column,
         label: column,
@@ -261,7 +290,12 @@ const Table = ({ view, data, columns }) => {
       },
     };
   });
+  // #endregion
+  // ======================================================
 
+  // Налаштування таблиці
+  // ======================================================
+  // #region options
   const options = {
     exportButton: true,
     filterType: "dropdown",
@@ -272,7 +306,7 @@ const Table = ({ view, data, columns }) => {
     rowsPerPage: 20,
     rowsPerPageOptions: [5, 6, 7, 8, 9, 10, 15, 20],
     downloadOptions: {
-      filename: "specialty.csv",
+      filename: `${location.pathname}.csv`,
     },
     pagination: false,
 
@@ -291,16 +325,8 @@ const Table = ({ view, data, columns }) => {
       );
     },
   };
-
-  useEffect(() => {
-    dispatch(
-      getTableDataThunk({
-        endPoint: `${location.pathname}`,
-        getParams: { page: currentPage, size: SIZE },
-      })
-    );
-    if (!serviceInfo) dispatch(serviceInfoThunk());
-  }, [page]);
+  // #endregion
+  // ======================================================
 
   return (
     <StyledWrapper>
@@ -320,7 +346,7 @@ const Table = ({ view, data, columns }) => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={page}
+              value={currentPage}
               onChange={handleChange}
               size="small"
             >
@@ -333,7 +359,7 @@ const Table = ({ view, data, columns }) => {
           </PageSelectWrapper>
           <StyledPagination
             count={10}
-            page={page}
+            page={currentPage}
             onChange={handleChangePage}
             size="large"
           />
