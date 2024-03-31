@@ -97,7 +97,6 @@ const Table = ({ view, data, columns }) => {
 
   const CustomChip = ({ label, onDelete }) => {
     let customLabel = label;
-    console.log(label);
     if (label === "" || label === null || label === undefined) {
       customLabel = "(пусто)";
     } else if (label.toString().toLocaleLowerCase().startsWith("http"))

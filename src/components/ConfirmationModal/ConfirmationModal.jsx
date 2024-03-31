@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentPage, selectModalContent } from "../../redux/selectors/serviceSelectors";
+import {
+  selectCurrentPage,
+  selectModalContent,
+} from "../../redux/selectors/serviceSelectors";
 
 import { useLocation } from "react-router-dom";
 import {
@@ -24,7 +27,10 @@ const ConfirmationModal = () => {
   const location = useLocation();
   const action = useSelector(selectModalContent);
   const dispatch = useDispatch();
-  const currentPage = useSelector(selectCurrentPage)
+  const currentPage = useSelector(selectCurrentPage);
+
+  let title;
+  let actionToDispatch;
 
   const handleCancel = () => {
     dispatch(
@@ -58,7 +64,7 @@ const ConfirmationModal = () => {
         dispatch(
           editTableDataThunk({
             endPoint: `${location.pathname}/${action.recordData.id}`,
-            // endPoint: "teachers/1",
+
             putData: action.editedData,
             editParams: { page: currentPage, size: SIZE },
           })
@@ -69,7 +75,7 @@ const ConfirmationModal = () => {
         dispatch(
           deleteTableDataThunk({
             endPoint: `${location.pathname}/${action.recordData.id}`,
-            // endPoint: "teachers/2",
+
             deleteParams: { page: currentPage, size: SIZE },
           })
         );
@@ -78,9 +84,6 @@ const ConfirmationModal = () => {
     }
     dispatch(setModalStatus(false));
   };
-
-  let title;
-  let actionToDispatch;
 
   switch (action.action) {
     case "AddConfirm": {
