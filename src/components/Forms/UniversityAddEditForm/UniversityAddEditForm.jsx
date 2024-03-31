@@ -19,7 +19,7 @@ import {
 
 const UniversityAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordData);
+  console.log(dataContent.recordDataEdit);
 
   const dispatch = useDispatch();
 
@@ -52,8 +52,8 @@ const UniversityAddEditForm = () => {
       ? dispatch(
           setModalContent({
             action: "EditConfirm",
-            recordData: {
-              ...dataContent.recordData,
+            recordDataEdit: {
+              ...dataContent.recordDataEdit,
               ...data,
               // ...transformedData,
             },
@@ -99,10 +99,10 @@ const UniversityAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.role,
-                          label: dataContent.recordData.role,
+                          value: dataContent.recordDataEdit.role,
+                          label: dataContent.recordDataEdit.role,
                         }
                       : null
                   }
@@ -142,10 +142,10 @@ const UniversityAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.role,
-                          label: dataContent.recordData.role,
+                          value: dataContent.recordDataEdit.role,
+                          label: dataContent.recordDataEdit.role,
                         }
                       : null
                   }

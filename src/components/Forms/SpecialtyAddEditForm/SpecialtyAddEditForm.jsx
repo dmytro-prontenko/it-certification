@@ -19,7 +19,7 @@ import {
 
 const SpecialtyAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordData);
+  console.log(dataContent.recordDataEdit);
 
   const dispatch = useDispatch();
 
@@ -48,7 +48,7 @@ const SpecialtyAddEditForm = () => {
     dispatch(
       setModalContent({
         action: "EditConfirm",
-        editedData: { id: dataContent.recordData.id, ...filteredData },
+        editedData: { id: dataContent.recordDataEdit.id, ...filteredData },
       })
     );
   };
@@ -84,10 +84,10 @@ const SpecialtyAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.id,
-                          label: dataContent.recordData.id,
+                          value: dataContent.recordDataEdit.id,
+                          label: dataContent.recordDataEdit.id,
                         }
                       : null
                   }
@@ -126,7 +126,7 @@ const SpecialtyAddEditForm = () => {
                   sSearchable={true}
                   isClearable={true}
                   maxMenuHeight={145}
-                  defaultValue={dataContent.recordData?.name || null}
+                  defaultValue={dataContent.recordDataEdit?.name || null}
                   // required
                 />
               )}
@@ -150,7 +150,7 @@ const SpecialtyAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте посилання на стандарт"
-              defaultValue={dataContent.recordData?.link_standard || null}
+              defaultValue={dataContent.recordDataEdit?.link_standard || null}
               // required
               {...register("link_standard", { required: true, maxLength: 100 })}
             />

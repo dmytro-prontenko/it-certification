@@ -15,7 +15,7 @@ import {
   editTableDataThunk,
 } from "../../redux/thunk/mainInfoThunks";
 import CancelButton from "../Buttons/CancelButton/CancelButton";
-import ProceedButton from "../Buttons/ProceedButton/ProccedButton";
+import ProceedButton from "../Buttons/ProceedButton/ProceedButton";
 import {
   ButtonsWrapper,
   ConfirmationTitle,
@@ -33,20 +33,27 @@ const ConfirmationModal = () => {
   let actionToDispatch;
 
   const handleCancel = () => {
-    dispatch(
-      setModalContent({
-        action: null,
-        recordData: null,
-      })
-    );
-    dispatch(setModalStatus(false));
+    actionToDispatch === "Edit"
+      ? dispatch(
+          setModalContent({
+            action: actionToDispatch,
+            recordDataEdit: { ...action.recordDataEdit, ...action.editedData },
+          })
+        )
+      : dispatch(
+          setModalContent({
+            action: actionToDispatch,
+            recordDataEdit: { ...action.recordDataEdit },
+          })
+        );
   };
 
   const handleProceed = (actionToDispatch) => {
     dispatch(
       setModalContent({
         action: null,
-        recordData: null,
+        recordDataEdit: null,
+        recordDataAdd: null,
       })
     );
     switch (actionToDispatch) {
@@ -63,7 +70,7 @@ const ConfirmationModal = () => {
       case "Edit": {
         dispatch(
           editTableDataThunk({
-            endPoint: `${location.pathname}/${action.recordData.id}`,
+            endPoint: `${location.pathname}/${action.recordDataEdit.id}`,
 
             putData: action.editedData,
             editParams: { page: currentPage, size: SIZE },
@@ -74,7 +81,7 @@ const ConfirmationModal = () => {
       case "Delete": {
         dispatch(
           deleteTableDataThunk({
-            endPoint: `${location.pathname}/${action.recordData.id}`,
+            endPoint: `${location.pathname}/${action.recordDataEdit.id}`,
 
             deleteParams: { page: currentPage, size: SIZE },
           })

@@ -19,7 +19,7 @@ import {
 
 const EducationLevelAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordData);
+  console.log(dataContent.recordDataEdit);
 
   const dispatch = useDispatch();
 
@@ -45,7 +45,7 @@ const EducationLevelAddEditForm = () => {
     dispatch(
       setModalContent({
         action: "EditConfirm",
-        recordData: { ...dataContent.recordData, ...data },
+        recordDataEdit: { ...dataContent.recordDataEdit, ...data },
       })
     );
   };
@@ -81,10 +81,10 @@ const EducationLevelAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.id,
-                          label: dataContent.recordData.id,
+                          value: dataContent.recordDataEdit.id,
+                          label: dataContent.recordDataEdit.id,
                         }
                       : null
                   }
@@ -111,7 +111,7 @@ const EducationLevelAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте назву рівня освіти"
-              defaultValue={dataContent.recordData?.link || null}
+              defaultValue={dataContent.recordDataEdit?.link || null}
               // required
               {...register("name", { required: true, maxLength: 100 })}
             />

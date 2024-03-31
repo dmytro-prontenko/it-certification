@@ -39,7 +39,7 @@ function App() {
 
   const handleCloseModal = () => {
     dispatch(setModalStatus(false));
-    dispatch(setModalContent({ action: null, recordData: null }));
+    dispatch(setModalContent({ action: null, recordDataEdit: null }));
   };
 
   return (
