@@ -61,14 +61,23 @@ const TeachersAddEditForm = () => {
     }
   };
 
+  let recordData;
+    if (dataContent.action === "Add") {
+      actionTitle = "Додати";
+      recordData = dataContent.recordDataAdd;
+    } else {
+      actionTitle = "Редагувати";
+      recordData = dataContent.recordDataEdit;
+    }
+
   useEffect(() => {
-    if (dataContent.recordData && dataContent.recordData.department) {
+    if (recordData && recordData.department) {
       setSelectedDepartment({
-        value: dataContent.recordData.department.id,
-        label: dataContent.recordData.department.name,
+        value: recordData.department.id,
+        label: recordData.department.name,
       });
     }
-  }, [dataContent.recordData]);
+  }, [recordData]);
   // #endregion
   // ======================================================
 
@@ -84,11 +93,7 @@ const TeachersAddEditForm = () => {
   // #endregion
   // ======================================================
 
-  if (dataContent.action === "Add") {
-    actionTitle = "Додати";
-  } else {
-    actionTitle = "Редагувати";
-  }
+
 
   // Збір обʼєкту зі зміненими полями форми при Edit
   // ======================================================
@@ -113,6 +118,7 @@ const TeachersAddEditForm = () => {
   // #region onSubmit
   const onSubmit = (data) => {
     const dirtyFieldsArray = getDirtyFieldsValues();
+    console.log(data);
 
     //* Формування request body для Add
     if (dataContent.action !== "Edit") {
@@ -171,6 +177,19 @@ const TeachersAddEditForm = () => {
       : dispatch(
           setModalContent({
             action: "AddConfirm",
+            recordDataAdd: {
+              ...data,
+              degree: { id: data.degree.value, name: data.degree.label },
+              department: {
+                id: data.department.value,
+                name: data.department.label,
+              },
+              position: { id: data.position.value, name: data.position.label },
+              university: {
+                id: data.university.value,
+                name: data.university.label,
+              },
+            },
             editedData: { ...transformedData },
           })
         );
@@ -196,7 +215,7 @@ const TeachersAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Введіть ПІБ викладача"
-              defaultValue={dataContent.recordData?.name || null}
+              defaultValue={recordData?.name || null}
               // required
               {...register(
                 "name",
@@ -266,10 +285,10 @@ const TeachersAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    recordData
                       ? {
-                          value: dataContent.recordData.position.id,
-                          label: dataContent.recordData.position.name,
+                          value: recordData.position.id,
+                          label: recordData.position.name,
                         }
                       : null
                   }
@@ -324,10 +343,10 @@ const TeachersAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    recordData
                       ? {
-                          value: dataContent.recordData.degree.id,
-                          label: dataContent.recordData.degree.name,
+                          value: recordData.degree.id,
+                          label: recordData.degree.name,
                         }
                       : null
                   }
@@ -353,7 +372,7 @@ const TeachersAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Введіть Email викладача"
-              defaultValue={dataContent.recordData?.email || null}
+              defaultValue={recordData?.email || null}
               // required
               {...register(
                 "email",
@@ -419,10 +438,10 @@ const TeachersAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    recordData
                       ? {
-                          value: dataContent.recordData.university.id,
-                          label: dataContent.recordData.university.name,
+                          value: recordData.university.id,
+                          label: recordData.university.name,
                         }
                       : null
                   }
@@ -481,10 +500,10 @@ const TeachersAddEditForm = () => {
                   maxMenuHeight={150}
                   value={selectedDepartment}
                   defaultValue={
-                    dataContent.recordData
+                    recordData
                       ? {
-                          value: dataContent.recordData.department.id,
-                          label: dataContent.recordData.department.name,
+                          value: recordData.department.id,
+                          label: recordData.department.name,
                         }
                       : null
                   }
@@ -514,7 +533,7 @@ const TeachersAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Введіть коментар"
-              defaultValue={dataContent.recordData?.comments || null}
+              defaultValue={recordData?.comments || null}
               // required
               {...register("comments", { required: false, maxLength: 100 })}
             />

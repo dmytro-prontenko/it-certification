@@ -28,9 +28,9 @@ const Modal = ({ open, onClose, children }) => {
     document.body.style.paddingRight = "0"; // Сбрасываем padding-right при закрытии модального окна
     document.body.style.overflowY = "auto";
   }
-  
+
   const handleCloseUserModal = () => {
-    dispatch(setModalContent({ action: null, recordData: null }));
+    dispatch(setModalContent({ action: null, recordDataEdit: null }));
     dispatch(setModalStatus(false));
   };
 

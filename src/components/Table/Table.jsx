@@ -86,10 +86,17 @@ const Table = ({ view, data, columns }) => {
   // #endregion
   // ======================================================
 
-  const handleModal = (action, recordData) => {
+  const handleModal = (action, recordDataEdit) => {
     if (serviceInfo) {
       dispatch(setModalStatus(!modalStatus));
-      dispatch(setModalContent({ action, recordData }));
+      dispatch(
+        setModalContent({
+          action,
+          recordDataEdit,
+          recordDataAdd: null,
+          editedData: null,
+        })
+      );
     } else {
       console.log("Сервіс не відповідає. Спробуйте пізніше");
     }

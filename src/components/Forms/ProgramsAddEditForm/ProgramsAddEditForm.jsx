@@ -19,7 +19,7 @@ import {
 
 const ProgramsAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordData);
+  console.log(dataContent.recordDataEdit);
 
   const dispatch = useDispatch();
 
@@ -45,7 +45,7 @@ const ProgramsAddEditForm = () => {
     dispatch(
       setModalContent({
         action: "EditConfirm",
-        recordData: { ...dataContent.recordData, ...data },
+        recordDataEdit: { ...dataContent.recordDataEdit, ...data },
       })
     );
   };
@@ -68,7 +68,7 @@ const ProgramsAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Оберіть назву програми"
-              defaultValue={dataContent.recordData?.name || null}
+              defaultValue={dataContent.recordDataEdit?.name || null}
               // required
               {...register("name", { required: true, maxLength: 100 })}
             />
@@ -101,10 +101,10 @@ const ProgramsAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.role,
-                          label: dataContent.recordData.role,
+                          value: dataContent.recordDataEdit.role,
+                          label: dataContent.recordDataEdit.role,
                         }
                       : null
                   }
@@ -166,10 +166,10 @@ const ProgramsAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.status,
-                          label: dataContent.recordData.status,
+                          value: dataContent.recordDataEdit.status,
+                          label: dataContent.recordDataEdit.status,
                         }
                       : null
                   }
@@ -211,10 +211,10 @@ const ProgramsAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.status,
-                          label: dataContent.recordData.status,
+                          value: dataContent.recordDataEdit.status,
+                          label: dataContent.recordDataEdit.status,
                         }
                       : null
                   }
@@ -243,7 +243,7 @@ const ProgramsAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте прізвище ім'я та по батькові гаранта"
-              defaultValue={dataContent.recordData?.email || null}
+              defaultValue={dataContent.recordDataEdit?.email || null}
               // required
               {...register("guarantor_name", {
                 required: true,
@@ -279,10 +279,10 @@ const ProgramsAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.institution,
-                          label: dataContent.recordData.institution,
+                          value: dataContent.recordDataEdit.institution,
+                          label: dataContent.recordDataEdit.institution,
                         }
                       : null
                   }
