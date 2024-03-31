@@ -8,19 +8,7 @@ import {
 } from "../thunk/mainInfoThunks";
 
 const initialState = {
-  tableData: {
-    content: [
-      {
-        id: 100,
-        name: "Харківський національний університет",
-        abbr: "ХНУ",
-        programs_list_url: "http://google.com",
-        url: "http://google.com",
-      },
-    ],
-    pageNumber: 1,
-    totalElements: 1,
-  },
+  tableData: [],
   serviceInfo: {
     position: [
       {
