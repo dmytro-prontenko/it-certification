@@ -17,7 +17,7 @@ import {
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
 
-const InstitutionAddEditForm = () => {
+const UniversityAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
   console.log(dataContent.recordDataEdit);
 
@@ -174,7 +174,7 @@ const InstitutionAddEditForm = () => {
               placeholder="Додайте посилання на сайт ЗВО"
               defaultValue={null}
               // required
-              {...register("institutionLink", {
+              {...register("universityLink", {
                 required: true,
                 maxLength: 100,
               })}
@@ -206,4 +206,4 @@ const InstitutionAddEditForm = () => {
   );
 };
 
-export default InstitutionAddEditForm;
+export default UniversityAddEditForm;
