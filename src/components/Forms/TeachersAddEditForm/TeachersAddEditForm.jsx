@@ -62,9 +62,7 @@ const TeachersAddEditForm = () => {
   };
 
   useEffect(() => {
-    // Проверяем, что есть данные для редактирования и что в объекте recordData есть кафедра
     if (dataContent.recordData && dataContent.recordData.department) {
-      // Устанавливаем значение выбранной кафедры
       setSelectedDepartment({
         value: dataContent.recordData.department.id,
         label: dataContent.recordData.department.name,

@@ -5,6 +5,8 @@ import MUIDataTable, { TableFilterList } from "mui-datatables";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { tableTheme } from "../../helpers/MUI_themes/table_theme";
+import getColumnsToRender from "../../helpers/getColumnsToRender.jsx";
 import {
   selectDictionary,
   tableData,
@@ -23,15 +25,11 @@ import {
   serviceInfoThunk,
 } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
-import { tableTheme } from "../../services/MUI_themes/table_theme";
-import Icon from "../Icon/Icon";
 import {
-  LinkWrapper,
   PageSelectWrapper,
   PaginationWrapper,
   StyledPagination,
   StyledWrapper,
-  TableLink,
 } from "./Table.styled";
 
 const Table = ({ view, data, columns }) => {
@@ -41,8 +39,6 @@ const Table = ({ view, data, columns }) => {
   const currentPage = useSelector(selectCurrentPage);
   const serviceInfo = useSelector(selectDictionary);
   const teachers = useSelector(tableData);
-
-  console.log(teachers);
 
   const totalPages = Number(Math.ceil(teachers?.totalElements / SIZE));
 
@@ -129,175 +125,9 @@ const Table = ({ view, data, columns }) => {
 
   // Налаштування колонок таблиці
   // ======================================================
-  // #region columns
-  const columnsToRender = columns.map((column) => {
-    if (column.includes("Посилання")) {
-      return {
-        name: column,
-        label: column,
-        options: {
-          setCellHeaderProps: () => {
-            return { align: "center" };
-          },
-          setCellProps: () => {
-            return { align: "center" };
-          },
-          customBodyRender: (value) =>
-            value && (
-              <LinkWrapper>
-                <TableLink href={"https" + value} target="_blank">
-                  {"Ознайомитись"}
-                </TableLink>
-              </LinkWrapper>
-            ),
-          filterOptions: {
-            renderValue: (val) => {
-              if (val === "" || val === null || val === undefined) {
-                return "(пусто)";
-              } else if (val.toString().toLocaleLowerCase().startsWith("http"))
-                return "Ознайомитись";
-            },
-          },
-        },
-      };
-    }
 
-    if (column.includes("Номер")) {
-      return {
-        name: column,
-        label: column,
-        options: {
-          setCellProps: () => {
-            return { align: "center", padding: "0" };
-          },
-          filterType: "multiselect",
-        },
-      };
-    }
-    if (column.includes("Посада")) {
-      return {
-        name: column,
-        label: column,
-        options: {
-          setCellHeaderProps: () => {
-            return { align: "center" };
-          },
-          setCellProps: () => {
-            return { align: "center" };
-          },
-          filterType: "multiselect",
-        },
-      };
-    }
-    if (column.includes("Імʼя викладача")) {
-      return {
-        name: column,
-        label: column,
-        options: {
-          setCellHeaderProps: () => {
-            return { align: "center", width: "230px" };
-          },
-          setCellProps: () => {
-            return { align: "left", width: "230px" };
-          },
-          filterType: "multiselect",
-        },
-      };
-    }
-    if (column.includes("Наукова ступінь")) {
-      return {
-        name: column,
-        label: column,
-        options: {
-          setCellHeaderProps: () => {
-            return { align: "center", width: "170px" };
-          },
-          setCellProps: () => {
-            return { align: "center", width: "170px" };
-          },
-          filterType: "multiselect",
-        },
-      };
-    }
+  const columnsToRender = getColumnsToRender(columns, data, handleModal);
 
-    if (column.includes("Дія")) {
-      const actionStyles = {
-        existingStyles: {
-          align: "center",
-          width: "130px",
-        },
-      };
-
-      actionStyles.noWrapCell = {
-        ...actionStyles.existingStyles,
-        whiteSpace: "nowrap",
-      };
-      return {
-        name: column,
-        label: column,
-        options: {
-          filter: false,
-          setCellHeaderProps: () => {
-            return { style: actionStyles.noWrapCell };
-          },
-          setCellProps: () => {
-            return { style: actionStyles.noWrapCell };
-          },
-          customBodyRenderLite: (dataIndex) => (
-            <>
-              <Tooltip title="Редагувати">
-                <IconButton
-                  onClick={() => handleModal("Edit", data.content[dataIndex])}
-                >
-                  <Icon
-                    styles={{ fill: "var(--edit-green)" }}
-                    width={24}
-                    height={24}
-                    iconId={"pencil"}
-                  />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Видалити">
-                <IconButton
-                  onClick={() => handleModal("Delete", data.content[dataIndex])}
-                >
-                  <Icon
-                    styles={{ fill: "var( --delete-red)" }}
-                    width={24}
-                    height={24}
-                    iconId={"trash"}
-                  />
-                </IconButton>
-              </Tooltip>
-            </>
-          ),
-        },
-      };
-    }
-
-    return {
-      name: column,
-      label: column,
-      options: {
-        setCellHeaderProps: () => {
-          return { align: "center" };
-        },
-        setCellProps: () => {
-          return { align: "left" };
-        },
-        filterType: "multiselect",
-        filterOptions: {
-          renderValue: (val) => {
-            if (val === "" || val === null || val === undefined) {
-              return "(пусто)";
-            }
-            return val;
-          },
-        },
-      },
-    };
-  });
-  // #endregion
   // ======================================================
 
   // Налаштування таблиці
