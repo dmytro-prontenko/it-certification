@@ -8,7 +8,7 @@ import { selectModalContent } from "../../../redux/selectors/serviceSelectors";
 import { setModalContent } from "../../../redux/slice/serviceSlice";
 import CommonButton from "../../Buttons/CommonButton/CommonButton";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ErrorsContainer,
   ModalAddEditTitle,
@@ -60,6 +60,17 @@ const TeachersAddEditForm = () => {
       setSelectedDepartment(null);
     }
   };
+
+  useEffect(() => {
+    // Проверяем, что есть данные для редактирования и что в объекте recordData есть кафедра
+    if (dataContent.recordData && dataContent.recordData.department) {
+      // Устанавливаем значение выбранной кафедры
+      setSelectedDepartment({
+        value: dataContent.recordData.department.id,
+        label: dataContent.recordData.department.name,
+      });
+    }
+  }, [dataContent.recordData]);
   // #endregion
   // ======================================================
 

@@ -5,7 +5,10 @@ import MUIDataTable, { TableFilterList } from "mui-datatables";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { selectDictionary } from "../../redux/selectors/mainInfoSelectors";
+import {
+  selectDictionary,
+  tableData,
+} from "../../redux/selectors/mainInfoSelectors";
 import {
   selectCurrentPage,
   selectOpenModal,
@@ -37,6 +40,11 @@ const Table = ({ view, data, columns }) => {
   const modalStatus = useSelector(selectOpenModal);
   const currentPage = useSelector(selectCurrentPage);
   const serviceInfo = useSelector(selectDictionary);
+  const teachers = useSelector(tableData);
+
+  console.log(teachers);
+
+  const totalPages = Number(Math.ceil(teachers?.totalElements / SIZE));
 
   let dataArray = [];
 
@@ -340,28 +348,34 @@ const Table = ({ view, data, columns }) => {
           }}
         />
         <PaginationWrapper>
-          <PageSelectWrapper>
-            <div>Показати сторінку</div>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={currentPage}
-              onChange={handleChange}
-              size="small"
-            >
-              {[...Array(10)].map((_, index) => (
-                <MenuItem key={index} value={index + 1}>
-                  {index + 1}
-                </MenuItem>
-              ))}
-            </Select>
-          </PageSelectWrapper>
-          <StyledPagination
-            count={10}
-            page={currentPage}
-            onChange={handleChangePage}
-            size="large"
-          />
+          {totalPages ? (
+            <>
+              <PageSelectWrapper>
+                <div>Показати сторінку</div>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={currentPage}
+                  onChange={handleChange}
+                  size="small"
+                >
+                  {totalPages
+                    ? [...Array(totalPages)].map((_, index) => (
+                        <MenuItem key={index} value={index + 1}>
+                          {index + 1}
+                        </MenuItem>
+                      ))
+                    : null}
+                </Select>
+              </PageSelectWrapper>
+              <StyledPagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handleChangePage}
+                size="large"
+              />
+            </>
+          ) : null}
         </PaginationWrapper>
       </ThemeProvider>
     </StyledWrapper>
