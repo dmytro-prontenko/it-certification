@@ -7,29 +7,19 @@ import Table from "../../components/Table/Table";
 import { tableData } from "../../redux/selectors/mainInfoSelectors";
 import { ImageTop } from "../../commonStyles/commonStyles";
 
-const DisciplinePage = () => {
-  const discipline = useSelector(tableData);
-  const columns = [
-    "№",
-    "Дисципліна",
-    "Викладач",
-    "Блок",
-    "Група",
-    "Програма",
-    "Сілабус",
-    "РП",
-    "Дія",
-  ];
+const UniversityPage = () => {
+  const university = useSelector(tableData);
+  const columns = ["№", "ЗВО", "Абревіатура", "Перелік прогам", "Сайт", "Дія"];
 
   return (
     <>
       <StyledTableWrapper className="container">
         <ImageTop></ImageTop>
-        <Table view={"Перелік дисциплін"} data={discipline} columns={columns} />
+        <Table view={"Перелік ЗВО"} data={university} columns={columns} />
         <ImageBottom></ImageBottom>
       </StyledTableWrapper>
     </>
   );
 };
 
-export default DisciplinePage;
+export default UniversityPage;

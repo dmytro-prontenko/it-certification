@@ -30,7 +30,7 @@ select:-webkit-autofill:focus {
   --text-input: #8c9098;
   --logo-yellow-400: #f3c80b;
   --link-yellow-500: #e9a116;
-  --shadov-yellow-500: #c2a009;
+  --shadow-yellow-500: #c2a009;
   --logo-blue: #27a6eb;
   --delete-red: #f20a0a;
   --edit-green: #24a750;
@@ -148,5 +148,5 @@ button {
 .container {
   margin: 0 auto;
   max-width: 1440px;
-  padding: 0px 84px 120px 84px;
+  padding: 0px 40px 120px;
 }

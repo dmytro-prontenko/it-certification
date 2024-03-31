@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentPage, selectModalContent } from "../../redux/selectors/serviceSelectors";
+import {
+  selectCurrentPage,
+  selectModalContent,
+} from "../../redux/selectors/serviceSelectors";
 
 import { useLocation } from "react-router-dom";
 import {
@@ -12,7 +15,7 @@ import {
   editTableDataThunk,
 } from "../../redux/thunk/mainInfoThunks";
 import CancelButton from "../Buttons/CancelButton/CancelButton";
-import ProceedButton from "../Buttons/ProceedButton/ProccedButton";
+import ProceedButton from "../Buttons/ProceedButton/ProceedButton";
 import {
   ButtonsWrapper,
   ConfirmationTitle,
@@ -24,23 +27,33 @@ const ConfirmationModal = () => {
   const location = useLocation();
   const action = useSelector(selectModalContent);
   const dispatch = useDispatch();
-  const currentPage = useSelector(selectCurrentPage)
+  const currentPage = useSelector(selectCurrentPage);
+
+  let title;
+  let actionToDispatch;
 
   const handleCancel = () => {
-    dispatch(
-      setModalContent({
-        action: null,
-        recordData: null,
-      })
-    );
-    dispatch(setModalStatus(false));
+    actionToDispatch === "Edit"
+      ? dispatch(
+          setModalContent({
+            action: actionToDispatch,
+            recordDataEdit: { ...action.recordDataEdit, ...action.editedData },
+          })
+        )
+      : dispatch(
+          setModalContent({
+            action: actionToDispatch,
+            recordDataEdit: { ...action.recordDataEdit },
+          })
+        );
   };
 
   const handleProceed = (actionToDispatch) => {
     dispatch(
       setModalContent({
         action: null,
-        recordData: null,
+        recordDataEdit: null,
+        recordDataAdd: null,
       })
     );
     switch (actionToDispatch) {
@@ -48,8 +61,8 @@ const ConfirmationModal = () => {
         dispatch(
           addTableDataThunk({
             endPoint: `${location.pathname}`,
-            putData: action.editedData,
-            editParams: { page: currentPage, size: SIZE },
+            postData: action.editedData,
+            postParams: { page: currentPage, size: SIZE },
           })
         );
         break;
@@ -57,8 +70,8 @@ const ConfirmationModal = () => {
       case "Edit": {
         dispatch(
           editTableDataThunk({
-            endPoint: `${location.pathname}/${action.recordData.id}`,
-            // endPoint: "teachers/1",
+            endPoint: `${location.pathname}/${action.recordDataEdit.id}`,
+
             putData: action.editedData,
             editParams: { page: currentPage, size: SIZE },
           })
@@ -68,8 +81,8 @@ const ConfirmationModal = () => {
       case "Delete": {
         dispatch(
           deleteTableDataThunk({
-            endPoint: `${location.pathname}/${action.recordData.id}`,
-            // endPoint: "teachers/2",
+            endPoint: `${location.pathname}/${action.recordDataEdit.id}`,
+
             deleteParams: { page: currentPage, size: SIZE },
           })
         );
@@ -78,9 +91,6 @@ const ConfirmationModal = () => {
     }
     dispatch(setModalStatus(false));
   };
-
-  let title;
-  let actionToDispatch;
 
   switch (action.action) {
     case "AddConfirm": {

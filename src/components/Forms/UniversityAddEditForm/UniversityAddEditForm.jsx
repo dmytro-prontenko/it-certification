@@ -17,9 +17,9 @@ import {
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
 
-const InstitutionAddEditForm = () => {
+const UniversityAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordData);
+  console.log(dataContent.recordDataEdit);
 
   const dispatch = useDispatch();
 
@@ -42,12 +42,30 @@ const InstitutionAddEditForm = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    dispatch(
-      setModalContent({
-        action: "EditConfirm",
-        recordData: { ...dataContent.recordData, ...data },
-      })
-    );
+    // const transformedData = {
+    //   status: data.status.value,
+    //   position: data.role.value,
+    //   institution: data.university.value,
+    // };
+
+    dataContent.action === "Edit"
+      ? dispatch(
+          setModalContent({
+            action: "EditConfirm",
+            recordDataEdit: {
+              ...dataContent.recordDataEdit,
+              ...data,
+              // ...transformedData,
+            },
+          })
+        )
+      : dispatch(
+          setModalContent({
+            action: "AddConfirm",
+            // editedData: { ...data, ...transformedData },
+            editedData: { ...data },
+          })
+        );
   };
   // console.log(errors);
 
@@ -81,10 +99,10 @@ const InstitutionAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.role,
-                          label: dataContent.recordData.role,
+                          value: dataContent.recordDataEdit.role,
+                          label: dataContent.recordDataEdit.role,
                         }
                       : null
                   }
@@ -124,10 +142,10 @@ const InstitutionAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.role,
-                          label: dataContent.recordData.role,
+                          value: dataContent.recordDataEdit.role,
+                          label: dataContent.recordDataEdit.role,
                         }
                       : null
                   }
@@ -156,7 +174,7 @@ const InstitutionAddEditForm = () => {
               placeholder="Додайте посилання на сайт ЗВО"
               defaultValue={null}
               // required
-              {...register("institutionLink", {
+              {...register("universityLink", {
                 required: true,
                 maxLength: 100,
               })}
@@ -188,4 +206,4 @@ const InstitutionAddEditForm = () => {
   );
 };
 
-export default InstitutionAddEditForm;
+export default UniversityAddEditForm;

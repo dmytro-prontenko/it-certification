@@ -2,58 +2,115 @@ import AddIcon from "@mui/icons-material/Add";
 import { Chip, IconButton, MenuItem, Select, Tooltip } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentPage, selectOpenModal } from "../../redux/selectors/serviceSelectors";
+import { useLocation } from "react-router-dom";
+import { tableTheme } from "../../helpers/MUI_themes/table_theme";
+import getColumnsToRender from "../../helpers/getColumnsToRender.jsx";
 import {
+  selectDictionary,
+  tableData,
+} from "../../redux/selectors/mainInfoSelectors";
+import {
+  selectCurrentPage,
+  selectOpenModal,
+} from "../../redux/selectors/serviceSelectors";
+import {
+  setCurrentPage,
   setModalContent,
   setModalStatus,
 } from "../../redux/slice/serviceSlice";
-import { tableTheme } from "../../services/MUI_themes/table_theme";
-import Icon from "../Icon/Icon";
 import {
-  LinkWrapper,
+  getTableDataThunk,
+  serviceInfoThunk,
+} from "../../redux/thunk/mainInfoThunks";
+import { SIZE } from "../../service/constant";
+import {
   PageSelectWrapper,
   PaginationWrapper,
   StyledPagination,
   StyledWrapper,
-  TableLink,
 } from "./Table.styled";
-import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
-import { SIZE } from "../../service/constant";
-import { useLocation } from "react-router-dom";
 
 const Table = ({ view, data, columns }) => {
   const dispatch = useDispatch();
-  const modalStatus = useSelector(selectOpenModal);
   const location = useLocation();
+  const modalStatus = useSelector(selectOpenModal);
   const currentPage = useSelector(selectCurrentPage);
+  const serviceInfo = useSelector(selectDictionary);
+  const teachers = useSelector(tableData);
+
+  const totalPages = Number(Math.ceil(teachers?.totalElements / SIZE));
 
   let dataArray = [];
 
-  const [page, setPage] = useState(1);
+  useEffect(() => {
+    dispatch(
+      getTableDataThunk({
+        endPoint: `${location.pathname}`,
+        getParams: { page: currentPage, size: SIZE },
+      })
+    );
+    if (!serviceInfo) dispatch(serviceInfoThunk());
+  }, [currentPage]);
 
-  data.data?.map((el) => dataArray.push(Object.values(el)));
+  // Функція, що перетворює вхідні дані для рендеру таблиці в масив масивів
+  // ======================================================================
+  // #region
+  data.content?.forEach((obj) => {
+    let objValues = [];
+    for (let key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        if (typeof obj[key] === "object" && "name" in obj[key]) {
+          objValues.push(obj[key].name);
+        } else {
+          objValues.push(obj[key]);
+        }
+      }
+    }
+    dataArray.push(objValues);
+  });
+  // #endregion
+  // ======================================================
 
+  // Пагінація
+  // ======================================================
+  // #region pagination
   const handleChange = (e) => {
-    setPage(Number(e.target.value));
+    dispatch(setCurrentPage(e.target.value));
   };
 
   const handleChangePage = (e) => {
-    setPage(Number(e.target.textContent));
+    dispatch(setCurrentPage(e.target.textContent));
+  };
+  // #endregion
+  // ======================================================
+
+  const handleModal = (action, recordDataEdit) => {
+    if (serviceInfo) {
+      dispatch(setModalStatus(!modalStatus));
+      dispatch(
+        setModalContent({
+          action,
+          recordDataEdit,
+          recordDataAdd: null,
+          editedData: null,
+        })
+      );
+    } else {
+      console.log("Сервіс не відповідає. Спробуйте пізніше");
+    }
   };
 
-  const handleModal = (action, recordData) => {
-    dispatch(setModalStatus(!modalStatus));
-    dispatch(setModalContent({ action, recordData }));
-  };
+  // Підміна посилань на лінк "Ознайомитись"
+  // ======================================================
+  // #region replace
 
   const CustomChip = ({ label, onDelete }) => {
     let customLabel = label;
-    console.log(label);
     if (label === "" || label === null || label === undefined) {
       customLabel = "(пусто)";
-    } else if (label.toString().toLocaleLowerCase().startsWith("hell"))
+    } else if (label.toString().toLocaleLowerCase().startsWith("http"))
       customLabel = "Ознайомитись";
 
     return (
@@ -70,118 +127,19 @@ const Table = ({ view, data, columns }) => {
     return <TableFilterList {...props} ItemComponent={CustomChip} />;
   };
 
-  const columnsToRender = columns.map((column) => {
-    if (column.includes("Посилання")) {
-      return {
-        name: column,
-        label: column,
-        options: {
-          setCellHeaderProps: () => {
-            return { align: "center" };
-          },
-          setCellProps: () => {
-            return { align: "center" };
-          },
-          customBodyRender: (value) =>
-            value && (
-              <LinkWrapper>
-                <TableLink href={"https" + value} target="_blank">
-                  {"Ознайомитись"}
-                </TableLink>
-              </LinkWrapper>
-            ),
-          filterOptions: {
-            renderValue: (val) => {
-              if (val === "" || val === null || val === undefined) {
-                return "(пусто)";
-              } else if (val.toString().toLocaleLowerCase().startsWith("http"))
-                return "Ознайомитись";
-            },
-          },
-        },
-      };
-    }
+  // #endregion
+  // ======================================================
 
-    if (column.includes("Номер")) {
-      return {
-        name: column,
-        label: column,
-        options: {
-          setCellProps: () => {
-            return { align: "center" };
-          },
-          filterType: "multiselect",
-        },
-      };
-    }
+  // Налаштування колонок таблиці
+  // ======================================================
 
-    if (column.includes("Дія")) {
-      return {
-        name: column,
-        label: column,
-        options: {
-          filter: false,
-          setCellHeaderProps: () => {
-            return { align: "center" };
-          },
-          setCellProps: () => {
-            return { align: "center" };
-          },
-          customBodyRenderLite: (dataIndex) => (
-            <>
-              <Tooltip title="Редагувати">
-                <IconButton
-                  onClick={() => handleModal("Edit", data.data[dataIndex])}
-                >
-                  <Icon
-                    styles={{ fill: "var(--edit-green)" }}
-                    width={24}
-                    height={24}
-                    iconId={"pencil"}
-                  />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Видалити">
-                <IconButton
-                  onClick={() => handleModal("Delete", data.data[dataIndex])}
-                >
-                  <Icon
-                    styles={{ fill: "var( --delete-red)" }}
-                    width={24}
-                    height={24}
-                    iconId={"trash"}
-                  />
-                </IconButton>
-              </Tooltip>
-            </>
-          ),
-        },
-      };
-    }
+  const columnsToRender = getColumnsToRender(columns, data, handleModal);
 
-    return {
-      name: column,
-      label: column,
-      options: {
-        setCellHeaderProps: () => {
-          return { align: "center" };
-        },
-        setCellProps: () => {
-          return { align: "left" };
-        },
-        filterType: "multiselect",
-        filterOptions: {
-          renderValue: (val) => {
-            if (val === "" || val === null || val === undefined) {
-              return "(пусто)";
-            }
-            return val;
-          },
-        },
-      },
-    };
-  });
+  // ======================================================
 
+  // Налаштування таблиці
+  // ======================================================
+  // #region options
   const options = {
     exportButton: true,
     filterType: "dropdown",
@@ -192,7 +150,7 @@ const Table = ({ view, data, columns }) => {
     rowsPerPage: 20,
     rowsPerPageOptions: [5, 6, 7, 8, 9, 10, 15, 20],
     downloadOptions: {
-      filename: "specialty.csv",
+      filename: `${location.pathname}.csv`,
     },
     pagination: false,
 
@@ -211,15 +169,8 @@ const Table = ({ view, data, columns }) => {
       );
     },
   };
-
-  useEffect(() => {
-    dispatch(
-      getTableDataThunk({
-        endPoint: `${location.pathname}`,
-        getParams: { page: currentPage, size: SIZE },
-      })
-    );
-  }, [page]);
+  // #endregion
+  // ======================================================
 
   return (
     <StyledWrapper>
@@ -234,28 +185,34 @@ const Table = ({ view, data, columns }) => {
           }}
         />
         <PaginationWrapper>
-          <PageSelectWrapper>
-            <div>Показати сторінку</div>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={page}
-              onChange={handleChange}
-              size="small"
-            >
-              {[...Array(10)].map((_, index) => (
-                <MenuItem key={index} value={index + 1}>
-                  {index + 1}
-                </MenuItem>
-              ))}
-            </Select>
-          </PageSelectWrapper>
-          <StyledPagination
-            count={10}
-            page={page}
-            onChange={handleChangePage}
-            size="large"
-          />
+          {totalPages ? (
+            <>
+              <PageSelectWrapper>
+                <div>Показати сторінку</div>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={currentPage}
+                  onChange={handleChange}
+                  size="small"
+                >
+                  {totalPages
+                    ? [...Array(totalPages)].map((_, index) => (
+                        <MenuItem key={index} value={index + 1}>
+                          {index + 1}
+                        </MenuItem>
+                      ))
+                    : null}
+                </Select>
+              </PageSelectWrapper>
+              <StyledPagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handleChangePage}
+                size="large"
+              />
+            </>
+          ) : null}
         </PaginationWrapper>
       </ThemeProvider>
     </StyledWrapper>

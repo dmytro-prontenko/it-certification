@@ -23,6 +23,13 @@ export const tableTheme = () =>
           },
         },
       },
+      MuiDivider: {
+        styleOverrides: {
+          root: {
+            color: "var(--accent-green-300)",
+          },
+        },
+      },
       MUIDataTableHeadCell: {
         styleOverrides: {
           root: {},
@@ -88,9 +95,16 @@ export const tableTheme = () =>
 
               // padding:0,
             },
-            "&:hover": {
-              backgroundColor: "var(--accent-yellow-100)",
-            },
+            // "&:hover": {
+            //   backgroundColor: "var(--accent-yellow-200)",
+            //   "& svg": {
+            //     transform: "rotate(180deg)", // Вращение на 360 градусов при наведении
+            //   },
+            // },
+            // "& svg": {
+            //   transform: "rotate(0deg)", // Изначальное значение - нет вращения
+            //   transition: "transform 0.5s ease-in-out", // Плавный переход
+            // },
           },
         },
       },

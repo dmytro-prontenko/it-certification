@@ -1,16 +1,18 @@
 const selectStyles = {
   select: (customStyles) => ({
     ...customStyles,
+    position: "relative",
     "&:focus": { outline: "none" },
     "&:hover": { outline: "none" },
     border: "none",
     outline: "none",
-    boxShadow:"none",
+    boxShadow: "none",
     transition: "border-color 0.2s",
+    color: "var(--basic-black)",
     "&:focus, &:hover": {
       outline: "none",
       border: "none",
-      boxShadow:"none"
+      boxShadow: "none",
     },
   }),
   option: () => ({
@@ -23,7 +25,8 @@ const selectStyles = {
   }),
   control: (customStyles) => ({
     ...customStyles,
-    boxShadow: 'none',
+    position: "relative",
+    boxShadow: "none",
 
     "&:focus": {},
     "&:hover": {
@@ -36,11 +39,9 @@ const selectStyles = {
     background: "transparent",
 
     width: "100%",
-    minHeight: 102,
-    padding: "40px 20px",
+    // minHeight: 102,
+    padding: "0 12px",
     textAlign: "start",
-
-    // padding: "40px 20px",
 
     color: "green",
     fontSize: "14px",
@@ -59,14 +60,13 @@ const selectStyles = {
   dropdownIndicator: (customStyles) => ({
     ...customStyles,
     "&:focus": { color: "green" },
-    "&:hover": { color: "green", cursor:"pointer" },
+    "&:hover": { color: "green", cursor: "pointer" },
     "&:active": { color: "green" },
     color: "var(--accent-green-300)",
-
   }),
   menu: (customStyles) => ({
     ...customStyles,
-    // gap: 10,
+
     background: "white",
     cursor: "pointer",
     color: "var(--basic-grey)",
@@ -75,7 +75,11 @@ const selectStyles = {
   }),
   singleValue: (customStyles) => ({
     ...customStyles,
-    color: "var(--basic-grey)",
+
+    fontSize: "14px",
+    fontWeight: 400,
+    lineHeight: "150%",
+    color: "var(--basic-black)",
   }),
   container: (styles) => ({
     ...styles,

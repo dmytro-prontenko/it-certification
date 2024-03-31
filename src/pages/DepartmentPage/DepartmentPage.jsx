@@ -1,8 +1,11 @@
 import { useSelector } from "react-redux";
-import { StyledTableWrapper } from "../../commonStyles/commonStyles";
+import {
+  ImageBottom,
+  StyledTableWrapper,
+} from "../../commonStyles/commonStyles";
 import Table from "../../components/Table/Table";
 import { tableData } from "../../redux/selectors/mainInfoSelectors";
-import { ImageBottom, ImageTop } from "../../commonStyles/commonStyles";
+import { ImageTop } from "../../commonStyles/commonStyles";
 
 const DepartmentPage = () => {
   const department = useSelector(tableData);
@@ -17,13 +20,13 @@ const DepartmentPage = () => {
   ];
 
   return (
-
+    <>
       <StyledTableWrapper className="container">
         <ImageTop></ImageTop>
         <Table view={"Перелік кафедр"} data={department} columns={columns} />
         <ImageBottom></ImageBottom>
       </StyledTableWrapper>
-
+    </>
   );
 };
 
