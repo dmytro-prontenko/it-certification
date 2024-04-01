@@ -19,6 +19,7 @@ import {
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
 import { selectDictionary } from "../../../redux/selectors/mainInfoSelectors";
+import getDirtyFieldsValues from "../../../helpers/getDirtyFieldsValues";
 
 const TeachersAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
@@ -62,13 +63,13 @@ const TeachersAddEditForm = () => {
   };
 
   let recordData;
-    if (dataContent.action === "Add") {
-      actionTitle = "Додати";
-      recordData = dataContent.recordDataAdd;
-    } else {
-      actionTitle = "Редагувати";
-      recordData = dataContent.recordDataEdit;
-    }
+  if (dataContent.action === "Add") {
+    actionTitle = "Додати";
+    recordData = dataContent.recordDataAdd;
+  } else {
+    actionTitle = "Редагувати";
+    recordData = dataContent.recordDataEdit;
+  }
 
   useEffect(() => {
     if (recordData && recordData.department) {
@@ -93,22 +94,9 @@ const TeachersAddEditForm = () => {
   // #endregion
   // ======================================================
 
-
-
   // Збір обʼєкту зі зміненими полями форми при Edit
   // ======================================================
   // #region
-
-  const getDirtyFieldsValues = () => {
-    const dirtyFieldsArray = [];
-    Object.keys(dirtyFields).forEach((field) => {
-      if (dirtyFields[field]) {
-        const value = getValues(field);
-        dirtyFieldsArray.push({ field, value });
-      }
-    });
-    return dirtyFieldsArray;
-  };
 
   // #endregion
   // ======================================================
@@ -117,8 +105,7 @@ const TeachersAddEditForm = () => {
   // ======================================================
   // #region onSubmit
   const onSubmit = (data) => {
-    const dirtyFieldsArray = getDirtyFieldsValues();
-    console.log(data);
+    const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
 
     //* Формування request body для Add
     if (dataContent.action !== "Edit") {
@@ -216,7 +203,6 @@ const TeachersAddEditForm = () => {
               type="text"
               placeholder="Введіть ПІБ викладача"
               defaultValue={recordData?.name || null}
-              // required
               {...register(
                 "name",
                 dataContent.action !== "Edit"
@@ -226,12 +212,16 @@ const TeachersAddEditForm = () => {
                         message: "Введіть імʼя викладача",
                       },
                       minLength: {
-                        value: 2,
-                        message: "Мінімальна довжина для імені 2 символи",
+                        value: 1,
+                        message: "Мінімальна довжина для імені 1 символ",
                       },
                       maxLength: {
                         value: 100,
                         message: "Максимальна довжина для імені 100 символів",
+                      },
+                      pattern: {
+                        value: /^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ']+$/,
+                        message: "Ім'я повинно містити тільки літери",
                       },
                     }
                   : { required: false }
@@ -267,10 +257,6 @@ const TeachersAddEditForm = () => {
                             value: true,
                             message: "Оберіть посаду викладача",
                           },
-                          minLength: {
-                            value: 3,
-                            message: "Мінімальна довжина 6 символів",
-                          },
                         }
                       : { required: false }
                   )}
@@ -279,7 +265,7 @@ const TeachersAddEditForm = () => {
                     value: el.id,
                     label: el.name,
                   }))}
-                  placeholder="Оберіть зі списку"
+                  placeholder="Оберіть посаду викладача"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
@@ -325,10 +311,6 @@ const TeachersAddEditForm = () => {
                             value: true,
                             message: "Оберіть науковий ступінь викладача",
                           },
-                          minLength: {
-                            value: 3,
-                            message: "Мінімальна довжина 6 символів",
-                          },
                         }
                       : { required: false }
                   )}
@@ -373,7 +355,6 @@ const TeachersAddEditForm = () => {
               type="text"
               placeholder="Введіть Email викладача"
               defaultValue={recordData?.email || null}
-              // required
               {...register(
                 "email",
                 dataContent.action !== "Edit"
@@ -383,10 +364,17 @@ const TeachersAddEditForm = () => {
                         message: "Введіть email викладача",
                       },
                       minLength: {
-                        value: 3,
+                        value: 6,
                         message: "Мінімальна довжина 6 символів",
                       },
-                      pattern: /^\S+@\S+$/i,
+                      maxLength: {
+                        value: 100,
+                        message: "Максимальна довжина для email 100 символів",
+                      },
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                        message: "Введіть коректний email",
+                      },
                     }
                   : { required: false }
               )}
@@ -418,11 +406,7 @@ const TeachersAddEditForm = () => {
                       ? {
                           required: {
                             value: true,
-                            message: "Введіть ЗВО викладача",
-                          },
-                          minLength: {
-                            value: 3,
-                            message: "Мінімальна довжина 6 символів",
+                            message: "Оберіть ЗВО викладача",
                           },
                         }
                       : { required: false }
@@ -483,11 +467,7 @@ const TeachersAddEditForm = () => {
                   {...register("department", {
                     required: {
                       value: false,
-                      message: "Введіть ЗВО викладача",
-                    },
-                    minLength: {
-                      value: 3,
-                      message: "Мінімальна довжина 6 символів",
+                      message: "Оберіть кафедру викладача",
                     },
                   })}
                   {...field}
@@ -534,7 +514,6 @@ const TeachersAddEditForm = () => {
               type="text"
               placeholder="Введіть коментар"
               defaultValue={recordData?.comments || null}
-              // required
               {...register("comments", { required: false, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
