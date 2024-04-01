@@ -1,14 +1,15 @@
 import { Divider } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import Select from "react-select";
+// import Select from "react-select";
 
 import CommonButton from "../../Buttons/CommonButton/CommonButton";
-import selectStyles from "../../../commonStyles/SelectStyles";
+// import selectStyles from "../../../commonStyles/SelectStyles";
 import { setModalContent } from "../../../redux/slice/serviceSlice";
 import { selectModalContent } from "../../../redux/selectors/serviceSelectors";
 
 import {
+  ErrorsContainer,
   ModalAddEditTitle,
   StyledAddEditForm,
   StyledAddEditInputWrapper,
@@ -24,8 +25,7 @@ const UniversityAddEditForm = () => {
   const dispatch = useDispatch();
 
   let actionTitle;
-
-  // let defaultData;
+  // let transformedData = {};
 
   if (dataContent.action === "Add") {
     actionTitle = "Додати";
@@ -35,18 +35,55 @@ const UniversityAddEditForm = () => {
 
   const {
     register,
-    control,
     handleSubmit,
-    // formState: { errors },
+    // getValues,
+    formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
+    // const dirtyFieldsArray = getDirtyFieldsValues();
     console.log(data);
-    // const transformedData = {
-    //   status: data.status.value,
-    //   position: data.role.value,
-    //   institution: data.university.value,
-    // };
+
+
+//* Формування request body для Add
+
+// if (dataContent.action !== "Edit") {
+//   transformedData = {
+//     name: data.name,
+//     abbr: {
+//       id: data.abbr.value,
+//     },
+//     programLink: {
+//       id: data.programLink.value,
+//     },
+//     universityLink: {
+//       id: data.universityLink.value,
+//     },
+//   };
+
+//  } else {
+
+//* Формування request body для Edit
+
+//  dirtyFieldsArray.forEach((item) => {
+//   switch (item.field) {
+//     case "name":
+//       transformedData.name = item.value;
+//       break;
+//     case ("abbr", "university"):
+//       transformedData.abbr = { id: item.value.value };
+//       break;
+//     case "programLink":
+//       transformedData.programLink = { id: item.value.value };
+//       break;
+//     case "universityLink":
+//       transformedData.universityLink = { id: item.value.value };
+//       break;
+//     default:
+//       transformedData = {};
+// }
+// });
+// }
 
     dataContent.action === "Edit"
       ? dispatch(
@@ -75,6 +112,8 @@ const UniversityAddEditForm = () => {
       <StyledAddEditForm onSubmit={handleSubmit(onSubmit)}>
         <StyledAddEditInputsWrapper>
           <StyledAddEditInputWrapper>
+            {/* =============================== Назва ЗВО */}
+
             <StyledAddEditLabel>Назва ЗВО</StyledAddEditLabel>
             <Divider
               orientation="vertical"
@@ -83,40 +122,42 @@ const UniversityAddEditForm = () => {
                 color: "var(--basic-grey)",
               }}
             />
-            <Controller
-              name="name"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  // options={[...Array(20)].map((el, index) => ({
-                  //   value: index,
-                  //   label: index,
-                  // }))}
-                  placeholder="Оберіть назву ЗВО"
-                  styles={selectStyles}
-                  isSearchable={true}
-                  isClearable={true}
-                  maxMenuHeight={150}
-                  defaultValue={
-                    dataContent.recordDataEdit
-                      ? {
-                          value: dataContent.recordDataEdit.role,
-                          label: dataContent.recordDataEdit.role,
-                        }
-                      : null
-                  }
-                  // required
-                />
+            <StyledAddEditTextInput
+              type="text"
+              placeholder="Введіть назву ЗВО"
+              defaultValue={
+                dataContent.recordDataEdit
+                  ? dataContent.recordDataEdit.name
+                  : null
+              }
+              {...register(
+                "name",
+                dataContent.action !== "Edit"
+                  ? {
+                      required: {
+                        value: true,
+                        message: "Введіть назву закладу",
+                      },
+                      minLength: {
+                        value: 2,
+                        message: "Мінімальна довжина для назви 2 символи",
+                      },
+                      maxLength: {
+                        value: 100,
+                        message: "Максимальна довжина для назви 100 символів",
+                      },
+                    }
+                  : { required: false }
               )}
             />
-            {/* {errors.category && (
-              <StyledErrorSelectMobile>
-                {errors.category.message}
-              </StyledErrorSelectMobile>
-            )} */}
+
+            {errors.name && (
+              <ErrorsContainer>{errors.name.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
-          {/* ================================= */}
+
+          {/* ================================= Абревіатура */}
+
           <StyledAddEditInputWrapper>
             <StyledAddEditLabel>Абревіатура</StyledAddEditLabel>
             <Divider
@@ -126,40 +167,79 @@ const UniversityAddEditForm = () => {
                 color: "var(--basic-grey)",
               }}
             />
-            <Controller
-              name="abbr"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  // options={[...Array(20)].map((el, index) => ({
-                  //   value: index,
-                  //   label: index,
-                  // }))}
-                  placeholder="Оберіть абревіатуру"
-                  styles={selectStyles}
-                  isSearchable={true}
-                  isClearable={true}
-                  maxMenuHeight={150}
-                  defaultValue={
-                    dataContent.recordDataEdit
-                      ? {
-                          value: dataContent.recordDataEdit.role,
-                          label: dataContent.recordDataEdit.role,
-                        }
-                      : null
-                  }
-                  // required
-                />
+            <StyledAddEditTextInput
+              type="text"
+              placeholder="Введіть абревіатуру"
+              defaultValue={
+                dataContent.recordDataEdit
+                  ? dataContent.recordDataEdit.abbr
+                  : null
+              }
+              {...register(
+                "abbr",
+                dataContent.action !== "Edit"
+                  ? {
+                      required: { value: true, message: "Введіть абревіатуру" },
+                      minLength: {
+                        value: 2,
+                        message: "Мінімальна довжина для абревіатури 2 символи",
+                      },
+                      maxLength: {
+                        value: 10,
+                        message:
+                          "Максимальна довжина для абревіатури 10 символів",
+                      },
+                    }
+                  : { required: false }
               )}
             />
-            {/* {errors.category && (
-              <StyledErrorSelectMobile>
-                {errors.category.message}
-              </StyledErrorSelectMobile>
-            )} */}
           </StyledAddEditInputWrapper>
-          {/* ================================= */}
+
+          {/* ================================= Перелік программ */}
+
+          <StyledAddEditInputWrapper>
+            <StyledAddEditLabel>Перелік программ</StyledAddEditLabel>
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{
+                color: "var(--basic-grey)",
+              }}
+            />
+            <StyledAddEditTextInput
+              type="text"
+              placeholder="Додайте посилання на перелік программ"
+              defaultValue={
+                dataContent.recordDataEdit
+                  ? dataContent.recordDataEdit.programs_list_url
+                  : null
+              }
+              // required
+              {...register(
+                "programLink",
+                dataContent.action !== "Edit"
+                  ? {
+                      required: {
+                        value: true,
+                        message: "Введіть посилання переліку программ",
+                      },
+                      minLength: {
+                        value: 10,
+                        message:
+                          "Мінімальна довжина посилання 10 символів, та  має починатись з 'http'",
+                      },
+                      maxLength: {
+                        value: 100,
+                        message:
+                          "Максимальна довжина для посилання 100 символів",
+                      },
+                    }
+                  : { required: false }
+              )}
+            />
+          </StyledAddEditInputWrapper>
+
+          {/* ================================= Посилання на сайт ЗВО */}
           <StyledAddEditInputWrapper>
             <StyledAddEditLabel>Посилання на сайт ЗВО</StyledAddEditLabel>
             <Divider
@@ -172,32 +252,36 @@ const UniversityAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте посилання на сайт ЗВО"
-              defaultValue={null}
-              // required
-              {...register("universityLink", {
-                required: true,
-                maxLength: 100,
-              })}
+              defaultValue={
+                dataContent.recordDataEdit
+                  ? dataContent.recordDataEdit.url
+                  : null
+              }
+              {...register(
+                "universityLink",
+                dataContent.action !== "Edit"
+                  ? {
+                      required: {
+                        value: true,
+                        message: "Введіть посилання ЗВО",
+                      },
+                      minLength: {
+                        value: 10,
+                        message:
+                          "Мінімальна довжина посилання 10 символів, та  має починатись з 'http'",
+                      },
+                      maxLength: {
+                        value: 100,
+                        message:
+                          "Максимальна довжина для посилання 100 символів",
+                      },
+                    }
+                  : { required: false }
+              )}
             />
           </StyledAddEditInputWrapper>
+
           {/* ================================= */}
-          <StyledAddEditInputWrapper>
-            <StyledAddEditLabel>Перелік прогамм</StyledAddEditLabel>
-            <Divider
-              orientation="vertical"
-              flexItem
-              sx={{
-                color: "var(--basic-grey)",
-              }}
-            />
-            <StyledAddEditTextInput
-              type="text"
-              placeholder="Додайте посилання на перелік прогамм"
-              defaultValue={null}
-              // required
-              {...register("programLink", { required: true, maxLength: 100 })}
-            />
-          </StyledAddEditInputWrapper>
         </StyledAddEditInputsWrapper>
 
         <CommonButton buttonType={"submit"}>{actionTitle}</CommonButton>
