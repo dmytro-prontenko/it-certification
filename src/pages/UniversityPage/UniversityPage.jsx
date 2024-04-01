@@ -9,7 +9,7 @@ import { ImageTop } from "../../commonStyles/commonStyles";
 
 const UniversityPage = () => {
   const university = useSelector(tableData);
-  const columns = ["№", "ЗВО", "Абревіатура", "Перелік прогам", "Сайт", "Дія"];
+  const columns = ["№", "ЗВО", "Абревіатура", "Перелік програм", "Сайт", "Дія"];
 
   return (
     <>
