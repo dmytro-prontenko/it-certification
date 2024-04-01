@@ -58,7 +58,19 @@ const Table = ({ view, data, columns }) => {
   // Функція, що перетворює вхідні дані для рендеру таблиці в масив масивів
   // ======================================================================
   // #region
-  data.content?.forEach((obj) => {
+  let dataToRender;
+  
+  if (location.pathname === "/department") {
+    dataToRender = data?.content.map((el) => ({
+      ...el,
+      contacts: "contacts",
+    }));
+  } else {
+    dataToRender = data?.content;
+  }
+  // console.log(dataToRender)
+
+  dataToRender?.forEach((obj) => {
     let objValues = [];
     for (let key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -71,6 +83,8 @@ const Table = ({ view, data, columns }) => {
     }
     dataArray.push(objValues);
   });
+
+  // console.log(dataArray)
   // #endregion
   // ======================================================
 

@@ -41,7 +41,7 @@ const getColumnsToRender = (columns, data, handleModal) => {
         label: column,
         options: {
           setCellProps: () => {
-            return { align: "center", padding: "0" };
+            return { align: "center", padding: "none" };
           },
           filterType: "multiselect",
         },
