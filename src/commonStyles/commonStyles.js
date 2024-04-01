@@ -4,7 +4,8 @@
 import styled from "styled-components";
 
 export const ModalWrapper = styled.div`
-  padding: 70px;
+  // padding: 70px;
+  padding: 32px 64px 64px 64px;
 `;
 
 export const StyledTableWrapper = styled.div`
@@ -78,7 +79,8 @@ export const ImageBottom = styled.div`
 export const StyledAddEditForm = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 80px auto 0;
+  // margin: 80px auto 0;
+  margin: 56px auto 0;
   gap: 40px;
 `;
 
@@ -88,6 +90,8 @@ export const ModalAddEditTitle = styled.h1`
   font-size: 40px;
   font-weight: 400;
   line-height: 150%; /* 60px */
+
+  margin-top: 43px;
 `;
 
 export const StyledAddEditInputsWrapper = styled.div`
@@ -116,17 +120,19 @@ export const StyledAddEditLabel = styled.label`
   font-size: 14px;
   font-weight: 400;
   line-height: 150%;
-  padding: 12px;
+  // padding: 12px;
+
+  padding: 13.5px 12px;
 
   color: var(--basic-black);
 `;
 
 export const StyledAddEditTextInput = styled.input`
-position: relative;
-  width: calc(100% - 288px);
-  padding: 12px;
+  position: relative;
+  // width: calc(100% - 288px);
+  width: 520px;
   border: none;
-  border-radius:8px;
+  border-radius: 8px;
 
   font-size: 14px;
   font-weight: 400;
@@ -149,7 +155,7 @@ export const ErrorsContainer = styled.p`
   bottom: -20px;
   left: 0;
 
-  color:var(--delete-red);
+  color: var(--delete-red);
 
   font-size: 10px;
   font-weight: 400;

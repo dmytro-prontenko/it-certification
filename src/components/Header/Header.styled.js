@@ -48,7 +48,7 @@ export const UserPanel = styled.div`
 `;
 
 export const UserSettingsButton = styled.div`
-  padding-top: 42px;
+  padding-top: 56px;
 `;
 
 export const UserInfo = styled.div`
@@ -66,9 +66,9 @@ export const UserAvatar = styled.div`
 `;
 
 export const UserName = styled.p`
-  font-weight: 500px;
-  font-size: 12px;
-  line-height: 1.5em;
+  font-weight: 400px;
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--basic-black);
   white-space: nowrap;
 `;

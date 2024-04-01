@@ -196,7 +196,7 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--accent-green-300)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
@@ -240,7 +240,7 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--accent-green-300)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
 
@@ -294,7 +294,7 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--accent-green-300)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
 
@@ -348,7 +348,7 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--accent-green-300)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
@@ -392,7 +392,7 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--accent-green-300)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <Controller
@@ -455,7 +455,7 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--accent-green-300)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
 
@@ -507,7 +507,7 @@ const TeachersAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--accent-green-300)!importany",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
