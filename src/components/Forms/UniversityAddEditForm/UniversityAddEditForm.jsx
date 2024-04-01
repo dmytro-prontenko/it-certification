@@ -15,6 +15,7 @@ import {
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
 import getDirtyFieldsValues from "../../../helpers/getDirtyFieldsValues";
+import handleUrlValidation from "../../../helpers/handleUrlValidation";
 
 const UniversityAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
@@ -50,7 +51,7 @@ const UniversityAddEditForm = () => {
         abbr: data.abbr,
         programs_list_url: data.programs_list_url,
         url: data.url,
-      };
+      }
     } else {
       //* Формування request body для Edit
 
@@ -60,7 +61,7 @@ const UniversityAddEditForm = () => {
           case "name":
             transformedData.name = item.value;
             break;
-          case ("abbr"):
+          case "abbr":
             transformedData.abbr = item.value;
             break;
           case "programs_list_url":
@@ -71,8 +72,8 @@ const UniversityAddEditForm = () => {
             break;
           default:
             transformedData = {};
-          }
-          console.log(transformedData);
+        }
+        console.log(transformedData);
       });
     }
 
@@ -95,7 +96,9 @@ const UniversityAddEditForm = () => {
               abbr: {
                 abbr: data.abbr,
               },
-              programs_list_url: { programs_list_url: data.programs_list_url.value },
+              programs_list_url: {
+                programs_list_url: data.programs_list_url.value,
+              },
               url: {
                 url: data.url.value,
               },
@@ -200,6 +203,9 @@ const UniversityAddEditForm = () => {
                   : { required: false }
               )}
             />
+            {errors.abbr && (
+              <ErrorsContainer>{errors.abbr.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
 
           {/* ================================= Перелік программ */}
@@ -221,7 +227,7 @@ const UniversityAddEditForm = () => {
                   ? dataContent.recordDataEdit.programs_list_url
                   : null
               }
-              // required
+              onChange={handleUrlValidation}
               {...register(
                 "programs_list_url",
                 dataContent.action !== "Edit"
@@ -248,6 +254,11 @@ const UniversityAddEditForm = () => {
                   : { required: false }
               )}
             />
+            {errors.programs_list_url && (
+              <ErrorsContainer>
+                {errors.programs_list_url.message}
+              </ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
 
           {/* ================================= Посилання на сайт ЗВО */}
@@ -268,6 +279,7 @@ const UniversityAddEditForm = () => {
                   ? dataContent.recordDataEdit.url
                   : null
               }
+              onChange={handleUrlValidation}
               {...register(
                 "url",
                 dataContent.action !== "Edit"
@@ -295,6 +307,9 @@ const UniversityAddEditForm = () => {
                   : { required: false }
               )}
             />
+            {errors.url && (
+              <ErrorsContainer>{errors.url.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
 
           {/* ================================= */}
