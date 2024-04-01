@@ -64,10 +64,10 @@ function App() {
           <Route path="/discipline-blocks" element={<BlockDisciplinesPage />} />
           <Route path="/discipline-groups" element={<GroupDisPage />} />
           <Route path="/teachers-cabinet" element={<TeacherCabinetPage />}>
-            <Route path="/calendar" element={<CalendarPage />} />
-            <Route path="/silabus" element={<SilabusPage />} />
-            <Route path="/reviews" element={<ReviewsPage />} />
-            <Route path="/lecture" element={<LecturesPage />} />
+            <Route path="calendar" element={<CalendarPage />} />
+            <Route path="silabus" element={<SilabusPage />} />
+            <Route path="reviews" element={<ReviewsPage />} />
+            <Route path="lecture" element={<LecturesPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
