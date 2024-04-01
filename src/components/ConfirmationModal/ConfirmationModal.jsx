@@ -6,6 +6,7 @@ import {
 
 import { useLocation } from "react-router-dom";
 import {
+  setCurrentPage,
   setModalContent,
   setModalStatus,
 } from "../../redux/slice/serviceSlice";
@@ -28,6 +29,7 @@ const ConfirmationModal = () => {
   const action = useSelector(selectModalContent);
   const dispatch = useDispatch();
   const currentPage = useSelector(selectCurrentPage);
+  const tableData = useSelector(tableData);
 
   let title;
   let actionToDispatch;
@@ -79,13 +81,16 @@ const ConfirmationModal = () => {
         break;
       }
       case "Delete": {
+        // TODO перевірити зміну сторінки
+        console.log("TODO перевірити зміну сторінки");
+        if ((tableData.totalElements - 1) % SIZE === 0) dispatch(setCurrentPage(currentPage - 1));
         dispatch(
           deleteTableDataThunk({
             endPoint: `${location.pathname}/${action.recordDataEdit.id}`,
-
             deleteParams: { page: currentPage, size: SIZE },
           })
         );
+
         break;
       }
     }
