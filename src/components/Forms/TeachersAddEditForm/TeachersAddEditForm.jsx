@@ -106,7 +106,6 @@ const TeachersAddEditForm = () => {
   // #region onSubmit
   const onSubmit = (data) => {
     const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
-    console.log(data);
 
     //* Формування request body для Add
     if (dataContent.action !== "Edit") {
@@ -204,7 +203,6 @@ const TeachersAddEditForm = () => {
               type="text"
               placeholder="Введіть ПІБ викладача"
               defaultValue={recordData?.name || null}
-              // required
               {...register(
                 "name",
                 dataContent.action !== "Edit"
@@ -357,7 +355,6 @@ const TeachersAddEditForm = () => {
               type="text"
               placeholder="Введіть Email викладача"
               defaultValue={recordData?.email || null}
-              // required
               {...register(
                 "email",
                 dataContent.action !== "Edit"
@@ -517,7 +514,6 @@ const TeachersAddEditForm = () => {
               type="text"
               placeholder="Введіть коментар"
               defaultValue={recordData?.comments || null}
-              // required
               {...register("comments", { required: false, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
