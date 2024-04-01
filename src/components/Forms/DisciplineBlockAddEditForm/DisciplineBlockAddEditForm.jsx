@@ -16,14 +16,20 @@ import {
   StyledAddEditLabel,
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
+import { selectDictionary } from "../../../redux/selectors/mainInfoSelectors";
+import getDirtyFieldsValues from "../../../helpers/getDirtyFieldsValues";
 
 const DisciplineBlockAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordDataEdit);
+  const blockDisciplinesTitles = useSelector(selectDictionary);
+
+  // console.log(blockDisciplinesTitles.disciplineBlocks);
+  // console.log(dataContent);
 
   const dispatch = useDispatch();
 
   let actionTitle;
+  let transformedData = {};
 
   if (dataContent.action === "Add") {
     actionTitle = "Додати";
@@ -35,15 +41,41 @@ const DisciplineBlockAddEditForm = () => {
     register,
     control,
     handleSubmit,
-    // formState: { errors },
+    getValues,
+    formState: { dirtyFields },
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
+
+    // console.log("data", data);
+    if (dataContent.action !== "Edit") {
+      transformedData = {
+        name: data.id.label,
+        description: data.description,
+      };
+    } else {
+      //* Формування request body для Edit
+      dirtyFieldsArray.forEach((item) => {
+        console.log(item);
+        switch (item.field) {
+          case "name":
+            transformedData.name = item;
+            break;
+          case "description":
+            transformedData.description = { id: item.value.value };
+            break;
+          default:
+            transformedData = {};
+        }
+      });
+    }
+
+    // console.log("transformedData", transformedData);
+
     const filteredData = Object.fromEntries(
       Object.entries(data).filter(([, value]) => value !== undefined)
     );
-    console.log(filteredData);
 
     dispatch(
       setModalContent({
@@ -74,10 +106,12 @@ const DisciplineBlockAddEditForm = () => {
               render={({ field }) => (
                 <Select
                   {...field}
-                  // options={[...Array(20)].map((el, index) => ({
-                  //   value: index,
-                  //   label: index,
-                  // }))}
+                  options={[...blockDisciplinesTitles.disciplineBlocks].map(
+                    (option) => ({
+                      value: option.id,
+                      label: option.name,
+                    })
+                  )}
                   placeholder="Оберіть назву блоку дисципліни"
                   styles={selectStyles}
                   isSearchable={true}
@@ -118,7 +152,7 @@ const DisciplineBlockAddEditForm = () => {
               placeholder="Додайте опис про блок дисциплін"
               defaultValue={dataContent.recordDataEdit?.link_standard || null}
               // required
-              {...register("link_standard", { required: true, maxLength: 100 })}
+              {...register("description", { required: true, maxLength: 100 })}
             />
           </StyledAddEditInputWrapper>
         </StyledAddEditInputsWrapper>
