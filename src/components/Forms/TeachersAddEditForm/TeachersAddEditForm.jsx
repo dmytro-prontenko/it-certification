@@ -19,6 +19,7 @@ import {
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
 import { selectDictionary } from "../../../redux/selectors/mainInfoSelectors";
+import getDirtyFieldsValues from "../../../helpers/getDirtyFieldsValues";
 
 const TeachersAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
@@ -62,13 +63,13 @@ const TeachersAddEditForm = () => {
   };
 
   let recordData;
-    if (dataContent.action === "Add") {
-      actionTitle = "Додати";
-      recordData = dataContent.recordDataAdd;
-    } else {
-      actionTitle = "Редагувати";
-      recordData = dataContent.recordDataEdit;
-    }
+  if (dataContent.action === "Add") {
+    actionTitle = "Додати";
+    recordData = dataContent.recordDataAdd;
+  } else {
+    actionTitle = "Редагувати";
+    recordData = dataContent.recordDataEdit;
+  }
 
   useEffect(() => {
     if (recordData && recordData.department) {
@@ -93,22 +94,9 @@ const TeachersAddEditForm = () => {
   // #endregion
   // ======================================================
 
-
-
   // Збір обʼєкту зі зміненими полями форми при Edit
   // ======================================================
   // #region
-
-  const getDirtyFieldsValues = () => {
-    const dirtyFieldsArray = [];
-    Object.keys(dirtyFields).forEach((field) => {
-      if (dirtyFields[field]) {
-        const value = getValues(field);
-        dirtyFieldsArray.push({ field, value });
-      }
-    });
-    return dirtyFieldsArray;
-  };
 
   // #endregion
   // ======================================================
@@ -117,7 +105,7 @@ const TeachersAddEditForm = () => {
   // ======================================================
   // #region onSubmit
   const onSubmit = (data) => {
-    const dirtyFieldsArray = getDirtyFieldsValues();
+    const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
     console.log(data);
 
     //* Формування request body для Add
