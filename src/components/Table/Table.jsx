@@ -48,7 +48,6 @@ const Table = ({ view, data, columns }) => {
     dispatch(
       getTableDataThunk({
         endPoint: `${location.pathname}`,
-        // endPoint: "/teachers",
         getParams: { page: currentPage, size: SIZE },
       })
     );
@@ -59,7 +58,6 @@ const Table = ({ view, data, columns }) => {
   // ======================================================================
   // #region
   let dataToRender;
-  
   if (location.pathname === "/department") {
     dataToRender = data?.content.map((el) => ({
       ...el,
@@ -186,6 +184,8 @@ const Table = ({ view, data, columns }) => {
   };
   // #endregion
   // ======================================================
+  console.log(columnsToRender)
+  console.log(dataArray)
 
   return (
     <StyledWrapper>
