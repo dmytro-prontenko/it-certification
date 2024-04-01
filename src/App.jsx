@@ -31,6 +31,13 @@ const DisciplinePage = lazy(() =>
   import("./pages/DisciplinePage/DisciplinePage")
 );
 const GroupDisPage = lazy(() => import("./pages/GroupDisPage/GroupDisPage"));
+const TeacherCabinetPage = lazy(() =>
+  import("./pages/TeacherCabinetPage/TeacherCabinetPage")
+);
+const CalendarPage = lazy(() => import("./components/Test/CalendarPage"));
+const SilabusPage = lazy(() => import("./components/Test/SilabusPage"));
+const ReviewsPage = lazy(() => import("./components/Test/ReviewsPage"));
+const LecturesPage = lazy(() => import("./components/Test/LecturesPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 function App() {
@@ -48,14 +55,20 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<WelcomePage />} />
           <Route path="/universities" element={<UniversityPage />} />
-          <Route path="/specialty" element={<SpecialtyPage />} />
-          <Route path="/education-level" element={<EducationLevelPage />} />
-          <Route path="/programs" element={<ProgramsPage />} />
-          <Route path="/teachers" element={<TeachersPage />} />
-          <Route path="/department" element={<DepartmentPage />} />
-          <Route path="/discipline" element={<DisciplinePage />} />
-          <Route path="/disciplines-block" element={<BlockDisciplinesPage />} />
-          <Route path="/disciplines-group" element={<GroupDisPage />} />
+          <Route path="specialty" element={<SpecialtyPage />} />
+          <Route path="education-level" element={<EducationLevelPage />} />
+          <Route path="programs" element={<ProgramsPage />} />
+          <Route path="teachers" element={<TeachersPage />} />
+          <Route path="department" element={<DepartmentPage />} />
+          <Route path="discipline" element={<DisciplinePage />} />
+          <Route path="disciplines-block" element={<BlockDisciplinesPage />} />
+          <Route path="disciplines-group" element={<GroupDisPage />} />
+          <Route path="teachers-cabinet" element={<TeacherCabinetPage />}>
+            <Route path="calendar" element={<CalendarPage />} />
+            <Route path="silabus" element={<SilabusPage />} />
+            <Route path="reviews" element={<ReviewsPage />} />
+            <Route path="lecture" element={<LecturesPage />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

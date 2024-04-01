@@ -11,6 +11,7 @@ import {
 const initialState = {
   error: null,
   isSignedIn: false,
+  role: "admin",
   isLoading: false,
   openModal: false,
   currentPage: 1,
