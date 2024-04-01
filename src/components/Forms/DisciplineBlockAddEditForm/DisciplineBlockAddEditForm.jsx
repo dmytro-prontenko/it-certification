@@ -18,24 +18,13 @@ import {
 } from "../../../commonStyles/commonStyles";
 import { selectDictionary } from "../../../redux/selectors/mainInfoSelectors";
 import getDirtyFieldsValues from "../../../helpers/getDirtyFieldsValues";
+import { useState } from "react";
 
 const DisciplineBlockAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
   const blockDisciplinesTitles = useSelector(selectDictionary);
 
-  // console.log(blockDisciplinesTitles.disciplineBlocks);
-  // console.log(dataContent);
-
   const dispatch = useDispatch();
-
-  let actionTitle;
-  let transformedData = {};
-
-  if (dataContent.action === "Add") {
-    actionTitle = "Додати";
-  } else {
-    actionTitle = "Редагувати";
-  }
 
   const {
     register,
@@ -44,6 +33,42 @@ const DisciplineBlockAddEditForm = () => {
     getValues,
     formState: { dirtyFields },
   } = useForm();
+
+  // const [blockDisciplinesOptions, setBlockDisciplinesOptions] = useState([]);
+
+  let actionTitle;
+  let transformedData = {};
+
+  // const handleUniversityChange = (selectedOption) => {
+  //   setSelectedUniversity(selectedOption);
+  //   if (selectedOption) {
+  //     const departmentData =
+  //       dictionary.university
+  //         .find((el) => el.id === selectedOption.value)
+  //         ?.department.map((cath) => ({
+  //           value: cath.id,
+  //           label: cath.name,
+  //         })) || [];
+  //     setDepartmentOptions(departmentData);
+  //   } else {
+  //     setDepartmentOptions([]);
+  //     setSelectedDepartment(null);
+  //   }
+  // };
+
+  let recordData;
+
+  if (dataContent.action === "Add") {
+    actionTitle = "Додати";
+    recordData = dataContent.recordDataAdd;
+  } else {
+    actionTitle = "Редагувати";
+    recordData = dataContent.recordDataEdit;
+  }
+
+  // const handleBlockDisciplinesClear = () => {
+  //   setBlockDisciplinesOptions(null);
+  // };
 
   const onSubmit = (data) => {
     const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
@@ -63,26 +88,31 @@ const DisciplineBlockAddEditForm = () => {
             transformedData.name = item;
             break;
           case "description":
-            transformedData.description = { id: item.value.value };
+            transformedData.description = { id: item.value };
             break;
           default:
             transformedData = {};
         }
       });
     }
-
-    // console.log("transformedData", transformedData);
-
-    const filteredData = Object.fromEntries(
-      Object.entries(data).filter(([, value]) => value !== undefined)
-    );
-
-    dispatch(
-      setModalContent({
-        action: "EditConfirm",
-        editedData: { id: dataContent.recordDataEdit.id, ...filteredData },
-      })
-    );
+    dataContent.action === "Edit"
+      ? dispatch(
+          setModalContent({
+            action: "EditConfirm",
+            editedData: {
+              ...transformedData,
+            },
+          })
+        )
+      : dispatch(
+          setModalContent({
+            action: "AddConfirm",
+            recordDataAdd: {
+              ...data,
+            },
+            editedData: { ...transformedData },
+          })
+        );
   };
   // console.log(errors);
 
@@ -105,6 +135,17 @@ const DisciplineBlockAddEditForm = () => {
               control={control}
               render={({ field }) => (
                 <Select
+                  {...register(
+                    "name",
+                    dataContent.action !== "Edit"
+                      ? {
+                          required: {
+                            value: true,
+                            message: "Оберіть назву блоку дисципліни",
+                          },
+                        }
+                      : { required: false }
+                  )}
                   {...field}
                   options={[...blockDisciplinesTitles.disciplineBlocks].map(
                     (option) => ({
