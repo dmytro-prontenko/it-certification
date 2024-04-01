@@ -20,7 +20,6 @@ import handleUrlValidation from "../../../helpers/handleUrlValidation";
 
 const SpecialtyAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordDataEdit);
 
   const dispatch = useDispatch();
 
@@ -42,7 +41,6 @@ const SpecialtyAddEditForm = () => {
 
   const onSubmit = (data) => {
     const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
-    console.log(data);
 
     if (dataContent.action !== "Edit") {
       transformedData = {
@@ -54,7 +52,6 @@ const SpecialtyAddEditForm = () => {
       //* Формування request body для Edit
 
       dirtyFieldsArray.forEach((item) => {
-        console.log(item.value);
         switch (item.field) {
           case "code":
             transformedData.code = item.value;
@@ -68,7 +65,6 @@ const SpecialtyAddEditForm = () => {
           default:
             transformedData = {};
         }
-        console.log(transformedData);
       });
     }
     // Відкриття модального вікна Confirmation modal
@@ -99,13 +95,6 @@ const SpecialtyAddEditForm = () => {
         );
   };
 
-  //==== проверка для ссылок на кириллицу
-  // const handleStandardUrlChange = (e) => {
-  //   const inputValue = e.target.value;
-  //   if (/[\u0400-\u04FF]/.test(inputValue)) {
-  //     e.target.value = inputValue.replace(/[\u0400-\u04FF]/g, "");
-  //   }
-  // };
 
   return (
     <>
