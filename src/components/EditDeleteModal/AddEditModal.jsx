@@ -25,15 +25,15 @@ const AddEditModal = () => {
       formToRender = <UniversityAddEditForm />;
       break;
     }
-    case "/specialty": {
+    case "/specialties": {
       formToRender = <SpecialtyAddEditForm />;
       break;
     }
-    case "/education-level": {
+    case "/education-levels": {
       formToRender = <EducationLevelAddEditForm />;
       break;
     }
-    case "/programs": {
+    case "/education-programs": {
       formToRender = <ProgramsAddEditForm />;
       break;
     }
@@ -41,15 +41,15 @@ const AddEditModal = () => {
       formToRender = <DepartmentAddEditForm />;
       break;
     }
-    case "/disciplines-block": {
+    case "/discipline-blocks": {
       formToRender = <DisciplineBlockAddEditForm />;
       break;
     }
-    case "/discipline": {
+    case "/disciplines": {
       formToRender = <DisciplineAddEditForm />;
       break;
     }
-    case "/disciplines-group": {
+    case "/discipline-groups": {
       formToRender = <DisciplineGroupAddEditForm />;
       break;
     }

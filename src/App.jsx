@@ -54,16 +54,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<WelcomePage />} />
+          <Route path="/teachers" element={<TeachersPage />} />
           <Route path="/universities" element={<UniversityPage />} />
-          <Route path="specialty" element={<SpecialtyPage />} />
-          <Route path="education-level" element={<EducationLevelPage />} />
-          <Route path="programs" element={<ProgramsPage />} />
-          <Route path="teachers" element={<TeachersPage />} />
-          <Route path="department" element={<DepartmentPage />} />
-          <Route path="discipline" element={<DisciplinePage />} />
-          <Route path="disciplines-block" element={<BlockDisciplinesPage />} />
-          <Route path="disciplines-group" element={<GroupDisPage />} />
-          <Route path="teachers-cabinet" element={<TeacherCabinetPage />}>
+          <Route path="/specialties" element={<SpecialtyPage />} />
+          <Route path="/education-levels" element={<EducationLevelPage />} />
+          <Route path="/education-programs" element={<ProgramsPage />} />
+          <Route path="/department" element={<DepartmentPage />} />
+          <Route path="/disciplines" element={<DisciplinePage />} />
+          <Route path="/discipline-blocks" element={<BlockDisciplinesPage />} />
+          <Route path="/discipline-groups" element={<GroupDisPage />} />
+          <Route path="/teachers-cabinet" element={<TeacherCabinetPage />}>
             <Route path="calendar" element={<CalendarPage />} />
             <Route path="silabus" element={<SilabusPage />} />
             <Route path="reviews" element={<ReviewsPage />} />
