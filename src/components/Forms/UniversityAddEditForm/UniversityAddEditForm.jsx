@@ -17,6 +17,7 @@ import {
   StyledAddEditLabel,
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
+import getDirtyFieldsValues from "../../../helpers/getDirtyFieldsValues";
 
 const UniversityAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
@@ -25,7 +26,7 @@ const UniversityAddEditForm = () => {
   const dispatch = useDispatch();
 
   let actionTitle;
-  // let transformedData = {};
+  let transformedData = {};
 
   if (dataContent.action === "Add") {
     actionTitle = "Додати";
@@ -36,74 +37,80 @@ const UniversityAddEditForm = () => {
   const {
     register,
     handleSubmit,
-    // getValues,
-    formState: { errors },
+    getValues,
+    formState: { errors, dirtyFields },
   } = useForm();
 
   const onSubmit = (data) => {
-    // const dirtyFieldsArray = getDirtyFieldsValues();
+    const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
     console.log(data);
 
-    //* Формування request body для Add
+    // * Формування request body для Add
 
-    // if (dataContent.action !== "Edit") {
-    //   transformedData = {
-    //     name: data.name,
-    //     abbr: {
-    //       id: data.abbr.value,
-    //     },
-    //     programLink: {
-    //       id: data.programLink.value,
-    //     },
-    //     universityLink: {
-    //       id: data.universityLink.value,
-    //     },
-    //   };
+    if (dataContent.action !== "Edit") {
+      transformedData = {
+        name: data.name,
+        abbr: {
+          id: data.abbr.value,
+        },
+        programLink: {
+          id: data.programLink.value,
+        },
+        universityLink: {
+          id: data.universityLink.value,
+        },
+      };
+    } else {
+      //* Формування request body для Edit
 
-    //  } else {
+      dirtyFieldsArray.forEach((item) => {
+        switch (item.field) {
+          case "name":
+            transformedData.name = item.value;
+            break;
+          case ("abbr", "university"):
+            transformedData.abbr = { id: item.value.value };
+            break;
+          case "programLink":
+            transformedData.programLink = { id: item.value.value };
+            break;
+          case "universityLink":
+            transformedData.universityLink = { id: item.value.value };
+            break;
+          default:
+            transformedData = {};
+        }
+      });
+    }
 
-    //* Формування request body для Edit
-
-    //  dirtyFieldsArray.forEach((item) => {
-    //   switch (item.field) {
-    //     case "name":
-    //       transformedData.name = item.value;
-    //       break;
-    //     case ("abbr", "university"):
-    //       transformedData.abbr = { id: item.value.value };
-    //       break;
-    //     case "programLink":
-    //       transformedData.programLink = { id: item.value.value };
-    //       break;
-    //     case "universityLink":
-    //       transformedData.universityLink = { id: item.value.value };
-    //       break;
-    //     default:
-    //       transformedData = {};
-    // }
-    // });
-    // }
-
+    // Відкриття модального вікна Confirmation modal
     dataContent.action === "Edit"
       ? dispatch(
           setModalContent({
             action: "EditConfirm",
-            recordDataEdit: {
-              ...dataContent.recordDataEdit,
-              ...data,
-              // ...transformedData,
+            editedData: {
+              ...transformedData,
             },
           })
         )
       : dispatch(
           setModalContent({
             action: "AddConfirm",
-            // editedData: { ...data, ...transformedData },
-            editedData: { ...data },
+            recordDataAdd: {
+              ...data,
+              name: { name: data.name.label },
+              abbr: {
+                abbr: data.department.label,
+              },
+              programLink: { programLink: data.programLink.value },
+              universityLink: {
+                universityLink: data.universityLink.value,
+              },
+            },
+            editedData: { ...transformedData },
           })
         );
   };
-  // console.log(errors);
 
   return (
     <>
