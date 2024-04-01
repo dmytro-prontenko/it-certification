@@ -44,46 +44,45 @@ const UniversityAddEditForm = () => {
     // const dirtyFieldsArray = getDirtyFieldsValues();
     console.log(data);
 
+    //* Формування request body для Add
 
-//* Формування request body для Add
+    // if (dataContent.action !== "Edit") {
+    //   transformedData = {
+    //     name: data.name,
+    //     abbr: {
+    //       id: data.abbr.value,
+    //     },
+    //     programLink: {
+    //       id: data.programLink.value,
+    //     },
+    //     universityLink: {
+    //       id: data.universityLink.value,
+    //     },
+    //   };
 
-// if (dataContent.action !== "Edit") {
-//   transformedData = {
-//     name: data.name,
-//     abbr: {
-//       id: data.abbr.value,
-//     },
-//     programLink: {
-//       id: data.programLink.value,
-//     },
-//     universityLink: {
-//       id: data.universityLink.value,
-//     },
-//   };
+    //  } else {
 
-//  } else {
+    //* Формування request body для Edit
 
-//* Формування request body для Edit
-
-//  dirtyFieldsArray.forEach((item) => {
-//   switch (item.field) {
-//     case "name":
-//       transformedData.name = item.value;
-//       break;
-//     case ("abbr", "university"):
-//       transformedData.abbr = { id: item.value.value };
-//       break;
-//     case "programLink":
-//       transformedData.programLink = { id: item.value.value };
-//       break;
-//     case "universityLink":
-//       transformedData.universityLink = { id: item.value.value };
-//       break;
-//     default:
-//       transformedData = {};
-// }
-// });
-// }
+    //  dirtyFieldsArray.forEach((item) => {
+    //   switch (item.field) {
+    //     case "name":
+    //       transformedData.name = item.value;
+    //       break;
+    //     case ("abbr", "university"):
+    //       transformedData.abbr = { id: item.value.value };
+    //       break;
+    //     case "programLink":
+    //       transformedData.programLink = { id: item.value.value };
+    //       break;
+    //     case "universityLink":
+    //       transformedData.universityLink = { id: item.value.value };
+    //       break;
+    //     default:
+    //       transformedData = {};
+    // }
+    // });
+    // }
 
     dataContent.action === "Edit"
       ? dispatch(
@@ -119,7 +118,7 @@ const UniversityAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
@@ -164,7 +163,7 @@ const UniversityAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
@@ -203,7 +202,7 @@ const UniversityAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
@@ -246,7 +245,7 @@ const UniversityAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
