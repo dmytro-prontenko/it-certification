@@ -23,13 +23,14 @@ import {
   ConfirmationWrapper,
 } from "./ConfirmationModal.styled";
 import { SIZE } from "../../service/constant";
+import { tableData } from "../../redux/selectors/mainInfoSelectors";
 
 const ConfirmationModal = () => {
   const location = useLocation();
   const action = useSelector(selectModalContent);
   const dispatch = useDispatch();
   const currentPage = useSelector(selectCurrentPage);
-  const tableData = useSelector(tableData);
+  const tableDataForPagination = useSelector(tableData);
 
   let title;
   let actionToDispatch;
@@ -83,7 +84,8 @@ const ConfirmationModal = () => {
       case "Delete": {
         // TODO перевірити зміну сторінки
         console.log("TODO перевірити зміну сторінки");
-        if ((tableData.totalElements - 1) % SIZE === 0) dispatch(setCurrentPage(currentPage - 1));
+        if ((tableDataForPagination.totalElements - 1) % SIZE === 0)
+          dispatch(setCurrentPage(currentPage - 1));
         dispatch(
           deleteTableDataThunk({
             endPoint: `${location.pathname}/${action.recordDataEdit.id}`,

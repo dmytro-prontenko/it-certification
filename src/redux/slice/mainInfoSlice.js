@@ -9,79 +9,7 @@ import {
 
 const initialState = {
   tableData: [],
-  serviceInfo: {
-    position: [
-      {
-        id: 1,
-        name: "професор",
-      },
-    ],
-    degree: [
-      {
-        id: 2,
-        name: "phd",
-      },
-    ],
-    university: [
-      {
-        id: 3,
-        name: "Харківський національний університет ім.Каразіна",
-        abbr: "ХНУ",
-        department: [
-          {
-            id: 1,
-            name: "Кафедра",
-          },
-          {
-            id: 2,
-            name: "Кафедра2",
-          },
-        ],
-      },
-      {
-        id: 5,
-        name: "Харківський національний університет ім.Каразіна2",
-        abbr: "ХНУ2",
-        department: [
-          {
-            id: 6,
-            name: "Інформаційні технології2",
-          },
-        ],
-      },
-    ],
-    specialty: [
-      {
-        id: 1,
-        code: " ",
-        name: " ",
-      },
-    ],
-    educationLevels: [
-      {
-        id: 1,
-        name: " ",
-      },
-    ],
-    discipline: [
-      {
-        id: 1,
-        name: " ",
-      },
-    ],
-    disciplineGroups: [
-      {
-        id: 1,
-        name: " ",
-      },
-    ],
-    disciplineBlocks: [
-      {
-        id: 1,
-        name: " ",
-      },
-    ],
-  },
+  serviceInfo: null,
 };
 
 const mainInfoSlice = createSlice({
@@ -103,7 +31,7 @@ const mainInfoSlice = createSlice({
         state.tableData = action.payload;
       })
       .addCase(serviceInfoThunk.fulfilled, (state, action) => {
-        state.serviceInfo = { ...action.payload.serviceInfo };
+        state.serviceInfo = action.payload;
       });
   },
 });
