@@ -110,7 +110,8 @@ export const StyledAddEditInputWrapper = styled.div`
 export const StyledAddEditLabel = styled.label`
   position: relative;
 
-  width: 288px;
+  // width: 288px;
+  width: 212px;
   font-family: Roboto;
   font-size: 14px;
   font-weight: 400;

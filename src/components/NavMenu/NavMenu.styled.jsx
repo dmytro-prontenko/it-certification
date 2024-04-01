@@ -21,14 +21,10 @@ export const PageLink = styled(NavLink)`
 `;
 
 export const ListPage = styled.ul`
-  // padding-bottom: 23px;
-  // padding-top: 23px;
+  max-width: 815px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
- 
 `;
-
-

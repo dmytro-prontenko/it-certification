@@ -2,7 +2,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { Chip, IconButton, MenuItem, Select, Tooltip } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { tableTheme } from "../../helpers/MUI_themes/table_theme";
@@ -21,8 +21,8 @@ import {
   setModalStatus,
 } from "../../redux/slice/serviceSlice";
 import {
-  getTableDataThunk,
-  serviceInfoThunk,
+  // getTableDataThunk,
+  // serviceInfoThunk,
 } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
 import {
@@ -44,15 +44,16 @@ const Table = ({ view, data, columns }) => {
 
   let dataArray = [];
 
-  useEffect(() => {
-    dispatch(
-      getTableDataThunk({
-        endPoint: `${location.pathname}`,
-        getParams: { page: currentPage, size: SIZE },
-      })
-    );
-    if (!serviceInfo) dispatch(serviceInfoThunk());
-  }, [currentPage]);
+  // useEffect(() => {
+  //   dispatch(
+  //     getTableDataThunk({
+  //       // endPoint: `${location.pathname}`,
+  //       endPoint: "/teachers",
+  //       getParams: { page: currentPage, size: SIZE },
+  //     })
+  //   );
+  //   if (!serviceInfo) dispatch(serviceInfoThunk());
+  // }, [currentPage]);
 
   // Функція, що перетворює вхідні дані для рендеру таблиці в масив масивів
   // ======================================================================
