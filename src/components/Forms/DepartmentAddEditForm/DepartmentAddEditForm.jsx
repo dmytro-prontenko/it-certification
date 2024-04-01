@@ -19,7 +19,7 @@ import {
 
 const DepartmentAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordData);
+  console.log(dataContent.recordDataEdit);
 
   const dispatch = useDispatch();
 
@@ -41,18 +41,18 @@ const DepartmentAddEditForm = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-          const transformedData = {
-            status: data.status.value,
-            position: data.position.value,
-            institution: data.institution.value,
-          };
+    const transformedData = {
+      status: data.status.value,
+      position: data.position.value,
+      institution: data.institution.value,
+    };
     console.log(data);
     dataContent.action === "Edit"
       ? dispatch(
           setModalContent({
             action: "EditConfirm",
-            recordData: {
-              ...dataContent.recordData,
+            recordDataEdit: {
+              ...dataContent.recordDataEdit,
               ...data,
               ...transformedData,
             },
@@ -97,10 +97,10 @@ const DepartmentAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.id,
-                          label: dataContent.recordData.id,
+                          value: dataContent.recordDataEdit.id,
+                          label: dataContent.recordDataEdit.id,
                         }
                       : null
                   }
@@ -129,7 +129,7 @@ const DepartmentAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте сайт кафедри"
-              defaultValue={dataContent.recordData?.link || null}
+              defaultValue={dataContent.recordDataEdit?.link || null}
               // required
               {...register("link", { required: true, maxLength: 100 })}
             />
@@ -149,7 +149,7 @@ const DepartmentAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте опис про кафедру"
-              defaultValue={dataContent.recordData?.link || null}
+              defaultValue={dataContent.recordDataEdit?.link || null}
               // required
               {...register("link", { required: true, maxLength: 100 })}
             />
@@ -181,7 +181,7 @@ const DepartmentAddEditForm = () => {
                   sSearchable={true}
                   isClearable={true}
                   maxMenuHeight={145}
-                  defaultValue={dataContent.recordData?.name || null}
+                  defaultValue={dataContent.recordDataEdit?.name || null}
                   // required
                 />
               )}
@@ -207,7 +207,7 @@ const DepartmentAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте контакти"
-              defaultValue={dataContent.recordData?.link || null}
+              defaultValue={dataContent.recordDataEdit?.link || null}
               // required
               {...register("link", { required: true, maxLength: 100 })}
             />

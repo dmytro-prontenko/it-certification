@@ -11,9 +11,10 @@ import { selectOpenModal } from "./redux/selectors/serviceSelectors";
 import { setModalContent, setModalStatus } from "./redux/slice/serviceSlice";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
-const InstitutionPage = lazy(() =>
-  import("./pages/InstitutionPage/InstitutionPage")
+const UniversityPage = lazy(() =>
+  import("./pages/UniversityPage/UniversityPage")
 );
+
 const SpecialtyPage = lazy(() => import("./pages/SpecialtyPage/SpecialtyPage"));
 const EducationLevelPage = lazy(() =>
   import("./pages/EducationLevelPage/EducationLevelPage")
@@ -45,7 +46,7 @@ function App() {
 
   const handleCloseModal = () => {
     dispatch(setModalStatus(false));
-    dispatch(setModalContent({ action: null, recordData: null }));
+    dispatch(setModalContent({ action: null, recordDataEdit: null }));
   };
 
   return (
@@ -53,7 +54,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<WelcomePage />} />
-          <Route path="institution" element={<InstitutionPage />} />
+          <Route path="/universities" element={<UniversityPage />} />
           <Route path="specialty" element={<SpecialtyPage />} />
           <Route path="education-level" element={<EducationLevelPage />} />
           <Route path="programs" element={<ProgramsPage />} />

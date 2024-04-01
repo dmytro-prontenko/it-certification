@@ -13,7 +13,7 @@ const initialState = {
     position: [
       {
         id: 1,
-        name: "доцент",
+        name: "професор",
       },
     ],
     degree: [
@@ -29,12 +29,12 @@ const initialState = {
         abbr: "ХНУ",
         department: [
           {
-            id: 6,
-            name: "Інформаційні технології",
+            id: 1,
+            name: "Кафедра",
           },
           {
-            id: 4,
-            name: "Інформаційні технології6",
+            id: 2,
+            name: "Кафедра2",
           },
         ],
       },

@@ -10,7 +10,7 @@ const NavMenu = () => {
           <PageLink to="/teachers">Викладачі</PageLink>
         </li>
         <li>
-          <PageLink to="/institution">ЗВО</PageLink>
+          <PageLink to="/universities">ЗВО</PageLink>
         </li>
         <li>
           <PageLink to="/specialty">Спеціальність</PageLink>

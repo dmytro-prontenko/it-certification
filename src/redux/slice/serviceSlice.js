@@ -17,7 +17,8 @@ const initialState = {
   currentPage: 1,
   modalContent: {
     action: null,
-    recordData: null,
+    recordDataEdit: null,
+    recordDataAdd: null,
     editedData: null,
   },
 };

@@ -19,7 +19,7 @@ import {
 
 const DisciplineAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordData);
+  console.log(dataContent.recordDataEdit);
 
   const dispatch = useDispatch();
 
@@ -48,7 +48,7 @@ const DisciplineAddEditForm = () => {
     dispatch(
       setModalContent({
         action: "EditConfirm",
-        editedData: { id: dataContent.recordData.id, ...filteredData },
+        editedData: { id: dataContent.recordDataEdit.id, ...filteredData },
       })
     );
   };
@@ -84,10 +84,10 @@ const DisciplineAddEditForm = () => {
                   isClearable={true}
                   maxMenuHeight={150}
                   defaultValue={
-                    dataContent.recordData
+                    dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordData.id,
-                          label: dataContent.recordData.id,
+                          value: dataContent.recordDataEdit.id,
+                          label: dataContent.recordDataEdit.id,
                         }
                       : null
                   }
@@ -128,7 +128,7 @@ const DisciplineAddEditForm = () => {
                   sSearchable={true}
                   isClearable={true}
                   maxMenuHeight={145}
-                  defaultValue={dataContent.recordData?.name || null}
+                  defaultValue={dataContent.recordDataEdit?.name || null}
                   // required
                 />
               )}
@@ -166,7 +166,7 @@ const DisciplineAddEditForm = () => {
                   sSearchable={true}
                   isClearable={true}
                   maxMenuHeight={145}
-                  defaultValue={dataContent.recordData?.name || null}
+                  defaultValue={dataContent.recordDataEdit?.name || null}
                   // required
                 />
               )}
@@ -192,7 +192,7 @@ const DisciplineAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте посилання на сілабус"
-              defaultValue={dataContent.recordData?.link_standard || null}
+              defaultValue={dataContent.recordDataEdit?.link_standard || null}
               // required
               {...register("link_standard", { required: true, maxLength: 100 })}
             />
@@ -214,7 +214,7 @@ const DisciplineAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте посилання на робочу програму"
-              defaultValue={dataContent.recordData?.link_standard || null}
+              defaultValue={dataContent.recordDataEdit?.link_standard || null}
               // required
               {...register("link_standard", { required: true, maxLength: 100 })}
             />
