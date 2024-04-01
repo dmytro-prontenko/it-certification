@@ -226,12 +226,16 @@ const TeachersAddEditForm = () => {
                         message: "Введіть імʼя викладача",
                       },
                       minLength: {
-                        value: 2,
-                        message: "Мінімальна довжина для імені 2 символи",
+                        value: 1,
+                        message: "Мінімальна довжина для імені 1 символ",
                       },
                       maxLength: {
                         value: 100,
                         message: "Максимальна довжина для імені 100 символів",
+                      },
+                      pattern: {
+                        value: /^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ']+$/,
+                        message: "Ім'я повинно містити тільки літери",
                       },
                     }
                   : { required: false }
@@ -267,10 +271,6 @@ const TeachersAddEditForm = () => {
                             value: true,
                             message: "Оберіть посаду викладача",
                           },
-                          minLength: {
-                            value: 3,
-                            message: "Мінімальна довжина 6 символів",
-                          },
                         }
                       : { required: false }
                   )}
@@ -279,7 +279,7 @@ const TeachersAddEditForm = () => {
                     value: el.id,
                     label: el.name,
                   }))}
-                  placeholder="Оберіть зі списку"
+                  placeholder="Оберіть посаду викладача"
                   styles={selectStyles}
                   isSearchable={true}
                   isClearable={true}
@@ -324,10 +324,6 @@ const TeachersAddEditForm = () => {
                           required: {
                             value: true,
                             message: "Оберіть науковий ступінь викладача",
-                          },
-                          minLength: {
-                            value: 3,
-                            message: "Мінімальна довжина 6 символів",
                           },
                         }
                       : { required: false }
@@ -383,10 +379,17 @@ const TeachersAddEditForm = () => {
                         message: "Введіть email викладача",
                       },
                       minLength: {
-                        value: 3,
+                        value: 6,
                         message: "Мінімальна довжина 6 символів",
                       },
-                      pattern: /^\S+@\S+$/i,
+                      maxLength: {
+                        value: 100,
+                        message: "Максимальна довжина для email 100 символів",
+                      },
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                        message: "Введіть коректний email",
+                      },
                     }
                   : { required: false }
               )}
@@ -418,11 +421,7 @@ const TeachersAddEditForm = () => {
                       ? {
                           required: {
                             value: true,
-                            message: "Введіть ЗВО викладача",
-                          },
-                          minLength: {
-                            value: 3,
-                            message: "Мінімальна довжина 6 символів",
+                            message: "Оберіть ЗВО викладача",
                           },
                         }
                       : { required: false }
@@ -483,11 +482,7 @@ const TeachersAddEditForm = () => {
                   {...register("department", {
                     required: {
                       value: false,
-                      message: "Введіть ЗВО викладача",
-                    },
-                    minLength: {
-                      value: 3,
-                      message: "Мінімальна довжина 6 символів",
+                      message: "Оберіть кафедру викладача",
                     },
                   })}
                   {...field}
