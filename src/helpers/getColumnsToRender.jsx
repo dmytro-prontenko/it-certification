@@ -93,6 +93,38 @@ const getColumnsToRender = (columns, data, handleModal) => {
       };
     }
 
+    if (column.includes("Назва блоку дисципліни")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "left", width: "568px" };
+          },
+          setCellProps: () => {
+            return { align: "left", width: "568px" };
+          },
+          filterType: "multiselect",
+        },
+      };
+    }
+
+    if (column.includes("Опис")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "left", width: "628px" };
+          },
+          setCellProps: () => {
+            return { align: "left", width: "628px" };
+          },
+          filterType: "multiselect",
+        },
+      };
+    }
+
     if (column.includes("Дія")) {
       const actionStyles = {
         existingStyles: {
@@ -171,7 +203,6 @@ const getColumnsToRender = (columns, data, handleModal) => {
     };
   });
 
-
-  return columnsToRender
+  return columnsToRender;
 };
-export default getColumnsToRender
+export default getColumnsToRender;
