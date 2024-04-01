@@ -9,6 +9,7 @@ import Modal from "./components/Modal/Modal";
 import ModalContent from "./components/ModalContent/ModalContent";
 import { selectOpenModal } from "./redux/selectors/serviceSelectors";
 import { setModalContent, setModalStatus } from "./redux/slice/serviceSlice";
+import ScrollButton from "./helpers/Scroll-to-top/ScrollButton";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const UniversityPage = lazy(() =>
@@ -76,6 +77,8 @@ function App() {
       <Modal open={modalStatus} onClose={handleCloseModal}>
         {<ModalContent />}
       </Modal>
+
+      <ScrollButton />
     </>
   );
 }
