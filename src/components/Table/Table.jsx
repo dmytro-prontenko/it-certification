@@ -48,7 +48,6 @@ const Table = ({ view, data, columns }) => {
     dispatch(
       getTableDataThunk({
         endPoint: `${location.pathname}`,
-        // endPoint: "/teachers",
         getParams: { page: currentPage, size: SIZE },
       })
     );
@@ -58,7 +57,18 @@ const Table = ({ view, data, columns }) => {
   // Функція, що перетворює вхідні дані для рендеру таблиці в масив масивів
   // ======================================================================
   // #region
-  data.content?.forEach((obj) => {
+  let dataToRender;
+  if (location.pathname === "/department") {
+    dataToRender = data?.content.map((el) => ({
+      ...el,
+      contacts: "contacts",
+    }));
+  } else {
+    dataToRender = data?.content;
+  }
+  // console.log(dataToRender)
+
+  dataToRender?.forEach((obj) => {
     let objValues = [];
     for (let key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -71,6 +81,8 @@ const Table = ({ view, data, columns }) => {
     }
     dataArray.push(objValues);
   });
+
+  // console.log(dataArray)
   // #endregion
   // ======================================================
 
@@ -172,6 +184,8 @@ const Table = ({ view, data, columns }) => {
   };
   // #endregion
   // ======================================================
+  console.log(columnsToRender)
+  console.log(dataArray)
 
   return (
     <StyledWrapper>
