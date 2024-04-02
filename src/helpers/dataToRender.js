@@ -198,3 +198,28 @@ export const departmentTableData = (columns, data) => {
   });
   return dataArrays;
 };
+
+export const disciplineBlockLevelTableData = (columns, data) => {
+  function objectToArray(index, columns, data) {
+    const dataArray = [index + 1];
+    for (let key of columns) {
+      switch (key) {
+        case "Назва блоку дисципліни":
+          dataArray.push(data.name);
+          break;
+        case "Опис":
+          dataArray.push(data.description);
+          break;
+        default:
+          break;
+      }
+    }
+    return dataArray;
+  }
+
+  const dataArrays = [];
+  data?.forEach((obj, index) => {
+    dataArrays.push(objectToArray(index, columns, obj));
+  });
+  return dataArrays;
+};
