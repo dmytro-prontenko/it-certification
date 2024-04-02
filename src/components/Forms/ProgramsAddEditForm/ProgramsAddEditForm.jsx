@@ -200,16 +200,16 @@ const ProgramsAddEditForm = () => {
                   message: "Введіть назву програми",
                 },
                 minLength: {
-                  value: 1,
-                  message: "Мінімальна довжина для назву 1 символ",
+                  value: 2,
+                  message: "Мінімальна довжина для назви 2 символ",
                 },
                 maxLength: {
                   value: 100,
-                  message: "Максимальна довжина для назву 100 символів",
+                  message: "Максимальна довжина для назви 100 символів",
                 },
                 pattern: {
                   value: /^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ' ]+$/,
-                  message: "Назву повинна містити тільки літери",
+                  message: "Назва повинна містити тільки літери",
                 },
               })}
             />
@@ -417,7 +417,8 @@ const ProgramsAddEditForm = () => {
                 },
                 maxLength: {
                   value: 100,
-                  message: "Максимальна довжина для назву 100 символів",
+                  message:
+                    "Максимальна довжина для прізвища, ім'я та по-батькові гаранта 100 символів",
                 },
                 pattern: {
                   value: /^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ' ]+$/,
@@ -502,13 +503,9 @@ const ProgramsAddEditForm = () => {
                   value: true,
                   message: "Введіть посилання на програму",
                 },
-                minLength: {
-                  value: 1,
-                  message: "Мінімальна довжина для посилання 1 символ",
-                },
                 maxLength: {
-                  value: 100,
-                  message: "Максимальна довжина для посилання 100 символів",
+                  value: 255,
+                  message: "Максимальна довжина для посилання 255 символів",
                 },
                 pattern: {
                   value:
@@ -542,10 +539,6 @@ const ProgramsAddEditForm = () => {
                 required: {
                   value: true,
                   message: "Введіть посилання на силабус",
-                },
-                minLength: {
-                  value: 1,
-                  message: "Мінімальна довжина для посилання 1 символ",
                 },
                 maxLength: {
                   value: 100,
