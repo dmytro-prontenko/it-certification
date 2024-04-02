@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CalendarContainer = styled.div`
   width: 516px;
-  height: 498px;
+  /* height: 498px; */
   padding: 40px 0px;
   display: flex;
   flex-direction: column;

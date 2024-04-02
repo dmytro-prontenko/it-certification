@@ -37,7 +37,6 @@ const CalendarMonths = () => {
   const year = currentDate.getFullYear();
 
   const firstDayOfMonth = new Date(year, month, 1);
-  console.log(firstDayOfMonth);
   let startingDay = firstDayOfMonth.getDay();
   startingDay = startingDay === 0 ? 6 : startingDay - 1;
 
@@ -45,20 +44,32 @@ const CalendarMonths = () => {
   const numWeeks = Math.ceil((numDaysInMonth + startingDay) / 7);
 
   const calendar = [];
-
   let day = 1;
   const prevMonthNumDays = new Date(year, month, 0).getDate();
+
   for (let i = 0; i < numWeeks; i += 1) {
     const week = [];
     for (let j = 0; j < 7; j += 1) {
       if (i === 0 && j < startingDay) {
         const prevMonthDay = prevMonthNumDays - (startingDay - j - 1);
-        week.push({ day: prevMonthDay, isCurrentMonth: false });
+        week.push({
+          day: prevMonthDay,
+          isCurrentMonth: false,
+          monthIdx: month === 0 ? 11 : month - 1,
+        });
       } else if (day <= numDaysInMonth) {
-        week.push({ day, isCurrentMonth: true });
+        week.push({
+          day,
+          isCurrentMonth: true,
+          monthIdx: month,
+        });
         day += 1;
       } else {
-        week.push({ day: day - numDaysInMonth, isCurrentMonth: false });
+        week.push({
+          day: day - numDaysInMonth,
+          isCurrentMonth: false,
+          monthIdx: month === 11 ? 0 : month + 1,
+        });
         day += 1;
       }
     }
@@ -67,9 +78,11 @@ const CalendarMonths = () => {
 
   const isCurrentDay = (day, monthIndex, year) => {
     const today = new Date();
+    const currentMonthIndex = today.getMonth();
+
     return (
       day === today.getDate() &&
-      months[monthIndex] === months[today.getMonth()] &&
+      monthIndex === currentMonthIndex &&
       year === today.getFullYear()
     );
   };
@@ -130,15 +143,19 @@ const CalendarMonths = () => {
                   <TableElem
                     key={index}
                     style={{
-                      color: isCurrentDay(data.day)
+                      color: isCurrentDay(data.day, data.monthIdx, year)
                         ? undefined
                         : data.isCurrentMonth
                         ? "#111010"
                         : "#8C9098",
-                      border: isCurrentDay(data.day, month, year)
+                      border: isCurrentDay(data.day, data.monthIdx, year)
                         ? "1px solid #E9A116"
                         : "none",
-                      backgroundColor: isCurrentDay(data.day, month, year)
+                      backgroundColor: isCurrentDay(
+                        data.day,
+                        data.monthIdx,
+                        year
+                      )
                         ? "#FFF1C6"
                         : "inherit",
                     }}
