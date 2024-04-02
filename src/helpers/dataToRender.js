@@ -164,3 +164,37 @@ export const programsTableData = (columns, data) => {
   });
   return dataArrays;
 };
+
+export const departmentTableData = (columns, data) => {
+  function objectToArray(index, columns, data) {
+    const dataArray = [index + 1];
+    for (let key of columns) {
+      switch (key) {
+        case "Назва кафедри":
+          dataArray.push(data.name);
+          break;
+        case "ЗВО":
+          dataArray.push(data.university.name);
+          break;
+        case "Опис":
+          dataArray.push(data.description);
+          break;
+        case "Контакт":
+          dataArray.push("contact");
+          break;
+        case "Кафедра":
+          dataArray.push(data.url);
+          break;
+        default:
+          break;
+      }
+    }
+    return dataArray;
+  }
+
+  const dataArrays = [];
+  data?.forEach((obj, index) => {
+    dataArrays.push(objectToArray(index, columns, obj));
+  });
+  return dataArrays;
+};
