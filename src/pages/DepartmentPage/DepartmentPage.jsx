@@ -1,17 +1,17 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import {
   ImageBottom,
+  ImageTop,
   StyledTableWrapper,
 } from "../../commonStyles/commonStyles";
 import Table from "../../components/Table/Table";
+import { departmentTableData } from "../../helpers/dataToRender";
 import { tableData } from "../../redux/selectors/mainInfoSelectors";
-import { ImageTop } from "../../commonStyles/commonStyles";
-import { useLocation } from "react-router-dom";
 import { selectCurrentPage } from "../../redux/selectors/serviceSelectors";
-import { useEffect } from "react";
 import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
-import { departmentTableData } from "../../helpers/dataToRender";
 
 const DepartmentPage = () => {
   const dispatch = useDispatch();
@@ -38,7 +38,11 @@ const DepartmentPage = () => {
     "Дія",
   ];
 
-  const dataToRender = departmentTableData(columns, department.content);
+  let dataToRender;
+
+  if (Object.prototype.hasOwnProperty.call(department, "content")) {
+    dataToRender = departmentTableData(columns, department.content);
+  }
 
   return (
     <>

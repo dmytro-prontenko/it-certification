@@ -2,18 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Table from "../../components/Table/Table";
 
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import {
   ImageBottom,
   ImageTop,
   StyledTableWrapper,
 } from "../../commonStyles/commonStyles";
+import { specialtyTableData } from "../../helpers/dataToRender";
 import { tableData } from "../../redux/selectors/mainInfoSelectors";
-import { useLocation } from "react-router-dom";
 import { selectCurrentPage } from "../../redux/selectors/serviceSelectors";
-import { useEffect } from "react";
 import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
-import { specialtyTableData } from "../../helpers/dataToRender";
 
 const SpecialtyPage = () => {
   const dispatch = useDispatch();
@@ -38,7 +38,11 @@ const SpecialtyPage = () => {
     "Дія",
   ];
 
-  const dataToRender = specialtyTableData(columns, specialty.content);
+  let dataToRender;
+
+  if (Object.prototype.hasOwnProperty.call(specialty, "content")) {
+    dataToRender = specialtyTableData(columns, specialty.content);
+  }
 
   return (
     <>

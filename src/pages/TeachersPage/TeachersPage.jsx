@@ -2,17 +2,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Table from "../../components/Table/Table";
 
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import {
   ImageBottom,
   ImageTop,
   StyledTableWrapper,
 } from "../../commonStyles/commonStyles";
-import { tableData } from "../../redux/selectors/mainInfoSelectors";
 import { teacherTableData } from "../../helpers/dataToRender";
-import { useEffect } from "react";
-import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
-import { useLocation } from "react-router-dom";
+import { tableData } from "../../redux/selectors/mainInfoSelectors";
 import { selectCurrentPage } from "../../redux/selectors/serviceSelectors";
+import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
 
 const TeachersPage = () => {
@@ -42,12 +42,17 @@ const TeachersPage = () => {
     "Дія",
   ];
 
-  const dataToRender = teacherTableData(columns, teachers.content);
+  let dataToRender;
+
+  if (Object.prototype.hasOwnProperty.call(teachers, "content")) {
+    dataToRender = teacherTableData(columns, teachers.content);
+  }
 
   return (
     <>
       <StyledTableWrapper className="container">
         <ImageTop></ImageTop>
+
         <Table
           view={"Перелік викладачів"}
           data={dataToRender}

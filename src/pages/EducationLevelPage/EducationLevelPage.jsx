@@ -1,17 +1,17 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import {
   ImageBottom,
   ImageTop,
   StyledTableWrapper,
 } from "../../commonStyles/commonStyles";
 import Table from "../../components/Table/Table";
+import { educationLevelTableData } from "../../helpers/dataToRender";
 import { tableData } from "../../redux/selectors/mainInfoSelectors";
-import { useLocation } from "react-router-dom";
 import { selectCurrentPage } from "../../redux/selectors/serviceSelectors";
-import { useEffect } from "react";
 import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
-import { educationLevelTableData } from "../../helpers/dataToRender";
 
 const EducationLevelPage = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,11 @@ const EducationLevelPage = () => {
 
   const columns = ["№", "Рівень", "Назва", "Дія"];
 
-  const dataToRender = educationLevelTableData(columns, educationLevel.content);
+  let dataToRender;
+
+  if (Object.prototype.hasOwnProperty.call(educationLevel, "content")) {
+    dataToRender = educationLevelTableData(columns, educationLevel.content);
+  }
 
   return (
     <>

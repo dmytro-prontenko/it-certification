@@ -3,15 +3,15 @@ import { LinkWrapper, TableLink } from "../components/Table/Table.styled";
 import Icon from "../components/Icon/Icon";
 import { useLocation } from "react-router-dom";
 
-const getColumnsToRender = (columns, data, handleModal) => {
-  const location = useLocation();
-  const { pathname } = location;
-
+const getColumnsToRender = (columns, data, handleModal, location) => {
   const columnsToRender = columns.map((column) => {
     if (
       column.includes("Посилання") ||
       column.includes("Сайт") ||
       column.includes("Блок") ||
+      column.includes("Сілабус") ||
+      column.includes("Програма") ||
+      (column.includes("Кафедра") && location === "/department") ||
       column.includes("Перелік програм")
     ) {
       return {
