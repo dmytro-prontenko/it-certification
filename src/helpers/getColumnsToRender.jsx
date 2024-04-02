@@ -1,8 +1,12 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { LinkWrapper, TableLink } from "../components/Table/Table.styled";
 import Icon from "../components/Icon/Icon";
+import { useLocation } from "react-router-dom";
 
 const getColumnsToRender = (columns, data, handleModal) => {
+  const location = useLocation();
+  const { pathname } = location;
+
   const columnsToRender = columns.map((column) => {
     if (
       column.includes("Посилання") ||
@@ -115,15 +119,52 @@ const getColumnsToRender = (columns, data, handleModal) => {
     }
 
     if (column.includes("Опис")) {
+      return pathname === "/discipline-blocks"
+        ? {
+            name: column,
+            label: column,
+            options: {
+              setCellHeaderProps: () => {
+                return {
+                  align: "left",
+                  margin: "0 0 0 -100px",
+                  width: "628px",
+                };
+              },
+              setCellProps: () => {
+                return { align: "left", width: "628px" };
+              },
+              filterType: "multiselect",
+            },
+          }
+        : {
+            name: column,
+            label: column,
+            options: {
+              setCellHeaderProps: () => {
+                return {
+                  align: "left",
+                  width: "380px",
+                };
+              },
+              setCellProps: () => {
+                return { align: "left", width: "380px" };
+              },
+              filterType: "multiselect",
+            },
+          };
+    }
+
+    if (column.includes("Дисципліни")) {
       return {
         name: column,
         label: column,
         options: {
           setCellHeaderProps: () => {
-            return { align: "left", width: "628px" };
+            return { align: "left", width: "184px" };
           },
           setCellProps: () => {
-            return { align: "left", width: "628px" };
+            return { align: "left", width: "184px" };
           },
           filterType: "multiselect",
         },
