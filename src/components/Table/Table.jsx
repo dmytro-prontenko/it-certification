@@ -121,7 +121,7 @@ const Table = ({ view, data, columns }) => {
   // Налаштування колонок таблиці
   // ======================================================
 
-  const columnsToRender = getColumnsToRender(columns, dataToTable, handleModal);
+  const columnsToRender = getColumnsToRender(columns, dataToTable, handleModal, location.pathname);
 
   // ======================================================
 

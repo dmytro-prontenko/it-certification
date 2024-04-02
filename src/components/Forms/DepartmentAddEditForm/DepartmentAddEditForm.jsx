@@ -33,6 +33,15 @@ const DepartmentAddEditForm = () => {
     actionTitle = "Редагувати";
   }
 
+    let recordData;
+    if (dataContent.action === "Add") {
+      actionTitle = "Додати";
+      recordData = dataContent.recordDataAdd;
+    } else {
+      actionTitle = "Редагувати";
+      recordData = dataContent.recordDataEdit;
+    }
+
   const {
     register,
     control,
@@ -82,7 +91,7 @@ const DepartmentAddEditForm = () => {
               }}
             />
             <Controller
-              name="id"
+              name="name"
               control={control}
               render={({ field }) => (
                 <Select
@@ -99,7 +108,7 @@ const DepartmentAddEditForm = () => {
                   defaultValue={
                     dataContent.recordDataEdit
                       ? {
-                          value: dataContent.recordDataEdit.id,
+                          value: recordData.name,
                           label: dataContent.recordDataEdit.id,
                         }
                       : null

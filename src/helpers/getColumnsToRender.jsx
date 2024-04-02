@@ -2,7 +2,7 @@ import { IconButton, Tooltip } from "@mui/material";
 import { LinkWrapper, TableLink } from "../components/Table/Table.styled";
 import Icon from "../components/Icon/Icon";
 
-const getColumnsToRender = (columns, data, handleModal) => {
+const getColumnsToRender = (columns, data, handleModal, location) => {
   const columnsToRender = columns.map((column) => {
     if (
       column.includes("Посилання") ||
@@ -10,6 +10,7 @@ const getColumnsToRender = (columns, data, handleModal) => {
       column.includes("Блок") ||
       column.includes("Сілабус") ||
       column.includes("Програма") ||
+      (column.includes("Кафедра") && location === "/department") ||
       column.includes("Перелік програм")
     ) {
       return {
@@ -178,7 +179,6 @@ const getColumnsToRender = (columns, data, handleModal) => {
     };
   });
 
-
-  return columnsToRender
+  return columnsToRender;
 };
-export default getColumnsToRender
+export default getColumnsToRender;
