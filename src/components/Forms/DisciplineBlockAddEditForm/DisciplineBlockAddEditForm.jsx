@@ -46,7 +46,7 @@ const DisciplineBlockAddEditForm = () => {
 
     if (dataContent.action !== "Edit") {
       transformedData = {
-        name: data.description,
+        name: data.name,
         description: data.description,
       };
     } else {

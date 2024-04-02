@@ -64,7 +64,7 @@ const DisciplineGroupAddEditForm = () => {
     const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
     if (dataContent.action !== "Edit") {
       transformedData = {
-        name: data.description,
+        name: data.name,
         description: data.description,
         block: { id: data.block.value },
         discipline_url: data.discipline_url,

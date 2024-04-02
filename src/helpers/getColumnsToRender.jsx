@@ -1,7 +1,6 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { LinkWrapper, TableLink } from "../components/Table/Table.styled";
 import Icon from "../components/Icon/Icon";
-import { useLocation } from "react-router-dom";
 
 const getColumnsToRender = (columns, data, handleModal, location) => {
   const columnsToRender = columns.map((column) => {
@@ -119,7 +118,7 @@ const getColumnsToRender = (columns, data, handleModal, location) => {
     }
 
     if (column.includes("Опис")) {
-      return pathname === "/discipline-blocks"
+      return location === "/discipline-blocks"
         ? {
             name: column,
             label: column,
