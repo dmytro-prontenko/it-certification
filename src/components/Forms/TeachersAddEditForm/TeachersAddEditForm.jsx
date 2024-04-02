@@ -220,11 +220,28 @@ const TeachersAddEditForm = () => {
                         message: "Максимальна довжина для імені 100 символів",
                       },
                       pattern: {
-                        value: /^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ']+$/,
+                        value: /^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ' ]+$/,
                         message: "Ім'я повинно містити тільки літери",
                       },
                     }
-                  : { required: false }
+                  : {
+                      required: {
+                        value: true,
+                        message: "Введіть імʼя викладача",
+                      },
+                      minLength: {
+                        value: 1,
+                        message: "Мінімальна довжина для імені 1 символ",
+                      },
+                      maxLength: {
+                        value: 100,
+                        message: "Максимальна довжина для імені 100 символів",
+                      },
+                      pattern: {
+                        value: /^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ' ]+$/,
+                        message: "Ім'я повинно містити тільки літери",
+                      },
+                    }
               )}
             />
             {errors.name && (
@@ -376,7 +393,21 @@ const TeachersAddEditForm = () => {
                         message: "Введіть коректний email",
                       },
                     }
-                  : { required: false }
+                  : {
+                      required: false,
+                      minLength: {
+                        value: 6,
+                        message: "Мінімальна довжина 6 символів",
+                      },
+                      maxLength: {
+                        value: 100,
+                        message: "Максимальна довжина для email 100 символів",
+                      },
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                        message: "Введіть коректний email",
+                      },
+                    }
               )}
             />
             {errors.email && (

@@ -8,7 +8,38 @@ import {
 } from "../thunk/mainInfoThunks";
 
 const initialState = {
-  tableData: [],
+  tableData: [
+    {
+      content: [
+        {
+          id: 1,
+          specialty: {
+            id: 1,
+            name: "specialty",
+          },
+          name: "Назва",
+          university: {
+            id: 100,
+            name: "Харківський національний університет",
+          },
+          education_level: {
+            id: 100,
+            name: "Бакалавр",
+          },
+          guarantor: "Гарант",
+          department: {
+            id: 1,
+            url: "http://google.com",
+            name: "Кафедра",
+          },
+          program_url: "http://google.com",
+          syllabus_url: "http://google.com",
+        },
+      ],
+      pageNumber: 1,
+      totalElements: 1,
+    },
+  ],
   serviceInfo: null,
 };
 
