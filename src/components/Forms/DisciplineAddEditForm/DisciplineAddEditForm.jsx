@@ -10,6 +10,7 @@ import { selectModalContent } from "../../../redux/selectors/serviceSelectors";
 import getDirtyFieldsValues from "../../../helpers/getDirtyFieldsValues";
 
 import {
+  ErrorsContainer,
   ModalAddEditTitle,
   StyledAddEditForm,
   StyledAddEditInputWrapper,
@@ -51,9 +52,11 @@ const DisciplineAddEditForm = () => {
     if (dataContent.action !== "Edit") {
       transformedData = {
         name: data.name,
-        description: data.description,
-        block: { id: data.block.value },
-        discipline_url: data.discipline_url,
+        teacher: data.teacher,
+        discipline_group: data.discipline_group,
+        education_program: { id: data.block.value },
+        syllabus_url: data.discipline_url,
+        education_plan_url: "http://google.com",
       };
     } else {
       //* Формування request body для Edit
@@ -62,13 +65,16 @@ const DisciplineAddEditForm = () => {
           case "name":
             transformedData.name = item.value;
             break;
-          case "description":
+          case "discipline_group":
             transformedData.description = item.value;
             break;
-          case "block":
+          case "education_program":
             transformedData.block = { id: item.value.value };
             break;
-          case "discipline_url":
+          case "syllabus_url":
+            transformedData.discipline_url = item.value;
+            break;
+          case "education_plan_url":
             transformedData.discipline_url = item.value;
             break;
           default:
