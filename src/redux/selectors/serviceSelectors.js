@@ -5,3 +5,5 @@ export const selectModalContentAction = (state) =>
   state.service.modalContent.action;
 export const selectModalContentData = (state) =>
   state.service.modalContent.recordDataEdit;
+
+export const selectIsLoading = (state) => state.service.isLoading;
