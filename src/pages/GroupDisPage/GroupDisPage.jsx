@@ -8,7 +8,7 @@ import { selectCurrentPage } from "../../redux/selectors/serviceSelectors";
 import { useEffect } from "react";
 import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
-import { disciplineGroupLevelTableData } from "../../helpers/dataToRender";
+import { disciplineGroupTableData } from "../../helpers/dataToRender";
 
 const GroupDisPage = () => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const GroupDisPage = () => {
 
   const columns = ["№", "Група дисциплін", "Опис", "Блок", "Дисципліни", "Дія"];
 
-  const dataToRender = disciplineGroupLevelTableData(
+  const dataToRender = disciplineGroupTableData(
     columns,
     disciplineGroup.content
   );

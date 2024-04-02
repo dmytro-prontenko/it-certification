@@ -11,7 +11,7 @@ import { selectCurrentPage } from "../../redux/selectors/serviceSelectors";
 import { useEffect } from "react";
 import { getTableDataThunk } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
-import { disciplineBlockLevelTableData } from "../../helpers/dataToRender";
+import { disciplineBlockTableData } from "../../helpers/dataToRender";
 
 const BlockDisciplinesPage = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const BlockDisciplinesPage = () => {
 
   const columns = ["№", "Назва блоку дисципліни", "Опис", "Дія"];
 
-  const dataToRender = disciplineBlockLevelTableData(
+  const dataToRender = disciplineBlockTableData(
     columns,
     disciplineBlock.content
   );
