@@ -8,38 +8,36 @@ import {
 } from "../thunk/mainInfoThunks";
 
 const initialState = {
-  tableData: [
-    {
-      content: [
-        {
+  tableData: {
+    content: [
+      {
+        id: 1,
+        specialty: {
           id: 1,
-          specialty: {
-            id: 1,
-            name: "specialty",
-          },
-          name: "Назва",
-          university: {
-            id: 100,
-            name: "Харківський національний університет",
-          },
-          education_level: {
-            id: 100,
-            name: "Бакалавр",
-          },
-          guarantor: "Гарант",
-          department: {
-            id: 1,
-            url: "http://google.com",
-            name: "Кафедра",
-          },
-          program_url: "http://google.com",
-          syllabus_url: "http://google.com",
+          name: "121",
         },
-      ],
-      pageNumber: 1,
-      totalElements: 1,
-    },
-  ],
+        name: "Назва програми",
+        university: {
+          id: 2,
+          name: "Львівський національний університет",
+        },
+        education_level: {
+          id: 100,
+          name: "Бакалавр",
+        },
+        guarantor: "Гаранторенко Гарант Гарантович",
+        department: {
+          id: 3,
+          url: "http://google.com",
+          name: "Кафедра біоінформатики",
+        },
+        program_url: "http://google.com/program",
+        syllabus_url: "http://google.com/sylabus",
+      },
+    ],
+    pageNumber: 1,
+    totalElements: 1,
+  },
   serviceInfo: null,
 };
 

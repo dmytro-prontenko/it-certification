@@ -11,6 +11,7 @@ const ProgramsPage = () => {
   const programs = useSelector(tableData);
   const columns = [
     "№",
+    "Код",
     "Назва програми",
     "ЗВО",
     "Рівень освіти",

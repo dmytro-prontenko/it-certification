@@ -21,7 +21,7 @@ import {
   setModalStatus,
 } from "../../redux/slice/serviceSlice";
 import {
-  getTableDataThunk,
+  // getTableDataThunk,
   serviceInfoThunk,
 } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
@@ -45,12 +45,12 @@ const Table = ({ view, data, columns }) => {
   let dataArray = [];
 
   useEffect(() => {
-    dispatch(
-      getTableDataThunk({
-        endPoint: `${location.pathname}`,
-        getParams: { page: currentPage, size: SIZE },
-      })
-    );
+    // dispatch(
+    //   getTableDataThunk({
+    //     endPoint: `${location.pathname}`,
+    //     getParams: { page: currentPage, size: SIZE },
+    //   })
+    // );
     if (!serviceInfo) dispatch(serviceInfoThunk());
   }, [currentPage]);
 
