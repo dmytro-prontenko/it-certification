@@ -8,7 +8,7 @@ import Loader from "../Loader/Loader";
 
 const Layout = () => {
   return (
-    <Suspense fallback={<Loader />}>
+    <>
       <Header />
       <main>
         <Suspense fallback={<Loader />}>
@@ -16,7 +16,7 @@ const Layout = () => {
         </Suspense>
       </main>
       <Footer />
-    </Suspense>
+    </>
   );
 };
 

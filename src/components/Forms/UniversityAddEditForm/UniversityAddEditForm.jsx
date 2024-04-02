@@ -1,10 +1,7 @@
 import { Divider } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-// import Select from "react-select";
-
 import CommonButton from "../../Buttons/CommonButton/CommonButton";
-// import selectStyles from "../../../commonStyles/SelectStyles";
 import { setModalContent } from "../../../redux/slice/serviceSlice";
 import { selectModalContent } from "../../../redux/selectors/serviceSelectors";
 
@@ -17,6 +14,8 @@ import {
   StyledAddEditLabel,
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
+import getDirtyFieldsValues from "../../../helpers/getDirtyFieldsValues";
+import handleUrlValidation from "../../../helpers/handleUrlValidation";
 
 const UniversityAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
@@ -25,7 +24,7 @@ const UniversityAddEditForm = () => {
   const dispatch = useDispatch();
 
   let actionTitle;
-  // let transformedData = {};
+  let transformedData = {};
 
   if (dataContent.action === "Add") {
     actionTitle = "Додати";
@@ -36,75 +35,78 @@ const UniversityAddEditForm = () => {
   const {
     register,
     handleSubmit,
-    // getValues,
-    formState: { errors },
+    getValues,
+    formState: { errors, dirtyFields },
   } = useForm();
 
   const onSubmit = (data) => {
-    // const dirtyFieldsArray = getDirtyFieldsValues();
+    const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
     console.log(data);
 
+    // * Формування request body для Add
 
-//* Формування request body для Add
+    if (dataContent.action !== "Edit") {
+      transformedData = {
+        name: data.name,
+        abbr: data.abbr,
+        programs_list_url: data.programs_list_url,
+        url: data.url,
+      }
+    } else {
+      //* Формування request body для Edit
 
-// if (dataContent.action !== "Edit") {
-//   transformedData = {
-//     name: data.name,
-//     abbr: {
-//       id: data.abbr.value,
-//     },
-//     programLink: {
-//       id: data.programLink.value,
-//     },
-//     universityLink: {
-//       id: data.universityLink.value,
-//     },
-//   };
+      dirtyFieldsArray.forEach((item) => {
+        console.log(item.value);
+        switch (item.field) {
+          case "name":
+            transformedData.name = item.value;
+            break;
+          case "abbr":
+            transformedData.abbr = item.value;
+            break;
+          case "programs_list_url":
+            transformedData.programs_list_url = item.value;
+            break;
+          case "url":
+            transformedData.url = item.value;
+            break;
+          default:
+            transformedData = {};
+        }
+        console.log(transformedData);
+      });
+    }
 
-//  } else {
-
-//* Формування request body для Edit
-
-//  dirtyFieldsArray.forEach((item) => {
-//   switch (item.field) {
-//     case "name":
-//       transformedData.name = item.value;
-//       break;
-//     case ("abbr", "university"):
-//       transformedData.abbr = { id: item.value.value };
-//       break;
-//     case "programLink":
-//       transformedData.programLink = { id: item.value.value };
-//       break;
-//     case "universityLink":
-//       transformedData.universityLink = { id: item.value.value };
-//       break;
-//     default:
-//       transformedData = {};
-// }
-// });
-// }
-
+    // Відкриття модального вікна Confirmation modal
     dataContent.action === "Edit"
       ? dispatch(
           setModalContent({
             action: "EditConfirm",
-            recordDataEdit: {
-              ...dataContent.recordDataEdit,
-              ...data,
-              // ...transformedData,
+            editedData: {
+              ...transformedData,
             },
           })
         )
       : dispatch(
           setModalContent({
             action: "AddConfirm",
-            // editedData: { ...data, ...transformedData },
-            editedData: { ...data },
+            recordDataAdd: {
+              ...data,
+              name: { name: data.name },
+              abbr: {
+                abbr: data.abbr,
+              },
+              programs_list_url: {
+                programs_list_url: data.programs_list_url.value,
+              },
+              url: {
+                url: data.url.value,
+              },
+            },
+            editedData: { ...transformedData },
           })
         );
   };
-  // console.log(errors);
 
   return (
     <>
@@ -119,7 +121,7 @@ const UniversityAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
@@ -146,6 +148,10 @@ const UniversityAddEditForm = () => {
                         value: 100,
                         message: "Максимальна довжина для назви 100 символів",
                       },
+                      pattern: {
+                        value: /^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ\s']+$/u,
+                        message: "Назва повинна містити тільки літери",
+                      },
                     }
                   : { required: false }
               )}
@@ -164,7 +170,7 @@ const UniversityAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
@@ -172,7 +178,7 @@ const UniversityAddEditForm = () => {
               placeholder="Введіть абревіатуру"
               defaultValue={
                 dataContent.recordDataEdit
-                  ? dataContent.recordDataEdit.abbr
+                  ? dataContent.recordDataEdit.abbr.toUpperCase()
                   : null
               }
               {...register(
@@ -189,10 +195,17 @@ const UniversityAddEditForm = () => {
                         message:
                           "Максимальна довжина для абревіатури 10 символів",
                       },
+                      pattern: {
+                        value: /^[A-Za-zА-Яа-яЁёЇїІіЄєҐґ']+$/,
+                        message: "Абревіатура повинна містити тільки літери",
+                      },
                     }
                   : { required: false }
               )}
             />
+            {errors.abbr && (
+              <ErrorsContainer>{errors.abbr.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
 
           {/* ================================= Перелік программ */}
@@ -203,7 +216,7 @@ const UniversityAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
@@ -214,9 +227,9 @@ const UniversityAddEditForm = () => {
                   ? dataContent.recordDataEdit.programs_list_url
                   : null
               }
-              // required
+              onChange={handleUrlValidation}
               {...register(
-                "programLink",
+                "programs_list_url",
                 dataContent.action !== "Edit"
                   ? {
                       required: {
@@ -225,18 +238,27 @@ const UniversityAddEditForm = () => {
                       },
                       minLength: {
                         value: 10,
-                        message:
-                          "Мінімальна довжина посилання 10 символів, та  має починатись з 'http'",
+                        message: "Мінімальна довжина посилання 10 символів",
                       },
                       maxLength: {
                         value: 100,
                         message:
                           "Максимальна довжина для посилання 100 символів",
                       },
+                      pattern: {
+                        value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
+                        message:
+                          "Посилання має починатись з 'http' або 'https'",
+                      },
                     }
                   : { required: false }
               )}
             />
+            {errors.programs_list_url && (
+              <ErrorsContainer>
+                {errors.programs_list_url.message}
+              </ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
 
           {/* ================================= Посилання на сайт ЗВО */}
@@ -246,7 +268,7 @@ const UniversityAddEditForm = () => {
               orientation="vertical"
               flexItem
               sx={{
-                color: "var(--basic-grey)",
+                borderColor: "var(--accent-green-300)",
               }}
             />
             <StyledAddEditTextInput
@@ -257,8 +279,9 @@ const UniversityAddEditForm = () => {
                   ? dataContent.recordDataEdit.url
                   : null
               }
+              onChange={handleUrlValidation}
               {...register(
-                "universityLink",
+                "url",
                 dataContent.action !== "Edit"
                   ? {
                       required: {
@@ -275,10 +298,18 @@ const UniversityAddEditForm = () => {
                         message:
                           "Максимальна довжина для посилання 100 символів",
                       },
+                      pattern: {
+                        value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
+                        message:
+                          "Посилання має починатись з 'http' або 'https'",
+                      },
                     }
                   : { required: false }
               )}
             />
+            {errors.url && (
+              <ErrorsContainer>{errors.url.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
 
           {/* ================================= */}

@@ -37,8 +37,11 @@ export const StyledModalContent = styled.div`
 
 export const CloseModalButton = styled.button`
   position: absolute;
-  right: 3%;
-  top: 4%;
+  // right: 3%;
+  // top: 4%;
+
+  right: 64px;
+  top: 32px;
 
   border: none;
   background: transparent;
