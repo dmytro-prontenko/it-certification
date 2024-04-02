@@ -38,51 +38,22 @@ const Table = ({ view, data, columns }) => {
   const modalStatus = useSelector(selectOpenModal);
   const currentPage = useSelector(selectCurrentPage);
   const serviceInfo = useSelector(selectDictionary);
-  const teachers = useSelector(tableData);
+  const dataToTable = useSelector(tableData);
 
-  const totalPages = Number(Math.ceil(teachers?.totalElements / SIZE));
-
-  let dataArray = [];
+  const totalPages = Number(Math.ceil(dataToTable?.totalElements / SIZE));
 
   useEffect(() => {
-    dispatch(
-      getTableDataThunk({
-        endPoint: `${location.pathname}`,
-        getParams: { page: currentPage, size: SIZE },
-      })
-    );
+    if (currentPage > 1) {
+      dispatch(
+        getTableDataThunk({
+          endPoint: `${location.pathname}`,
+          getParams: { page: currentPage, size: SIZE },
+        })
+      );
+    }
     if (!serviceInfo) dispatch(serviceInfoThunk());
   }, [currentPage]);
 
-  // Функція, що перетворює вхідні дані для рендеру таблиці в масив масивів
-  // ======================================================================
-  // #region
-  let dataToRender;
-  if (location.pathname === "/department") {
-    dataToRender = data?.content.map((el) => ({
-      ...el,
-      contacts: "contacts",
-    }));
-  } else {
-    dataToRender = data?.content;
-  }
-  // console.log(dataToRender)
-
-  dataToRender?.forEach((obj) => {
-    let objValues = [];
-    for (let key in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        if (typeof obj[key] === "object" && "name" in obj[key]) {
-          objValues.push(obj[key].name);
-        } else {
-          objValues.push(obj[key]);
-        }
-      }
-    }
-    dataArray.push(objValues);
-  });
-
-  // console.log(dataArray)
   // #endregion
   // ======================================================
 
@@ -146,7 +117,7 @@ const Table = ({ view, data, columns }) => {
   // Налаштування колонок таблиці
   // ======================================================
 
-  const columnsToRender = getColumnsToRender(columns, data, handleModal);
+  const columnsToRender = getColumnsToRender(columns, dataToTable, handleModal);
 
   // ======================================================
 
@@ -184,15 +155,13 @@ const Table = ({ view, data, columns }) => {
   };
   // #endregion
   // ======================================================
-  console.log(columnsToRender)
-  console.log(dataArray)
 
   return (
     <StyledWrapper>
       <ThemeProvider theme={tableTheme()}>
         <MUIDataTable
           title={view}
-          data={dataArray}
+          data={data}
           columns={columnsToRender}
           options={options}
           components={{
