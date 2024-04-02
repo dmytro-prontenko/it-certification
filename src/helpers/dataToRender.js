@@ -96,3 +96,71 @@ export const specialtyTableData = (columns, data) => {
   });
   return dataArrays;
 };
+
+export const educationLevelTableData = (columns, data) => {
+  function objectToArray(index, columns, data) {
+    const dataArray = [index + 1];
+    for (let key of columns) {
+      switch (key) {
+        case "Рівень":
+          dataArray.push(data.education_level);
+          break;
+        case "Назва":
+          dataArray.push(data.name);
+          break;
+        default:
+          break;
+      }
+    }
+    return dataArray;
+  }
+
+  const dataArrays = [];
+  data?.forEach((obj, index) => {
+    dataArrays.push(objectToArray(index, columns, obj));
+  });
+  return dataArrays;
+};
+
+export const programsTableData = (columns, data) => {
+  function objectToArray(index, columns, data) {
+    const dataArray = [index + 1];
+    for (let key of columns) {
+      switch (key) {
+        case "Код":
+          dataArray.push(data.specialty.code);
+          break;
+        case "Назва програми":
+          dataArray.push(data.name);
+          break;
+        case "ЗВО":
+          dataArray.push(data.university.name);
+          break;
+        case "Рівень освіти":
+          dataArray.push(data.education_level.education_level);
+          break;
+        case "Гарант":
+          dataArray.push(data.guarantor);
+          break;
+        case "Кафедра":
+          dataArray.push(data.department.name);
+          break;
+        case "Програма":
+          dataArray.push(data.program_url);
+          break;
+        case "Сілабус":
+          dataArray.push(data.syllabus_url);
+          break;
+        default:
+          break;
+      }
+    }
+    return dataArray;
+  }
+
+  const dataArrays = [];
+  data?.forEach((obj, index) => {
+    dataArrays.push(objectToArray(index, columns, obj));
+  });
+  return dataArrays;
+};
