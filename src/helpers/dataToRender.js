@@ -68,3 +68,31 @@ export const universityTableData = (columns, data) => {
   });
   return dataArrays;
 };
+
+export const specialtyTableData = (columns, data) => {
+  function objectToArray(index, columns, data) {
+    const dataArray = [index + 1];
+    for (let key of columns) {
+      switch (key) {
+        case "Назва":
+          dataArray.push(data.name);
+          break;
+        case "Код спеціальності":
+          dataArray.push(data.code);
+          break;
+        case "Посилання на стандарт":
+          dataArray.push(data.standard_url);
+          break;
+        default:
+          break;
+      }
+    }
+    return dataArray;
+  }
+
+  const dataArrays = [];
+  data?.forEach((obj, index) => {
+    dataArrays.push(objectToArray(index, columns, obj));
+  });
+  return dataArrays;
+};
