@@ -8,14 +8,18 @@ import {
 } from "../thunk/mainInfoThunks";
 
 const initialState = {
-  tableData: [],
+  tableData: {},
   serviceInfo: null,
 };
 
 const mainInfoSlice = createSlice({
   name: "mainInfo",
   initialState,
-  reducers: {},
+  reducers: {
+    setTableData: (state, action) => {
+      state.tableData = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getTableDataThunk.fulfilled, (state, action) => {
@@ -37,3 +41,4 @@ const mainInfoSlice = createSlice({
 });
 
 export const mainInfoReducer = mainInfoSlice.reducer;
+export const { setTableData } = mainInfoSlice.actions;

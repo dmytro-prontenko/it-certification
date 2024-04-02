@@ -13,6 +13,7 @@ import {
 } from "../../redux/selectors/mainInfoSelectors";
 import {
   selectCurrentPage,
+  selectIsLoading,
   selectOpenModal,
 } from "../../redux/selectors/serviceSelectors";
 import {
@@ -22,6 +23,7 @@ import {
 } from "../../redux/slice/serviceSlice";
 import {
   getTableDataThunk,
+  // getTableDataThunk,
   serviceInfoThunk,
 } from "../../redux/thunk/mainInfoThunks";
 import { SIZE } from "../../service/constant";
@@ -31,6 +33,7 @@ import {
   StyledPagination,
   StyledWrapper,
 } from "./Table.styled";
+import Loader from "../Loader/Loader.jsx";
 
 const Table = ({ view, data, columns }) => {
   const dispatch = useDispatch();
@@ -39,6 +42,7 @@ const Table = ({ view, data, columns }) => {
   const currentPage = useSelector(selectCurrentPage);
   const serviceInfo = useSelector(selectDictionary);
   const dataToTable = useSelector(tableData);
+  const isLoading = useSelector(selectIsLoading);
 
   const totalPages = Number(Math.ceil(dataToTable?.totalElements / SIZE));
 
@@ -131,10 +135,32 @@ const Table = ({ view, data, columns }) => {
     selectToolbarPlacement: "none",
     selectableRowsHideCheckboxes: true,
     draggableColumns: { enabled: true, transitionTime: 300 },
-    rowsPerPage: 20,
-    rowsPerPageOptions: [5, 6, 7, 8, 9, 10, 15, 20],
+    rowsPerPage: SIZE,
     downloadOptions: {
       filename: `${location.pathname}.csv`,
+    },
+    textLabels: {
+      body: {
+        columnHeaderTooltip: (column) => `Сортувати за ${column.label}`,
+        // noMatch: "Вибачте, немає жодного запису для відображення",
+        noMatch: isLoading ? (
+          <Loader />
+        ) : (
+          "Вибачте, немає жодного запису для відображення"
+        ),
+      },
+      toolbar: {
+        search: "Пошук",
+        downloadCsv: "Завантажити CSV",
+        print: "Друк сторінки",
+        viewColumns: "Відображення колонок",
+        filterTable: "Фільтр",
+      },
+      filter: {
+        all: "Показати все",
+        title: "Оберіть потрібний фільтр",
+        reset: "Скинути",
+      },
     },
     pagination: false,
 
