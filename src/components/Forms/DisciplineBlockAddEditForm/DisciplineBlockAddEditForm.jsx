@@ -1,14 +1,14 @@
 import { Divider } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import Select from "react-select";
 
 import CommonButton from "../../Buttons/CommonButton/CommonButton";
-import selectStyles from "../../../commonStyles/SelectStyles";
+// import selectStyles from "../../../commonStyles/SelectStyles";
 import { setModalContent } from "../../../redux/slice/serviceSlice";
 import { selectModalContent } from "../../../redux/selectors/serviceSelectors";
 
 import {
+  ErrorsContainer,
   ModalAddEditTitle,
   StyledAddEditForm,
   StyledAddEditInputWrapper,
@@ -16,22 +16,21 @@ import {
   StyledAddEditLabel,
   StyledAddEditTextInput,
 } from "../../../commonStyles/commonStyles";
-import { selectDictionary } from "../../../redux/selectors/mainInfoSelectors";
+// import { selectDictionary } from "../../../redux/selectors/mainInfoSelectors";
 import getDirtyFieldsValues from "../../../helpers/getDirtyFieldsValues";
-import { useState } from "react";
+// import { useState } from "react";
 
 const DisciplineBlockAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  const blockDisciplinesTitles = useSelector(selectDictionary);
+  // const blockDisciplinesTitles = useSelector(selectDictionary);
 
   const dispatch = useDispatch();
 
   const {
     register,
-    control,
     handleSubmit,
     getValues,
-    formState: { dirtyFields },
+    formState: { errors, dirtyFields },
   } = useForm();
 
   // const [blockDisciplinesOptions, setBlockDisciplinesOptions] = useState([]);
@@ -56,16 +55,13 @@ const DisciplineBlockAddEditForm = () => {
   //   }
   // };
 
-  let recordData;
-
   if (dataContent.action === "Add") {
     actionTitle = "Додати";
-    recordData = dataContent.recordDataAdd;
   } else {
     actionTitle = "Редагувати";
-    recordData = dataContent.recordDataEdit;
   }
 
+  console.log(dataContent);
   // const handleBlockDisciplinesClear = () => {
   //   setBlockDisciplinesOptions(null);
   // };
@@ -76,25 +72,26 @@ const DisciplineBlockAddEditForm = () => {
     // console.log("data", data);
     if (dataContent.action !== "Edit") {
       transformedData = {
-        name: data.id.label,
+        name: data.description,
         description: data.description,
       };
     } else {
       //* Формування request body для Edit
       dirtyFieldsArray.forEach((item) => {
-        console.log(item);
         switch (item.field) {
           case "name":
-            transformedData.name = item;
+            transformedData.name = item.value;
             break;
           case "description":
-            transformedData.description = { id: item.value };
+            transformedData.description = item.value;
             break;
           default:
             transformedData = {};
         }
       });
     }
+
+    console.log("transformedData", transformedData);
     dataContent.action === "Edit"
       ? dispatch(
           setModalContent({
@@ -114,7 +111,6 @@ const DisciplineBlockAddEditForm = () => {
           })
         );
   };
-  // console.log(errors);
 
   return (
     <>
@@ -130,51 +126,34 @@ const DisciplineBlockAddEditForm = () => {
                 color: "var(--basic-grey)",
               }}
             />
-            <Controller
-              name="id"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  {...register(
-                    "name",
-                    dataContent.action !== "Edit"
-                      ? {
-                          required: {
-                            value: true,
-                            message: "Оберіть назву блоку дисципліни",
-                          },
-                        }
-                      : { required: false }
-                  )}
-                  {...field}
-                  options={[...blockDisciplinesTitles.disciplineBlocks].map(
-                    (option) => ({
-                      value: option.id,
-                      label: option.name,
-                    })
-                  )}
-                  placeholder="Оберіть назву блоку дисципліни"
-                  styles={selectStyles}
-                  isSearchable={true}
-                  isClearable={true}
-                  maxMenuHeight={150}
-                  defaultValue={
-                    dataContent.recordDataEdit
-                      ? {
-                          value: dataContent.recordDataEdit.id,
-                          label: dataContent.recordDataEdit.id,
-                        }
-                      : null
-                  }
-                  // required
-                />
+            <StyledAddEditTextInput
+              type="text"
+              placeholder="Додайте опис про блок дисциплін"
+              defaultValue={dataContent.recordDataEdit?.name || null}
+              // required
+              {...register(
+                "name",
+                dataContent.action !== "Edit"
+                  ? {
+                      required: {
+                        value: true,
+                        message: "Введіть назву блоку дисципліни",
+                      },
+                      minLength: {
+                        value: 1,
+                        message: "Мінімальна довжина для імені 1 символ",
+                      },
+                      maxLength: {
+                        value: 100,
+                        message: "Максимальна довжина для імені 100 символів",
+                      },
+                    }
+                  : { required: false }
               )}
             />
-            {/* {errors.category && (
-              <StyledErrorSelectMobile>
-                {errors.category.message}
-              </StyledErrorSelectMobile>
-            )} */}
+            {errors.name && (
+              <ErrorsContainer>{errors.name.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
 
           {/* ================================= */}
@@ -191,7 +170,7 @@ const DisciplineBlockAddEditForm = () => {
             <StyledAddEditTextInput
               type="text"
               placeholder="Додайте опис про блок дисциплін"
-              defaultValue={dataContent.recordDataEdit?.link_standard || null}
+              defaultValue={dataContent.recordDataEdit?.description || null}
               // required
               {...register("description", { required: true, maxLength: 100 })}
             />
