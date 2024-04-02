@@ -19,7 +19,6 @@ import handleUrlValidation from "../../../helpers/handleUrlValidation";
 
 const UniversityAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordDataEdit);
 
   const dispatch = useDispatch();
 
@@ -41,7 +40,6 @@ const UniversityAddEditForm = () => {
 
   const onSubmit = (data) => {
     const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
-    console.log(data);
 
     // * Формування request body для Add
 
@@ -51,12 +49,11 @@ const UniversityAddEditForm = () => {
         abbr: data.abbr,
         programs_list_url: data.programs_list_url,
         url: data.url,
-      }
+      };
     } else {
       //* Формування request body для Edit
 
       dirtyFieldsArray.forEach((item) => {
-        console.log(item.value);
         switch (item.field) {
           case "name":
             transformedData.name = item.value;
@@ -73,7 +70,6 @@ const UniversityAddEditForm = () => {
           default:
             transformedData = {};
         }
-        console.log(transformedData);
       });
     }
 
@@ -134,7 +130,7 @@ const UniversityAddEditForm = () => {
               }
               {...register(
                 "name",
-                dataContent.action !== "Edit"
+                dataContent.action
                   ? {
                       required: {
                         value: true,
@@ -183,7 +179,7 @@ const UniversityAddEditForm = () => {
               }
               {...register(
                 "abbr",
-                dataContent.action !== "Edit"
+                dataContent.action
                   ? {
                       required: { value: true, message: "Введіть абревіатуру" },
                       minLength: {
@@ -230,7 +226,7 @@ const UniversityAddEditForm = () => {
               onChange={handleUrlValidation}
               {...register(
                 "programs_list_url",
-                dataContent.action !== "Edit"
+                dataContent.action
                   ? {
                       required: {
                         value: true,
@@ -246,9 +242,10 @@ const UniversityAddEditForm = () => {
                           "Максимальна довжина для посилання 100 символів",
                       },
                       pattern: {
-                        value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
+                        value:
+                          /^(https?:\/\/)[\w.-]+(?:\.[\w.-]+)+[/\w\-._~:/?#[\]@!$&'()*+,;=]+$/,
                         message:
-                          "Посилання має починатись з 'http' або 'https'",
+                          "Посилання повинно починатися з 'http://' або 'https://' та бути правильним URL",
                       },
                     }
                   : { required: false }
@@ -282,7 +279,7 @@ const UniversityAddEditForm = () => {
               onChange={handleUrlValidation}
               {...register(
                 "url",
-                dataContent.action !== "Edit"
+                dataContent.action
                   ? {
                       required: {
                         value: true,
@@ -299,9 +296,10 @@ const UniversityAddEditForm = () => {
                           "Максимальна довжина для посилання 100 символів",
                       },
                       pattern: {
-                        value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
+                        value:
+                          /^(https?:\/\/)[\w.-]+(?:\.[\w.-]+)+[/\w\-._~:/?#[\]@!$&'()*+,;=]+$/,
                         message:
-                          "Посилання має починатись з 'http' або 'https'",
+                          "Посилання повинно починатися з 'http://' або 'https://' та бути правильним URL",
                       },
                     }
                   : { required: false }

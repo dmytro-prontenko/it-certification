@@ -34,10 +34,12 @@ export const tableTheme = () =>
         styleOverrides: {
           root: {},
           contentWrapper: {
-            justifyContent: "center",
+            // justifyContent: "center",
+            justifyContent: "left",
           },
           toolButton: {
             margin: 0,
+            padding: "10px 20px",
           },
         },
       },

@@ -19,7 +19,6 @@ import getDirtyFieldsValues from "../../../helpers/getDirtyFieldsValues";
 
 const EducationLevelAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordDataEdit);
 
   const dispatch = useDispatch();
 
@@ -45,7 +44,7 @@ const EducationLevelAddEditForm = () => {
     const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
     if (dataContent.action !== "Edit") {
       transformedData = {
-        code: data.code,
+        education_level: data.education_level,
         name: data.name,
       };
     } else {
@@ -53,8 +52,8 @@ const EducationLevelAddEditForm = () => {
 
       dirtyFieldsArray.forEach((item) => {
         switch (item.field) {
-          case "code":
-            transformedData.code = item.value;
+          case "education_level":
+            transformedData.education_level = item.value;
             break;
           case "name":
             transformedData.name = item.value;
@@ -79,7 +78,7 @@ const EducationLevelAddEditForm = () => {
             action: "AddConfirm",
             recordDataAdd: {
               ...data,
-              code: { code: data.code },
+              education_level: { education_level: data.education_level },
               name: {
                 name: data.name,
               },
@@ -88,8 +87,6 @@ const EducationLevelAddEditForm = () => {
           })
         );
   };
-
-  // console.log(errors);
 
   return (
     <>
@@ -110,12 +107,12 @@ const EducationLevelAddEditForm = () => {
               placeholder="Оберіть номер спеціальності"
               defaultValue={
                 dataContent.recordDataEdit
-                  ? dataContent.recordDataEdit.code
+                  ? dataContent.recordDataEdit.education_level
                   : null
               }
               {...register(
-                "code",
-                dataContent.action !== "Edit"
+                "education_level: 2,",
+                dataContent.action
                   ? {
                       required: {
                         value: true,
@@ -138,8 +135,10 @@ const EducationLevelAddEditForm = () => {
                   : { required: false }
               )}
             />
-            {errors.code && (
-              <ErrorsContainer>{errors.code.message}</ErrorsContainer>
+            {errors.education_level && (
+              <ErrorsContainer>
+                {errors.education_level.message}
+              </ErrorsContainer>
             )}
           </StyledAddEditInputWrapper>
 
@@ -164,7 +163,7 @@ const EducationLevelAddEditForm = () => {
               }
               {...register(
                 "name",
-                dataContent.action !== "Edit"
+                dataContent.action
                   ? {
                       required: {
                         value: true,

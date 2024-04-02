@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { tableTheme } from "../../helpers/MUI_themes/table_theme";
-import getColumnsToRender from "../../helpers/getColumnsToRender.jsx";
+import getColumnsToRender from "../../helpers/getColumnsToRender";
 import {
   selectDictionary,
   tableData,

@@ -1,14 +1,24 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { LinkWrapper, TableLink } from "../components/Table/Table.styled";
 import Icon from "../components/Icon/Icon";
+import { useLocation } from "react-router-dom";
 
-const getColumnsToRender = (columns, data, handleModal) => {
+const GetColumnsToRender = (columns, data, handleModal) => {
+  const location = useLocation();
+
+  const getColumnWidth = () => {
+    if (location.pathname === "/specialties") {
+      return "550px";
+    } else if (location.pathname === "/education-levels") {
+      return "100%";
+    }
+  };
+
   const columnsToRender = columns.map((column) => {
     if (
       column.includes("Посилання") ||
-      column.includes("Сайт") ||
-      column.includes("Блок") ||
-      column.includes("Перелік програм")
+      // column.includes("Сайт") ||
+      column.includes("Блок")
     ) {
       return {
         name: column,
@@ -18,7 +28,7 @@ const getColumnsToRender = (columns, data, handleModal) => {
             return { align: "center" };
           },
           setCellProps: () => {
-            return { align: "center" };
+            return { align: "left" };
           },
           customBodyRender: (value) =>
             value && (
@@ -98,11 +108,133 @@ const getColumnsToRender = (columns, data, handleModal) => {
       };
     }
 
+    if (column.includes("Абревіатура")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "left", width: "220px" };
+          },
+          setCellProps: () => {
+            return { align: "left", width: "220px" };
+          },
+        },
+      };
+    }
+
+    if (column.includes("Сайт")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "left", width: "212px" };
+          },
+          setCellProps: () => {
+            return { align: "left", width: "212px" };
+          },
+        },
+      };
+    }
+
+    if (column.includes("Перелік програм")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "left", width: "212px" };
+          },
+          setCellProps: () => {
+            return { align: "left", width: "212px" };
+          },
+        },
+      };
+    }
+
+    if (column.includes("Назва")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "center", width: getColumnWidth() };
+          },
+          setCellProps: () => {
+            return { align: "left", width: getColumnWidth() };
+          },
+          filterType: "multiselect",
+        },
+      };
+    }
+
+    if (column.includes("Стандарт")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "center", width: "440px" };
+          },
+          setCellProps: () => {
+            return { align: "left", width: "440px" };
+          },
+          filterType: "multiselect",
+        },
+      };
+    }
+
+    if (column.includes("Код")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "center", width: "230px" };
+          },
+          setCellProps: () => {
+            return { align: "left", width: "230px" };
+          },
+          filterType: "multiselect",
+        },
+      };
+    }
+
+    if (column.includes("Рівень")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { align: "left", width: "30px" };
+          },
+          setCellProps: () => {
+            return { align: "left", width: "30px" };
+          },
+          filterType: "multiselect",
+        },
+      };
+    }
+
+    if (column.includes("№")) {
+      return {
+        name: column,
+        label: column,
+        options: {
+          setCellHeaderProps: () => {
+            return { width: "30px" };
+          },
+          filterType: "multiselect",
+        },
+      };
+    }
+
     if (column.includes("Дія")) {
       const actionStyles = {
         existingStyles: {
-          align: "center",
-          width: "130px",
+          align: "right",
+          width: "120px",
         },
       };
 
@@ -116,10 +248,14 @@ const getColumnsToRender = (columns, data, handleModal) => {
         options: {
           filter: false,
           setCellHeaderProps: () => {
-            return { style: actionStyles.noWrapCell };
+            return {
+              style: actionStyles.noWrapCell,
+            };
           },
           setCellProps: () => {
-            return { style: actionStyles.noWrapCell };
+            return {
+              style: actionStyles.noWrapCell,
+            };
           },
           customBodyRenderLite: (dataIndex) => (
             <>
@@ -176,7 +312,6 @@ const getColumnsToRender = (columns, data, handleModal) => {
     };
   });
 
-
-  return columnsToRender
+  return columnsToRender;
 };
-export default getColumnsToRender
+export default GetColumnsToRender;

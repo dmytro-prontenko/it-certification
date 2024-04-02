@@ -121,7 +121,7 @@ const SpecialtyAddEditForm = () => {
               }
               {...register(
                 "code",
-                dataContent.action !== "Edit"
+                dataContent.action 
                   ? {
                       required: {
                         value: true,
@@ -169,7 +169,7 @@ const SpecialtyAddEditForm = () => {
               }
               {...register(
                 "name",
-                dataContent.action !== "Edit"
+                dataContent.action 
                   ? {
                       required: {
                         value: true,
@@ -217,7 +217,7 @@ const SpecialtyAddEditForm = () => {
               onChange={handleUrlValidation}
               {...register(
                 "standard_url",
-                dataContent.action !== "Edit"
+                dataContent.action 
                   ? {
                       required: {
                         value: true,

@@ -9,7 +9,7 @@ import { tableData } from "../../redux/selectors/mainInfoSelectors";
 
 const EducationLevelPage = () => {
   const educationLevel = useSelector(tableData);
-  const columns = ["№", "Назва", "Дія"];
+  const columns = ["№", "Рівень", "Назва", "Дія"];
 
   return (
     <>
