@@ -223,3 +223,34 @@ export const disciplineBlockLevelTableData = (columns, data) => {
   });
   return dataArrays;
 };
+
+export const disciplineGroupLevelTableData = (columns, data) => {
+  function objectToArray(index, columns, data) {
+    const dataArray = [index + 1];
+    for (let key of columns) {
+      switch (key) {
+        case "Група дисциплін":
+          dataArray.push(data.name);
+          break;
+        case "Опис":
+          dataArray.push(data.description);
+          break;
+        case "Блок":
+          dataArray.push(data.blockname);
+          break;
+        case "Дисципліни":
+          dataArray.push(data.discipline_url);
+          break;
+        default:
+          break;
+      }
+    }
+    return dataArray;
+  }
+
+  const dataArrays = [];
+  data?.forEach((obj, index) => {
+    dataArrays.push(objectToArray(index, columns, obj));
+  });
+  return dataArrays;
+};
