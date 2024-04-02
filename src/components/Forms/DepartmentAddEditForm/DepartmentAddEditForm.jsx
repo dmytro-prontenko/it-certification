@@ -19,7 +19,7 @@ import {
 
 const DepartmentAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  console.log(dataContent.recordDataEdit);
+  // console.log(dataContent.recordDataEdit);
 
   const dispatch = useDispatch();
 

@@ -4,7 +4,12 @@ import Icon from "../components/Icon/Icon";
 
 const getColumnsToRender = (columns, data, handleModal) => {
   const columnsToRender = columns.map((column) => {
-    if (column.includes("Посилання")) {
+    if (
+      column.includes("Посилання") ||
+      column.includes("Сайт") ||
+      column.includes("Блок") ||
+      column.includes("Перелік програм")
+    ) {
       return {
         name: column,
         label: column,
@@ -18,7 +23,7 @@ const getColumnsToRender = (columns, data, handleModal) => {
           customBodyRender: (value) =>
             value && (
               <LinkWrapper>
-                <TableLink href={"https" + value} target="_blank">
+                <TableLink href={value} target="_blank">
                   {"Ознайомитись"}
                 </TableLink>
               </LinkWrapper>
@@ -41,7 +46,7 @@ const getColumnsToRender = (columns, data, handleModal) => {
         label: column,
         options: {
           setCellProps: () => {
-            return { align: "center", padding: "0" };
+            return { align: "center", padding: "none" };
           },
           filterType: "multiselect",
         },

@@ -11,7 +11,7 @@ import { tableData } from "../../redux/selectors/mainInfoSelectors";
 
 const SpecialtyPage = () => {
   const specialty = useSelector(tableData);
-  const columns = ["Номер", "Назва", "Посилання на стандарт", "Дія"];
+  const columns = ["Номер", "Назва", "Код спеціальності","Посилання на стандарт", "Дія"];
 
   return (
     <>
