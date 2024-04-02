@@ -22,7 +22,6 @@ import getDirtyFieldsValues from "../../../helpers/getDirtyFieldsValues";
 
 const DisciplineBlockAddEditForm = () => {
   const dataContent = useSelector(selectModalContent);
-  // const blockDisciplinesTitles = useSelector(selectDictionary);
 
   const dispatch = useDispatch();
 
@@ -33,27 +32,8 @@ const DisciplineBlockAddEditForm = () => {
     formState: { errors, dirtyFields },
   } = useForm();
 
-  // const [blockDisciplinesOptions, setBlockDisciplinesOptions] = useState([]);
-
   let actionTitle;
   let transformedData = {};
-
-  // const handleUniversityChange = (selectedOption) => {
-  //   setSelectedUniversity(selectedOption);
-  //   if (selectedOption) {
-  //     const departmentData =
-  //       dictionary.university
-  //         .find((el) => el.id === selectedOption.value)
-  //         ?.department.map((cath) => ({
-  //           value: cath.id,
-  //           label: cath.name,
-  //         })) || [];
-  //     setDepartmentOptions(departmentData);
-  //   } else {
-  //     setDepartmentOptions([]);
-  //     setSelectedDepartment(null);
-  //   }
-  // };
 
   if (dataContent.action === "Add") {
     actionTitle = "Додати";
@@ -61,15 +41,9 @@ const DisciplineBlockAddEditForm = () => {
     actionTitle = "Редагувати";
   }
 
-  console.log(dataContent);
-  // const handleBlockDisciplinesClear = () => {
-  //   setBlockDisciplinesOptions(null);
-  // };
-
   const onSubmit = (data) => {
     const dirtyFieldsArray = getDirtyFieldsValues(dirtyFields, getValues);
 
-    // console.log("data", data);
     if (dataContent.action !== "Edit") {
       transformedData = {
         name: data.description,
@@ -91,7 +65,6 @@ const DisciplineBlockAddEditForm = () => {
       });
     }
 
-    console.log("transformedData", transformedData);
     dataContent.action === "Edit"
       ? dispatch(
           setModalContent({
@@ -172,8 +145,21 @@ const DisciplineBlockAddEditForm = () => {
               placeholder="Додайте опис про блок дисциплін"
               defaultValue={dataContent.recordDataEdit?.description || null}
               // required
-              {...register("description", { required: true, maxLength: 100 })}
+              {...register(
+                "description",
+                dataContent.action !== "Edit"
+                  ? {
+                      required: {
+                        value: true,
+                        message: "Введіть опис блоку дисципліни",
+                      },
+                    }
+                  : { required: false }
+              )}
             />
+            {errors.name && (
+              <ErrorsContainer>{errors.name.message}</ErrorsContainer>
+            )}
           </StyledAddEditInputWrapper>
         </StyledAddEditInputsWrapper>
 
